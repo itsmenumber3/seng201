@@ -7,8 +7,27 @@ package seng201.classes;
 public class user {
     public String userName;
     public int difficultyLevel;
+
     public int userDays;
     public int currentDay;
+
+    public int userPoint;
+    public int userGold;
+
+    public inventory userInventory;
+
+    user() {
+
+    }
+
+    /**
+     * Fetch difficulty level
+     * @return difficulty level, of type integer
+     */
+
+    public int getDifficultyLevel() {
+        return difficultyLevel;
+    }
 
     /**
      * setUserDay allows user to set how many days the game will last
@@ -57,5 +76,40 @@ public class user {
         } else {
             System.out.println("You've won!");
         }
+    }
+
+    /**
+     * @return the gold balance of the user
+     */
+
+    public int getUserGold() {
+        return this.userGold;
+    }
+
+    /**
+     * Set a new gold balance for the user
+     * @param newUserGold
+     */
+
+    public void setUserGold(int newUserGold) {
+        this.userGold = newUserGold;
+    }
+
+    /**
+     * This function allows the user to purchase an item from the shop
+     */
+
+    public void purchase(item purchasingItem) {
+        if (this.getUserGold() >= purchasingItem.getValue()) {
+            System.out.println("Purchased item successfully");
+            this.setUserGold(this.getUserGold() - purchasingItem.getValue());
+            userInventory.addToInventory(purchasingItem);
+        } else {
+            System.out.println("Insufficient gold...");
+        }
+    }
+
+    public void useWeapon() {
+        
     }
 }
