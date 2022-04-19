@@ -14,6 +14,8 @@ import seng201.classes.exceptions.*;
 
 import seng201.classes.assets.*;
 
+import seng201.classes.items.*;
+
 public class user {
 
     MagicNumbers magicNumbers = new MagicNumbers();
@@ -111,7 +113,9 @@ public class user {
      * @param currentDay
      * @throws an an error
      */
-    public void setCurrentDay(int currentDay) { throw new UnallowedMethodException("You must use setNextDay() instead"); }
+    public void setCurrentDay(int currentDay) throws UnallowedMethodException { 
+        throw new UnallowedMethodException("You must use setNextDay() instead"); 
+    }
 
     /**
      * This method sets the next day of the game.
@@ -124,6 +128,17 @@ public class user {
             this.currentDay++; // Increment to the next day
             // Start the next day, supposedly?
             this.startNextDay();
+        }
+    }
+
+    /**
+     * Start the next day, or end game
+     */
+    public void startNextDay() {
+        if (currentDay >= getUserDays()) {
+            endGame(true);
+        } else {
+            currentDay++;
         }
     }
 
@@ -146,22 +161,38 @@ public class user {
      * @param inputUserPoints
      * @throws an error
      */
-    public void setUserPoints(int inputUserPoints) { throw new UnallowedMethodException("This method is not allowed."); }
+    public void setUserPoints(int inputUserPoints) throws UnallowedMethodException { 
+        throw new UnallowedMethodException("This method is not allowed."); 
+    }
 
     /**
      * This method will reset the user points to zero.
      */
-    public void resetUserPoint() {
-        this.userPoints = 0;
+    public void resetUserPoint() { this.userPoints = 0; }
+
+    /**
+     * This method accepts a positive integer only, to increase user points.
+     * @param inputIncrementAmount
+     */
+    public void incrementUserPointsBy(int inputIncrementAmount) throws InvalidInputException {
+        if (inputIncrementAmount >= 0) {
+            this.userPoints = this.getUserPoints() + inputIncrementAmount;
+        } else {
+            throw new InvalidInputException("Cannot increment user points by a negative number.");
+        }
     }
 
     /**
-     * This method accepts a positive or negative integer.
-     * This interger is either the increase amount or decrease amount.
-     * @param inputIncrementDecrementAmount
+     * This method accepts a positive integer only, to DECREASE user points.
+     * @param inputDecrementAmount
      */
-    public void incrementDecrementUserPointsBy(int inputIncrementDecrementAmount) {
-        this.userPoints = this.getUserPoints() + inputIncrementDecrementAmount;
+    public void decrementUserPointsBy(int inputDecrementAmount) throws InvalidInputException {
+        if (inputDecrementAmount >= 0 ) {
+            this.userPoints = this.getUserPoints() - inputDecrementAmount;
+        } else {
+            throw new InvalidInputException("Enter a positive number to decrease by.");
+        }
+        
     }
 
     // USER POINTS --------------------------------------------------
@@ -170,7 +201,7 @@ public class user {
 
     // USER GOLDS ---------------------------------------------------
 
-    public int userGold;
+    private int userGold;
 
     /**
      * This method returns the gold balance of the user
@@ -178,17 +209,101 @@ public class user {
      */
     public int getUserGold() { return this.userGold; }
 
-
     /**
      * Setting a new gold balance for the user isn't allowed.
      * @param newUserGold
+     * @throws UnallowedMethodException
      */
+    public void setUserGold(int newUserGold) throws UnallowedMethodException {
+        throw new UnallowedMethodException("Method is not allowed"); 
+    }
 
-    public void setUserGold(int newUserGold) { throw new UnallowedMethodException("Method is not allowed") };
+    /**
+     * This method resets the gold balance to zero.
+     */
+    public void resetUserGold() { this.userGold = 0; }
+
+    /**
+     * This method increments user golds. Only accepts a positive integer.
+     * @param inputIncrementDecrementAmount
+     */
+    public void incrementUserGoldBy(int inputIncrementAmount) throws InvalidInputException {
+        if (inputIncrementAmount >= 0) { this.userGold = this.userGold + inputIncrementAmount; } 
+        else { throw new InvalidInputException("Cannot accept a negative number"); }
+    }
+
+    /**
+     * This method decrements user golds. Only accepts a positive integer.
+     * @param inputDecrementAmount
+     */
+    public void decrementUserGoldBy(int inputDecrementAmount) {
+        try {
+            this.userGold = this.userGold - inputDecrementAmount;
+        } catch (inputDecrementAmount <= 0) {
+            throw new InvalidInputException("Enter a positive number");
+        }
+        if (inputDecrementAmount >= 0) { ; } 
+        else {  }
+    }
 
     // USER GOLDS ---------------------------------------------------
 
-    public inventory userInventory;
+
+
+    // USER INVENTORY -----------------------------------------------
+
+    private Inventory userInventory = new Inventory();
+
+    /**
+     * This method returns the object that is the inventory of the user.
+     * WARNING: it returns the object rather than the ArrayList Inventory.items[];
+     * To return only the ArrayList, use Inventory.getItems;
+     * @return the object userInventory of type Inventory;
+     */
+    public Inventory getUserInventory() { return this.userInventory; }
+
+    /**
+     * Setting userInventory is not allowed.
+     * To add a new item, drop an item, or reset inventory, use
+     * Inventory.addToInventory(item), .removeFromInventory(item), resetInventory()
+     * @param inputUserInventory
+     * @throws UnallowedMethodException
+     */
+    public void setUserInventory(Inventory inputUserInventory) throws UnallowedMethodException { 
+        throw new UnallowedMethodException("Unallowed method"); 
+    }
+
+    /**
+     * This function allows the user to purchase an item from the shop
+     */
+    public void userPurchaseItem(Item inputItem) {
+        if (this.getUserGold() >= inputItem.getItemValue()) {
+            System.out.println("Purchased item successfully");
+            this.decrementUserGoldBy(inputItem.getItemValue());
+            userInventory.addToInventory(inputItem);
+        } else {
+            System.out.println("Insufficient gold...");
+        }
+    }
+
+    // INVENTORY ----------------------------------------------------
+
+
+    // END THE GAME -------------------------------------------------
+
+    /** 
+     * This function ends the game.
+     * @param boolean to indicate if user has won
+     */
+
+    public void endGame(boolean hasUserWonGame) {
+        // Do something
+        if (hasUserWonGame == false) {
+            System.out.println("Game Over");
+        } else {
+            System.out.println("You've won!");
+        }
+    }
 
     user() {
 
@@ -210,47 +325,9 @@ public class user {
 
     public int getUserDays() { return userDays; }
 
-    /**
-     * Start the next day, or end game
-     */
-
-    public void startNextDay() {
-        if (currentDay >= getUserDays()) {
-            endGame(true);
-        } else {
-            currentDay++;
-        }
-    }
-
-    /** 
-     * This function ends the game.
-     * @param boolean to indicate if user has won
-     */
-
-    public void endGame(boolean hasUserWonGame) {
-        // Do something
-        if (hasUserWonGame == false) {
-            System.out.println("Game Over");
-        } else {
-            System.out.println("You've won!");
-        }
-    }
 
 
-
-    /**
-     * This function allows the user to purchase an item from the shop
-     */
-
-    public void purchase(item purchasingItem) {
-        if (this.getUserGold() >= purchasingItem.getValue()) {
-            System.out.println("Purchased item successfully");
-            this.setUserGold(this.getUserGold() - purchasingItem.getValue());
-            userInventory.addToInventory(purchasingItem);
-        } else {
-            System.out.println("Insufficient gold...");
-        }
-    }
+    
 
     private boolean isGamePaused;
 

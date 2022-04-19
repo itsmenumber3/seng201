@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import seng201.classes.items.*;
 
 public class Inventory {
-    ArrayList<Item> items = new ArrayList<Item>();
+    private ArrayList<Item> items = new ArrayList<Item>();
 
     public void addToInventory(Item inputItem) {
         this.items.add(inputItem);
@@ -15,4 +15,9 @@ public class Inventory {
         this.items.remove(inputItem);
     }
 
+    public void resetInventory() {
+        this.items = new ArrayList<Item>();
+    }
+
+    public ArrayList<Item> getItems() { return this.items; }
 }

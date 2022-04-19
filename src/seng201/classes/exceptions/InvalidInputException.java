@@ -1,7 +1,7 @@
-package seng201.classes;
+package seng201.classes.exceptions;
 
-public class InvalidLengthException extends Exception {
-    InvalidLengthException(String message) {
+public class InvalidInputException extends Exception {
+    public InvalidInputException(String message) {
         super(message);
     }
 }
