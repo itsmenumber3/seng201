@@ -6,15 +6,21 @@
 
 package seng201.classes;
 
+import java.util.*;
+
+import seng201.classes.*;
+
+import seng201.classes.exceptions.*;
+
+import seng201.classes.assets.*;
+
 public class user {
 
-    magicNumbers magicNumbers = new magicNumbers();
+    MagicNumbers magicNumbers = new MagicNumbers();
+    Tools tools = new Tools();
 
-    // VARIABLES AND THEIR GETTERS AND SETTERS
+    // USERNAME----------------------------------------------------
 
-    /**
-     * userName stores the name of the user, as input in GUI.
-     */
     private String userName;
 
     /** 
@@ -24,15 +30,10 @@ public class user {
      * @throws InvalidInputException if the input does not satisfy the above conditions
      */
     public void setUserName(String inputUserName) throws InvalidInputException { 
-        if (inputUserName.contains(magicNumbers.UNALLOWED_USERNAME_CHARACTER)) {
-            throw new InvalidInputException("Username must not contain white spaces");
-        } 
-        if (inputUserName.length() <= 13 && inputUserName.length() >= 5) {
-            this.userName = inputUserName; 
-        } else if (inputUserName.length() > 13) {
-            throw new InvalidInputException("Name is too long, it should be");
-        }  else {
-            throw new InvalidInputException("Name is too short");
+        if (tools.IsUserNameValid(inputUserName) == true) {
+            this.userName = inputUserName;
+        } else {
+            throw new InvalidInputException("Invalid username");
         }
     }
 
@@ -42,31 +43,32 @@ public class user {
      */
     public String getUserName() { return this.userName; }
 
+    // USERNAME----------------------------------------------------
 
 
-    /**
-     * This variable stores the difficulty level of the game, as input by user.
-     * difficulty is an enum type. It is defined in difficulty.java and has three values: EASY, MEDIUM, HARD
-     */
-    private difficulty difficultyLevel;
+
+    // DIFFICULTY----------------------------------------------------
+
+    private Difficulty difficultyLevel; // difficulty is an enum type. Defined in Difficulty.java and has three values: EASY, MEDIUM, HARD
 
     /**
      * This method sets the difficulty level
      * @param difficulty level of enum type difficulty
      */
-    public void setDifficultyLevel(difficulty inputDifficultyLevel) { this.difficultyLevel = inputDifficultyLevel; }
+    public void setDifficultyLevel(Difficulty inputDifficultyLevel) { this.difficultyLevel = inputDifficultyLevel; }
 
     /**
      * this method returns the difficulty level.
      * @return difficulty level of enum type difficulty
      */
-    public difficulty getDifficultyLevel() { return difficultyLevel; }
+    public Difficulty getDifficultyLevel() { return difficultyLevel; }
+
+    // DIFFICULTY----------------------------------------------------
 
 
 
-    /**
-     * This variable stores the chosen length of the game, measured in days.
-     */
+    // DAYS OF THE GAME----------------------------------------------
+
     private int userDays;
 
     /**
@@ -77,10 +79,10 @@ public class user {
      * @throws an ArithmeticException if an invalid day range is entered
      */
     public void setUserDays(int inputUserDays) {
-        if (inputUserDays <= magicNumbers.MAXIMUM_USER_DAYS && inputUserDays >= 1) {
+        if (inputUserDays <= magicNumbers.MAXIMUM_USER_DAYS && inputUserDays >= magicNumbers.MINIMUM_USER_DAYS) {
             userDays = inputUserDays;
         } else {
-            throw new ArithmeticException("Invalid game days - please choose between 1 and 10 inclusive.");
+            throw new ArithmeticException(magicNumbers.INVALID_USER_DAYS_ERROR_MESSAGE);
         }
     }
 
@@ -88,24 +90,32 @@ public class user {
      * This method returns the chosen number of days
      * @return the chosen number of days of type int
      */
-    public int getUserDays(int inputUserDays) { return userDays; }
+    public int getUserDays(int inputUserDays) { return this.userDays; }
+
+    // DAYS OF THE GAME----------------------------------------------
 
 
 
-    /**
-     * This method returns the current day of the days
-     * The first day is Day 1.
-     */
+    // CURRENT DAY OF THE GAME --------------------------------------
+
     private int currentDay;
 
-    public int getCurrentDay() {
-        return this.currentDay;
-    }
+    /**
+     * This method will get the current day and return it
+     * @return the current day
+     */
+    public int getCurrentDay() { return this.currentDay; }
 
-    public void setCurrentDay(int currentDay) {
-        System.out.println("DEVELOPER WARNING: You must use setNextDay() instead");
-    }
+    /**
+     * It is not possible to set the current day. Safe programming practices.
+     * @param currentDay
+     * @throws an an error
+     */
+    public void setCurrentDay(int currentDay) { throw new UnallowedMethodException("You must use setNextDay() instead"); }
 
+    /**
+     * This method sets the next day of the game.
+     */
     public void setNextDay() {
         if (this.getCurrentDay() == this.getUserDays()) {
             // User has won the game? Redirect to method endGame
@@ -117,12 +127,66 @@ public class user {
         }
     }
 
+    // CURRENT DAY OF THE GAME --------------------------------------
+
+    
+
+    // USER POINTS --------------------------------------------------
+
+    public int userPoints;
+
     /**
-     * This variable stores the point of the user.
+     * This method returns the user points
+     * @return the user points
+     */
+    public int getUserPoints() { return this.userPoints; }
+
+    /**
+     * Modifying the userpoint directly is not allowed.
+     * @param inputUserPoints
+     * @throws an error
+     */
+    public void setUserPoints(int inputUserPoints) { throw new UnallowedMethodException("This method is not allowed."); }
+
+    /**
+     * This method will reset the user points to zero.
+     */
+    public void resetUserPoint() {
+        this.userPoints = 0;
+    }
+
+    /**
+     * This method accepts a positive or negative integer.
+     * This interger is either the increase amount or decrease amount.
+     * @param inputIncrementDecrementAmount
+     */
+    public void incrementDecrementUserPointsBy(int inputIncrementDecrementAmount) {
+        this.userPoints = this.getUserPoints() + inputIncrementDecrementAmount;
+    }
+
+    // USER POINTS --------------------------------------------------
+
+
+
+    // USER GOLDS ---------------------------------------------------
+
+    public int userGold;
+
+    /**
+     * This method returns the gold balance of the user
+     * @return the gold balance of the user
+     */
+    public int getUserGold() { return this.userGold; }
+
+
+    /**
+     * Setting a new gold balance for the user isn't allowed.
+     * @param newUserGold
      */
 
-    public int userPoint;
-    public int userGold;
+    public void setUserGold(int newUserGold) { throw new UnallowedMethodException("Method is not allowed") };
+
+    // USER GOLDS ---------------------------------------------------
 
     public inventory userInventory;
 
@@ -172,22 +236,7 @@ public class user {
         }
     }
 
-    /**
-     * @return the gold balance of the user
-     */
 
-    public int getUserGold() {
-        return this.userGold;
-    }
-
-    /**
-     * Set a new gold balance for the user
-     * @param newUserGold
-     */
-
-    public void setUserGold(int newUserGold) {
-        this.userGold = newUserGold;
-    }
 
     /**
      * This function allows the user to purchase an item from the shop
@@ -222,5 +271,13 @@ public class user {
             System.out.println("Game has been resumed");
         }
         
+    }
+
+    public int randomNumber;
+
+    private Random randomSeed = new Random();
+
+    public void randomiser() {
+        randomNumber = randomSeed.nextInt(20);
     }
 }
