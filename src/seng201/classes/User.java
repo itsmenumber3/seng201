@@ -7,13 +7,9 @@
 package seng201.classes;
 
 import java.util.*;
-
 import seng201.classes.*;
-
 import seng201.classes.exceptions.*;
-
 import seng201.classes.assets.*;
-
 import seng201.classes.items.*;
 
 public class User {

@@ -22,8 +22,5 @@ public class MagicNumbers {
         // Do nothign lol
     }
 
-    public String[] ALLOWED_USERNAME_CHARACTERS = 
-    ;
-
 
 }
