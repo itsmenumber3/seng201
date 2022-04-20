@@ -193,9 +193,9 @@ public class User {
         }
     }
 
-        /**
+    /**
      * This method returns the user points
-     * @return the user points
+     * @return userPoints: integer
      */
     public int getUserPoints() { return this.userPoints; }
 
@@ -208,18 +208,13 @@ public class User {
     private int userGold;
 
     /**
-     * This method returns the gold balance of the user
-     * @return the gold balance of the user
-     */
-    public int getUserGold() { return this.userGold; }
-
-    /**
      * Setting a new gold balance for the user isn't allowed.
-     * @param newUserGold
+     * @param newUserGold: integer
      * @throws UnallowedMethodException
      */
-    public void setUserGold(int newUserGold) throws UnallowedMethodException {
-        throw new UnallowedMethodException("Method is not allowed"); 
+    public void setUserGold(int newUserGold) {
+        try { throw new UnallowedMethodException("Method is not allowed"); } 
+        catch (UnallowedMethodException e) { e.printStackTrace(); }     
     }
 
     /**
@@ -228,12 +223,17 @@ public class User {
     public void resetUserGold() { this.userGold = 0; }
 
     /**
-     * This method increments user golds. Only accepts a positive integer.
-     * @param inputIncrementDecrementAmount
+     * This method increments user golds. Only accepts a positive integer as argument.
+     * @param inputIncrementAmount: integer
+     * @throws UnexpectedNegativeNumberException
      */
-    public void incrementUserGoldBy(int inputIncrementAmount) throws InvalidInputException {
-        if (inputIncrementAmount >= 0) { this.userGold = this.userGold + inputIncrementAmount; } 
-        else { throw new InvalidInputException("Cannot accept a negative number"); }
+    public void incrementUserGoldBy(int inputIncrementAmount) {
+        try {
+            if (inputIncrementAmount >= 0) { this.userGold = this.userGold + inputIncrementAmount; } 
+            else { throw new UnexpectedNegativeNumberException("Cannot accept a negative number"); }
+        } catch (UnexpectedNegativeNumberException e) {
+            e.printStackTrace();
+        }  
     }
 
     /**
@@ -242,123 +242,68 @@ public class User {
      */
     public void decrementUserGoldBy(int inputDecrementAmount) {
         try {
-            this.userGold = this.userGold - inputDecrementAmount;
-        } catch (inputDecrementAmount <= 0) {
-            throw new InvalidInputException("Enter a positive number");
+            if (inputDecrementAmount >= 0) { this.userGold = this.userGold - inputDecrementAmount; }
+            else { throw new UnexpectedNegativeNumberException("Cannot accept a negative number"); }
+        } catch (UnexpectedNegativeNumberException e) {
+            e.printStackTrace();
         }
-        if (inputDecrementAmount >= 0) { ; } 
-        else {  }
     }
+
+    /**
+     * This method returns the gold balance of the user
+     * @return the gold balance of the user
+     */
+    public int getUserGold() { return this.userGold; }
 
     // USER GOLDS ---------------------------------------------------
 
 
 
     // USER INVENTORY -----------------------------------------------
+    
 
-    private Inventory userInventory = new Inventory();
+    private Inventory userInventory = new Inventory(); // PLEASE NOTE THAT there is an Inventory() class.
 
     /**
      * This method returns the object that is the inventory of the user.
-     * WARNING: it returns the object rather than the ArrayList Inventory.items[];
-     * To return only the ArrayList, use Inventory.getItems;
+     * WARNING: it returns the object rather than the ArrayList Inventory.items;
+     * To return only the ArrayList, use Inventory().getItems;
      * @return the object userInventory of type Inventory;
      */
     public Inventory getUserInventory() { return this.userInventory; }
 
     /**
-     * Setting userInventory is not allowed.
-     * To add a new item, drop an item, or reset inventory, use
-     * Inventory.addToInventory(item), .removeFromInventory(item), resetInventory()
+     * Setting userInventory is not allowed. To add a new item, drop an item, or reset inventory, use
+     * Inventory().addToInventory(item), .removeFromInventory(item), and .resetInventory()
      * @param inputUserInventory
      * @throws UnallowedMethodException
      */
-    public void setUserInventory(Inventory inputUserInventory) throws { 
-        throw new UnallowedMethodException("Unallowed method"); 
+    public void setUserInventory(Inventory inputUserInventory) { 
+        try { throw new UnallowedMethodException("Unallowed method"); } 
+        catch (UnallowedMethodException e) { e.printStackTrace(); }
     }
 
     /**
-     * This function allows the user to purchase an item from the shop
+     * This method helps the user to purchase an item.
+     * 1. Add that item to array list userInventory.items.
+     * 2. Decrement user gold balance.
+     * If there isn't enough gold, throw an error InsuffientUserGoldBalanceException.
+     * @param inputItem: Item, as in Item.java
+     * @throws InsufficientUserGoldBalanceException
      */
     public void userPurchaseItem(Item inputItem) {
-        if (this.getUserGold() >= inputItem.getItemValue()) {
-            System.out.println("Purchased item successfully");
-            this.decrementUserGoldBy(inputItem.getItemValue());
-            userInventory.addToInventory(inputItem);
-        } else {
-            System.out.println("Insufficient gold...");
+        try {
+            if (this.getUserGold() >= inputItem.getItemValue()) {   // Check if item value <= userGold
+                System.out.println("Purchased item successfully");  // If yes, purchased successfully.
+                this.decrementUserGoldBy(inputItem.getItemValue()); // Decrement userGold.
+                userInventory.addToInventory(inputItem);            // Add item to userInventory.
+            } else {
+                throw new InsufficientUserGoldBalanceException("Not enough gold to buy this item");
+            }
+        } catch (InsufficientUserGoldBalanceException e) {
+            System.out.println("Not enough gold to buy this item!");
         }
     }
 
     // INVENTORY ----------------------------------------------------
-
-
-    // END THE GAME -------------------------------------------------
-
-    /** 
-     * This function ends the game.
-     * @param boolean to indicate if user has won
-     */
-
-    public void endGame(boolean hasUserWonGame) {
-        // Do something
-        if (hasUserWonGame == false) {
-            System.out.println("Game Over");
-        } else {
-            System.out.println("You've won!");
-        }
-    }
-
-    user() {
-
-    }
-
-    /**
-     * Fetch difficulty level
-     * @return difficulty level, of type integer
-     */
-
-    
-
-    
-
-    /**
-     * Return the number of days
-     * @return 
-     */
-
-    public int getUserDays() { return userDays; }
-
-
-
-    
-
-    private boolean isGamePaused;
-
-    public boolean getIsGamePaused() {
-        return this.isGamePaused;
-    }
-
-    /**
-     * This method will allow the user to pause and unpause the game. 
-     */
-
-    public void togglePauseUnpauseGame() {
-        this.isGamePaused = !(this.getIsGamePaused()); // Negate it!
-
-        if (this.getIsGamePaused() == true) {
-            System.out.println("Game has been paused");
-        } else {
-            System.out.println("Game has been resumed");
-        }
-        
-    }
-
-    public int randomNumber;
-
-    private Random randomSeed = new Random();
-
-    public void randomiser() {
-        randomNumber = randomSeed.nextInt(20);
-    }
 }

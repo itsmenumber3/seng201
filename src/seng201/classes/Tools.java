@@ -38,20 +38,4 @@ public class Tools {
         }
     }
 
-    /**
-     * 
-     * @param inputUserDays
-     * @return
-     * @throws InvalidInputException
-     */
-
-    public int userDaysValidation(int inputUserDays) throws InvalidInputException {
-        if (inputUserDays <= magicNumbers.MAXIMUM_USER_DAYS 
-         && inputUserDays >= magicNumbers.MINIMUM_USER_DAYS) {
-            return inputUserDays;
-        } else {
-            throw new InvalidInputException(magicNumbers.INVALID_USER_DAYS_ERROR_MESSAGE);
-        }
-    }
-
 }
