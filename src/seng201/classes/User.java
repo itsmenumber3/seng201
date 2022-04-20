@@ -16,7 +16,7 @@ import seng201.classes.assets.*;
 
 import seng201.classes.items.*;
 
-public class user {
+public class User {
 
     MagicNumbers magicNumbers = new MagicNumbers();
     Tools tools = new Tools();
@@ -26,22 +26,23 @@ public class user {
     private String userName;
 
     /** 
-     * setUserName accepts a string and set userName to that string
-     * The username must be of 5 characters or longer, of 13 characters or shorter, and must not contain " "
-     * @param getUserName of type string
-     * @throws InvalidInputException if the input does not satisfy the above conditions
+     * This method accepts a string and set userName to that string. There are many conditions to a valid username:
+     * 1. The username must be of 5 characters or longer, of 13 characters or shorter.
+     * 2. The username must only contain alphanumeric characters.
+     * This method tries to assign the input username to userName via the method userNameValidation as in Tools().
+     * If it is invalid, tools.userNameValidation will throw the error InvalidInputException and will not assign.
+     * @param inputUserName: String, user-chosen username
      */
     public void setUserName(String inputUserName) throws InvalidInputException { 
-        if (tools.IsUserNameValid(inputUserName) == true) {
-            this.userName = inputUserName;
-        } else {
-            throw new InvalidInputException("Invalid username");
-        }
+        try { 
+            this.userName = tools.userNameValidation(inputUserName); 
+        } 
+        catch (InvalidInputException e) { e.printStackTrace(); }
     }
 
     /**
-     * getUserName returns the userName of the user
-     * @return userName
+     * This method returns the userName of the user
+     * @return userName: String
      */
     public String getUserName() { return this.userName; }
 
@@ -54,16 +55,21 @@ public class user {
     private Difficulty difficultyLevel; // difficulty is an enum type. Defined in Difficulty.java and has three values: EASY, MEDIUM, HARD
 
     /**
-     * This method sets the difficulty level
-     * @param difficulty level of enum type difficulty
+     * This method sets the difficulty level.
+     * Difficulty is an enum class defined in Difficulty.java
+     * There can be three Difficulty values: EASY, MEDIUM and HARD.
+     * @param inputDifficultyLevel: Difficulty
      */
-    public void setDifficultyLevel(Difficulty inputDifficultyLevel) { this.difficultyLevel = inputDifficultyLevel; }
+    public void setDifficultyLevel(Difficulty inputDifficultyLevel) { 
+        try { this.difficultyLevel = inputDifficultyLevel; } 
+        catch (Exception e) { e.printStackTrace(); }
+    }
 
     /**
-     * this method returns the difficulty level.
-     * @return difficulty level of enum type difficulty
+     * This method returns the difficulty level.
+     * @return difficultyLevel: Difficulty
      */
-    public Difficulty getDifficultyLevel() { return difficultyLevel; }
+    public Difficulty getDifficultyLevel() { return this.difficultyLevel; }
 
     // DIFFICULTY----------------------------------------------------
 
@@ -74,18 +80,14 @@ public class user {
     private int userDays;
 
     /**
-     * setUserDay allows user to set how many days the game will last
-     * The maximum number of days is 10, the minimum number of days is 1
-     * Anything outside of this range, an ArithmeticException will be thrown
-     * @param inputUserDay
-     * @throws an ArithmeticException if an invalid day range is entered
+     * This method allows user to set how many days the game will last
+     * The maximum number and minimum number of days is set in MagicNumbers().
+     * Anything outside of this range, an InvalidInputException will be thrown
+     * @param inputUserDay: integer, from user input
      */
     public void setUserDays(int inputUserDays) {
-        if (inputUserDays <= magicNumbers.MAXIMUM_USER_DAYS && inputUserDays >= magicNumbers.MINIMUM_USER_DAYS) {
-            userDays = inputUserDays;
-        } else {
-            throw new ArithmeticException(magicNumbers.INVALID_USER_DAYS_ERROR_MESSAGE);
-        }
+        try { this.userDays = tools.userDaysValidation(inputUserDays); } 
+        catch (InvalidInputException e) { e.printStackTrace(); }
     }
 
     /**
@@ -100,47 +102,40 @@ public class user {
 
     // CURRENT DAY OF THE GAME --------------------------------------
 
-    private int currentDay;
+    private int userCurrentDay;
 
     /**
-     * This method will get the current day and return it
-     * @return the current day
+     * It is not possible to set the current day, as we want to avoid jumping days.
+     * To set the next day, use setNextDay() which increments userCurrentDay.
+     * To reset, use resetCurrentDay() to reset it to 1.
+     * @param inputCurrentDay: integer
+     * @throws UnallowedMethodException
      */
-    public int getCurrentDay() { return this.currentDay; }
-
-    /**
-     * It is not possible to set the current day. Safe programming practices.
-     * @param currentDay
-     * @throws an an error
-     */
-    public void setCurrentDay(int currentDay) throws UnallowedMethodException { 
-        throw new UnallowedMethodException("You must use setNextDay() instead"); 
+    public void setCurrentDay(int inputCurrentDay) { 
+        try { throw new UnallowedMethodException("Unallowed method"); } 
+        catch (UnallowedMethodException e) { e.printStackTrace(); }
     }
 
     /**
-     * This method sets the next day of the game.
+     * This method checks if the user has won the game. This is done by comparing the current day to what is the last day.
+     * If the user has won the game, return true to Game(). Else, we increment the userCurrentDay and return false.
+     * @return true:  boolean if user has won the game (the current day is the last day)
+     *         false: boolean if user hasn't won the game 
      */
-    public void setNextDay() {
-        if (this.getCurrentDay() == this.getUserDays()) {
-            // User has won the game? Redirect to method endGame
-            this.endGame(true);
+    public boolean hasUserWonGameElseSetNextDay() {
+        if (this.getCurrentDay() == this.getUserDays()) { // User has won the game
+            return true; // Return true to Game() to conclude the game
         } else {
-            this.currentDay++; // Increment to the next day
-            // Start the next day, supposedly?
-            this.startNextDay();
+            this.userCurrentDay++; // Increment to the next day
+            return false; // Return false to Game() to start the next day
         }
     }
 
     /**
-     * Start the next day, or end game
+     * This method gets the current day and returns it
+     * @return userCurrentDay: integer
      */
-    public void startNextDay() {
-        if (currentDay >= getUserDays()) {
-            endGame(true);
-        } else {
-            currentDay++;
-        }
-    }
+    public int getCurrentDay() { return this.userCurrentDay; }
 
     // CURRENT DAY OF THE GAME --------------------------------------
 
@@ -151,18 +146,13 @@ public class user {
     public int userPoints;
 
     /**
-     * This method returns the user points
-     * @return the user points
+     * Modifying the userPoints directly is not allowed.
+     * @param inputUserPoints: integer
+     * @throws UnallowedMethodException
      */
-    public int getUserPoints() { return this.userPoints; }
-
-    /**
-     * Modifying the userpoint directly is not allowed.
-     * @param inputUserPoints
-     * @throws an error
-     */
-    public void setUserPoints(int inputUserPoints) throws UnallowedMethodException { 
-        throw new UnallowedMethodException("This method is not allowed."); 
+    public void setUserPoints(int inputUserPoints) { 
+        try { throw new UnallowedMethodException("This method is not allowed."); }
+        catch (UnallowedMethodException e) { e.printStackTrace(); }
     }
 
     /**
@@ -171,29 +161,43 @@ public class user {
     public void resetUserPoint() { this.userPoints = 0; }
 
     /**
-     * This method accepts a positive integer only, to increase user points.
-     * @param inputIncrementAmount
+     * This method increments the user point. Must pass a positive integer argument!
+     * @param inputIncrementAmount: integer
+     * @throws UnexpectedNegativeNumberException if a negative integer is passed.
      */
-    public void incrementUserPointsBy(int inputIncrementAmount) throws InvalidInputException {
-        if (inputIncrementAmount >= 0) {
-            this.userPoints = this.getUserPoints() + inputIncrementAmount;
-        } else {
-            throw new InvalidInputException("Cannot increment user points by a negative number.");
+    public void incrementUserPointsBy(int inputIncrementAmount) {
+        try {
+            if (inputIncrementAmount >= 0) {
+                this.userPoints = this.getUserPoints() + inputIncrementAmount;
+            } else {
+                throw new UnexpectedNegativeNumberException("Cannot increment user points by a negative number.");
+            }
+        } catch (UnexpectedNegativeNumberException e) { 
+            e.printStackTrace(); 
         }
     }
 
     /**
-     * This method accepts a positive integer only, to DECREASE user points.
-     * @param inputDecrementAmount
+     * This method decrements the user points by an amount. Must pass a positive integer as argument!
+     * @param inputDecrementAmount: integer
      */
     public void decrementUserPointsBy(int inputDecrementAmount) throws InvalidInputException {
-        if (inputDecrementAmount >= 0 ) {
-            this.userPoints = this.getUserPoints() - inputDecrementAmount;
-        } else {
-            throw new InvalidInputException("Enter a positive number to decrease by.");
+        try {
+            if (inputDecrementAmount >= 0) {
+                this.userPoints = this.getUserPoints() - inputDecrementAmount;
+            } else {
+                throw new UnexpectedNegativeNumberException("Cannot decrement user points by a negative number.");
+            }
+        } catch (UnexpectedNegativeNumberException e) { 
+            e.printStackTrace(); 
         }
-        
     }
+
+        /**
+     * This method returns the user points
+     * @return the user points
+     */
+    public int getUserPoints() { return this.userPoints; }
 
     // USER POINTS --------------------------------------------------
 
@@ -269,7 +273,7 @@ public class user {
      * @param inputUserInventory
      * @throws UnallowedMethodException
      */
-    public void setUserInventory(Inventory inputUserInventory) throws UnallowedMethodException { 
+    public void setUserInventory(Inventory inputUserInventory) throws { 
         throw new UnallowedMethodException("Unallowed method"); 
     }
 
