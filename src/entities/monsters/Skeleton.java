@@ -1,4 +1,4 @@
-package monsters;
+package entities.monsters;
 
 import main.Player;
 

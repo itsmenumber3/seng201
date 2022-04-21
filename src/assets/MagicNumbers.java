@@ -14,7 +14,7 @@ public class MagicNumbers {
     public final int RESET_POINT_VALUE = 0; // Do not change
     public final int RESET_CURRENT_DAY_VALUE = 0; // Do not change
 
-    // Values of monsters
+    // Values of entities.monsters
     public int SKELETON_VALUE;
     public int ZOMBIE_VALUE;
     public int GHAST_VALUE;

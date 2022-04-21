@@ -2,8 +2,8 @@ package main;
 
 import java.util.ArrayList;
 
+import entities.Entity;
 import exceptions.UnallowedMethodException;
-import items.*;
 
 public class Inventory {
     private ArrayList<Entity> entities = new ArrayList<>();

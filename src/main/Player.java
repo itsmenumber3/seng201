@@ -9,7 +9,7 @@ package main;
 import assets.enums.Difficulty;
 import assets.*; // Import MagicNumbers and Tools
 import exceptions.*; // Import the Exception classes
-import items.*; // Import items that player can buy and hold
+import entities.items.*; // Import entities.items that player can buy and hold
 
 
 public class Player {
@@ -325,7 +325,7 @@ public class Player {
 
     /**
      * This method returns the object that is the inventory of the player.
-     * WARNING: it returns the object rather than the ArrayList main.Inventory.items;
+     * WARNING: it returns the object rather than the ArrayList main.Inventory.entities.items;
      * To return only the ArrayList, use main.Inventory().getItems;
      * @return the object playerInventory of type main.Inventory;
      */
@@ -347,7 +347,7 @@ public class Player {
 
     /**
      * This method helps the player to purchase an item.
-     * 1. Add that item to array list playerInventory.items.
+     * 1. Add that item to array list playerInventory.entities.items.
      * 2. Decrement player gold balance.
      * If there isn't enough gold, throw an error InsufficientPlayerGoldBalanceException.
      * @param inputItem: Item, as in Item.java

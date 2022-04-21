@@ -1,6 +1,6 @@
-package items;
+package entities.items;
 
-import main.Entity;
+import entities.Entity;
 
 public class Item extends Entity {
     public void setItemValue() {

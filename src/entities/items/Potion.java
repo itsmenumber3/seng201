@@ -1,4 +1,4 @@
-package items;
+package entities.items;
 
 public class Potion {
 }

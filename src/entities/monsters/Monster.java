@@ -1,9 +1,9 @@
-package monsters;
+package entities.monsters;
 
 import assets.MagicNumbers;
 import exceptions.InvalidMonsterNumericPropertyException;
 import exceptions.UnallowedMethodException;
-import main.Entity;
+import entities.Entity;
 import main.Player;
 
 public class Monster extends Entity {
