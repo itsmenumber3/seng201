@@ -19,7 +19,8 @@ public class MagicNumbers {
     public int ZOMBIE_VALUE;
     public int GHAST_VALUE;
     public int WITHER_VALUE;
-
+    public int MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE = 100;
+    public int MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE = 0;
     public int DEFAULT_MONSTER_HEALTH_LEVEL = 100;
 
     public MagicNumbers() {

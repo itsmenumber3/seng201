@@ -62,7 +62,7 @@ public class Monster extends Entity {
      */
     void resetMonsterHealthLevel() {
         try {
-            if (magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL <= 100) {
+            if (magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE  && magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
                 this.monsterHealthLevel = magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL;
             } else {
                 throw new InvalidMonsterNumericPropertyException("Health over 100");
@@ -94,7 +94,7 @@ public class Monster extends Entity {
      */
     void setMonsterAttackDamage(int inputMonsterAttackDamage) {
         try {
-            if (inputMonsterAttackDamage <= 100) {
+            if (inputMonsterAttackDamage <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE  && inputMonsterAttackDamage >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
                 this.monsterAttackDamage = inputMonsterAttackDamage;
             } else {
                 throw new InvalidMonsterNumericPropertyException("Over 100!");
@@ -113,8 +113,32 @@ public class Monster extends Entity {
         return this.monsterAttackDamage;
     }
     
-    
-    private int resistanceAbility;
+    // RESISTANCE ABILITY ---------------------------------------------------
+
+    private int monsterResistanceAbility;
+
+    void setMonsterResistanceAbility(int inputResistanceAbility) {
+        try {
+            if (inputResistanceAbility <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE && inputResistanceAbility >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
+                this.monsterResistanceAbility = inputResistanceAbility;
+            } else {
+                throw new InvalidMonsterNumericPropertyException("Invalid numeric value");
+            }
+        } catch (InvalidMonsterNumericPropertyException e) {
+            e.printStackTrace();
+        }
+        this.monsterResistanceAbility = inputResistanceAbility;
+    }
+
+    /**
+     * This method returns the resistance ability of the monster
+     * @return monsterResistanceAbility: integer
+     */
+    public int getMonsterResistanceAbility() {
+        return this.monsterResistanceAbility;
+    }
+
+    // RESISTANCE ABILITY ---------------------------------------------------
 
     // IMPORTANT VARIABLES --------------------------------------------------
 
