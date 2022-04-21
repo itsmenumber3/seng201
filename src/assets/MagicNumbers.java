@@ -1,9 +1,7 @@
 package assets;
 
 
-import java.nio.charset.CharacterCodingException;
-
-import assets.*;
+import enums.Difficulty;
 
 public class MagicNumbers {
 
@@ -15,12 +13,20 @@ public class MagicNumbers {
     public int MAXIMUM_USER_NAME_CHARACTERS = 13;
     public int MINIMUM_USER_NAME_CHARACTERS = 1;
 
+    public int SKELETON_VALUE;
+    public int ZOMBIE_VALUE;
+    public int GHAST_VALUE;
+    public int WITHER_VALUE;
+
     public MagicNumbers() {
         // This is legal, but do nothing.
     }
 
-    public MagicNumbers(Difficulty difficultyLevel) {
-        // Do nothign lol
+    public MagicNumbers(Difficulty inputDifficulty) {
+        if (inputDifficulty.equals(Difficulty.EASY)) {
+            this.SKELETON_VALUE = 40;
+            this.ZOMBIE_VALUE = 30;
+        }
     }
 
 

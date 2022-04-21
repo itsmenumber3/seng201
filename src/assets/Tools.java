@@ -1,16 +1,40 @@
 package assets;
 
-
+import java.util.*;
 import java.util.regex.*;
 
-import main.*; // Import Inventory and Shop
-import assets.*; // Import MagicNumbers and Tools
+import enums.Difficulty;
 import exceptions.*; // Import the Exception classes
-import items.*; // Import items that player can buy and hold
-import monsters.*; // Import monsters that player can buy and hold
+
 
 public class Tools {
     MagicNumbers magicNumbers = new MagicNumbers();
+    Scanner scanner = new Scanner(System.in);
+
+    // Internal
+    public String readPlayerStringInput(String inputPrompt) {
+        System.out.print(inputPrompt);
+        return scanner.nextLine();
+    }
+
+    // Internal
+    public Difficulty convertStringIntoDifficulty(String inputString) {
+        Difficulty inputDifficultyLevel = null;
+        try {
+            if (Objects.equals(inputString, "1")) {
+                inputDifficultyLevel = Difficulty.EASY;
+            } else if (Objects.equals(inputString, "2")){
+                inputDifficultyLevel = Difficulty.MEDIUM;
+            } else if (Objects.equals(inputString, "3")) {
+                inputDifficultyLevel = Difficulty.HARD;
+            } else {
+                throw new InvalidInputException("Enter 1, 2 or 3.");
+            }
+        } catch (InvalidInputException e) {
+            System.out.println("Error; Handle is not a big problem as we will implement UI and this cannot happen in UI");
+        }
+        return inputDifficultyLevel;
+    }
 
     /**
      * This method validates the playerName in Player(). There are many conditions to a valid playerName:
@@ -24,26 +48,15 @@ public class Tools {
      * @throws InvalidInputException, if the playerName is found to be invalid
      */
     public String playerNameValidation(String inputPlayerName) throws InvalidInputException {
-        String regex = "^[A-Za-z]\\w{5,29}$";
+        String regex = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";
         Pattern pattern = Pattern.compile(regex);
 
         if (inputPlayerName == null) {
-            throw new InvalidInputException(String.format("playerName cannot be blank.\n" +
-                                                            "The playerName length must be between %d-%d characters inclusive (violated).\n" +
-                                                            "The playerName must only contain alphanumeric A-Z, 0-9 characters.%n",
-                                                            magicNumbers.MINIMUM_USER_NAME_CHARACTERS, magicNumbers.MAXIMUM_USER_NAME_CHARACTERS));
-        } else if (inputPlayerName.length() < magicNumbers.MINIMUM_USER_NAME_CHARACTERS || inputPlayerName.length() > magicNumbers.MAXIMUM_USER_NAME_CHARACTERS) {
-            throw new InvalidInputException(String.format("playerName is invalid.\n" +
-                                                            "The playerName length must be between %d-%d characters inclusive (violated).\n" +
-                                                            "The playerName must only contain alphanumeric A-Z, 0-9 characters.%n",
-                                                            magicNumbers.MINIMUM_USER_NAME_CHARACTERS, magicNumbers.MAXIMUM_USER_NAME_CHARACTERS));
+            throw new InvalidInputException("playerName cannot be blank");
         } else {
             Matcher playerNameMatcher = pattern.matcher(inputPlayerName);
             if (!playerNameMatcher.matches()) {
-                throw new InvalidInputException(String.format("playerName is invalid.\n" +
-                                                                "The playerName length must be between %d-%d characters inclusive.\n" +
-                                                                "The playerName must only contain alphanumeric A-Z, 0-9 characters (violated).%n",
-                                                                magicNumbers.MINIMUM_USER_NAME_CHARACTERS, magicNumbers.MAXIMUM_USER_NAME_CHARACTERS));
+                throw new InvalidInputException("playerName is invalid");
             } else {
                 return inputPlayerName;
             }

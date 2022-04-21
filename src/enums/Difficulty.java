@@ -1,4 +1,4 @@
-package assets;
+package enums;
 
 public enum Difficulty {
     EASY,

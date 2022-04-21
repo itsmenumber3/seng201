@@ -6,18 +6,22 @@
 
 package main;
 
-import main.*; // Import Inventory and Shop
+import enums.Difficulty;
 import assets.*; // Import MagicNumbers and Tools
 import exceptions.*; // Import the Exception classes
 import items.*; // Import items that player can buy and hold
-import monsters.*; // Import monsters that player can buy and hold
+
 
 public class Player {
 
     // WHEN PLAYER IS INSTANTIATED --------------------------------
 
     public Player() {
-
+        this.setPlayerName(tools.readPlayerStringInput("Please enter player name: "));
+        this.setDifficultyLevel(tools.convertStringIntoDifficulty(tools.readPlayerStringInput("Please enter level 1, 2, 3: ")));
+        this.setPlayerDays(Integer.parseInt(tools.readPlayerStringInput("Enter player days: ")));
+        this.resetCurrentDay();
+        System.out.println("Cool");
     }
 
     // WHEN PLAYER IS INSTANTIATED --------------------------------
@@ -56,7 +60,8 @@ public class Player {
             this.playerName = tools.playerNameValidation(inputPlayerName);
         }
         catch (InvalidInputException e) { // If playerNameValidation throws this error
-            e.printStackTrace();
+            System.out.println("Name not valid");
+            this.setPlayerName(tools.readPlayerStringInput("Please enter player name: "));
         }
     }
 
@@ -124,7 +129,7 @@ public class Player {
                 this.playerDays = inputPlayerDays;
             }
         } catch (InvalidInputException e) { // Catch the error if it occurs.
-            e.printStackTrace();
+            this.setPlayerDays(Integer.parseInt(tools.readPlayerStringInput("Enter player days: ")));
         }
     }
 
@@ -156,6 +161,13 @@ public class Player {
         } catch (UnallowedMethodException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * This method resets the current day to 0.
+     */
+    public void resetCurrentDay() {
+        this.playerCurrentDay = 0;
     }
 
     /**
