@@ -1,5 +1,13 @@
 package main;
 
 public class Entity {
-    public int value;
+    private int value;
+
+    public void setValue(int inputValue) {
+        this.value = inputValue;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }

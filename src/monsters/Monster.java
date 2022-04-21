@@ -18,24 +18,24 @@ public class Monster extends Entity {
 
 
     // MONSTER VALUE --------------------------------------------------
-
-    private int monsterValue;
-
-    /**
-     * This method sets the gold value of the monster.
-     * @param inputMonsterValue: integer
-     */
-    void setMonsterValue(int inputMonsterValue) {
-        this.monsterValue = inputMonsterValue;
-    }
-
-    /**
-     * This method returns the gold value of the monster.
-     * @return monsterValue: integer
-     */
-    public int getMonsterValue() {
-        return this.monsterValue;
-    }
+// DEPRECATED
+//    private int monsterValue;
+//
+//    /**
+//     * This method sets the gold value of the monster.
+//     * @param inputMonsterValue: integer
+//     */
+//    void setMonsterValue(int inputMonsterValue) {
+//        this.monsterValue = inputMonsterValue;
+//    }
+//
+//    /**
+//     * This method returns the gold value of the monster.
+//     * @return monsterValue: integer
+//     */
+//    public int getMonsterValue() {
+//        return this.monsterValue;
+//    }
 
     // MONSTER VALUE --------------------------------------------------
 
