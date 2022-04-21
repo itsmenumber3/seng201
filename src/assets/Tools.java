@@ -8,8 +8,9 @@ import exceptions.*; // Import the Exception classes
 
 
 public class Tools {
-    MagicNumbers magicNumbers = new MagicNumbers();
-    Scanner scanner = new Scanner(System.in);
+
+    MagicNumbers magicNumbers = new MagicNumbers(); // get the constants in the MagicNumbers class
+    Scanner scanner = new Scanner(System.in); // Internal
 
     // Internal
     public String readPlayerStringInput(String inputPrompt) {
@@ -43,9 +44,9 @@ public class Tools {
      * If the playerName is found to be VALID, return that playerName as String for assignment into a variable.
      * Else, if the playerName is found to be INVALID, throw an InvalidInputException error.
      * InvalidInputException is a custom exception class found in seng201.classes.exceptions.
-     * @param inputPlayerName: String, which is the argument passed on by setPlayerName() in class Player().
-     * @return inputPlayerName: String, only return if the playerName is valid against criteria
-     * @throws InvalidInputException, if the playerName is found to be invalid
+     * @param inputPlayerName String, which is the argument passed on by setPlayerName() in class Player().
+     * @return inputPlayerName String, only return if the playerName is valid against criteria
+     * @throws InvalidInputException if the playerName is found to be invalid
      */
     public String playerNameValidation(String inputPlayerName) throws InvalidInputException {
         String regex = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";

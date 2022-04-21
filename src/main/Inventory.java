@@ -2,22 +2,51 @@ package main;
 
 import java.util.ArrayList;
 
+import exceptions.UnallowedMethodException;
 import items.*;
 
 public class Inventory {
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Entity> entities = new ArrayList<>();
 
-    public void addToInventory(Item inputItem) {
-        this.items.add(inputItem);
+    /**
+     * This method adds an Entity into the entities ArrayList
+     * @param inputEntity: Entity
+     */
+    public void addToInventory(Entity inputEntity) {
+        this.entities.add(inputEntity);
     }
 
-    public void removeFromInventory(Item inputItem) {
-        this.items.remove(inputItem);
+    /**
+     * This method removes an entity from the ArrayList entities
+     * And then return it
+     * @param inputEntity: Entity
+     * @return inputEntity: Entity
+     */
+    public Entity removeFromInventory(Entity inputEntity) {
+        this.entities.remove(inputEntity);
+        return inputEntity;
     }
 
+    /**
+     * This method resets the inventory i.e. a blank ArrayList
+     */
     public void resetInventory() {
-        this.items = new ArrayList<>();
+        this.entities = new ArrayList<>();
+    }
+    
+    public void setInventory() {
+        try {
+            throw new UnallowedMethodException("Unallowed method");
+        } catch (UnallowedMethodException e) {
+            e.printStackTrace();
+        }
     }
 
-    public ArrayList<Item> getItems() { return this.items; }
+    /**
+     * This method returns the ArrayList entities
+     * @return this.entities: ArrayList
+     */
+    public ArrayList<Entity> getItems() { 
+        return this.entities; 
+    }
 }

@@ -12,5 +12,10 @@
 * All monsters have the same amount of health out of 100
 * They differ in their ability to resist damage
 
+## An explanation of the file structure
+* /src/ is the source root of the game program.
+* Game is the main class that co-ordinates the game.
+* MagicNumbers stores constants 
+
 
 
