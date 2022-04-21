@@ -11,6 +11,7 @@ public class Tools {
 
     MagicNumbers magicNumbers = new MagicNumbers(); // get the constants in the MagicNumbers class
     Scanner scanner = new Scanner(System.in); // Internal
+    Random random = new Random();
 
     // Internal
     public String readPlayerStringInput(String inputPrompt) {
@@ -35,6 +36,10 @@ public class Tools {
             System.out.println("Error; Handle is not a big problem as we will implement UI and this cannot happen in UI");
         }
         return inputDifficultyLevel;
+    }
+
+    public boolean TrueFalseRandom(float inputProbability) {
+        return true;
     }
 
     /**

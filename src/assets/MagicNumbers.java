@@ -13,6 +13,7 @@ public class MagicNumbers {
     public final int RESET_GOLD_VALUE = 30;
     public final int RESET_POINT_VALUE = 0; // Do not change
     public final int RESET_CURRENT_DAY_VALUE = 0; // Do not change
+    public final int DEFAULT_RANDOM_COMPARISON_VALUE = 0;
 
     // Values of entities.monsters
     public int SKELETON_VALUE;
