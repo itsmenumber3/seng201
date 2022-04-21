@@ -20,6 +20,8 @@ public class MagicNumbers {
     public int GHAST_VALUE;
     public int WITHER_VALUE;
 
+    public int DEFAULT_MONSTER_HEALTH_LEVEL = 100;
+
     public MagicNumbers() {
         // This is legal, but do nothing.
     }

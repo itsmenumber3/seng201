@@ -1,6 +1,13 @@
 package items;
 
-public interface Item {
-    public void setItemValue();
-    public int getItemValue();
+import main.Entity;
+
+public class Item extends Entity {
+    public void setItemValue() {
+
+    }
+
+    public int getItemValue() {
+        return 0;
+    }
 }
