@@ -3,7 +3,7 @@ package assets;
 import java.util.*;
 import java.util.regex.*;
 
-import enums.Difficulty;
+import assets.enums.Difficulty;
 import exceptions.*; // Import the Exception classes
 
 

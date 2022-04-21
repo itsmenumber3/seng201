@@ -6,7 +6,7 @@
 
 package main;
 
-import enums.Difficulty;
+import assets.enums.Difficulty;
 import assets.*; // Import MagicNumbers and Tools
 import exceptions.*; // Import the Exception classes
 import items.*; // Import items that player can buy and hold
@@ -167,7 +167,7 @@ public class Player {
      * This method resets the current day to 0.
      */
     public void resetCurrentDay() {
-        this.playerCurrentDay = 0;
+        this.playerCurrentDay = magicNumbers.RESET_CURRENT_DAY_VALUE; // Should be 0
     }
 
     /**
