@@ -146,7 +146,7 @@ public class Monster extends Entity {
     // INSTANTIATION --------------------------------------------------------
 
     Monster(Player player) {
-        magicNumbers = new MagicNumbers(player.getDifficultyLevel());
+        magicNumbers = new MagicNumbers(player.getPlayerDifficulty());
     }
 
     // INSTANTIATION --------------------------------------------------------

@@ -1,9 +1,3 @@
-/**
- * Class: Player
- * Description: Player holds data about the player and their course of actions throughout the game.
- * Author: Francis Phan
- */
-
 package main;
 
 import assets.enums.Difficulty;
@@ -11,33 +5,43 @@ import assets.*; // Import MagicNumbers and Tools
 import exceptions.*; // Import the Exception classes
 import entities.items.*; // Import entities.items that player can buy and hold
 
-
+/**
+ *
+ */
 public class Player {
+    // LIBRARIES --------------------------------------------------
+
+    /**
+     * MagicNumbers is a class that holds all constants in this game programme.
+     */
+    MagicNumbers magicNumbers = new MagicNumbers();
+    // Some numerical values are dependent on the difficulty level chosen by the player.
+    // magicNumbers will be assigned again when difficulty level is known.
+
+    Tools tools = new Tools(); // Tools is a class that provides some basic functionalities, such as playerName validation
+    // and random number generator!
+
+    // LIBRARIES --------------------------------------------------
+
+
 
     // WHEN PLAYER IS INSTANTIATED --------------------------------
 
+    /**
+     * This method provides for the instantiation of the class Player.
+     * It goes through all the variables that store user data, for example, playerName and playerDifficulty
+     * and ask for the user to input. It also resets many counters to their default starting values,
+     * such as gold, points, and current day to 0 or 1 (as set in magicNumbers).
+     */
     public Player() {
         this.setPlayerName(tools.readPlayerStringInput("Please enter player name: "));
-        this.setDifficultyLevel(tools.convertStringIntoDifficulty(tools.readPlayerStringInput("Please enter level 1, 2, 3: ")));
+        this.setPlayerDifficulty(tools.convertStringIntoDifficulty(tools.readPlayerStringInput("Please enter level 1, 2, 3: ")));
         this.setPlayerDays(Integer.parseInt(tools.readPlayerStringInput("Enter player days: ")));
-        this.resetCurrentDay();
+        this.resetPlayerCurrentDay();
         System.out.println("Cool");
     }
 
     // WHEN PLAYER IS INSTANTIATED --------------------------------
-
-
-
-    // LIBRARIES --------------------------------------------------
-
-    MagicNumbers magicNumbers = new MagicNumbers(); // MagicNumbers is a class that holds most numerical values needed in the game.
-                                                    // Some numerical values are dependent on the difficulty level chosen by the player.
-                                                    // magicNumbers will be assigned again when difficulty level is known.
-
-    Tools tools = new Tools(); // Tools is a class that provides some basic functionalities, such as playerName validation
-                               // and random number generator!
-
-    // LIBRARIES --------------------------------------------------
 
 
 
@@ -57,7 +61,7 @@ public class Player {
         try {
             // If playerName does not meet criteria, playerNameValidation will throw an InvalidInputException
             // Else, playerNameValidation returns that exact inputPlayerName: String.
-            this.playerName = tools.playerNameValidation(inputPlayerName);
+            this.playerName = tools.nameValidation(inputPlayerName);
         }
         catch (InvalidInputException e) { // If playerNameValidation throws this error
             System.out.println("Name not valid");
@@ -79,17 +83,17 @@ public class Player {
 
     // DIFFICULTY----------------------------------------------------
 
-    private Difficulty difficultyLevel; // difficulty is an enum type. Defined in Difficulty.java and has three values: EASY, MEDIUM, HARD
+    private Difficulty playerDifficulty; // difficulty is an enum type. Defined in Difficulty.java and has three values: EASY, MEDIUM, HARD
 
     /**
      * This method sets the difficulty level.
      * Difficulty is an enum class defined in Difficulty.java
      * There can be three Difficulty values: EASY, MEDIUM and HARD.
-     * @param inputDifficultyLevel: Difficulty
+     * @param inputPlayerDifficulty: Difficulty
      */
-    public void setDifficultyLevel(Difficulty inputDifficultyLevel) {
-        try {  // Should throw an error if inputDifficultyLevel is an invalid value.
-            this.difficultyLevel = inputDifficultyLevel;
+    public void setPlayerDifficulty(Difficulty inputPlayerDifficulty) {
+        try {  // Should throw an error if inputPlayerDifficulty is an invalid value.
+            this.playerDifficulty = inputPlayerDifficulty;
         } catch (Exception e) {
             System.out.println("Please provide a valid difficulty level");
             e.printStackTrace();
@@ -98,10 +102,10 @@ public class Player {
 
     /**
      * This method returns the difficulty level.
-     * @return difficultyLevel: Difficulty
+     * @return playerDifficulty: Difficulty
      */
-    public Difficulty getDifficultyLevel() {
-        return this.difficultyLevel;
+    public Difficulty getPlayerDifficulty() {
+        return this.playerDifficulty;
     }
 
     // DIFFICULTY----------------------------------------------------
@@ -116,7 +120,7 @@ public class Player {
      * This method allows player to set how many days the game will last
      * The maximum number and minimum number of days is set in MagicNumbers().
      * Anything outside this range, an InvalidInputException will be thrown
-     * @param inputPlayerDays: integer, from player input
+     * @param inputPlayerDays integer, from player input
      */
     public void setPlayerDays(int inputPlayerDays) {
         try { // If the day is out of the valid range, throw an error.
@@ -153,9 +157,9 @@ public class Player {
      * It is not possible to set the current day, as we want to avoid jumping days.
      * To set the next day, use setNextDay() which increments playerCurrentDay.
      * To reset, use resetCurrentDay() to reset it to 1.
-     * @param inputCurrentDay: integer
+     * @param inputPlayerCurrentDay: integer
      */
-    public void setCurrentDay(int inputCurrentDay) {
+    public void setPlayerCurrentDay(int inputPlayerCurrentDay) {
         try { // This method is simply not allowed, so throw an error straight away
             throw new UnallowedMethodException("Unallowed method");
         } catch (UnallowedMethodException e) {
@@ -164,9 +168,9 @@ public class Player {
     }
 
     /**
-     * This method resets the current day to 0.
+     * This method resets the current day to MagicNumbers.RESET_CURRENT_DAY_VALUE (which should be 0)
      */
-    public void resetCurrentDay() {
+    public void resetPlayerCurrentDay() {
         this.playerCurrentDay = magicNumbers.RESET_CURRENT_DAY_VALUE; // Should be 0
     }
 
@@ -176,8 +180,8 @@ public class Player {
      * @return true:  boolean if player has won the game (the current day is the last day)
      *         false: boolean if player hasn't won the game
      */
-    public boolean hasPlayerWonGameElseSetNextDay() {
-        if (this.getCurrentDay() == this.getPlayerDays()) { // Player has won the game
+    public boolean hasPlayerWonGameElseSetPlayerNextDay() {
+        if (this.getPlayerCurrentDay() == this.getPlayerDays()) { // Player has won the game
             return true; // Return true to Game() to conclude the game
         } else { // If Player has not won game
             this.playerCurrentDay++; // Increment to the next day
@@ -189,7 +193,7 @@ public class Player {
      * This method gets the current day and returns it
      * @return playerCurrentDay: integer
      */
-    public int getCurrentDay() {
+    public int getPlayerCurrentDay() {
         return this.playerCurrentDay;
     }
 

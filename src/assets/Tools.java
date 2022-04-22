@@ -43,28 +43,29 @@ public class Tools {
     }
 
     /**
-     * This method validates the playerName in Player(). There are many conditions to a valid playerName:
-     * 1. The playerName must be of 5 characters or longer, of 13 characters or shorter.
-     * 2. The playerName must only contain alphanumeric characters.
-     * If the playerName is found to be VALID, return that playerName as String for assignment into a variable.
-     * Else, if the playerName is found to be INVALID, throw an InvalidInputException error.
+     * This method validates the user input where naming is required, such as the name of the Player,
+     * and the names given by the Player to the Monsters. There is a number of criteria to a valid name:
+     * 1. The name must be between 3-18 characters (inclusive) in length.
+     * 2. The name must only contain alphanumeric characters, or points, dashes, and underscores.
+     * If the name is found to be VALID, return that name as String for assignment into a variable.
+     * Else, if the name is found to be INVALID, throw an InvalidInputException error.
      * InvalidInputException is a custom exception class found in seng201.classes.exceptions.
-     * @param inputPlayerName String, which is the argument passed on by setPlayerName() in class Player().
-     * @return inputPlayerName String, only return if the playerName is valid against criteria
-     * @throws InvalidInputException if the playerName is found to be invalid
+     * @param inputName String, which is the argument passed on by setPlayerName() in class Player().
+     * @return inputName String, only return if the name is valid against criteria
+     * @throws InvalidInputException if the name is found to be invalid
      */
-    public String playerNameValidation(String inputPlayerName) throws InvalidInputException {
-        String regex = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$";
+    public String nameValidation(String inputName) throws InvalidInputException {
+        String regex = magicNumbers.NAME_VALIDATION_REGEX;
         Pattern pattern = Pattern.compile(regex);
 
-        if (inputPlayerName == null) {
-            throw new InvalidInputException("playerName cannot be blank");
+        if (inputName == null) {
+            throw new InvalidInputException("name cannot be blank");
         } else {
-            Matcher playerNameMatcher = pattern.matcher(inputPlayerName);
-            if (!playerNameMatcher.matches()) {
-                throw new InvalidInputException("playerName is invalid");
+            Matcher nameMatcher = pattern.matcher(inputName);
+            if (!nameMatcher.matches()) {
+                throw new InvalidInputException("name is invalid");
             } else {
-                return inputPlayerName;
+                return inputName;
             }
         }
     }
