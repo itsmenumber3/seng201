@@ -3,8 +3,11 @@ package main;
 import assets.enums.Difficulty;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
-import exceptions.*; // Import the Exception classes
-import entities.items.*; // Import entities.items that player can buy and hold
+import entities.items.Item;
+import exceptions.InsufficientPlayerGoldBalanceException;
+import exceptions.InvalidInputException;
+import exceptions.UnallowedMethodException;
+import exceptions.UnexpectedNegativeNumberException;
 
 /**
  *
