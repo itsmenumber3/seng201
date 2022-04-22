@@ -1,5 +1,6 @@
 package main;
 
+import assets.enums.RoleType;
 import entities.*;
 import exceptions.UnallowedMethodException;
 
@@ -11,6 +12,11 @@ import java.util.ArrayList;
  * @author Francis
  */
 public class Shop implements Role {
+
+    @Override
+    public RoleType getRoleType() {
+        return RoleType.SHOP;
+    }
 
     /**
      * The ArrayList shopRange contains a list of entities for sale on a particular day.

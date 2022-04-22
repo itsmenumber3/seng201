@@ -1,6 +1,7 @@
 package main;
 
 import assets.enums.Difficulty;
+import assets.enums.RoleType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
 import entities.items.Item;
@@ -27,6 +28,13 @@ public class Player implements Role {
 
     // LIBRARIES --------------------------------------------------
 
+
+    // GET ROLE TYPE
+
+    @Override
+    public RoleType getRoleType() {
+        return RoleType.PLAYER;
+    }
 
 
     // WHEN PLAYER IS INSTANTIATED --------------------------------

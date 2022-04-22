@@ -1,5 +1,7 @@
 package main;
 
-public interface Role {
+import assets.enums.RoleType;
 
+public interface Role {
+    public RoleType getRoleType();
 }

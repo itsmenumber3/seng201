@@ -1,4 +1,5 @@
 package entities.monsters;
 
-public class Wither {
+public class Spirit {
+
 }

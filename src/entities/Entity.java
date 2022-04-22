@@ -4,6 +4,7 @@ import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
 import assets.enums.Rarity;
 import exceptions.InvalidInputException;
+import exceptions.MaximumStringLengthExceededException;
 import exceptions.UnexpectedNegativeNumberException;
 
 /**
@@ -13,7 +14,7 @@ import exceptions.UnexpectedNegativeNumberException;
  * @see entities.monsters.Monster
  * @see entities.items.Item
  */
-public class Entity {
+public abstract class Entity {
 
     // LIBRARIES ------------------------------------------
 
@@ -97,63 +98,62 @@ public class Entity {
     private String entityDescription;
 
     /**
-     * This string
-     * @param inputEntityDescription
+     * This method assigns an input string as a brief description string of entity.
+     * If this input string is too long (over 200 characters) throw an MaximumStringLengthExceededException
+     * @param inputEntityDescription String, provide a 200-word or less description here.
+     * @see InvalidInputException
      */
     public void setEntityDescription(String inputEntityDescription) {
-        this.entityDescription = inputEntityDescription;
+        try {
+            if (inputEntityDescription.length() <= magicNumbers.MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH) {
+                this.entityDescription = inputEntityDescription;
+            } else {
+                throw new MaximumStringLengthExceededException("Description too long");
+            }
+        } catch (MaximumStringLengthExceededException e) {
+            e.printStackTrace();
+        }
+
     }
 
+    /**
+     * This method returns the string description of entity
+     * @return entityDescription String
+     */
     public String getEntityDescription() {
         return this.entityDescription;
     }
 
+    // ENTITY DESCRIPTION ---------------------------------
+
+
+
+    // RARITY ---------------------------------------------
+
+    /**
+     * This variable stores how rare the entity is. It is of enum type Rarity.
+     * There are three Rarity levels: COMMON, UNCOMMON, RARE.
+     */
     private Rarity entityRarity;
 
+    /**
+     * This method accepts an input of type Rarity and assign it to entityRarity.
+     * @param inputEntityRarity Rarity
+     * @see Rarity
+     */
     public void setEntityRarity(Rarity inputEntityRarity) {
         this.entityRarity = inputEntityRarity;
     }
 
+    /**
+     * This method returns the rarity of the entity.
+     * @return entityRarity Rarity
+     */
     public Rarity getEntityRarity() {
         return this.entityRarity;
     }
 
-    // SELL VALUE -----------------------------------------
-
-    /**
-     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
-     */
-    private int entitySellValue;
-
-    /**
-     * This method assigns a gold value to integer variable entitySellValue.
-     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
-     * @param inputEntitySellValue integer, which is what you want the sell value to be.This input value must
-     *                             be equal or greater than constant MINIMUM_MONSTER_SELL_PRICE: integer
-     *                             set in class MagicNumbers otherwise it will throw an error - UnexpectedNegativeNumberException
-     */
-    public void setEntitySellValue(int inputEntitySellValue) {
-        try {
-            if (inputEntitySellValue >= magicNumbers.MINIMUM_MONSTER_SELL_PRICE) {
-                this.entitySellValue = inputEntitySellValue;
-            } else {
-                throw new UnexpectedNegativeNumberException("Unexpected negative number");
-            }
-        } catch (UnexpectedNegativeNumberException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * This method returns the entitySellValue.
-     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
-     * @return entitySellValue integer
-     */
-    public int getEntitySellValue() {
-        return this.entitySellValue;
-    }
-
-    // SELL VALUE -----------------------------------------
+    // RARITY ---------------------------------------------
 
 
 
@@ -194,5 +194,44 @@ public class Entity {
     }
 
     // PURCHASE VALUE -------------------------------------
+
+
+
+    // SELL VALUE -----------------------------------------
+
+    /**
+     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
+     */
+    private int entitySellValue;
+
+    /**
+     * This method assigns a gold value to integer variable entitySellValue.
+     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
+     * @param inputEntitySellValue integer, which is what you want the sell value to be.This input value must
+     *                             be equal or greater than constant MINIMUM_MONSTER_SELL_PRICE: integer
+     *                             set in class MagicNumbers otherwise it will throw an error - UnexpectedNegativeNumberException
+     */
+    public void setEntitySellValue(int inputEntitySellValue) {
+        try {
+            if (inputEntitySellValue >= magicNumbers.MINIMUM_MONSTER_SELL_PRICE) {
+                this.entitySellValue = inputEntitySellValue;
+            } else {
+                throw new UnexpectedNegativeNumberException("Unexpected negative number");
+            }
+        } catch (UnexpectedNegativeNumberException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method returns the entitySellValue.
+     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
+     * @return entitySellValue integer
+     */
+    public int getEntitySellValue() {
+        return this.entitySellValue;
+    }
+
+    // SELL VALUE -----------------------------------------
 
 }
