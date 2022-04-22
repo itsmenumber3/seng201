@@ -3,11 +3,7 @@ package entities.items;
 import entities.*;
 
 public class Item extends Entity {
-    public void setItemValue() {
+    public Item() {
 
-    }
-
-    public int getItemValue() {
-        return 0;
     }
 }

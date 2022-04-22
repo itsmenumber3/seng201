@@ -1,4 +1,4 @@
 package entities.monsters;
 
-public class Ghast {
+public class Troll {
 }

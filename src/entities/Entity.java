@@ -8,7 +8,7 @@ import exceptions.UnexpectedNegativeNumberException;
 
 /**
  * An Entity is something that can be owned, used and traded by the player.
- * This means items (food, weapons, potions, shield) AND monsters (Ghast, Skeleton, Wither, Zombie)
+ * This means items (food, weapons, potions, shield) AND monsters (Troll, Skeleton, Wither, Zombie)
  * are all entities. The classes for items and monsters are extended from this class, Entity.
  * @see entities.monsters.Monster
  * @see entities.items.Item
@@ -21,16 +21,102 @@ public class Entity {
      * tools: Tools contains some the reusable functionalities needed throughout the program such as
      * command line input, name validation, and random number generator.
      */
-    Tools tools = new Tools();
+    public Tools tools = new Tools();
 
     /**
      * magicNumber: MagicNumbers s is an object storing all constants needed in this program.
      */
-    MagicNumbers magicNumbers = new MagicNumbers();
+    public MagicNumbers magicNumbers = new MagicNumbers();
 
     // LIBRARIES ------------------------------------------
 
 
+
+    // INSTANTIATION --------------------------------------
+
+    /**
+     * This method creates an instance of the class Entity.
+     * @param inputEntityName String that is the name entity.
+     * @param inputEntityDescription String that is the description of the entity.
+     * @param inputEntityRarity Rarity that describes how rare the entity is COMMON, UNCOMMON, RARE
+     * @param inputEntityPurchaseValue integer
+     * @param inputEntitySellValue integer
+     */
+    public Entity(String inputEntityName, String inputEntityDescription, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
+        this.setEntityName(inputEntityName);
+        this.setEntityDescription(inputEntityDescription);
+        this.setEntityRarity(inputEntityRarity);
+        this.setEntityPurchaseValue(inputEntityPurchaseValue);
+        this.setEntitySellValue(inputEntitySellValue);
+    }
+
+    // INSTANTIATION --------------------------------------
+
+
+
+    // ENTITY NAME ----------------------------------------
+
+    /**
+     * entityName: String stores the name of the entity.
+     */
+    private String entityName;
+
+    /**
+     * This method assigns the input string to the name of the entity.
+     * The input string must adhere to the Name Rules because it will be validated by nameValidation() in Tools.
+     * If violated, throw the error InvalidInputException
+     * @param inputEntityName String, the input string
+     * @see Tools
+     * @see InvalidInputException
+     */
+    public void setEntityName(String inputEntityName) {
+        try {
+            this.entityName = tools.nameValidation(inputEntityName);
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method returns the name of the entity.
+     * @return entityName String, the name of the entity.
+     */
+    public String getEntityName() {
+        return this.entityName;
+    }
+
+    // ENTITY NAME ----------------------------------------
+
+
+
+    // ENTITY DESCRIPTION ---------------------------------
+
+    /**
+     * This string provides a brief description of the entity.
+     */
+    private String entityDescription;
+
+    /**
+     * This string
+     * @param inputEntityDescription
+     */
+    public void setEntityDescription(String inputEntityDescription) {
+        this.entityDescription = inputEntityDescription;
+    }
+
+    public String getEntityDescription() {
+        return this.entityDescription;
+    }
+
+    private Rarity entityRarity;
+
+    public void setEntityRarity(Rarity inputEntityRarity) {
+        this.entityRarity = inputEntityRarity;
+    }
+
+    public Rarity getEntityRarity() {
+        return this.entityRarity;
+    }
 
     // SELL VALUE -----------------------------------------
 
@@ -109,44 +195,4 @@ public class Entity {
 
     // PURCHASE VALUE -------------------------------------
 
-
-
-    // ENTITY NAME ----------------------------------------
-
-    /**
-     * entityName: String is a string
-     */
-    private String entityName;
-
-    public void setEntityName(String inputEntityName) {
-        try {
-            this.entityName = tools.nameValidation(inputEntityName);
-        } catch (InvalidInputException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getEntityName() {
-        return this.entityName;
-    }
-
-    private String entityDescription;
-
-    public void setEntityDescription(String inputEntityDescription) {
-        this.entityDescription = inputEntityDescription;
-    }
-
-    public String getEntityDescription() {
-        return this.entityDescription;
-    }
-
-    private Rarity entityRarity;
-
-    public void setEntityRarity(Rarity inputEntityRarity) {
-        this.entityRarity = inputEntityRarity;
-    }
-
-    public Rarity getEntityRarity() {
-        return this.entityRarity;
-    }
 }

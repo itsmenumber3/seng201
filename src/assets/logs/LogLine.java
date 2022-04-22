@@ -1,4 +1,4 @@
-package logs;
+package assets.logs;
 
 import main.Role;
 

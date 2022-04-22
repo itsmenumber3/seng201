@@ -15,7 +15,7 @@ public class MagicNumbers {
     /**
      * This is the maximum number of days that the player can choose to play.
      * More than this and it's illegal, so throw an InvalidInputException in that case.
-     * @see exceptions.InvalidInputException should be thrown if violated
+     * @see exceptions.InvalidInputException
      */
     public final int MAXIMUM_USER_DAYS = 10;
 
@@ -66,8 +66,9 @@ public class MagicNumbers {
     public int MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE = 0;
     public final int MINIMUM_MONSTER_SELL_PRICE = 0;
     public final int MINIMUM_MONSTER_PURCHASE_PRICE = 0;
-    public int DEFAULT_MONSTER_HEALTH_LEVEL = 100;
+    public final int DEFAULT_MONSTER_HEALTH_LEVEL = 100;
 
+    public final int MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH = 200;
     public MagicNumbers() {
         // This is legal, but do nothing.
     }

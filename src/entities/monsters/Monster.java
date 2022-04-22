@@ -1,44 +1,19 @@
 package entities.monsters;
 
-import assets.libraries.MagicNumbers;
+import entities.Entity;
 import exceptions.InvalidMonsterNumericPropertyException;
 import exceptions.UnallowedMethodException;
-import entities.Entity;
-import main.Player;
 import main.Role;
 
 public class Monster extends Entity implements Role {
 
-    // LIBRARIES ------------------------------------------------------------
+    // INSTANTIATION --------------------------------------------------------
 
-    MagicNumbers magicNumbers = new MagicNumbers();
+    public Monster() {
+        super();
+    }
 
-
-    // LIBRARIES ------------------------------------------------------------
-
-
-
-    // MONSTER VALUE --------------------------------------------------
-// DEPRECATED
-//    private int monsterValue;
-//
-//    /**
-//     * This method sets the gold value of the monster.
-//     * @param inputMonsterValue: integer
-//     */
-//    void setMonsterValue(int inputMonsterValue) {
-//        this.monsterValue = inputMonsterValue;
-//    }
-//
-//    /**
-//     * This method returns the gold value of the monster.
-//     * @return monsterValue: integer
-//     */
-//    public int getMonsterValue() {
-//        return this.monsterValue;
-//    }
-
-    // MONSTER VALUE --------------------------------------------------
+    // INSTANTIATION --------------------------------------------------------
 
 
 
@@ -90,7 +65,7 @@ public class Monster extends Entity implements Role {
     private int monsterAttackDamage; // THis is the damage caused by the monster on its opponent
 
     /**
-     * This methods set the attack damage ability
+     * This method set the attack damage ability
      * @param inputMonsterAttackDamage: integer
      */
     void setMonsterAttackDamage(int inputMonsterAttackDamage) {
@@ -140,15 +115,4 @@ public class Monster extends Entity implements Role {
     }
 
     // RESISTANCE ABILITY ---------------------------------------------------
-
-    // IMPORTANT VARIABLES --------------------------------------------------
-
-
-    // INSTANTIATION --------------------------------------------------------
-
-    Monster(Player player) {
-        magicNumbers = new MagicNumbers(player.getPlayerDifficulty());
-    }
-
-    // INSTANTIATION --------------------------------------------------------
 }
