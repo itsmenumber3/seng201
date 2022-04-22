@@ -12,7 +12,7 @@ import exceptions.UnexpectedNegativeNumberException;
 /**
  *
  */
-public class Player {
+public class Player implements Role {
     // LIBRARIES --------------------------------------------------
 
     /**

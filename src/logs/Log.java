@@ -1,18 +1,16 @@
 package logs;
 
+import java.util.ArrayList;
+
 public class Log {
-    private String log;
+    private final ArrayList<LogLine> logs = new ArrayList<>();
 
-    public Log(String inputLog) {
-        this.setLog(inputLog);
+    public void writeLog(String inputLogTime, String inputLogSubject, String inputLogContent) {
+        LogLine newLog = new LogLine(inputLogTime, inputLogSubject, inputLogContent);
+        logs.add(newLog);
     }
 
-    public void setLog(String inputLog) {
-        this.log = inputLog;
+    public ArrayList<LogLine> getLog() {
+        return this.logs;
     }
-
-    public String getLog() {
-        return this.log;
-    }
-
 }

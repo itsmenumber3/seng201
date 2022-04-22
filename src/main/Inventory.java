@@ -2,7 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
-import entities.Entity;
+import entities.*;
 import exceptions.UnallowedMethodException;
 
 public class Inventory {

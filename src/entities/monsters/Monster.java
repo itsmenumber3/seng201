@@ -5,8 +5,9 @@ import exceptions.InvalidMonsterNumericPropertyException;
 import exceptions.UnallowedMethodException;
 import entities.Entity;
 import main.Player;
+import main.Role;
 
-public class Monster extends Entity {
+public class Monster extends Entity implements Role {
 
     // LIBRARIES ------------------------------------------------------------
 

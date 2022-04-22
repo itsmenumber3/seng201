@@ -1,7 +1,8 @@
 package main;
 
-import entities.Entity;
+import entities.*;
 import exceptions.UnallowedMethodException;
+
 import java.util.ArrayList;
 
 /**
@@ -9,12 +10,12 @@ import java.util.ArrayList;
  * They can purchase new entities from the shop, and sell their entities to the shop.
  * @author Francis
  */
-public class Shop {
+public class Shop implements Role {
 
     /**
      * The ArrayList shopRange contains a list of entities for sale on a particular day.
      */
-    private ArrayList<Entity> shopRange = new ArrayList<>();
+    private final ArrayList<Entity> shopRange = new ArrayList<>();
 
     /**
      * This method isn't allowed. Instead, use one of the following methods:
