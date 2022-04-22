@@ -1,4 +1,4 @@
 package entities.items.weapons;
 
-public class Weapon {
+public interface Weapon {
 }
