@@ -1,7 +1,8 @@
 package main;
 
 import assets.enums.Difficulty;
-import assets.*; // Import MagicNumbers and Tools
+import assets.libraries.MagicNumbers;
+import assets.libraries.Tools;
 import exceptions.*; // Import the Exception classes
 import entities.items.*; // Import entities.items that player can buy and hold
 

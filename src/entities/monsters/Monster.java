@@ -1,6 +1,6 @@
 package entities.monsters;
 
-import assets.MagicNumbers;
+import assets.libraries.MagicNumbers;
 import exceptions.InvalidMonsterNumericPropertyException;
 import exceptions.UnallowedMethodException;
 import entities.Entity;

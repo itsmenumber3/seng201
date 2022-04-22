@@ -1,23 +1,33 @@
 package entities;
 
-import assets.MagicNumbers;
-import assets.Tools;
+import assets.libraries.MagicNumbers;
+import assets.libraries.Tools;
 import assets.enums.Rarity;
 import exceptions.InvalidInputException;
 import exceptions.UnexpectedNegativeNumberException;
 
+/**
+ * An Entity is something that can be owned, used and traded by the player.
+ * This means items (food, weapons, potions, shield) AND monsters (Ghast, Skeleton, Wither, Zombie)
+ * are all entities. The classes for items and monsters are extended from this class, Entity.
+ * @see entities.monsters.Monster
+ * @see entities.items.Item
+ */
 public class Entity {
+
     // LIBRARIES ------------------------------------------
 
     /**
-     * Contains some the reusable functionalities such as command line input, name validation, and random number generator.
+     * tools: Tools contains some the reusable functionalities needed throughout the program such as
+     * command line input, name validation, and random number generator.
      */
     Tools tools = new Tools();
 
     /**
-     * Contains the constants.
+     * magicNumber: MagicNumbers s is an object storing all constants needed in this program.
      */
     MagicNumbers magicNumbers = new MagicNumbers();
+
     // LIBRARIES ------------------------------------------
 
 
@@ -25,13 +35,16 @@ public class Entity {
     // SELL VALUE -----------------------------------------
 
     /**
-     * entitySellValue: integer stores the gold value that the player can sell their owned monster for.
+     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
      */
     private int entitySellValue;
 
     /**
-     * This method assigns a gold value to entitySellValue regarding how much gold the monster should be sold to the store.
-     * @param inputEntitySellValue integer
+     * This method assigns a gold value to integer variable entitySellValue.
+     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
+     * @param inputEntitySellValue integer, which is what you want the sell value to be.This input value must
+     *                             be equal or greater than constant MINIMUM_MONSTER_SELL_PRICE: integer
+     *                             set in class MagicNumbers otherwise it will throw an error - UnexpectedNegativeNumberException
      */
     public void setEntitySellValue(int inputEntitySellValue) {
         try {
@@ -47,7 +60,8 @@ public class Entity {
 
     /**
      * This method returns the entitySellValue.
-     * @return entitySellValue integer.
+     * entitySellValue: integer stores the gold value that the player can sell their owned entity to the shop for.
+     * @return entitySellValue integer
      */
     public int getEntitySellValue() {
         return this.entitySellValue;
@@ -60,10 +74,18 @@ public class Entity {
     // PURCHASE VALUE -------------------------------------
 
     /**
-     * entityPurchaseValue
+     * entityPurchaseValue: integer is the gold value of the entity that the shop sells to the player.
      */
     private int entityPurchaseValue;
 
+    /**
+     * This method accepts a gold value integer input and sets the entityPurchaseValue to that input value.
+     * entityPurchaseValue: integer is the gold value of the entity that the shop sells to the player.
+     * @param inputEntityPurchaseValue integer, which is what you want the purchase price to be. This input value must
+     *                                 be equal or greater than constant MINIMUM_MONSTER_PURCHASE_PRICE: integer
+     *                                 set in class MagicNumbers otherwise it will throw an error - UnexpectedNegativeNumberException
+     * @see MagicNumbers
+     */
     public void setEntityPurchaseValue(int inputEntityPurchaseValue) {
         try {
             if (inputEntityPurchaseValue >= magicNumbers.MINIMUM_MONSTER_SELL_PRICE) {
@@ -76,10 +98,24 @@ public class Entity {
         }
     }
 
+    /**
+     * This method returns the entityPurchaseValue.
+     * entityPurchaseValue: integer is the gold value of the entity that the shop sells to the player.
+     * @return entityPurchaseValue integer
+     */
     public int getEntityPurchaseValue() {
         return this.entityPurchaseValue;
     }
 
+    // PURCHASE VALUE -------------------------------------
+
+
+
+    // ENTITY NAME ----------------------------------------
+
+    /**
+     * entityName: String is a string
+     */
     private String entityName;
 
     public void setEntityName(String inputEntityName) {

@@ -1,9 +1,10 @@
-package assets;
+package assets.libraries;
 
 import java.util.*;
 import java.util.regex.*;
 
 import assets.enums.Difficulty;
+import assets.libraries.MagicNumbers;
 import exceptions.*; // Import the Exception classes
 
 
