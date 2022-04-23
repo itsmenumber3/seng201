@@ -55,6 +55,12 @@ public class MagicNumbers {
      * @see main.Player
      */
     public final int RESET_CURRENT_DAY_VALUE = 1; // Do not change
+
+
+    /**
+     * This is the default health value of monster when initialised or reset.
+     */
+    public final int DEFAULT_MONSTER_HEALTH_LEVEL = 100;
     public final int DEFAULT_RANDOM_COMPARISON_VALUE = 0;
 
     // Values of entities.monsters
@@ -66,7 +72,7 @@ public class MagicNumbers {
     public int MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE = 0;
     public final int MINIMUM_MONSTER_SELL_PRICE = 0;
     public final int MINIMUM_MONSTER_PURCHASE_PRICE = 0;
-    public final int DEFAULT_MONSTER_HEALTH_LEVEL = 100;
+
 
     public final int MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH = 200;
     public MagicNumbers() {
