@@ -1,4 +1,4 @@
 package main.gameplay.battles;
 
-public class Antartica {
+public class Antarctica {
 }

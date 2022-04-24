@@ -10,6 +10,21 @@ import assets.enums.Difficulty;
  */
 public class MagicNumbers {
 
+    /**
+     * Instantiation of MagicNumbers without a difficulty level is legal.
+     * However it will just
+     */
+    public MagicNumbers() {
+
+    }
+
+    public MagicNumbers(Difficulty inputDifficulty) {
+        if (inputDifficulty.equals(Difficulty.EASY)) {
+            this.SKELETON_VALUE = 40;
+            this.ZOMBIE_VALUE = 30;
+        }
+    }
+
     // CONSTANTS FOR PLAYER INPUT VALIDATION ---------------------------------------
 
     /**
@@ -74,18 +89,11 @@ public class MagicNumbers {
     public final int MINIMUM_MONSTER_SELL_PRICE = 0;
     public final int MINIMUM_MONSTER_PURCHASE_PRICE = 0;
 
+    public final int MAXIMUM_MONSTERS_NUMBER_IN_TEAM = 4;
+
 
     public final int MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH = 200;
-    public MagicNumbers() {
-        // This is legal, but do nothing.
-    }
 
-    public MagicNumbers(Difficulty inputDifficulty) {
-        if (inputDifficulty.equals(Difficulty.EASY)) {
-            this.SKELETON_VALUE = 40;
-            this.ZOMBIE_VALUE = 30;
-        }
-    }
 
 
 }
