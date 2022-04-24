@@ -1,9 +1,9 @@
 package assets.enums;
 
 public enum WeaponType {
-    ARROW,
+    ARROW_BATCH,
     SHIELD,
     SWORD,
-    BULLET,
+    BULLET_BATCH,
     JAVELIN
 }
