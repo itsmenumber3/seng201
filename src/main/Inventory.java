@@ -99,4 +99,13 @@ public class Inventory {
     // REMOVE AN ENTITY OBJECT FROM THE ARRAY LIST ----------------
 
 
+    // IF AN ENTITY RUNS OUT OF ALL THE UNITS IT HAS --------------
+
+    /**
+     * This method works differently depending on the EntityType.
+     * @param inputEntity
+     */
+    public void uponEntityUsed(Entity inputEntity) {
+        if (inputEntity.)
+    }
 }
