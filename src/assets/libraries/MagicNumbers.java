@@ -10,20 +10,31 @@ import assets.enums.Difficulty;
  */
 public class MagicNumbers {
 
+    // INSTANTIATION --------------------------------------------------------------
+
     /**
      * Instantiation of MagicNumbers without a difficulty level is legal.
-     * However it will just
+     * However, difficulty-specific variables will not be assigned a value.
      */
     public MagicNumbers() {
 
     }
 
+    /**
+     * Instantiation of MagicNumbers with a difficulty level will assign values to difficulty-specific variables.
+     * @param inputDifficulty Difficulty, the level of difficulty in question.
+     */
     public MagicNumbers(Difficulty inputDifficulty) {
         if (inputDifficulty.equals(Difficulty.EASY)) {
             this.SKELETON_VALUE = 40;
             this.ZOMBIE_VALUE = 30;
         }
     }
+
+    // INSTANTIATION --------------------------------------------------------------
+
+
+
 
     // CONSTANTS FOR PLAYER INPUT VALIDATION ---------------------------------------
 
@@ -71,6 +82,9 @@ public class MagicNumbers {
      */
     public final int RESET_CURRENT_DAY_VALUE = 1; // Do not change
 
+    /**
+     * This is
+     */
     public final int RESET_ITEM_QUANTITY = 0;
 
     /**
