@@ -56,6 +56,7 @@ public class MagicNumbers {
      */
     public final int RESET_CURRENT_DAY_VALUE = 1; // Do not change
 
+    public final int RESET_ITEM_QUANTITY = 0;
 
     /**
      * This is the default health value of monster when initialised or reset.

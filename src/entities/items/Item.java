@@ -4,7 +4,7 @@ import assets.enums.EntityType;
 import assets.enums.ItemType;
 import assets.enums.Rarity;
 import assets.enums.RoleType;
-import entities.*;
+import entities.Entity;
 import exceptions.UnallowedMethodException;
 import main.Role;
 
@@ -28,9 +28,9 @@ public abstract class Item extends Entity {
      * This method - to instantiate an Item object - does two things:
      * 1. It accepts all the necessary parameters in order to instantiate all the variables as required in Entity.
      * 2. It sets entityType to ITEM to denote that this is an item.
-     * @param inputEntityName
-     * @param inputEntityDescription
-     * @param inputEntityRarity
+     * @param inputEntityName String, custom name of the item
+     * @param inputEntityDescription String, custom description of the item
+     * @param inputEntityRarity String,
      * @param inputEntityPurchaseValue
      * @param inputEntitySellValue
      * @param inputItemQuantity
@@ -60,7 +60,27 @@ public abstract class Item extends Entity {
 
     private int itemQuantity;
 
-    public void setItemQuantity(int inputItemQuantity, Role inputActor) {
+    /**
+     * It is not possible for anyone except the shop to set the quantity of an item (we don't want cheating!)
+     * If implementing for a shop, use shopSetItemQuantity(int inputItemQuantity, Role inputActor). This method must be exercised by the shop!
+     * If implementing for the inventory, use refillItemQuantity(int inputRefillItemQuantity, Role inputActor). This method must be exercised by the player, in their inventory!
+     * To reset
+     * @param inputItemQuantity integer, this will be discarded!
+     */
+    public void setItemQuantity(int inputItemQuantity) {
+        try {
+            throw new UnallowedMethodException("Unallowed method");
+        } catch (UnallowedMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method allows a shop to set item quantity before it is sold. Only the shop can do this!
+     * @param inputItemQuantity
+     * @param inputActor
+     */
+    public void shopSetItemQuantity(int inputItemQuantity, Role inputActor) {
         try {
             if (inputActor.getRoleType() == RoleType.SHOP) {
                 this.itemQuantity = inputItemQuantity;
@@ -72,8 +92,20 @@ public abstract class Item extends Entity {
         }
     }
 
-    public void refillItemQuantity(int inputRefillItemQuantity) {
-        this.itemQuantity += inputRefillItemQuantity;
+    public void refillItemQuantity(int inputRefillItemQuantity, Role inputActor) {
+        try {
+            if (inputActor.getRoleType() == RoleType.PLAYER) {
+                this.itemQuantity += inputRefillItemQuantity;
+            } else {
+                throw new UnallowedMethodException("Unallowed method!");
+            }
+        } catch (UnallowedMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void resetItemQuantity() {
+        this.itemQuantity = magicNumbers.RESET_ITEM_QUANTITY;
     }
 
     public int getItemQuantity() {
