@@ -37,12 +37,14 @@ public abstract class Entity {
     // INSTANTIATION --------------------------------------
 
     /**
-     * This method creates an instance of the class Entity.
+     * This method creates an instance of the class Entity. The Monster class and the Item class will use this.
      * @param inputEntityName String that is the name entity.
      * @param inputEntityDescription String that is the description of the entity.
      * @param inputEntityRarity Rarity that describes how rare the entity is COMMON, UNCOMMON, RARE
      * @param inputEntityPurchaseValue integer
      * @param inputEntitySellValue integer
+     * @see entities.monsters.Monster
+     * @see entities.items.Item
      */
     public Entity(String inputEntityName, String inputEntityDescription, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
         this.setEntityName(inputEntityName);

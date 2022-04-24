@@ -5,6 +5,6 @@ package entities.items.consumables;
  * @see Food
  * @see Potion
  */
-public interface Consumable {
+public class Consumable extends Item {
 
 }
