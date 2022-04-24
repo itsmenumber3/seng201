@@ -4,7 +4,7 @@ import assets.enums.Difficulty;
 import assets.enums.RoleType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
-import entities.items.Item;
+import entities.Entity;
 import exceptions.InsufficientPlayerGoldBalanceException;
 import exceptions.InvalidInputException;
 import exceptions.UnallowedMethodException;
@@ -368,17 +368,25 @@ public class Player implements Role {
      * If there isn't enough gold, throw an error InsufficientPlayerGoldBalanceException.
      * @param inputItem: Item, as in Item.java
      */
-    public void playerPurchaseItem(Item inputItem) {
+    public boolean hasPlayerGotEnoughGoldToPurchase(Entity inputEntity) {
+        if (this.getPlayerGold() >= inputEntity.getEntityPurchaseValue()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void playerPurchaseEntity(Entity inputEntity) {
         try {
-            if (this.getPlayerGold() >= inputItem.getItemValue()) {   // Check if item value <= playerGold
-                System.out.println("Purchased item successfully");  // If yes, purchased successfully.
-                this.decrementPlayerGoldBy(inputItem.getItemValue()); // Decrement playerGold.
-                playerInventory.addToInventory(inputItem);            // Add item to playerInventory.
+            if (this.hasPlayerGotEnoughGoldToPurchase(inputEntity)) {
+                System.out.println("Purchased successfully");  // If yes, purchased successfully.
+                this.decrementPlayerGoldBy(inputEntity.getEntityPurchaseValue()); // Decrement playerGold.
+                playerInventory.addToInventory(inputEntity);
             } else {
-                throw new InsufficientPlayerGoldBalanceException("Not enough gold to buy this item");
+                throw new InsufficientPlayerGoldBalanceException("Not enough gold");
             }
         } catch (InsufficientPlayerGoldBalanceException e) {
-            System.out.println("Not enough gold to buy this item!");
+            e.printStackTrace();
         }
     }
 

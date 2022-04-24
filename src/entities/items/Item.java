@@ -1,5 +1,7 @@
 package entities.items;
 
+import assets.enums.EntityType;
+import assets.enums.ItemType;
 import assets.enums.Rarity;
 import entities.*;
 import exceptions.UnallowedMethodException;
@@ -13,7 +15,15 @@ public abstract class Item extends Entity {
     public Item(String inputEntityName, String inputEntityDescription, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue,
                 int inputItemQuantity) {
         super(inputEntityName, inputEntityDescription, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
-        this.se
+        this.setEntityType(EntityType.ITEM);
+    }
+
+    public ItemType itemType;
+
+    public
+
+    public ItemType getItemType() {
+        return itemType;
     }
 
     private int itemQuantity;

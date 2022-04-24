@@ -1,5 +1,6 @@
 package entities;
 
+import assets.enums.EntityType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
 import assets.enums.Rarity;
@@ -55,10 +56,40 @@ public abstract class Entity {
 
 
 
+    // ENTITY TYPE ----------------------------------------
+
+    /**
+     * The entity type describes what kind of entity this is (either an item or a monster).
+     * @see EntityType
+     */
+    EntityType entityType;
+
+    /**
+     * This method allows for defining what kind of entity this is
+     * @param inputEntityType EntityType, which is an enum type
+     * @see EntityType
+     */
+    public void setEntityType(EntityType inputEntityType) {
+        this.entityType = inputEntityType;
+    }
+
+    /**
+     * This method returns what kind of entity this is
+     * @return entityType - EntityType, which is an enum type
+     * @see EntityType
+     */
+    public EntityType getEntityType() {
+        return this.entityType;
+    }
+
+    // ENTITY TYPE ----------------------------------------
+
+
+
     // ENTITY NAME ----------------------------------------
 
     /**
-     * entityName: String stores the name of the entity.
+     * entityName: String stores the custom name of the entity.
      */
     private String entityName;
 

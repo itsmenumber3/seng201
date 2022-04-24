@@ -13,7 +13,7 @@ public class Inventory {
      * @param inputEntity: Entity
      */
     public void addToInventory(Entity inputEntity) {
-        this.entities.add(inputEntity);
+        if (inputEntity.)
     }
 
     /**
