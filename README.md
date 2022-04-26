@@ -7,7 +7,7 @@
 
 ### Development timeline
 
-* 
+* Small changes
 
 ## Game explanation
 ### Monsters
