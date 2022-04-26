@@ -3,12 +3,11 @@
 ## Developers' Notes
 
 ### Introduction
-* This game was developed by Francis Phan and Jonathan Nicholas for our SENG201 assignment.
+* Monster Fighter was developed by Francis Phan and Jonathan Nicholas for SENG201.
 
 ### Development timeline
 
-* 18-24 April: Working game program in command line
-* 25-30 April: Working game program in UI
+* 
 
 ## Game explanation
 ### Monsters
