@@ -11,7 +11,7 @@
 * 25-30 April: Working game program in UI
 
 ## Game explanation
-### Monsterssss
+### Monstersssssssssssssssssssssss
 
 * There are four kinds of monsters. 
 
