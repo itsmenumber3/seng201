@@ -5,10 +5,13 @@ import assets.enums.RoleType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
 import entities.Entity;
+import entities.monsters.Monster;
 import exceptions.InsufficientPlayerGoldBalanceException;
 import exceptions.InvalidInputException;
 import exceptions.UnallowedMethodException;
 import exceptions.UnexpectedNegativeNumberException;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -389,6 +392,8 @@ public class Player implements Role {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Monster> playerUnusedMonsters = new ArrayList<>();
 
     // INVENTORY ----------------------------------------------------
 }

@@ -51,7 +51,7 @@ public class Inventory {
     // ADD AN ENTITY OBJECT INTO THE ARRAY LIST -------------------
 
     /**
-     * All entities can be stored in an inventory but the way they should be added is different.
+     * All entities can be stored in an inventory but the way they should be added is different depending on
      * This method adds an entity to the arraylist above if it's a monster - regardless of they are the same or different.
      *
      * For items, we have to check first if an identical item has already existed in the inventory. If yes, update the quantity.

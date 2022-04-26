@@ -1,4 +1,4 @@
 package entities.items.weapons;
 
-public class Javelin {
+public class Javelin extends Weapon {
 }
