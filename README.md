@@ -16,7 +16,7 @@
 * There are four kinds of monsters :))))
 
 ## Some features
-* All entities.monsters have the same amount of health out of 100
+* All entities.monsters have the same amount of health out of 1000
 * They differ in their ability to resist damage
 
 ## An explanation of the file structure
