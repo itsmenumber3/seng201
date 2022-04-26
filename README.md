@@ -13,7 +13,7 @@
 ## Game explanation
 ### Monstersss
 
-* There are four kinds of monsters. 
+* There are four kinds of monsters.
 
 ## Some features
 * All entities.monsters have the same amount of health out of 100
