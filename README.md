@@ -11,12 +11,12 @@
 * 25-30 April: Working game program in UI
 
 ## Game explanation
-### Monstersssssssssssssssssssssss
+### Monsters
 
-* There are four kinds of monsters :))))
+* There are four kinds of monsters
 
 ## Some features
-* All entities.monsters have the same amount of health out of 1000
+* All entities.monsters have the same amount of health out of 100
 * They differ in their ability to resist damage
 
 ## An explanation of the file structure
