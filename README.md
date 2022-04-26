@@ -12,7 +12,7 @@
 ## Game explanation
 ### Monsters
 
-* There are four kinds of monsters (test)
+* There are four kinds of monsters (nothing to see here)
 
 ## Some features
 * All entities.monsters have the same amount of health out of 100
