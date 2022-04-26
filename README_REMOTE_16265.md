@@ -10,6 +10,7 @@
 * Small changes
 
 ## Game explanation
+### Monsters
 
 * There are four kinds of monsters (nothing to see here)
 

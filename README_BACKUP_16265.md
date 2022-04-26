@@ -11,7 +11,10 @@
 
 ## Game explanation
 
+<<<<<<< HEAD
+=======
 * There are four kinds of monsters (nothing to see here)
+>>>>>>> francis
 
 ## Some features
 * All entities.monsters have the same amount of health out of 100
