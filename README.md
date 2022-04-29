@@ -1,10 +1,13 @@
 # Monster Fighter
 
 ## Developers' Notes
+Wowoww
 
 ### Introduction
 * Monster Fighter was developed by Francis Phan and Jonathan Nicholas for SENG201.
   https://go.codetogether.com/#/gQdcSMg2hb5n9JzX066808/za5lj5dO9gXbMBX24XTfca
+
+  this is a lot more powerful than is otherwise needed!
 ### Development timeline
 
 * Small changes

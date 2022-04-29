@@ -32,11 +32,13 @@ public abstract class Entity {
 
     // LIBRARIES ------------------------------------------
 
+    public String message;
 
 
     // INSTANTIATION --------------------------------------
 
     /**
+     * I am not sure as to why there is no
      * This method creates an instance of the class Entity. The Monster class and the Item class will use this.
      * @param inputEntityName String that is the name entity.
      * @param inputEntityDescription String that is the description of the entity.
@@ -60,10 +62,8 @@ public abstract class Entity {
 
     // ENTITY TYPE ----------------------------------------
 
-    /**
-     * The entity type describes what kind of entity this is (either an item or a monster).
-     * @see EntityType
-     */
+
+
     EntityType entityType;
 
     /**
