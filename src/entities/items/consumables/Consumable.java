@@ -16,6 +16,9 @@ public class Consumable extends Item {
         this.setItemType(ItemType.CONSUMABLE);
     }
 
+    /**
+     * This variable holds the type
+     */
     public ConsumableType consumableType;
 
     public void setConsumableType(ConsumableType inputConsumableType) {

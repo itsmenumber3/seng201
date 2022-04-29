@@ -1,4 +1,4 @@
-package assets.enums;
+packageassets.enums;
 
 
 public enum ConsumableType {

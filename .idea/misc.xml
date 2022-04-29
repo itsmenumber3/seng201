@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+n main
+        <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK">
+>>>>>>> bcfd78e3b72e0b18d824707a6807e7a0bf9a5cba
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
