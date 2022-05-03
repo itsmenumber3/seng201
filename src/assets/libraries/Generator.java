@@ -28,6 +28,10 @@ public class Generator {
 
     }
 
+    public Weapon randomGenerateNewWeapon() {
+
+    }
+
     public ArrowBatch generateNewArrowBatch() {
 
     }

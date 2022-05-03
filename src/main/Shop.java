@@ -1,10 +1,12 @@
 package main;
 
+import assets.enums.EntityType;
+import assets.enums.ItemType;
 import assets.enums.RoleType;
 import entities.*;
+import entities.items.weapons.Weapon;
 import exceptions.UnallowedMethodException;
-
-import java.util.ArrayList;
+import java.util.ArrayList; //
 
 /**
  * The class Shop provides for a shop where a player can come to trade.
@@ -13,6 +15,10 @@ import java.util.ArrayList;
  */
 public class Shop implements Role {
 
+    /**
+     * This method returns the RoleType of the shop, which is SHOP.
+     * @return value SHOP of enum type RoleType.
+     */
     @Override
     public RoleType getRoleType() {
         return RoleType.SHOP;
@@ -22,6 +28,8 @@ public class Shop implements Role {
      * The ArrayList shopRange contains a list of entities for sale on a particular day.
      */
     private final ArrayList<Entity> shopRange = new ArrayList<>();
+
+    private final ArrayList<Entity> whatPlayerPurchasedToday = new ArrayList<>();
 
     /**
      * This method isn't allowed. Instead, use one of the following methods:
@@ -70,23 +78,21 @@ public class Shop implements Role {
     }
 
     /**
-     * This
-     * @param inputEntity
+     * This method removes an entity from the shop range.
+     * @param inputEntity Entity
      */
-    public void removeEntityFromShopRange(Entity inputEntity) {}
-
-    public void randomStockEntity() {
-
-    }
-
-    public void randomUpdateExistingEntity() {
-
+    public void removeEntityFromShopRange(Entity inputEntity) {
+        this.getShopRange().remove(inputEntity); // Remove it from the shop range
     }
 
     /**
-     * This function refreshes the entity range of the product at the beginning of each day by a random factor.
+     * This method refreshes a shop range by:
+     * 1. Randomly removing an entity, such as a food item.
+     * 2. Replacing that entity with a new entity of the same EntityType but with some changes in variables and price.
+     * 3. Stock new entities of the same EntityType that the user bought the previous day.
+     * This refresh should only happen overnight.
      */
-    public void dailyShopRangeRefresh() {
+    public void overnightRefreshShopRange() {
 
     }
 }
