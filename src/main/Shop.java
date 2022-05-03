@@ -29,6 +29,8 @@ public class Shop implements Role {
      * The ArrayList shopRange contains a list of entities for sale on a particular day.
      */
     private final ArrayList<Monster> shopMonsterRange = new ArrayList<>();
+
+
     private final ArrayList<Monster> monstersWhichPlayerPurchasedToday = new ArrayList<>();
 
     /**
@@ -88,13 +90,10 @@ public class Shop implements Role {
 
 
     /**
-     * This method refreshes a shop range by:
-     * 1. Randomly removing an entity, such as a food item.
-     * 2. Replacing that entity with a new entity of the same EntityType but with some changes in variables and price.
-     * 3. Stock new entities of the same EntityType that the user bought the previous day.
-     * This refresh should only happen overnight.
+     * This method refreshes the monster range of a shop by:
+     * 1. For existing stock,
      */
     public void overnightRefreshShopMonsterRange() {
-        
+
     }
 }
