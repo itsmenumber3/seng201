@@ -71,4 +71,7 @@ public class Tools {
         }
     }
 
+    public int generateRandomInteger(int inputUpperBound) {
+        return random.nextInt(inputUpperBound);
+    }
 }

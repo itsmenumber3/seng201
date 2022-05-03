@@ -5,12 +5,13 @@ import assets.enums.ItemType;
 import assets.enums.RoleType;
 import entities.*;
 import entities.items.weapons.Weapon;
+import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 import java.util.ArrayList; //
 
 /**
  * The class Shop provides for a shop where a player can come to trade.
- * They can purchase new entities from the shop, and sell their entities to the shop.
+ * Please refer to our documentation.
  * @author Francis
  */
 public class Shop implements Role {
@@ -27,17 +28,16 @@ public class Shop implements Role {
     /**
      * The ArrayList shopRange contains a list of entities for sale on a particular day.
      */
-    private final ArrayList<Entity> shopRange = new ArrayList<>();
-
-    private final ArrayList<Entity> whatPlayerPurchasedToday = new ArrayList<>();
+    private final ArrayList<Monster> shopMonsterRange = new ArrayList<>();
+    private final ArrayList<Monster> monstersWhichPlayerPurchasedToday = new ArrayList<>();
 
     /**
      * This method isn't allowed. Instead, use one of the following methods:
-     * (1) addEntityToShopRange and removeEntityFromShopRange.
-     * (2) stockEntity and dailyShopRangeRefresh.
-     * @param inputShopRange ArrayList<Entity>
+     * (1) addEntityToShopMonsterRange and removeEntityFromShopMonsterRange.
+     * (2) stockEntity and dailyShopMonsterRangeRefresh.
+     * @param inputShopMonsterRange ArrayList<Monster>
      */
-    public void setShopRange(ArrayList<Entity> inputShopRange) {
+    public void setShopMonsterRange(ArrayList<Monster> inputShopMonsterRange) {
         try {
             throw new UnallowedMethodException("Unallowed method");
         } catch (UnallowedMethodException e) {
@@ -47,26 +47,35 @@ public class Shop implements Role {
 
     /**
      * This method returns the current shopRange.
-     * @return shopRange ArrayList<Entity>
+     * @return shopRange ArrayList<Monster>
      */
-    public ArrayList<Entity> getShopRange() {
-        return this.shopRange;
+    public ArrayList<Monster> getShopMonsterRange() {
+        return this.shopMonsterRange;
     }
 
     /**
      * This method manually adds an entity to shopRange.
      * @param inputEntity Entity, entity to be added to range
      */
-    public void addEntityToShopRange(Entity inputEntity) {
-        this.shopRange.add(inputEntity);
+    private void addMonsterToShopMonsterRange(Monster inputMonster) {
+        this.getShopMonsterRange().add(inputMonster);
+    }
+
+    /**
+     * This method removes an entity from the shop range.
+     * @param inputEntity Entity
+     */
+    private void removeMonsterFromShopMonsterRange(Monster removeMonster) {
+        this.getShopMonsterRange().remove(inputEntity); // Remove it from the shop range
     }
 
     /**
      * This method triggers relevant methods when an entity is purchased from the shop by the player.
      * @param inputEntity Entity, the entity in question
      */
-    public void uponEntityBeingPurchasedByPlayer(Entity inputEntity) {
-        this.removeEntityFromShopRange(inputEntity);
+    public void uponMonsterBeingPurchasedByPlayer(Monster inputMonster) {
+        this.removeMonsterFromShopMonsterRange(inputMonster);
+        this.
     }
 
     /**
@@ -74,16 +83,9 @@ public class Shop implements Role {
      * @param inputEntity Entity, the entity in question
      */
     public void uponEntityBeingSoldToShop(Entity inputEntity) {
-        this.addEntityToShopRange(inputEntity);
+        this.addEntityToShopMonsterRange(inputEntity);
     }
 
-    /**
-     * This method removes an entity from the shop range.
-     * @param inputEntity Entity
-     */
-    public void removeEntityFromShopRange(Entity inputEntity) {
-        this.getShopRange().remove(inputEntity); // Remove it from the shop range
-    }
 
     /**
      * This method refreshes a shop range by:
@@ -92,7 +94,7 @@ public class Shop implements Role {
      * 3. Stock new entities of the same EntityType that the user bought the previous day.
      * This refresh should only happen overnight.
      */
-    public void overnightRefreshShopRange() {
-
+    public void overnightRefreshShopMonsterRange() {
+        
     }
 }
