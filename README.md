@@ -1,7 +1,7 @@
 # Monster Fighter
 
 ## Developers' Notes
-Wowoww
+
 
 ### Introduction
 * Monster Fighter was developed by Francis Phan and Jonathan Nicholas for SENG201.
@@ -11,8 +11,7 @@ Wowoww
 ### Development timeline
 
 * Small changes
-/**
-* 
+
 
 ## Game explanation
 
