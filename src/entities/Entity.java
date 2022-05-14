@@ -41,16 +41,14 @@ public abstract class Entity {
      * I am not sure as to why there is no
      * This method creates an instance of the class Entity. The Monster class and the Item class will use this.
      * @param inputEntityName String that is the name entity.
-     * @param inputEntityDescription String that is the description of the entity.
      * @param inputEntityRarity Rarity that describes how rare the entity is COMMON, UNCOMMON, RARE
      * @param inputEntityPurchaseValue integer
      * @param inputEntitySellValue integer
      * @see entities.monsters.Monster
      * @see entities.items.Item
      */
-    public Entity(String inputEntityName, String inputEntityDescription, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
+    public Entity(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
         this.setEntityName(inputEntityName);
-        this.setEntityDescription(inputEntityDescription);
         this.setEntityRarity(inputEntityRarity);
         this.setEntityPurchaseValue(inputEntityPurchaseValue);
         this.setEntitySellValue(inputEntitySellValue);
@@ -129,46 +127,8 @@ public abstract class Entity {
     }
 
     // ENTITY NAME ----------------------------------------
-
-
-
-    // ENTITY DESCRIPTION ---------------------------------
-
-    /**
-     * This string provides a brief description of the entity.
-     */
-    private String entityDescription;
-
-    /**
-     * This method assigns an input string as a brief description string of entity.
-     * If this input string is too long (over 200 characters) throw an MaximumStringLengthExceededException
-     * @param inputEntityDescription String, provide a 200-word or less description here.
-     * @see InvalidInputException
-     */
-    public void setEntityDescription(String inputEntityDescription) {
-        try {
-            if (inputEntityDescription.length() <= magicNumbers.MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH) {
-                this.entityDescription = inputEntityDescription;
-            } else {
-                throw new MaximumStringLengthExceededException("Description too long");
-            }
-        } catch (MaximumStringLengthExceededException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-     * This method returns the string description of entity
-     * @return entityDescription String
-     */
-    public String getEntityDescription() {
-        return this.entityDescription;
-    }
-
-    // ENTITY DESCRIPTION ---------------------------------
-
-
+    
+    
 
     // RARITY ---------------------------------------------
 

@@ -11,8 +11,8 @@ import entities.items.Item;
  * @see Potion
  */
 public class Consumable extends Item {
-    Consumable(String inputEntityName, String inputEntityDescription, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
-        super(inputEntityName, inputEntityDescription, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
+    Consumable(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
+        super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
         this.setItemType(ItemType.CONSUMABLE);
     }
 

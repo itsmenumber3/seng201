@@ -29,13 +29,12 @@ public abstract class Item extends Entity {
      * 1. It accepts all the necessary arguments in order to instantiate all the variables as required in Entity.
      * 2. As in the Entity object that this class inherits, it sets entityType to ITEM to denote that this is an item.
      * @param inputEntityName String, custom name of the item
-     * @param inputEntityDescription String, custom description of the item
      * @param inputEntityRarity String,
      * @param inputEntityPurchaseValue
      * @param inputEntitySellValue
      */
-    public Item(String inputEntityName, String inputEntityDescription, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
-        super(inputEntityName, inputEntityDescription, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
+    public Item(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
+        super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
         this.setEntityType(EntityType.ITEM); // set Entity type that is an ITEM indeed.
     }
 

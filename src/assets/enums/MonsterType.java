@@ -4,5 +4,6 @@ public enum MonsterType {
     SKELETON,
     SPIRIT,
     TROLL,
-    ZOMBIE
+    ZOMBIE,
+    DRAGON
 }
