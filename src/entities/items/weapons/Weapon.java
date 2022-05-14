@@ -15,13 +15,12 @@ public abstract class Weapon extends Item {
      * 2. As in the Item object that this class inherits, upon initialised, entityType is set to ITEM to denote that this is an item.
      * 3. As for this class which inherits from Item, upon initialised, itemType is set to WEAPON to denote that this is a weapon.
      * @param inputEntityName String the
-     * @param inputEntityDescription
      * @param inputEntityRarity
      * @param inputEntityPurchaseValue
      * @param inputEntitySellValue
      */
-    public Weapon(String inputEntityName, String inputEntityDescription, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
-        super(inputEntityName, inputEntityDescription, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
+    public Weapon(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
+        super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
         this.setItemType(ItemType.WEAPON);
     }
 

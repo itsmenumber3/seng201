@@ -26,9 +26,9 @@ public class Dragon extends Monster {
      */
     public Dragon() {
     	getDragonName();
-    	/*String inputEntityName, String inputEntityDescription, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue,
+    	/*String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue,
         int inputAttackDamage, int inputResistanceAbility
-        super(inputEntityName, inputEntityDescription, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);*/
+        super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);*/
         this.resetMonsterHealthLevel();
         this.setMonsterAttackDamage(inputAttackDamage);
         this.setMonsterResistanceAbility(inputResistanceAbility);
