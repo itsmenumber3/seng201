@@ -34,9 +34,9 @@ public class Dragon extends Monster {
         this.setMonsterResistanceAbility(inputResistanceAbility);
     }
 
-    // INSTANTIATION --------------------------------------------------------
+    // INSTANTIATION -------------------------------------------------------- 
 
-
+    // Add a comment
 	private String getDragonName() {
 		return tools.generateRandomName(getMonsterType());
 	}
