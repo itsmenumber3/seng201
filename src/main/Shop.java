@@ -91,7 +91,7 @@ public class Shop implements Role {
 
     /**
      * This method refreshes the monster range of a shop by:
-     * 1. For existing stock,
+     * 1. For existing monsters, randomly update the
      */
     public void overnightRefreshShopMonsterRange() {
 
