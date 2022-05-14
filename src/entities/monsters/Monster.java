@@ -3,6 +3,7 @@ package entities.monsters;
 import assets.enums.Rarity;
 import assets.enums.RoleType;
 import entities.Entity;
+import exceptions.InvalidInputException;
 import exceptions.InvalidMonsterNumericPropertyException;
 import exceptions.UnallowedMethodException;
 import main.Role;
@@ -37,6 +38,7 @@ public abstract class Monster extends Entity implements Role {
      * @param inputEntitySellValue
      * @param inputAttackDamage
      * @param inputResistanceAbility
+     * @param inputHealAmount
      * @see Rarity
      */
     public Monster(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue,
@@ -152,4 +154,27 @@ public abstract class Monster extends Entity implements Role {
     }
 
     // RESISTANCE ABILITY ---------------------------------------------------
+    
+    
+    
+    // MONSTER RARITY -------------------------------------------------------
+    public int monsterRarity; 
+    
+    public int setMonsterRarity() {
+    	int tempMonsterRarity = tools.generateRandomMonsterRarity();
+    	try {
+    		if (tempMonsterRarity < magicNumbers.MINIMUM_RARITY || tempMonsterRarity > magicNumbers.MAXIMUM_RARITY) {
+    			throw new InvalidMonsterNumericPropertyException("Invalid input");
+    		} else {
+    			this.monsterRarity = tempMonsterRarity;
+    		}
+    	} catch (InvalidMonsterNumericPropertyException e) {
+    		e.printStackTrace();
+    	}
+    	return this.monsterRarity;
+    }
+    
+    public int getMonsterRarity() {
+    	return this.monsterRarity;
+    }
 }

@@ -15,9 +15,8 @@ public class Dragon extends Monster {
 
     /**
      * This method will create an instance of the class Dragon.
-     * @param inputEntityName String, the name of the monster
-     * @param inputEntityDescription String, the description of the monster
-     * @param inputEntityRarity Rarity, the rarity of the monster
+     * @param inputEntityName String, the name of the Dragon
+     * @param inputEntityRarity Rarity, the rarity of the Dragon
      * @param inputEntityPurchaseValue
      * @param inputEntitySellValue
      * @param inputAttackDamage
@@ -26,6 +25,7 @@ public class Dragon extends Monster {
      */
     public Dragon() {
     	getDragonName();
+    	getDragonRarity();
     	/*String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue,
         int inputAttackDamage, int inputResistanceAbility
         super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);*/
@@ -39,5 +39,10 @@ public class Dragon extends Monster {
     // Add a comment
 	private String getDragonName() {
 		return tools.generateRandomName(getMonsterType());
+	
+	}
+	
+	private int getDragonRarity() {
+		return 
 	}
 }	

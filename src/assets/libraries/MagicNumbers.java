@@ -2,6 +2,7 @@ package assets.libraries;
 
 
 import assets.enums.Difficulty;
+import assets.enums.MonsterType;
 
 /**
  * This class is a central place to store all constants as needed throughout this program.
@@ -30,6 +31,7 @@ public class MagicNumbers {
             this.ZOMBIE_VALUE = 30;
         }
     }
+    
 
     // INSTANTIATION --------------------------------------------------------------
 
@@ -103,8 +105,18 @@ public class MagicNumbers {
     public final int MINIMUM_MONSTER_SELL_PRICE = 0;
     public final int MINIMUM_MONSTER_PURCHASE_PRICE = 0;
 
+    public final int MINIMUM_RARITY = 1;
+    public final int MAXIMUM_RARITY = 5;
     public final int MAXIMUM_MONSTERS_NUMBER_IN_TEAM = 4;
+   
+    public final double LOWER_BOUND_RARITY = 0.3;
+    public final double MIDDLE_BOUND_RARITY = 0.6;
+    public final double UPPER_BOUND_RARITY = 1.0;
 
+    
+
+    public final MonsterType[] MONSTER_TYPES = {MonsterType.SKELETON, MonsterType.SPIRIT, MonsterType.TROLL, MonsterType.ZOMBIE, MonsterType.DRAGON};
+    public final int MONSTER_TYPES_LENGTH = MONSTER_TYPES.length;
 
     public final int MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH = 200;
 

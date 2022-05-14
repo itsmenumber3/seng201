@@ -90,6 +90,7 @@ public class Tools {
     	
     }
 
+    
     /***
      * public Monster generateRandomMonster(Player inputPlayer) {
      *         if (inputPlayer.getPlayerCurrentDay() / inputPlayer.getPlayerDays()) <=0.3 {
@@ -102,5 +103,47 @@ public class Tools {
      * @param inputPlayer
      * @return
      */
+    
+    public int generaterRandomMonsterRarity(Player inputPlayer) {
+    	double ratio = inputPlayer.getPlayerCurrentDay() / inputPlayer.getPlayerDays();
+    	int randInt = 0;
+    	if (ratio <= magicNumbers.LOWER_BOUND_RARITY) {
+    		randInt = random.nextInt(2);
+    	}
+    	else if (ratio <= magicNumbers.MIDDLE_BOUND_RARITY) {
+    		randInt = random.nextInt(2,4);
+    	}
+    	else if (ratio <= magicNumbers.UPPER_BOUND_RARITY) {
+    		randInt = random.nextInt(3,5);
+    	}
+    	return randInt;
+    }
+    
+    
+    public monster generateRandomMonster(Player inputPlayer) {
+    	int randInt = random.nextInt(MONSTER_TYPES_LENGTH);
+    	
+    	Monster monster;
+    	
+    	switch(randInt) {
+    	case (0):
+    		monster = new Skeleton();
+    		break;
+    	case (1):
+    		monster = new Spirit(0);
+    		break;
+    	case (2):
+    		monster = new Troll();
+    		break;
+    	case (3):
+    		monster = new Zombie();
+    		break;
+    	case (4):
+    		monster = new Dragon();
+    		break;
+    	}
+    	
+    	return monster;
+    }
 
 }
