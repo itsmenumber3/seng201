@@ -1,18 +1,22 @@
 package assets.libraries;
 
-import java.util.*;
-import java.util.regex.*;
+import java.security.SecureRandom;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import assets.enums.Difficulty;
-import assets.libraries.MagicNumbers;
-import exceptions.*; // Import the Exception classes
+import assets.enums.MonsterType;
+// Import the Exception classes
+import exceptions.InvalidInputException;
 
 
 public class Tools {
 
     MagicNumbers magicNumbers = new MagicNumbers(); // get the constants in the MagicNumbers class
     Scanner scanner = new Scanner(System.in); // Internal
-    Random random = new Random();
+    SecureRandom random = new SecureRandom();
 
     // Internal
     public String readPlayerStringInput(String inputPrompt) {
@@ -71,7 +75,16 @@ public class Tools {
         }
     }
 
+    // GENERATE RANDOM INTEGER -----------
+
     public int generateRandomInteger(int inputUpperBound) {
         return random.nextInt(inputUpperBound);
+    }
+    
+    // GENERATE RANDOM NAME --------------
+    
+    public String generateRandomName(MonsterType inputMonsterType) {
+    	return magicNumbers.MONSTER_NAMES[generateRandomInteger(magicNumbers.MONSTER_NAMES_ARRAY_LENGTH)];
+    	
     }
 }

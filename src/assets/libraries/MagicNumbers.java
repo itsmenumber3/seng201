@@ -108,6 +108,8 @@ public class MagicNumbers {
 
     public final int MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH = 200;
 
+    public String[] MONSTER_NAMES = {"Fred", "Francis", "Jono", "Toby"};
+    public int MONSTER_NAMES_ARRAY_LENGTH = MONSTER_NAMES.length;
 
 
 
