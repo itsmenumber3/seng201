@@ -9,7 +9,9 @@ import java.util.regex.Pattern;
 import assets.enums.Difficulty;
 import assets.enums.MonsterType;
 // Import the Exception classes
+import entities.monsters.Monster;
 import exceptions.InvalidInputException;
+import main.Player;
 
 
 public class Tools {
@@ -87,4 +89,18 @@ public class Tools {
     	return magicNumbers.MONSTER_NAMES[generateRandomInteger(magicNumbers.MONSTER_NAMES_ARRAY_LENGTH)];
     	
     }
+
+    /***
+     * public Monster generateRandomMonster(Player inputPlayer) {
+     *         if (inputPlayer.getPlayerCurrentDay() / inputPlayer.getPlayerDays()) <=0.3 {
+     *             // randomise a difficulty level between 1 and 2
+     *         } else if // the thng is larger than 0.3 but smaller than 0.6 {
+     *             // 1 and 3
+     *         } elise if // if it is betwwen 0.6 and 0.9
+     *             /// randomse a rarity level between 2 and 3
+     *     }
+     * @param inputPlayer
+     * @return
+     */
+
 }
