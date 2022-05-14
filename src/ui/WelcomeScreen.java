@@ -8,6 +8,9 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class WelcomeScreen {
 
@@ -41,12 +44,14 @@ public class WelcomeScreen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 746, 494);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblMonsterFighter = new JLabel("Monster Fighter");
-		lblMonsterFighter.setBounds(38, 45, 181, 15);
+		lblMonsterFighter.setFont(new Font("Dialog", Font.BOLD, 50));
+		lblMonsterFighter.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblMonsterFighter.setBounds(40, 29, 456, 67);
 		frame.getContentPane().add(lblMonsterFighter);
 		
 		JButton btnStartGame = new JButton("Start Game");
@@ -54,7 +59,7 @@ public class WelcomeScreen {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnStartGame.setBounds(38, 204, 117, 25);
+		btnStartGame.setBounds(171, 417, 424, 34);
 		frame.getContentPane().add(btnStartGame);
 	}
 }
