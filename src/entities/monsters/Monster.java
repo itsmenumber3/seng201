@@ -161,7 +161,6 @@ public abstract class Monster extends Entity implements Role {
     public int monsterRarity; 
     
     public int setMonsterRarity() {
-    	int tempMonsterRarity = tools.generateRandomMonsterRarity();
     	try {
     		if (tempMonsterRarity < magicNumbers.MINIMUM_RARITY || tempMonsterRarity > magicNumbers.MAXIMUM_RARITY) {
     			throw new InvalidMonsterNumericPropertyException("Invalid input");
