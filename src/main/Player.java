@@ -1,6 +1,5 @@
 package main;
 
-import assets.enums.Difficulty;
 import assets.enums.RoleType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
@@ -40,24 +39,6 @@ public class Player implements Role {
         return RoleType.PLAYER;
     }
 
-
-    // WHEN PLAYER IS INSTANTIATED --------------------------------
-
-    /**
-     * This method provides for the instantiation of the class Player.
-     * It goes through all the variables that store user data, for example, playerName and playerDifficulty
-     * and ask for the user to input. It also resets many counters to their default starting values,
-     * such as gold, points, and current day to 0 or 1 (as set in magicNumbers).
-     */
-    public Player() {
-        this.setPlayerName(tools.readPlayerStringInput("Please enter player name: "));
-        this.setPlayerDifficulty(tools.convertStringIntoDifficulty(tools.readPlayerStringInput("Please enter level 1, 2, 3: ")));
-        this.setPlayerDays(Integer.parseInt(tools.readPlayerStringInput("Enter player days: ")));
-        this.resetPlayerCurrentDay();
-        System.out.println("Cool");
-    }
-
-    // WHEN PLAYER IS INSTANTIATED --------------------------------
 
 
 
@@ -99,7 +80,7 @@ public class Player implements Role {
 
     // DIFFICULTY----------------------------------------------------
 
-    private Difficulty playerDifficulty; // difficulty is an enum type. Defined in Difficulty.java and has three values: EASY, MEDIUM, HARD
+    private int playerDifficulty; // difficulty is an enum type. Defined in Difficulty.java and has three values: EASY, MEDIUM, HARD
 
     /**
      * This method sets the difficulty level.
@@ -107,10 +88,14 @@ public class Player implements Role {
      * There can be three Difficulty values: EASY, MEDIUM and HARD.
      * @param inputPlayerDifficulty: Difficulty
      */
-    public void setPlayerDifficulty(Difficulty inputPlayerDifficulty) {
+    public void setPlayerDifficulty(int inputPlayerDifficulty) {
         try {  // Should throw an error if inputPlayerDifficulty is an invalid value.
-            this.playerDifficulty = inputPlayerDifficulty;
-        } catch (Exception e) {
+            if (inputPlayerDifficulty >= 1 && inputPlayerDifficulty <= 3) {
+                this.playerDifficulty = inputPlayerDifficulty;
+            } else {
+                throw new InvalidInputException("Invalid input");
+            }
+        } catch (InvalidInputException e) {
             System.out.println("Please provide a valid difficulty level");
             e.printStackTrace();
         }
@@ -120,7 +105,7 @@ public class Player implements Role {
      * This method returns the difficulty level.
      * @return playerDifficulty: Difficulty
      */
-    public Difficulty getPlayerDifficulty() {
+    public int getPlayerDifficulty() {
         return this.playerDifficulty;
     }
 

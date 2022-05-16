@@ -1,7 +1,6 @@
 package assets.libraries;
 
 
-import assets.enums.Difficulty;
 import assets.enums.MonsterType;
 
 /**
@@ -25,8 +24,8 @@ public class MagicNumbers {
      * Instantiation of MagicNumbers with a difficulty level will assign values to difficulty-specific variables.
      * @param inputDifficulty Difficulty, the level of difficulty in question.
      */
-    public MagicNumbers(Difficulty inputDifficulty) {
-        if (inputDifficulty.equals(Difficulty.EASY)) {
+    public MagicNumbers(int inputDifficulty) {
+        if (inputDifficulty == 1) {
             this.SKELETON_VALUE = 40;
             this.ZOMBIE_VALUE = 30;
         }

@@ -1,12 +1,10 @@
 package assets.libraries;
 
 import java.security.SecureRandom;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import assets.enums.Difficulty;
 import assets.enums.MonsterType;
 // Import the Exception classes
 import entities.monsters.Monster;
@@ -24,25 +22,6 @@ public class Tools {
     public String readPlayerStringInput(String inputPrompt) {
         System.out.print(inputPrompt);
         return scanner.nextLine();
-    }
-
-    // Internal
-    public Difficulty convertStringIntoDifficulty(String inputString) {
-        Difficulty inputDifficultyLevel = null;
-        try {
-            if (Objects.equals(inputString, "1")) {
-                inputDifficultyLevel = Difficulty.EASY;
-            } else if (Objects.equals(inputString, "2")){
-                inputDifficultyLevel = Difficulty.MEDIUM;
-            } else if (Objects.equals(inputString, "3")) {
-                inputDifficultyLevel = Difficulty.HARD;
-            } else {
-                throw new InvalidInputException("Enter 1, 2 or 3.");
-            }
-        } catch (InvalidInputException e) {
-            System.out.println("Error; Handle is not a big problem as we will implement UI and this cannot happen in UI");
-        }
-        return inputDifficultyLevel;
     }
 
     public boolean TrueFalseRandom(float inputProbability) {
