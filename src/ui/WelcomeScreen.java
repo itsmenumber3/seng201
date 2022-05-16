@@ -11,10 +11,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 public class WelcomeScreen {
 
-	private JFrame frame;
+	private JFrame frmMonsterFighter;
 
 	/**
 	 * Launch the application.
@@ -24,7 +26,7 @@ public class WelcomeScreen {
 			public void run() {
 				try {
 					WelcomeScreen window = new WelcomeScreen();
-					window.frame.setVisible(true);
+					window.frmMonsterFighter.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,23 +45,25 @@ public class WelcomeScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 746, 494);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmMonsterFighter = new JFrame();
+		frmMonsterFighter.setTitle("Monster Fighter");
+		frmMonsterFighter.setBounds(100, 100, 750, 500);
+		frmMonsterFighter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMonsterFighter.getContentPane().setLayout(null);
 		
-		JLabel lblMonsterFighter = new JLabel("Monster Fighter");
-		lblMonsterFighter.setFont(new Font("Dialog", Font.BOLD, 50));
+		JLabel lblMonsterFighter = new JLabel("MONSTER FIGHTER");
+		lblMonsterFighter.setForeground(Color.WHITE);
+		lblMonsterFighter.setFont(new Font("Dialog", Font.BOLD, 36));
 		lblMonsterFighter.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblMonsterFighter.setBounds(40, 29, 456, 67);
-		frame.getContentPane().add(lblMonsterFighter);
+		lblMonsterFighter.setBounds(32, 12, 580, 67);
+		frmMonsterFighter.getContentPane().add(lblMonsterFighter);
 		
 		JButton btnStartGame = new JButton("Start Game");
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnStartGame.setBounds(171, 417, 424, 34);
-		frame.getContentPane().add(btnStartGame);
+		btnStartGame.setBounds(397, 417, 317, 34);
+		frmMonsterFighter.getContentPane().add(btnStartGame);
 	}
 }
