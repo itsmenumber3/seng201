@@ -1,13 +1,61 @@
 package main;
 
 import assets.enums.EntityType;
+import assets.libraries.Tools;
 import entities.Entity;
 import entities.items.Item;
+import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
+import exceptions.FullTeamException;
 
 import java.util.ArrayList;
 
+import javax.print.DocFlavor.INPUT_STREAM;
+
 public class Inventory {
+	
+	Player player;
+	Tools tools = new Tools();
+	
+	public Inventory(Player inputPlayer) {
+		this.player = inputPlayer;
+	}
+	
+	// ARRAY LIST TO HOLD MONSTERS --------------------------------
+	
+	private ArrayList<Monster> monsters = new ArrayList<>();
+	
+	private void resetMonsters() {
+		this.monsters = new ArrayList<>();
+	}
+	
+	public void setMonsters(ArrayList<Monster> inputMonsters) {
+		try {
+			throw new UnallowedMethodException("Unallowed method");
+		} catch (UnallowedMethodException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<Monster> getMonsters() {
+		return this.monsters;
+	}
+	
+	public void addMonster(Monster inputMonster, int inputMonsterOrder) {
+		try {
+			if (monsters.size() >= tools.howManyMonstersBasedOnDifficulty(player.getPlayerDifficulty())) {
+				throw new FullTeamException("Cannot add more monsters");
+			} else {
+				
+			}
+		}
+	}
+	
+	public void reorderMonsters()
+	
+	
+	
+	// ARRAY LIST TO HOLD MONSTERS --------------------------------
 
     // ARRAY LIST TO HOLD ENTITIES --------------------------------
 

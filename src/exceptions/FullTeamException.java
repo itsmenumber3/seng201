@@ -1,8 +1,8 @@
-pac
+package exceptions;
 
-public classFullTeamException extends Exception {
-    public FullTeamException(String message) {
+public class FullTeamException extends Exception {
+
+	public FullTeamException(String message) {
         super(message);
     }
-    public
 }

@@ -47,13 +47,16 @@ public abstract class Entity {
      * @see entities.monsters.Monster
      * @see entities.items.Item
      */
-    public Entity(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
+    public Entity(String inputEntityName, int inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
         this.setEntityName(inputEntityName);
         this.setEntityRarity(inputEntityRarity);
         this.setEntityPurchaseValue(inputEntityPurchaseValue);
         this.setEntitySellValue(inputEntitySellValue);
     }
 
+    public Entity() {
+    	
+    }
     // INSTANTIATION --------------------------------------
 
 
@@ -133,17 +136,16 @@ public abstract class Entity {
     // RARITY ---------------------------------------------
 
     /**
-     * This variable stores how rare the entity is. It is of enum type Rarity.
-     * There are three Rarity levels: COMMON, UNCOMMON, RARE.
+     * This variable stores how rare the entity is
+     * There are five rarity levels: 1 2 3 4 5.
      */
-    private Rarity entityRarity;
+    private int entityRarity;
 
     /**
      * This method accepts an input of type Rarity and assign it to entityRarity.
-     * @param inputEntityRarity Rarity
-     * @see Rarity
+     * @param inputEntityRarity Integer
      */
-    public void setEntityRarity(Rarity inputEntityRarity) {
+    public void setEntityRarity(int inputEntityRarity) {
         this.entityRarity = inputEntityRarity;
     }
 
@@ -151,7 +153,7 @@ public abstract class Entity {
      * This method returns the rarity of the entity.
      * @return entityRarity Rarity
      */
-    public Rarity getEntityRarity() {
+    public int getEntityRarity() {
         return this.entityRarity;
     }
 

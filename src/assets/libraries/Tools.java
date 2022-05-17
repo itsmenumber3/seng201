@@ -6,8 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import assets.enums.MonsterType;
+import entities.monsters.Dragon;
 // Import the Exception classes
 import entities.monsters.Monster;
+import entities.monsters.Skeleton;
+import entities.monsters.Spirit;
+import entities.monsters.Troll;
+import entities.monsters.Zombie;
 import exceptions.InvalidInputException;
 import main.Player;
 
@@ -55,76 +60,8 @@ public class Tools {
             }
         }
     }
+    
 
-    // GENERATE RANDOM INTEGER -----------
-
-    public int generateRandomInteger(int inputUpperBound) {
-        return random.nextInt(inputUpperBound);
-    }
-    
-    // GENERATE RANDOM NAME --------------
-    
-    public String generateRandomName(MonsterType inputMonsterType) {
-    	return magicNumbers.MONSTER_NAMES[generateRandomInteger(magicNumbers.MONSTER_NAMES_ARRAY_LENGTH)];
-    	
-    }
-
-    
-    /***
-     * public Monster generateRandomMonster(Player inputPlayer) {
-     *         if (inputPlayer.getPlayerCurrentDay() / inputPlayer.getPlayerDays()) <=0.3 {
-     *             // randomise a difficulty level between 1 and 2
-     *         } else if // the thng is larger than 0.3 but smaller than 0.6 {
-     *             // 1 and 3
-     *         } elise if // if it is betwwen 0.6 and 0.9
-     *             /// randomse a rarity level between 2 and 3
-     *     }
-     * @param inputPlayer
-     * @return
-     */
-    
-    public int generaterRandomMonsterRarity(Player inputPlayer) {
-    	double ratio = inputPlayer.getPlayerCurrentDay() / inputPlayer.getPlayerDays();
-    	int randInt = 0;
-    	if (ratio <= magicNumbers.LOWER_BOUND_RARITY) {
-    		randInt = random.nextInt(2);
-    	}
-    	else if (ratio <= magicNumbers.MIDDLE_BOUND_RARITY) {
-    		randInt = random.nextInt(2,4);
-    	}
-    	else if (ratio <= magicNumbers.UPPER_BOUND_RARITY) {
-    		randInt = random.nextInt(3,5);
-    	}
-    	return randInt;
-    }
-    
-    
-    public monster generateRandomMonster(Player inputPlayer) {
-    	int randInt = random.nextInt(MONSTER_TYPES_LENGTH);
-    	
-    	Monster monster;
-    	
-    	switch(randInt) {
-    	case (0):
-    		monster = new Skeleton();
-    		break;
-    	case (1):
-    		monster = new Spirit(0);
-    		break;
-    	case (2):
-    		monster = new Troll();
-    		break;
-    	case (3):
-    		monster = new Zombie();
-    		break;
-    	case (4):
-    		monster = new Dragon();
-    		break;
-    	}
-    	
-    	return monster;
-    }
-    
     public int howManyMonstersBasedOnDifficulty(int inputDifficulty) {
     	if (inputDifficulty == 1) {
     		return 5;
@@ -133,6 +70,80 @@ public class Tools {
     	} else {
     		return 3;
     	}
+    }
+    
+    public Monster generateRandomMonster(Player inputPlayer) {
+    	Monster monster;
+    	
+    	// First step is to randomize a type of monster;
+    	int randInt = random.nextInt(1, magicNumbers.MONSTER_TYPES.length);
+    	switch(randInt) {
+	    	case (1):
+	    		monster = new Skeleton();
+	    		break;
+	    	case (2):
+	    		monster = new Spirit();
+	    		break;
+	    	case (3):
+	    		monster = new Troll();
+	    		break;
+	    	case (4):
+	    		monster = new Zombie();
+	    		break;
+	    	default:
+	    		monster = new Dragon();
+	    		break;
+    	}
+    	
+    	// Second step is to randomize its rarity (based on days)
+    	double playerProgress = inputPlayer.getPlayerCurrentDay() / inputPlayer.getPlayerDays();
+    	
+    	if (playerProgress <= 0.33) {
+    		monster.setEntityRarity(random.nextInt(1, 2));
+    	} else if (playerProgress <= 0.66) {
+    		monster.setEntityRarity(random.nextInt(1, 3));
+    	} else {
+    		monster.setEntityRarity(random.nextInt(2, 3));
+    	}
+    	monster.setEntityRarity(random.nextInt(1, 3));
+    	
+    	
+    	// Third step is to randomize its attack damage.
+    	if (inputPlayer.getPlayerDifficulty() == 1) {
+    		if (monster.getMonsterType() == MonsterType.SKELETON) {
+    			monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+    		} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
+    			monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+    		} else if(monster.getMonsterType() == MonsterType.TROLL) {
+    			monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+    		} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
+    			monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+    		};
+    		
+    	} else if (inputPlayer.getPlayerDifficulty() == 2) {
+    		if (monster.getMonsterType() == MonsterType.SKELETON) {
+    			monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+    		} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
+    			monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+    		} else if(monster.getMonsterType() == MonsterType.TROLL) {
+    			monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+    		} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
+    			monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+    		};
+    	} else {
+    		if (monster.getMonsterType() == MonsterType.SKELETON) {
+    			monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+    		} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
+    			monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+    		} else if(monster.getMonsterType() == MonsterType.TROLL) {
+    			monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+    		} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
+    			monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+    		};
+    	}
+    	
+    	
+    	return monster;
     }
 
 }

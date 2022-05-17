@@ -1,4 +1,9 @@
 package entities.monsters;
 
-public class Troll {
+import assets.enums.MonsterType;
+
+public class Troll extends Monster {
+	public Troll() {
+		this.setMonsterType(MonsterType.TROLL);
+	}
 }

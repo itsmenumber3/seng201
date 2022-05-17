@@ -1,5 +1,9 @@
 package entities.monsters;
 
-public class Spirit {
+import assets.enums.MonsterType;
 
+public class Spirit extends Monster {
+	public Spirit() {
+		this.setMonsterType(MonsterType.SPIRIT);
+	}
 }

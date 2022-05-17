@@ -52,6 +52,14 @@ public class PlayerSetupScreen {
 		window.setVisible(true);
 	}
 	
+	public void closeWindow() {
+		window.dispose();
+	}
+	
+	public void finishedWindow() {
+		gameEnvironment.closePlayerSetupScreen(this);
+	}
+	
 
 	/**
 	 * Create the application.
@@ -167,12 +175,12 @@ public class PlayerSetupScreen {
 		
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				gameEnvironment.player.setPlayerName(lblName.getText());
-				gameEnvironment.player.setPlayerDifficulty(sliderDifficulty.getValue());
-				gameEnvironment.player.setPlayerDays(sliderNumberofDays.getValue());
-				gameEnvironment.player.resetPlayerCurrentDay();
-				gameEnvironment.player.resetPlayerPoint();
-				gameEnvironment.player.resetPlayerGold();
+				gameEnvironment.getPlayer().setPlayerName(lblName.getText());
+				gameEnvironment.getPlayer().setPlayerDifficulty(sliderDifficulty.getValue());
+				gameEnvironment.getPlayer().setPlayerDays(sliderNumberofDays.getValue());
+				gameEnvironment.getPlayer().resetPlayerCurrentDay();
+				gameEnvironment.getPlayer().resetPlayerPoint();
+				gameEnvironment.getPlayer().resetPlayerGold();
 			}
 		});
 	}

@@ -115,13 +115,10 @@ public class MagicNumbers {
     
 
     public final MonsterType[] MONSTER_TYPES = {MonsterType.SKELETON, MonsterType.SPIRIT, MonsterType.TROLL, MonsterType.ZOMBIE, MonsterType.DRAGON};
-    public final int MONSTER_TYPES_LENGTH = MONSTER_TYPES.length;
 
     public final int MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH = 200;
 
-    public String[] MONSTER_NAMES = {"Fred", "Francis", "Jono", "Toby"};
-
-    public int MONSTER_NAMES_ARRAY_LENGTH = MONSTER_NAMES.length;
+    public String[] RANDOM_MONSTER
 
 
 

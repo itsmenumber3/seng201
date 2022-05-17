@@ -1,6 +1,6 @@
 package entities.monsters;
 
-import assets.enums.Rarity;
+import assets.enums.MonsterType;
 import assets.enums.RoleType;
 import entities.Entity;
 import exceptions.InvalidInputException;
@@ -8,48 +8,55 @@ import exceptions.InvalidMonsterNumericPropertyException;
 import exceptions.UnallowedMethodException;
 import main.Role;
 
-public abstract class Monster extends Entity implements Role {
+public class Monster extends Entity implements Role {
+	
+	private RoleType roleType = RoleType.MONSTER;
 
-    // LOGGING FUNCTION ----------------------------------------------------
-
-    /**
-     * This method is an implementation of the abstract method as defined in interface Role.
-     * It returns a RoleType enum data. It is used in the logging feature of this game.
-     * @see Role
-     * @see RoleType
-     * @return RoleType.MONSTER
-     */
-    @Override
+	public void setRoleType(RoleType inputRoleType) {
+		try {
+			throw new UnallowedMethodException("unallowed method");
+		} catch (UnallowedMethodException e) {
+			e.printStackTrace();
+		}
+	}
+	
     public RoleType getRoleType() {
-        return RoleType.MONSTER;
+        return this.roleType;
     }
 
-    // LOGGING FUNCTION ----------------------------------------------------
-
-
-
-    // INSTANTIATION --------------------------------------------------------
-
-    /**
-     * This method will create an instance of the class Monster.
-     * @param inputEntityName String, the name of the monster
-     * @param inputEntityRarity Rarity, the rarity of the monster
-     * @param inputEntityPurchaseValue
-     * @param inputEntitySellValue
-     * @param inputAttackDamage
-     * @param inputResistanceAbility
-     * @param inputHealAmount
-     * @see Rarity
-     */
-    public Monster(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue,
-                   int inputAttackDamage, int inputResistanceAbility) {
-        super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
-        this.resetMonsterHealthLevel();
-        this.setMonsterAttackDamage(inputAttackDamage);
-        this.setMonsterResistanceAbility(inputResistanceAbility);
+    private MonsterType monsterType;
+    
+    public void setMonsterType(MonsterType inputMonsterType) {
+    	this.monsterType = inputMonsterType;
+    }
+    
+    public MonsterType getMonsterType() {
+    	return this.monsterType;
     }
 
-    // INSTANTIATION --------------------------------------------------------
+
+//    // INSTANTIATION --------------------------------------------------------
+//
+//    /**
+//     * This method will create an instance of the class Monster.
+//     * @param inputEntityName String, the name of the monster
+//     * @param inputEntityRarity Rarity, the rarity of the monster
+//     * @param inputEntityPurchaseValue
+//     * @param inputEntitySellValue
+//     * @param inputAttackDamage
+//     * @param inputResistanceAbility
+//     * @param inputHealAmount
+//     * @see Rarity
+//     */
+//    public Monster(String inputEntityName, int inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue,
+//                   int inputAttackDamage, int inputResistanceAbility) {
+//        super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
+//        this.resetMonsterHealthLevel();
+//        this.setMonsterAttackDamage(inputAttackDamage);
+//        this.setMonsterResistanceAbility(inputResistanceAbility);
+//    }
+//
+//    // INSTANTIATION --------------------------------------------------------
 
 
 
@@ -132,7 +139,7 @@ public abstract class Monster extends Entity implements Role {
 
     private int monsterResistanceAbility;
 
-    void setMonsterResistanceAbility(int inputResistanceAbility) {
+    public void setMonsterResistanceAbility(int inputResistanceAbility) {
         try {
             if (inputResistanceAbility <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE && inputResistanceAbility >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
                 this.monsterResistanceAbility = inputResistanceAbility;
@@ -154,27 +161,4 @@ public abstract class Monster extends Entity implements Role {
     }
 
     // RESISTANCE ABILITY ---------------------------------------------------
-    
-    
-    
-    // MONSTER RARITY -------------------------------------------------------
-    public int monsterRarity; 
-    
-    public int setMonsterRarity() {
-    	int tempMonsterRarity = tools.generateRandomMonsterRarity();
-    	try {
-    		if (tempMonsterRarity < magicNumbers.MINIMUM_RARITY || tempMonsterRarity > magicNumbers.MAXIMUM_RARITY) {
-    			throw new InvalidMonsterNumericPropertyException("Invalid input");
-    		} else {
-    			this.monsterRarity = tempMonsterRarity;
-    		}
-    	} catch (InvalidMonsterNumericPropertyException e) {
-    		e.printStackTrace();
-    	}
-    	return this.monsterRarity;
-    }
-    
-    public int getMonsterRarity() {
-    	return this.monsterRarity;
-    }
 }

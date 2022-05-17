@@ -379,7 +379,5 @@ public class Player implements Role {
         }
     }
 
-    public ArrayList<Monster> playerUnusedMonsters = new ArrayList<>();
-
     // INVENTORY ----------------------------------------------------
 }
