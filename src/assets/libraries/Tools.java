@@ -124,5 +124,15 @@ public class Tools {
     	
     	return monster;
     }
+    
+    public int howManyMonstersBasedOnDifficulty(int inputDifficulty) {
+    	if (inputDifficulty == 1) {
+    		return 5;
+    	} else if (inputDifficulty == 2) {
+    		return 4;
+    	} else {
+    		return 3;
+    	}
+    }
 
 }

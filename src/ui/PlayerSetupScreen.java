@@ -15,8 +15,12 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.management.loading.PrivateClassLoader;
 import javax.swing.ImageIcon;
 import javax.swing.event.ChangeListener;
+
+import assets.libraries.Tools;
+
 import javax.swing.event.ChangeEvent;
 
 public class PlayerSetupScreen {
@@ -24,6 +28,7 @@ public class PlayerSetupScreen {
 	private JFrame window;
 	private JTextField playerNameTextField;
 	private GameEnvironment gameEnvironment;
+	private Tools tools = new Tools();
 
 	/**
 	 * Launch the application.
@@ -42,8 +47,11 @@ public class PlayerSetupScreen {
 	}
 
 	public PlayerSetupScreen(GameEnvironment inputGameEnvironment) {
-		
+		gameEnvironment = inputGameEnvironment;
+		initialize();
+		window.setVisible(true);
 	}
+	
 
 	/**
 	 * Create the application.
@@ -77,7 +85,7 @@ public class PlayerSetupScreen {
 		playerNameTextField.setFont(new Font("Dialog", Font.PLAIN, 18));
 		playerNameTextField.setColumns(10);
 		playerNameTextField.setBackground(new Color(230, 230, 250));
-		playerNameTextField.setBounds(51, 127, 278, 33);
+		playerNameTextField.setBounds(51, 127, 279, 33);
 		window.getContentPane().add(playerNameTextField);
 		
 		JLabel lblDifficulty = new JLabel("Difficulty");
@@ -115,10 +123,16 @@ public class PlayerSetupScreen {
 		lblPhotoCover.setBounds(384, -15, 382, 569);
 		window.getContentPane().add(lblPhotoCover);
 		
+		JLabel lblNoOfMembersDynamic = new JLabel("4");
+		lblNoOfMembersDynamic.setBounds(253, 357, 78, 31);
+		lblNoOfMembersDynamic.setFont(new Font("Dialog", Font.PLAIN, 18));
+		window.getContentPane().add(lblNoOfMembersDynamic);
+		
 		JSlider sliderDifficulty = new JSlider();
 		sliderDifficulty.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				
+				int numberOfMembers = tools.howManyMonstersBasedOnDifficulty(sliderDifficulty.getValue());
+				lblNoOfMembersDynamic.setText(String.valueOf(numberOfMembers));
 			}
 		});
 		sliderDifficulty.setValue(2);
@@ -132,13 +146,8 @@ public class PlayerSetupScreen {
 		sliderDifficulty.setMajorTickSpacing(1);
 		sliderDifficulty.setForeground(Color.BLACK);
 		sliderDifficulty.setFont(new Font("Dialog", Font.PLAIN, 14));
-		sliderDifficulty.setBounds(156, 189, 172, 50);
+		sliderDifficulty.setBounds(156, 189, 174, 50);
 		window.getContentPane().add(sliderDifficulty);
-		
-		JLabel lblNoOfMembersDynamic = new JLabel("4");
-		lblNoOfMembersDynamic.setBounds(253, 357, 78, 31);
-		lblNoOfMembersDynamic.setFont(new Font("Dialog", Font.PLAIN, 18));
-		window.getContentPane().add(lblNoOfMembersDynamic);
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.setBounds(51, 399, 279, 39);

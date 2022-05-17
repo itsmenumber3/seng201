@@ -1,5 +1,6 @@
 package main;
 
+import assets.libraries.Tools;
 import ui.PlayerSetupScreen;
 import ui.WelcomeScreen;
 
@@ -9,6 +10,7 @@ import ui.WelcomeScreen;
 public class GameEnvironment {
 
     public Player player = new Player();
+    public Tools tools = new Tools();
 
     public void launchWelcomeScreen() {
         WelcomeScreen welcomeWindow = new WelcomeScreen(this);
