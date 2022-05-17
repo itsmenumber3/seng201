@@ -10,8 +10,17 @@ import main.Role;
 
 public class Monster extends Entity implements Role {
 	
-	private RoleType roleType = RoleType.MONSTER;
 
+	private RoleType roleType = RoleType.MONSTER; // This is the role type of the monster 
+    private MonsterType monsterType; // This is the type of monster that is being represented
+    private int monsterHealthLevel; // This is the current health level of the monster
+    private int monsterAttackDamage; // This is the damage caused by the monster on its opponent
+
+
+    /** Setter of the roleType
+    *This is an unallowed method and will throw the UnallowedMethodException exception
+    *It will return "unallowed method" to the stack
+    */
 	public void setRoleType(RoleType inputRoleType) {
 		try {
 			throw new UnallowedMethodException("unallowed method");
@@ -20,16 +29,27 @@ public class Monster extends Entity implements Role {
 		}
 	}
 	
+    /** Getter the roleType of the Monster
+    * This method returns the role type of the monster
+    * @return roleType: RoleType
+    */
     public RoleType getRoleType() {
         return this.roleType;
     }
-
-    private MonsterType monsterType;
     
+    /** Setter for the monsterType of Monster
+    * This method sets the monsters type
+    * @param inputMonsterType
+    * @return monsterType: MonsterType
+    */
     public void setMonsterType(MonsterType inputMonsterType) {
     	this.monsterType = inputMonsterType;
     }
     
+    /** Getter for the monsterType of the Monster'
+    * This method returns the monsters type
+    * @return monsterType: MonsterType
+    */
     public MonsterType getMonsterType() {
     	return this.monsterType;
     }
@@ -62,9 +82,7 @@ public class Monster extends Entity implements Role {
 
     // HEALTH LEVEL ---------------------------------------------------
 
-    private int monsterHealthLevel;
-
-    /**
+    /** Setter for the monsterHealthLevel
      * This method isn't allowed and will throw an error.
      * @param inputMonsterHealthLevel: integer
      */
@@ -76,8 +94,10 @@ public class Monster extends Entity implements Role {
         }
     }
 
-    /**
+    /** Restter for the getMonsterHealthLevel 
      * This method resets the health level to DEFAULT_HEALTH_LEVEL in MagicNumbers
+     * The current health level is checked to see if it is within range
+     * @param DEFAULT_HEALTH_LEVEL @see MagicNumbers
      */
     public void resetMonsterHealthLevel() {
         try {
@@ -91,7 +111,7 @@ public class Monster extends Entity implements Role {
         }
     }
 
-    /**
+    /** Getter for the monsterHealthLevel
      * This method returns the health level
      * @return monsterHealthLevel: integer
      */
@@ -104,8 +124,6 @@ public class Monster extends Entity implements Role {
     
     
     // ATTACK DAMAGE --------------------------------------------------
-
-    private int monsterAttackDamage; // THis is the damage caused by the monster on its opponent
 
     /**
      * This method set the attack damage ability
