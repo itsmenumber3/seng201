@@ -1,6 +1,10 @@
 package main;
 
+import java.util.ArrayList;
+
+import assets.enums.MonsterType;
 import assets.libraries.Tools;
+import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 import ui.FirstMonsterSetupScreen;
 import ui.PlayerSetupScreen;
@@ -12,6 +16,7 @@ import ui.WelcomeScreen;
 public class GameEnvironment {
 
     private Player player = new Player();
+    private Tools tools = new Tools();
     
     public void setPlayer(Player inputPlayer) {
     	try {
@@ -40,10 +45,17 @@ public class GameEnvironment {
     
     public void closePlayerSetupScreen(PlayerSetupScreen inputPlayerSetupWindow) {
     	inputPlayerSetupWindow.closeWindow();
+    	this.launchFirstMonsterSetupScreen();
     }
     
     public void launchFirstMonsterSetupScreen() {
-    	FirstMonsterSetupScreen firstMonsterSetupScreen 
+    	
+    	FirstMonsterSetupScreen firstMonsterSetupWindow = new FirstMonsterSetupScreen(this);
+    }
+    
+    public void closeFirstMonsterSetupScreen(FirstMonsterSetupScreen firstMonsterSetupWindow) {
+    	firstMonsterSetupWindow.closeWindow();
+
     }
 
     public static void main(String[] args) {

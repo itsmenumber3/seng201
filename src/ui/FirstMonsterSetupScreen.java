@@ -6,17 +6,29 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JTextPane;
+
+import assets.libraries.Tools;
+import entities.monsters.Monster;
+import main.GameEnvironment;
+import main.Player;
+
 import java.awt.Color;
 import javax.swing.JPanel;
+import java.awt.SystemColor;
 
 public class FirstMonsterSetupScreen {
 
-	private JFrame frmPickYourFirst;
+	private JFrame window;
 	private JTextField textFieldMonsterName;
+	private GameEnvironment gameEnvironment;
+	private Tools tools = new Tools();
+	private ArrayList<Monster> monsters;
+	
 
 	/**
 	 * Launch the application.
@@ -26,12 +38,27 @@ public class FirstMonsterSetupScreen {
 			public void run() {
 				try {
 					FirstMonsterSetupScreen window = new FirstMonsterSetupScreen();
-					window.frmPickYourFirst.setVisible(true);
+					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+	
+	public FirstMonsterSetupScreen(GameEnvironment inputGameEnvironment) {
+		gameEnvironment = inputGameEnvironment;
+		monsters = tools.generateManyRandomMonsters(gameEnvironment.getPlayer(), 4);
+		initialize();
+		window.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		window.dispose();
+	}
+	
+	public void finishedWindow() {
+		gameEnvironment.closeFirstMonsterSetupScreen(this);
 	}
 
 	/**
@@ -45,70 +72,92 @@ public class FirstMonsterSetupScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmPickYourFirst = new JFrame();
-		frmPickYourFirst.setTitle("Pick your first monster");
-		frmPickYourFirst.setBounds(100, 100, 750, 500);
-		frmPickYourFirst.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmPickYourFirst.getContentPane().setLayout(null);
+		window = new JFrame();
+		window.setTitle("Pick your first monster");
+		window.setBounds(100, 100, 750, 500);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.getContentPane().setLayout(null);
 		
 		JLabel lblPickYourFirst = new JLabel("Pick your first monster");
 		lblPickYourFirst.setFont(new Font("Dialog", Font.BOLD, 24));
 		lblPickYourFirst.setBounds(28, 26, 458, 37);
-		frmPickYourFirst.getContentPane().add(lblPickYourFirst);
+		window.getContentPane().add(lblPickYourFirst);
 		
 		JLabel lblNameThisMonster = new JLabel("Name this monster");
 		lblNameThisMonster.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblNameThisMonster.setBounds(30, 98, 220, 26);
-		frmPickYourFirst.getContentPane().add(lblNameThisMonster);
+		window.getContentPane().add(lblNameThisMonster);
 		
-		JButton buttonMonster1 = new JButton("New button");
+		JLabel lblMonsterInfo = new JLabel("<html><div>Please select a monster first to view information.</div></html>");
+		lblMonsterInfo.setBounds(405, 98, 305, 293);
+		window.getContentPane().add(lblMonsterInfo);
+		
+		JButton buttonMonster1 = new JButton(monsters.get(0).getMonsterType().toString());
+		buttonMonster1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblMonsterInfo.setText("<html><div>" + tools.makeStringDescriptionFromMonsterInformation(monsters.get(0)) + "</div></html>");
+			}
+		});
 		buttonMonster1.setBounds(30, 233, 165, 73);
-		frmPickYourFirst.getContentPane().add(buttonMonster1);
+		window.getContentPane().add(buttonMonster1);
 		
-		JButton btnMonster2 = new JButton("New button");
+		JButton btnMonster2 = new JButton(monsters.get(1).getMonsterType().toString());
+		btnMonster2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblMonsterInfo.setText("<html><div>" + tools.makeStringDescriptionFromMonsterInformation(monsters.get(1)) + "</div></html>");
+			}
+		});
 		btnMonster2.setBounds(30, 318, 165, 73);
-		frmPickYourFirst.getContentPane().add(btnMonster2);
+		window.getContentPane().add(btnMonster2);
 		
-		JButton btnMonster3 = new JButton("New button");
+		JButton btnMonster3 = new JButton(monsters.get(2).getMonsterType().toString());
+		btnMonster3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblMonsterInfo.setText("<html><div>" + tools.makeStringDescriptionFromMonsterInformation(monsters.get(2)) + "</div></html>");
+			}
+		});
 		btnMonster3.setBounds(207, 233, 165, 73);
-		frmPickYourFirst.getContentPane().add(btnMonster3);
+		window.getContentPane().add(btnMonster3);
 		
-		JButton btnMonster4 = new JButton("New button");
+		JButton btnMonster4 = new JButton(monsters.get(3).getMonsterType().toString());
+		btnMonster4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lblMonsterInfo.setText("<html><div>" + tools.makeStringDescriptionFromMonsterInformation(monsters.get(3)) + "</div></html>");
+			}
+		});
 		btnMonster4.setBounds(207, 318, 165, 73);
-		frmPickYourFirst.getContentPane().add(btnMonster4);
+		window.getContentPane().add(btnMonster4);
 		
-		JLabel lblNameThisMonster_1 = new JLabel("");
-		lblNameThisMonster_1.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblNameThisMonster_1.setBounds(28, 301, 179, 26);
-		frmPickYourFirst.getContentPane().add(lblNameThisMonster_1);
-		
-		textFieldMonsterName = new JTextField();
+		textFieldMonsterName = new JTextField(tools.generateRandomMonsterName());
 		textFieldMonsterName.setForeground(Color.BLACK);
 		textFieldMonsterName.setFont(new Font("Dialog", Font.PLAIN, 18));
 		textFieldMonsterName.setColumns(10);
 		textFieldMonsterName.setBackground(new Color(230, 230, 250));
 		textFieldMonsterName.setBounds(30, 136, 278, 33);
-		frmPickYourFirst.getContentPane().add(textFieldMonsterName);
+		window.getContentPane().add(textFieldMonsterName);
 		
-		JLabel lblThenSelectOne = new JLabel("Then select one from below");
+		JLabel lblThenSelectOne = new JLabel("Select a monster from below");
 		lblThenSelectOne.setFont(new Font("Dialog", Font.BOLD, 18));
 		lblThenSelectOne.setBounds(30, 195, 296, 26);
-		frmPickYourFirst.getContentPane().add(lblThenSelectOne);
+		window.getContentPane().add(lblThenSelectOne);
 		
-		JButton btnConfirmMonsterChoice = new JButton("Confirm monster choice");
-		btnConfirmMonsterChoice.setBounds(479, 400, 232, 37);
-		frmPickYourFirst.getContentPane().add(btnConfirmMonsterChoice);
+		JPanel panelBackgroundMonsterInformation = new JPanel();
+		panelBackgroundMonsterInformation.setBounds(403, 98, 305, 293);
+		window.getContentPane().add(panelBackgroundMonsterInformation);
+		panelBackgroundMonsterInformation.setLayout(null);
+		panelBackgroundMonsterInformation.setBackground(SystemColor.window);
+		
+
 		
 		JPanel panelBackground = new JPanel();
 		panelBackground.setLayout(null);
 		panelBackground.setBackground(Color.WHITE);
 		panelBackground.setBounds(0, -11, 759, 492);
-		frmPickYourFirst.getContentPane().add(panelBackground);
+		window.getContentPane().add(panelBackground);
 		
-		JPanel panelBackgroundMonsterInformation = new JPanel();
-		panelBackgroundMonsterInformation.setBounds(403, 98, 305, 299);
-		panelBackground.add(panelBackgroundMonsterInformation);
-		panelBackgroundMonsterInformation.setLayout(null);
-		panelBackgroundMonsterInformation.setBackground(Color.GRAY);
+		JButton btnConfirmMonsterChoice = new JButton("Next");
+		btnConfirmMonsterChoice.setBounds(599, 418, 109, 37);
+		panelBackground.add(btnConfirmMonsterChoice);
+		
 	}
 }

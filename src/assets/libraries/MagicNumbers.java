@@ -112,13 +112,17 @@ public class MagicNumbers {
     public final double MIDDLE_BOUND_RARITY = 0.6;
     public final double UPPER_BOUND_RARITY = 1.0;
 
+    public final int[] RARITY_POSSIBILITIES_START_OF_GAME = {1, 2};
+    public final int[] RARITY_POSSIBILITIES_MID_OF_GAME = {1, 2, 3};
+    public final int[] RARITY_POSSIBILITIES_END_OF_GAME = {1, 2, 2, 3, 3}; 
     
+    public final String[] RANDOM_MONSTER_NAMES = {"Smogfang", "Goolops", "Doomboo", "Muckga", "Emberbug", "Acidgirl", "Ghosteyes", "Vaporman"};
 
     public final MonsterType[] MONSTER_TYPES = {MonsterType.SKELETON, MonsterType.SPIRIT, MonsterType.TROLL, MonsterType.ZOMBIE, MonsterType.DRAGON};
 
     public final int MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH = 200;
 
-    public String[] RANDOM_MONSTER
+    
 
 
 

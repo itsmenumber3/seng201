@@ -325,7 +325,7 @@ public class Player implements Role {
     // USER INVENTORY -----------------------------------------------
 
 
-    private final Inventory playerInventory = new Inventory(); // PLEASE NOTE THAT there is a main.Inventory() class.
+    private final Inventory playerInventory = new Inventory(this); // PLEASE NOTE THAT there is a main.Inventory() class.
                                                              // this is a constant and will never change.
 
     /**

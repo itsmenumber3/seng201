@@ -1,6 +1,7 @@
 package assets.libraries;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,6 +78,7 @@ public class Tools {
     	
     	// First step is to randomize a type of monster;
     	int randInt = random.nextInt(1, magicNumbers.MONSTER_TYPES.length);
+    	
     	switch(randInt) {
 	    	case (1):
 	    		monster = new Skeleton();
@@ -99,13 +101,12 @@ public class Tools {
     	double playerProgress = inputPlayer.getPlayerCurrentDay() / inputPlayer.getPlayerDays();
     	
     	if (playerProgress <= 0.33) {
-    		monster.setEntityRarity(random.nextInt(1, 2));
+    		monster.setEntityRarity(magicNumbers.RARITY_POSSIBILITIES_START_OF_GAME[random.nextInt(magicNumbers.RARITY_POSSIBILITIES_START_OF_GAME.length)]);
     	} else if (playerProgress <= 0.66) {
-    		monster.setEntityRarity(random.nextInt(1, 3));
+    		monster.setEntityRarity(magicNumbers.RARITY_POSSIBILITIES_MID_OF_GAME[random.nextInt(magicNumbers.RARITY_POSSIBILITIES_MID_OF_GAME.length)]);
     	} else {
-    		monster.setEntityRarity(random.nextInt(2, 3));
+    		monster.setEntityRarity(magicNumbers.RARITY_POSSIBILITIES_END_OF_GAME[random.nextInt(magicNumbers.RARITY_POSSIBILITIES_END_OF_GAME.length)]);
     	}
-    	monster.setEntityRarity(random.nextInt(1, 3));
     	
     	
     	// Third step is to randomize its attack damage.
@@ -140,10 +141,30 @@ public class Tools {
     		} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
     			monster.setMonsterResistanceAbility(random.nextInt(17, 23));
     		};
-    	}
+    	} // to complete implementation 
     	
+    	monster.setMonsterAttackDamage(10); // to be implemented
+    	
+    	monster.resetMonsterHealthLevel();
+
     	
     	return monster;
+    }
+    
+    public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
+    	ArrayList<Monster> monsters = new ArrayList<>();
+    	for (int index = 0; index < inputSize; index++) {
+    		monsters.add(this.generateRandomMonster(inputPlayer));
+    	}
+    	return monsters;
+    }
+    
+    public String makeStringDescriptionFromMonsterInformation(Monster inputMonster) {
+    	return String.format("This monster is a %s. It has an attack damage of %d and its resistance ability is %d. It is of rarity level %d. Currently, its health is %d out of 100.", inputMonster.getMonsterType().toString(), inputMonster.getMonsterAttackDamage(), inputMonster.getMonsterResistanceAbility(), inputMonster.getMonsterHealthLevel());
+    }
+    
+    public String generateRandomMonsterName() {
+    	return magicNumbers.RANDOM_MONSTER_NAMES[random.nextInt(magicNumbers.RANDOM_MONSTER_NAMES.length)];
     }
 
 }

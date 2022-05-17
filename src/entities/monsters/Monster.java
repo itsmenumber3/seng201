@@ -68,7 +68,7 @@ public class Monster extends Entity implements Role {
      * This method isn't allowed and will throw an error.
      * @param inputMonsterHealthLevel: integer
      */
-    void setMonsterHealthLevel(int inputMonsterHealthLevel) {
+    public void setMonsterHealthLevel(int inputMonsterHealthLevel) {
         try {
             throw new UnallowedMethodException("Unallowed method");
         } catch (UnallowedMethodException e) {
@@ -79,7 +79,7 @@ public class Monster extends Entity implements Role {
     /**
      * This method resets the health level to DEFAULT_HEALTH_LEVEL in MagicNumbers
      */
-    void resetMonsterHealthLevel() {
+    public void resetMonsterHealthLevel() {
         try {
             if (magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE  && magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
                 this.monsterHealthLevel = magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL;
@@ -111,7 +111,7 @@ public class Monster extends Entity implements Role {
      * This method set the attack damage ability
      * @param inputMonsterAttackDamage: integer
      */
-    void setMonsterAttackDamage(int inputMonsterAttackDamage) {
+    public void setMonsterAttackDamage(int inputMonsterAttackDamage) {
         try {
             if (inputMonsterAttackDamage <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE  && inputMonsterAttackDamage >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
                 this.monsterAttackDamage = inputMonsterAttackDamage;
