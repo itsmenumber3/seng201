@@ -15,7 +15,7 @@ public class Monster extends Entity implements Role {
     private MonsterType monsterType; // This is the type of monster that is being represented
     private int monsterHealthLevel; // This is the current health level of the monster
     private int monsterAttackDamage; // This is the damage caused by the monster on its opponent
-
+    private int monsterResistanceAbility; // This is the resistance to an attack that the monster has
 
     /** Setter of the roleType
     *This is an unallowed method and will throw the UnallowedMethodException exception
@@ -125,9 +125,9 @@ public class Monster extends Entity implements Role {
     
     // ATTACK DAMAGE --------------------------------------------------
 
-    /**
-     * This method set the attack damage ability
-     * @param inputMonsterAttackDamage: integer
+    /** Setter for the monsterAttackDamage
+     * This method sets the attack damage ability
+     * @param inputMonsterAttackDamage
      */
     public void setMonsterAttackDamage(int inputMonsterAttackDamage) {
         try {
@@ -142,7 +142,7 @@ public class Monster extends Entity implements Role {
 
     }
 
-    /**
+    /** Getter for the monsterAttackDamage
      * This method returns the monster attack damage
      * @return monsterAttackDamage: integer
      */
@@ -155,8 +155,10 @@ public class Monster extends Entity implements Role {
     
     // RESISTANCE ABILITY ---------------------------------------------------
 
-    private int monsterResistanceAbility;
-
+    /** Setter for the monsterResistanceAbility
+    * This method sets the resistance of a monster from an attack
+    * @param inputResistanceAbility
+    */
     public void setMonsterResistanceAbility(int inputResistanceAbility) {
         try {
             if (inputResistanceAbility <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE && inputResistanceAbility >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
@@ -170,8 +172,8 @@ public class Monster extends Entity implements Role {
         this.monsterResistanceAbility = inputResistanceAbility;
     }
 
-    /**
-     * This method returns the resistance ability of the monster
+    /** Getter for the monsterResistanceAbility
+     * This method returns the resistance ability of the monster from an attack
      * @return monsterResistanceAbility: integer
      */
     public int getMonsterResistanceAbility() {
