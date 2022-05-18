@@ -11,6 +11,8 @@ public class UiTools {
 			return "/assets/ui/img/LakeTaupo.jpg";
 		case CANTERBURY_WETLANDS:
 			return "/assets/ui/img/CanterburyWetlands.jpg";
+		case MOUNT_COOK:
+			return "/assets/ui/img/MountCook.jpg";
 		default:
 			return "/assets/ui/img/SouthlandFarm.jpg";
 		}
