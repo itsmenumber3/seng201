@@ -72,10 +72,10 @@ public class MapScreen {
 		btnLakeTaupo.setBounds(413, 248, 106, 25);
 		frmBattles.getContentPane().add(btnLakeTaupo);
 		
-		JButton btnFarewellSpit = new JButton("Farewell Spit");
+		JButton btnFarewellSpit = new JButton("<html><div>Canterbury Wetlands</div></html>");
 		btnFarewellSpit.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnFarewellSpit.setBackground(SystemColor.info);
-		btnFarewellSpit.setBounds(227, 310, 119, 25);
+		btnFarewellSpit.setBounds(333, 401, 97, 42);
 		frmBattles.getContentPane().add(btnFarewellSpit);
 		btnNewButton.setBackground(SystemColor.info);
 		btnNewButton.setBounds(127, 445, 97, 25);
@@ -94,7 +94,7 @@ public class MapScreen {
 		panelItem.setBounds(29, 39, 231, 219);
 		frmBattles.getContentPane().add(panelItem);
 		
-		JLabel lblNewLabel_1 = new JLabel("<html><div>" + "Your monsters are currently at " + "Farewell Spit" + ". Please select your next battle location to travel to." + "</div></html>");
+		JLabel lblNewLabel_1 = new JLabel("<html><div>" + "Your monsters are currently at " + "Wellington" + ". Please select your next battle location to travel to." + "</div></html>");
 		lblNewLabel_1.setForeground(Color.WHITE);
 		lblNewLabel_1.setBounds(12, 49, 207, 106);
 		panelItem.add(lblNewLabel_1);
