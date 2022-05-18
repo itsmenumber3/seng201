@@ -2,6 +2,8 @@ package entities.items.consumables;
 
 import entities.items.Item;
 
-public class Food extends  Consumable {
-
+public class Food extends Consumable {
+    public Food() {
+        super();
+    }
 }

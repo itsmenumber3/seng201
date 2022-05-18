@@ -2,7 +2,6 @@ package entities.items.consumables;
 
 import assets.enums.ConsumableType;
 import assets.enums.ItemType;
-import assets.enums.Rarity;
 import entities.items.Item;
 
 /**
@@ -11,21 +10,41 @@ import entities.items.Item;
  * @see Potion
  */
 public class Consumable extends Item {
-    Consumable(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
-        super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
-        this.setItemType(ItemType.CONSUMABLE);
+    public Consumable() {
+        super();
     }
 
+    // CONSUMABLE TYPE ------------------------------------------------------------
+
     /**
-     * This variable holds the type
+     * ConsumableType (enum) can be either Food or Potion
+     * @see ConsumableType
      */
     public ConsumableType consumableType;
 
+    /**
+     * This method sets the consumable type
+     * @param inputConsumableType ConsumableType
+     * @see ConsumableType
+     */
     public void setConsumableType(ConsumableType inputConsumableType) {
         this.consumableType = inputConsumableType;
     }
 
+    /**
+     * This method returns the consumable type
+     * @return consumableType of enum type ConsumableType
+     */
     public ConsumableType getConsumableType() {
         return this.consumableType;
     }
+
+    // CONSUMABLE TYPE ------------------------------------------------------------
+
+
+    // HEAL VALUE -----------------------------------------------------------------
+
+
+
+    // HEAL VALUE -----------------------------------------------------------------
 }

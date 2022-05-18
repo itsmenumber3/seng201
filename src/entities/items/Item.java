@@ -2,7 +2,6 @@ package entities.items;
 
 import assets.enums.EntityType;
 import assets.enums.ItemType;
-import assets.enums.Rarity;
 import assets.enums.RoleType;
 import entities.Entity;
 import exceptions.UnallowedMethodException;
@@ -25,15 +24,22 @@ public abstract class Item extends Entity {
     // INSTANTIATION ----------------------------------------------
 
     /**
+     * Basic instantiation
+     */
+    public Item() {
+        super();
+    }
+
+    /**
      * This method - to instantiate an Item object - does two things:
      * 1. It accepts all the necessary arguments in order to instantiate all the variables as required in Entity.
      * 2. As in the Entity object that this class inherits, it sets entityType to ITEM to denote that this is an item.
      * @param inputEntityName String, custom name of the item
-     * @param inputEntityRarity String,
-     * @param inputEntityPurchaseValue
-     * @param inputEntitySellValue
+     * @param inputEntityRarity String
+     * @param inputEntityPurchaseValue int
+     * @param inputEntitySellValue int
      */
-    public Item(String inputEntityName, Rarity inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
+    public Item(String inputEntityName, int inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue) {
         super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
         this.setEntityType(EntityType.ITEM); // set Entity type that is an ITEM indeed.
     }
@@ -44,6 +50,9 @@ public abstract class Item extends Entity {
 
     // ITEM TYPE --------------------------------------------------
 
+    /**
+     * ItemType (enum) can be either Consumable, Fuel, LottoTicket
+     */
     public ItemType itemType;
 
     public void setItemType(ItemType inputItemType) {

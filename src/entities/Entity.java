@@ -3,7 +3,6 @@ package entities;
 import assets.enums.EntityType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
-import assets.enums.Rarity;
 import exceptions.InvalidInputException;
 import exceptions.MaximumStringLengthExceededException;
 import exceptions.UnexpectedNegativeNumberException;
@@ -33,13 +32,16 @@ public abstract class Entity {
     // LIBRARIES ------------------------------------------
 
 
-    public String message;
-
-
     // INSTANTIATION --------------------------------------
 
     /**
-     * I am not sure as to why there is no
+     * Basic instantiation.
+     */
+    public Entity() {
+
+    }
+
+    /**
      * This method creates an instance of the class Entity. The Monster class and the Item class will use this.
      * @param inputEntityName String that is the name entity.
      * @param inputEntityRarity Rarity that describes how rare the entity is COMMON, UNCOMMON, RARE
@@ -55,17 +57,17 @@ public abstract class Entity {
         this.setEntitySellValue(inputEntitySellValue);
     }
 
-    public Entity() {
-    	
-    }
+
     // INSTANTIATION --------------------------------------
 
 
 
     // ENTITY TYPE ----------------------------------------
 
-
-
+    /**
+     * EntityType (enum) can either be Monster or Item
+     * @see EntityType
+     */
     EntityType entityType;
 
     /**
@@ -87,16 +89,6 @@ public abstract class Entity {
     }
 
     // ENTITY TYPE ----------------------------------------
-
-
-
-    // ENTITY SKU -----------------------------------------
-
-
-
-    // ENTITY SKU -----------------------------------------
-
-
 
 
     // ENTITY NAME ----------------------------------------
