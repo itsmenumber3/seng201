@@ -7,14 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import assets.enums.MonsterType;
-import entities.monsters.Dragon;
+import entities.monsters.battle_monsters.*;
+import entities.monsters.tradeable_monsters.Dragon;
 // Import the Exception classes
-import entities.Entity;
 import entities.monsters.Monster;
-import entities.monsters.Skeleton;
-import entities.monsters.Spirit;
-import entities.monsters.Troll;
-import entities.monsters.Zombie;
+import entities.monsters.tradeable_monsters.Skeleton;
+import entities.monsters.tradeable_monsters.Spirit;
+import entities.monsters.tradeable_monsters.Troll;
+import entities.monsters.tradeable_monsters.Zombie;
 import exceptions.InvalidInputException;
 import main.Player;
 
@@ -22,14 +22,8 @@ import main.Player;
 public class Tools {
 
     MagicNumbers magicNumbers = new MagicNumbers(); // get the constants in the MagicNumbers class
-    Scanner scanner = new Scanner(System.in); // Internal
     SecureRandom random = new SecureRandom();
 
-    // Internal
-    public String readPlayerStringInput(String inputPrompt) {
-        System.out.print(inputPrompt);
-        return scanner.nextLine();
-    }
 
     public boolean TrueFalseRandom(float inputProbability) {
         return true;
@@ -188,7 +182,7 @@ public class Tools {
 						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12]));
 				}	
 			}
-			else{
+			else {
 				if (monster.getMonsterType() == MonsterType.SKELETON) {
 					monster.setMonsterResistanceAbility(random.nextInt(
 						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
@@ -304,46 +298,45 @@ public class Tools {
 						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11]));
 				}	
 			}
-			else{
+			else {
 				if (monster.getMonsterType() == MonsterType.SKELETON) {
 					monster.setMonsterResistanceAbility(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16]));
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16]));
 					monster.setMonsterAttackDamage(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10]));
-    			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10]));
+				} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
 					monster.setMonsterResistanceAbility(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[17]));
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[17]));
 					monster.setMonsterAttackDamage(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[4],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9]));
-    			} else if(monster.getMonsterType() == MonsterType.TROLL) {
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[4],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9]));
+				} else if (monster.getMonsterType() == MonsterType.TROLL) {
 					monster.setMonsterResistanceAbility(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[18]));
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[18]));
 					monster.setMonsterAttackDamage(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[3],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8]));
-    			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[3],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8]));
+				} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
 					monster.setMonsterResistanceAbility(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[19]));
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[19]));
 					monster.setMonsterAttackDamage(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[2],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7]));
-				} else if (monster.getMonsterType() == MonsterType.DRAGON){
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[2],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7]));
+				} else if (monster.getMonsterType() == MonsterType.DRAGON) {
 					monster.setMonsterResistanceAbility(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[20]));
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[20]));
 					monster.setMonsterAttackDamage(random.nextInt(
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[1],
-						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6]));
-				}	
-
-    	} 
-		else {
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[1],
+							magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6]));
+				}
+			}
+    	} else {
 			if (monster.getEntityRarity() == 1){
     			if (monster.getMonsterType() == MonsterType.SKELETON) {
     				monster.setMonsterResistanceAbility(random.nextInt(
@@ -468,8 +461,9 @@ public class Tools {
     	
     	return monster;
     }
-    
-    public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
+
+
+		public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
     	ArrayList<Monster> monsters = new ArrayList<>();
     	for (int index = 0; index < inputSize; index++) {
     		monsters.add(this.generateRandomMonster(inputPlayer));
@@ -484,5 +478,36 @@ public class Tools {
     public String generateRandomMonsterName() {
     	return magicNumbers.RANDOM_MONSTER_NAMES[random.nextInt(magicNumbers.RANDOM_MONSTER_NAMES.length)];
     }
+
+	public Monster generateRandomBattleMonster(MonsterType inputMonsterType) {
+		Monster monster;
+		try {
+			switch (inputMonsterType) {
+				case MUD_MONSTER:
+					monster = new MudMonster();
+					break;
+				case SAND_MONSTER:
+					monster = new SandMonster();
+					break;
+				case WATER_MONSTER:
+					monster = new WaterMonster();
+					break;
+				case SNOW_MONSTER:
+					monster = new SnowMonster();
+					break;
+				case GRASS_MONSTER:
+					monster = new GrassMonster();
+					break;
+				default:
+					throw new InvalidInputException("Unallowed monster");
+			}
+			monster.setMonsterAttackDamage(10);
+			monster.setMonsterResistanceAbility(10);
+			monster.resetMonsterHealthLevel();
+			monster.setEntityName("BossMonster");
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
