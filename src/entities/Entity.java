@@ -10,7 +10,7 @@ import exceptions.UnexpectedNegativeNumberException;
 
 /**
  * An Entity is something that can be owned, used and traded by the player.
- * This means items (food, weapons, potions, shield) AND monsters (Troll, Skeleton, Wither, Zombie)
+ * This means items (food, weapons, potions, shield) AND monsters (Dragon, Troll, Skeleton, Spirit, Zombie)
  * are all entities. The classes for items and monsters are extended from this class, Entity.
  * @see entities.monsters.Monster
  * @see entities.items.Item
@@ -31,6 +31,7 @@ public abstract class Entity {
     public MagicNumbers magicNumbers = new MagicNumbers();
 
     // LIBRARIES ------------------------------------------
+
 
     public String message;
 
