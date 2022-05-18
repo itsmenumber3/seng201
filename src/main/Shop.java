@@ -24,6 +24,16 @@ public class Shop implements Role {
     public RoleType getRoleType() {
         return RoleType.SHOP;
     }
+    
+    private String shopName;
+    
+    public void setShopName(String inputShopName) {
+    	this.shopName = inputShopName;
+    }
+    
+    public String getShopName() {
+    	return this.shopName;
+    }
 
     /**
      * The ArrayList shopRange contains a list of entities for sale on a particular day.

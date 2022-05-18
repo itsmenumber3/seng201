@@ -1,6 +1,7 @@
 package battles;
 
 import assets.enums.BattleType;
+import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 import main.Shop;
 
@@ -67,5 +68,16 @@ public class Battle {
 
     public int getBattleReward() {
         return this.battleReward;
+    }
+    
+    public Monster battleMonster;
+    
+    public void setBattleMonster(Monster inputMonster) {
+    	this.battleMonster = inputMonster;
+    }
+   
+    
+    public Monster getBattleMonster() {
+    	return this.battleMonster;
     }
 }

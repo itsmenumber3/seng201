@@ -61,7 +61,7 @@ public class ShopScreen {
 		
 		JLabel lblNauMaiWelcome = new JLabel("New World Kaitaia");
 		lblNauMaiWelcome.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
-		lblNauMaiWelcome.setBounds(31, 20, 261, 34);
+		lblNauMaiWelcome.setBounds(12, 20, 261, 34);
 		window.getContentPane().add(lblNauMaiWelcome);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -167,6 +167,13 @@ public class ShopScreen {
 		lblTipClickTo_1_3.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblTipClickTo_1_3.setBounds(12, 171, 420, 47);
 		panelBuyFood.add(lblTipClickTo_1_3);
+		
+		JButton btnPurchaseAndFeed_1 = new JButton("<html><div>Purchase and store in inventory</div></html>");
+		btnPurchaseAndFeed_1.setForeground(Color.WHITE);
+		btnPurchaseAndFeed_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btnPurchaseAndFeed_1.setBackground(Color.RED);
+		btnPurchaseAndFeed_1.setBounds(12, 278, 353, 31);
+		panelBuyFood.add(btnPurchaseAndFeed_1);
 		
 		JPanel panelBuyPotion = new JPanel();
 		tabbedPane.addTab("Cafe", null, panelBuyPotion, null);

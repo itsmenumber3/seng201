@@ -79,6 +79,12 @@ public class MapScreen {
 		});
 		
 		JButton btnMilesBeach = new JButton("90 Miles Beach");
+		btnMilesBeach.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				// gameEnvironment.getPlayer().setPlayerSelectedBattle();
+			}
+		});
 		btnMilesBeach.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnMilesBeach.setBackground(SystemColor.info);
 		btnMilesBeach.setBounds(358, 111, 119, 25);
@@ -109,7 +115,7 @@ public class MapScreen {
 		panelItem.setLayout(null);
 		panelItem.setOpaque(true);
 		panelItem.setBackground(new Color(0, 51, 153));
-		panelItem.setBounds(29, 39, 231, 219);
+		panelItem.setBounds(29, 39, 231, 255);
 		window.getContentPane().add(panelItem);
 		
 		JLabel lblNewLabel_1 = new JLabel("<html><div>" + "Your monsters are currently at " + "Wellington" + ". Please select your next battle location to travel to." + "</div></html>");
@@ -131,16 +137,24 @@ public class MapScreen {
 		lblDay.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
 		JButton btnFarewellSpit_1_1 = new JButton("Visit FreshChoice Takaka");
-		btnFarewellSpit_1_1.setBounds(12, 179, 207, 25);
+		btnFarewellSpit_1_1.setForeground(Color.WHITE);
+		btnFarewellSpit_1_1.setBounds(12, 189, 207, 25);
 		panelItem.add(btnFarewellSpit_1_1);
 		btnFarewellSpit_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnFarewellSpit_1_1.setBackground(SystemColor.info);
+		btnFarewellSpit_1_1.setBackground(Color.RED);
 		
 		JButton btnFarewellSpit_1 = new JButton("Randomly select next battle");
 		btnFarewellSpit_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnFarewellSpit_1.setBackground(SystemColor.info);
 		btnFarewellSpit_1.setBounds(12, 153, 207, 25);
 		panelItem.add(btnFarewellSpit_1);
+		
+		JButton btnFarewellSpit_1_1_1 = new JButton("My inventory");
+		btnFarewellSpit_1_1_1.setForeground(Color.WHITE);
+		btnFarewellSpit_1_1_1.setBounds(12, 216, 207, 25);
+		panelItem.add(btnFarewellSpit_1_1_1);
+		btnFarewellSpit_1_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnFarewellSpit_1_1_1.setBackground(new Color(0, 153, 51));
 		
 		JLabel lblMapCover = new JLabel("");
 		lblMapCover.setIcon(new ImageIcon(MapScreen.class.getResource("/assets/ui/img/CookMapResized.jpg")));
