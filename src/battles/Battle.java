@@ -18,7 +18,7 @@ public class Battle {
         this.battleType = inputBattleType;
     }
 
-    public BattleType getBattleType(BattleType inputBattleType) {
+    public BattleType getBattleType() {
         return this.battleType;
     }
     
@@ -46,28 +46,6 @@ public class Battle {
 
     public String getBattleName() {
         return this.battleName;
-    }
-
-
-
-    public String battleDescription;
-
-    public void setBattleDescription(String inputBattleDescription) {
-        this.battleDescription = inputBattleDescription;
-    }
-
-    public String getBattleDescription() {
-        return this.battleDescription;
-    }
-
-    public int battleReward;
-
-    public void setBattleReward(int inputBattleReward) {
-        this.battleReward = inputBattleReward;
-    }
-
-    public int getBattleReward() {
-        return this.battleReward;
     }
     
     public Monster battleMonster;

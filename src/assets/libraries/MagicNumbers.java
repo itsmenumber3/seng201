@@ -44,14 +44,14 @@ public class MagicNumbers {
      * More than this and it's illegal, so throw an InvalidInputException in that case.
      * @see exceptions.InvalidInputException
      */
-    public final int MAXIMUM_USER_DAYS = 10;
+    public final int MAXIMUM_USER_DAYS = 15;
 
     /**
      * This is the minimum number of days that the player can choose to play.
      * Less than this and it's illegal, so throw an InvalidInputException in that case.
      * @see exceptions.InvalidInputException
      */
-    public final int MINIMUM_USER_DAYS = 1;
+    public final int MINIMUM_USER_DAYS = 5;
 
     /**
      * This is the regex string that can be used to validate the player input when they name something, such as themselves or an entity.
@@ -69,7 +69,7 @@ public class MagicNumbers {
      * This is the starting gold value balance for the player in the game, or when the game restarts.
      * @see main.Player
      */
-    public final int RESET_GOLD_VALUE = 30;
+    public final int RESET_GOLD_VALUE = 50;
 
     /**
      * This is the starting number of points the player has, or when the game restarts.

@@ -143,7 +143,7 @@ public class InventoryScreen {
 		panelBuyFood.add(lblTipClickTo_1_3);
 		
 		JPanel panelBuyPotion = new JPanel();
-		tabbedPane.addTab("Cafe", null, panelBuyPotion, null);
+		tabbedPane.addTab("Potion Fridge", null, panelBuyPotion, null);
 		panelBuyPotion.setLayout(null);
 		
 		JLabel lblTipClickTo_1_1_2 = new JLabel("<html><div>Select a monster:</div></html>");
@@ -163,6 +163,18 @@ public class InventoryScreen {
 		JComboBox comboBox_1_1 = new JComboBox();
 		comboBox_1_1.setBounds(154, 79, 210, 24);
 		panelBuyPotion.add(comboBox_1_1);
+		
+		JButton btndrinkPotionNow = new JButton("<html><div>Drink potion now</div></html>");
+		btndrinkPotionNow.setForeground(Color.WHITE);
+		btndrinkPotionNow.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btndrinkPotionNow.setBackground(Color.RED);
+		btndrinkPotionNow.setBounds(12, 179, 353, 31);
+		panelBuyPotion.add(btndrinkPotionNow);
+		
+		JLabel lblTipClickTo_1_3_1 = new JLabel("<html><div>You're selecting Pasta. Pasta increases adds 10% to the monster's health. Pasta costs 20 coins. </div></html>");
+		lblTipClickTo_1_3_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblTipClickTo_1_3_1.setBounds(12, 115, 420, 47);
+		panelBuyPotion.add(lblTipClickTo_1_3_1);
 		
 		JLabel lblYourBalance_1_1_2 = new JLabel("0 gold coins");
 		lblYourBalance_1_1_2.setHorizontalAlignment(SwingConstants.TRAILING);

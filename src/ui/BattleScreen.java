@@ -8,7 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JPanel;
-
+import assets.libraries.Tools;
+import assets.libraries.UiTools;
 import main.GameEnvironment;
 
 import javax.swing.JButton;
@@ -19,7 +20,9 @@ public class BattleScreen {
 
 	private JFrame window;
 	private GameEnvironment gameEnvironment;
-	private final JLabel lblNewLabel = new JLabel("");
+	private Tools tools = new Tools();
+	private UiTools uiTools = new UiTools();
+	private final JLabel lblPhoto = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -75,31 +78,31 @@ public class BattleScreen {
 		panelItem.setBounds(0, 0, 434, 469);
 		window.getContentPane().add(panelItem);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("<html><div>Farewell Spit</div></html>");
-		lblNewLabel_1_1.setBounds(34, 26, 329, 77);
-		panelItem.add(lblNewLabel_1_1);
-		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
+		JLabel lblBattleName = new JLabel(String.format("<html><div>%s</div></html>", gameEnvironment.getPlayer().getPlayerSelectedBattle().getBattleName()));
+		lblBattleName.setBounds(34, 26, 329, 77);
+		panelItem.add(lblBattleName);
+		lblBattleName.setForeground(Color.WHITE);
+		lblBattleName.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
 		
-		JLabel lblNewLabel_1 = new JLabel("<html><div>Farewell Spit is home to Mud Monster, a dangerous monster that has taken many lives of tourists. Kill it, and you get rewarded with 1000 gold coins from the NZ Government, plus get to steal all of its stuff. Lose against it, and die at the hands of it and game is over. Are you ready?</div></html>");
-		lblNewLabel_1.setBounds(34, 89, 329, 213);
-		panelItem.add(lblNewLabel_1);
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
+		JLabel lblBattleDescription = new JLabel(String.format("<html><div>%s</div></html>", tools.makeBattleDescription(gameEnvironment.getPlayer().getPlayerSelectedBattle())));
+		lblBattleDescription.setBounds(34, 89, 329, 213);
+		panelItem.add(lblBattleDescription);
+		lblBattleDescription.setForeground(Color.WHITE);
+		lblBattleDescription.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		
-		JButton btnFarewellSpit_1_1 = new JButton("Travel to Farewell Spit");
+		JButton btnFarewellSpit_1_1 = new JButton(String.format("<html><div>Travel to %s</div></html>", gameEnvironment.getPlayer().getPlayerSelectedBattle().getBattleName()));
 		btnFarewellSpit_1_1.setBounds(34, 347, 364, 43);
 		panelItem.add(btnFarewellSpit_1_1);
 		btnFarewellSpit_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		btnFarewellSpit_1_1.setBackground(SystemColor.info);
 		
-		JButton btnFarewellSpit_1 = new JButton("Select another battle");
+		JButton btnFarewellSpit_1 = new JButton("Go back to Map");
 		btnFarewellSpit_1.setBounds(34, 402, 364, 25);
 		panelItem.add(btnFarewellSpit_1);
 		btnFarewellSpit_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnFarewellSpit_1.setBackground(SystemColor.info);
-		lblNewLabel.setIcon(new ImageIcon(BattleScreen.class.getResource("/assets/ui/img/NinetyMilesBeach.jpg")));
-		lblNewLabel.setBounds(239, 0, 499, 469);
-		window.getContentPane().add(lblNewLabel);
+		lblPhoto.setIcon(new ImageIcon(BattleScreen.class.getResource(uiTools.battleScreenImagePicker(gameEnvironment.getPlayer().getPlayerSelectedBattle()))));
+		lblPhoto.setBounds(239, 0, 499, 469);
+		window.getContentPane().add(lblPhoto);
 	}
 }

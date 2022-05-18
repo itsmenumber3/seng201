@@ -6,7 +6,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import assets.enums.BattleType;
 import assets.enums.MonsterType;
+import battles.Battle;
 import entities.monsters.battle_monsters.*;
 import entities.monsters.tradeable_monsters.Dragon;
 // Import the Exception classes
@@ -480,7 +482,8 @@ public class Tools {
     }
 
 	public Monster generateRandomBattleMonster(MonsterType inputMonsterType, Player inputPlayer) {
-		Monster monster;
+		Monster monster = new Monster();
+		
 		try {
 			switch (inputMonsterType) {
 				case MUD_MONSTER:
@@ -526,7 +529,18 @@ public class Tools {
 		} catch (InvalidInputException e) {
 			e.printStackTrace();
 		}
+		
+		monster.setEntitySellValue(random.nextInt(70, 100));
+		
 		return monster;
 	}
-
+	
+	public String makeBattleDescription(Battle inputBattle) {
+		String[] creativeMonstersDescriptionStrings = {"It is a dangerous monster that has taken the lives of many people.", 
+												"Many village residents have disappeared, and they suspect nothing else but this monster.", 
+												"Residents are fearful, and they need your help to conquer this monster."};
+		return String.format("%s is home to the monster %s. %s Kill it, and you get rewarded with %d gold coins. Lose it and game is over. The stakes are high. Are you ready?", 
+				inputBattle.getBattleName(), inputBattle.getBattleMonster().getEntityName(), creativeMonstersDescriptionStrings[random.nextInt(0, creativeMonstersDescriptionStrings.length)], 
+				inputBattle.getBattleMonster().getEntitySellValue());
+	}
 }

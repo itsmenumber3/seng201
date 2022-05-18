@@ -6,6 +6,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.html.HTML;
 
+import assets.enums.MonsterType;
+import assets.libraries.Tools;
+import battles.Battle;
+import battles.CanterburyWetlands;
+import battles.LakeTaupo;
+import battles.MountCook;
+import battles.NinetyMilesBeach;
+import battles.SouthlandFarm;
+import entities.monsters.battle_monsters.MudMonster;
 import main.GameEnvironment;
 
 import java.awt.BorderLayout;
@@ -23,6 +32,7 @@ public class MapScreen {
 
 	private JFrame window;
 	private GameEnvironment gameEnvironment;
+	private Tools tools = new Tools();
 
 	/**
 	 * Launch the application.
@@ -67,22 +77,28 @@ public class MapScreen {
 	private void initialize() {
 		window = new JFrame();
 		window.setTitle("Battles");
-		window.setBounds(100, 100, 592, 744);
+		window.setBounds(100, 100, 592, 750);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Mt Cook");
-		btnNewButton.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnMtCook = new JButton("Mt Cook");
+		btnMtCook.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnMtCook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Battle battle = new MountCook();
+				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				finishedWindow();
 			}
 		});
 		
 		JButton btnMilesBeach = new JButton("90 Miles Beach");
 		btnMilesBeach.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				// gameEnvironment.getPlayer().setPlayerSelectedBattle();
+				Battle battle = new NinetyMilesBeach();
+				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				finishedWindow();
 			}
 		});
 		btnMilesBeach.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
@@ -91,25 +107,56 @@ public class MapScreen {
 		window.getContentPane().add(btnMilesBeach);
 		
 		JButton btnLakeTaupo = new JButton("Lake Taupo");
+		btnLakeTaupo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Battle battle = new LakeTaupo();
+				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				finishedWindow();
+			}
+		});
 		btnLakeTaupo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnLakeTaupo.setBackground(SystemColor.info);
 		btnLakeTaupo.setBounds(413, 248, 106, 25);
 		window.getContentPane().add(btnLakeTaupo);
 		
-		JButton btnFarewellSpit = new JButton("<html><div>Canterbury Wetlands</div></html>");
-		btnFarewellSpit.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnFarewellSpit.setBackground(SystemColor.info);
-		btnFarewellSpit.setBounds(333, 401, 97, 42);
-		window.getContentPane().add(btnFarewellSpit);
-		btnNewButton.setBackground(SystemColor.info);
-		btnNewButton.setBounds(130, 457, 97, 25);
-		window.getContentPane().add(btnNewButton);
+		JButton btnCanterburyWetlands = new JButton("<html><div>Canterbury Wetlands</div></html>");
+		btnCanterburyWetlands.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Battle battle = new CanterburyWetlands();
+				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.MUD_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				finishedWindow();
+			}
+		});
+		btnCanterburyWetlands.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnCanterburyWetlands.setBackground(SystemColor.info);
+		btnCanterburyWetlands.setBounds(333, 401, 97, 42);
+		window.getContentPane().add(btnCanterburyWetlands);
+		btnMtCook.setBackground(SystemColor.info);
+		btnMtCook.setBounds(130, 457, 97, 25);
+		window.getContentPane().add(btnMtCook);
 		
 		JButton btnSouthlandFarm = new JButton("Southland Farm");
+		btnSouthlandFarm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Battle battle = new SouthlandFarm();
+				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.GRASS_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				finishedWindow();
+			}
+		});
 		btnSouthlandFarm.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnSouthlandFarm.setBackground(SystemColor.info);
 		btnSouthlandFarm.setBounds(163, 574, 126, 25);
 		window.getContentPane().add(btnSouthlandFarm);
+		
+		JButton btnFarewellSpit_1_1_2 = new JButton("End Game");
+		btnFarewellSpit_1_1_2.setBounds(458, 665, 97, 25);
+		window.getContentPane().add(btnFarewellSpit_1_1_2);
+		btnFarewellSpit_1_1_2.setForeground(Color.WHITE);
+		btnFarewellSpit_1_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnFarewellSpit_1_1_2.setBackground(Color.RED);
 		
 		JPanel panelItem = new JPanel();
 		panelItem.setLayout(null);
