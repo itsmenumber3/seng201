@@ -8,12 +8,16 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JPanel;
+
+import main.GameEnvironment;
+
 import javax.swing.JButton;
 import java.awt.SystemColor;
 
 public class BattleScreen {
 
-	private JFrame frmBattle;
+	private JFrame window;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
@@ -23,12 +27,26 @@ public class BattleScreen {
 			public void run() {
 				try {
 					BattleScreen window = new BattleScreen();
-					window.frmBattle.setVisible(true);
+					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+	
+	public BattleScreen(GameEnvironment inputGameEnvironment) {
+		this.gameEnvironment = inputGameEnvironment;
+		initialize();
+		window.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		window.dispose();
+	}
+	
+	public void finishedWindow() {
+		gameEnvironment.closeBattleScreen(this);
 	}
 
 	/**
@@ -42,18 +60,18 @@ public class BattleScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmBattle = new JFrame();
-		frmBattle.setTitle("Battle");
-		frmBattle.setBounds(100, 100, 750, 500);
-		frmBattle.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmBattle.getContentPane().setLayout(null);
+		window = new JFrame();
+		window.setTitle("Battle");
+		window.setBounds(100, 100, 750, 500);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.getContentPane().setLayout(null);
 		
 		JPanel panelItem = new JPanel();
 		panelItem.setLayout(null);
 		panelItem.setOpaque(true);
 		panelItem.setBackground(new Color(0, 51, 153));
 		panelItem.setBounds(0, 0, 434, 469);
-		frmBattle.getContentPane().add(panelItem);
+		window.getContentPane().add(panelItem);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("<html><div>Farewell Spit</div></html>");
 		lblNewLabel_1_1.setBounds(34, 26, 329, 77);

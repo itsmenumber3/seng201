@@ -6,7 +6,9 @@ import assets.enums.MonsterType;
 import assets.libraries.Tools;
 import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
+import ui.BattleScreen;
 import ui.FirstMonsterSetupScreen;
+import ui.MapScreen;
 import ui.PlayerSetupScreen;
 import ui.WelcomeScreen;
 
@@ -55,6 +57,23 @@ public class GameEnvironment {
     
     public void closeFirstMonsterSetupScreen(FirstMonsterSetupScreen firstMonsterSetupWindow) {
     	firstMonsterSetupWindow.closeWindow();
+    }
+    
+    public void launchMapScreen() {
+    	MapScreen mapWindow = new MapScreen(this);
+    }
+    
+    public void closeMapScreen(MapScreen inputMapWindow) {
+    	inputMapWindow.closeWindow();
+    	this.launchBattleScreen();
+    }
+    
+    public void launchBattleScreen() {
+    	BattleScreen battleWindow = new BattleScreen(this);
+    }
+    
+    public void closeBattleScreen(BattleScreen inputBattleWindow) {
+    	inputBattleWindow.closeWindow();
     }
 
     public static void main(String[] args) {

@@ -49,7 +49,7 @@ public class MapScreen {
 	private void initialize() {
 		frmBattles = new JFrame();
 		frmBattles.setTitle("Battles");
-		frmBattles.setBounds(100, 100, 592, 720);
+		frmBattles.setBounds(100, 100, 592, 744);
 		frmBattles.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmBattles.getContentPane().setLayout(null);
 		
@@ -78,7 +78,7 @@ public class MapScreen {
 		btnFarewellSpit.setBounds(333, 401, 97, 42);
 		frmBattles.getContentPane().add(btnFarewellSpit);
 		btnNewButton.setBackground(SystemColor.info);
-		btnNewButton.setBounds(127, 445, 97, 25);
+		btnNewButton.setBounds(130, 457, 97, 25);
 		frmBattles.getContentPane().add(btnNewButton);
 		
 		JButton btnSouthlandFarm = new JButton("Southland Farm");
@@ -126,7 +126,7 @@ public class MapScreen {
 		
 		JLabel lblMapCover = new JLabel("");
 		lblMapCover.setIcon(new ImageIcon(MapScreen.class.getResource("/assets/ui/img/CookMapResized.jpg")));
-		lblMapCover.setBounds(0, 0, 590, 689);
+		lblMapCover.setBounds(0, 0, 590, 720);
 		frmBattles.getContentPane().add(lblMapCover);
 	}
 }

@@ -94,7 +94,7 @@ public class WelcomeScreen {
 		btnHowToPlay.setBounds(591, 417, 120, 34);
 		window.getContentPane().add(btnHowToPlay);
 		
-		JLabel lblTheNewZealand = new JLabel("THE NEW ZEALAND EDITION");
+		JLabel lblTheNewZealand = new JLabel("THE KIWI EDITION");
 		lblTheNewZealand.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTheNewZealand.setForeground(Color.WHITE);
 		lblTheNewZealand.setFont(new Font("Century Schoolbook L", Font.PLAIN, 30));

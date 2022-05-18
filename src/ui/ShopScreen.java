@@ -12,10 +12,19 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
+import java.awt.SystemColor;
+import javax.swing.JMenu;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
 
 public class ShopScreen {
 
-	private JFrame frmTheShop;
+	private JFrame window;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -25,7 +34,7 @@ public class ShopScreen {
 			public void run() {
 				try {
 					ShopScreen window = new ShopScreen();
-					window.frmTheShop.setVisible(true);
+					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,94 +53,178 @@ public class ShopScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmTheShop = new JFrame();
-		frmTheShop.setTitle("The Shop");
-		frmTheShop.setBounds(100, 100, 750, 500);
-		frmTheShop.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmTheShop.getContentPane().setLayout(null);
+		window = new JFrame();
+		window.setTitle("New World Kaitaia");
+		window.setBounds(100, 100, 750, 500);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.getContentPane().setLayout(null);
 		
 		JLabel lblNauMaiWelcome = new JLabel("New World Kaitaia");
-		lblNauMaiWelcome.setFont(new Font("Dialog", Font.BOLD, 24));
-		lblNauMaiWelcome.setBounds(31, 20, 458, 37);
-		frmTheShop.getContentPane().add(lblNauMaiWelcome);
-		
-		JLabel lblTodaysRange = new JLabel("Today's monster range");
-		lblTodaysRange.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblTodaysRange.setBounds(31, 64, 273, 30);
-		frmTheShop.getContentPane().add(lblTodaysRange);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(31, 96, 165, 73);
-		frmTheShop.getContentPane().add(btnNewButton);
-		
-		JButton btnTradeInYour = new JButton("Trade in monster");
-		btnTradeInYour.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnTradeInYour.setBounds(154, 381, 196, 30);
-		frmTheShop.getContentPane().add(btnTradeInYour);
-		
-		JButton btnVisitTheShops = new JButton("Buy food / potion");
-		btnVisitTheShops.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnVisitTheShops.setBounds(154, 415, 196, 30);
-		frmTheShop.getContentPane().add(btnVisitTheShops);
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(206, 96, 165, 73);
-		frmTheShop.getContentPane().add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(31, 181, 165, 73);
-		frmTheShop.getContentPane().add(btnNewButton_2);
-		
-		JButton btnNewButton_2_1 = new JButton("New button");
-		btnNewButton_2_1.setBounds(206, 181, 165, 73);
-		frmTheShop.getContentPane().add(btnNewButton_2_1);
-		
-		JButton btnNewButton_2_1_1 = new JButton("New button");
-		btnNewButton_2_1_1.setBounds(31, 266, 165, 73);
-		frmTheShop.getContentPane().add(btnNewButton_2_1_1);
-		
-		JButton btnNewButton_2_1_1_1 = new JButton("New button");
-		btnNewButton_2_1_1_1.setBounds(206, 266, 165, 73);
-		frmTheShop.getContentPane().add(btnNewButton_2_1_1_1);
-		
-		JButton btnTopUpWeapon = new JButton("Top up weapon");
-		btnTopUpWeapon.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnTopUpWeapon.setBounds(357, 381, 196, 30);
-		frmTheShop.getContentPane().add(btnTopUpWeapon);
+		lblNauMaiWelcome.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
+		lblNauMaiWelcome.setBounds(31, 20, 261, 34);
+		window.getContentPane().add(lblNauMaiWelcome);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(-30, 172, 778, 443);
-		frmTheShop.getContentPane().add(tabbedPane);
+		tabbedPane.setBounds(12, 69, 724, 388);
+		window.getContentPane().add(tabbedPane);
 		
-		JButton btnViewInventory = new JButton("View inventory");
-		btnViewInventory.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnViewInventory.setBounds(357, 415, 196, 30);
-		frmTheShop.getContentPane().add(btnViewInventory);
+		JPanel panelPurchaseMonster = new JPanel();
+		tabbedPane.addTab("Buy Monster", null, panelPurchaseMonster, "");
+		tabbedPane.setEnabledAt(0, true);
+		tabbedPane.setBackgroundAt(0, Color.WHITE);
+		panelPurchaseMonster.setLayout(null);
 		
-		JButton btnReturnToDashboard = new JButton("Dashboard");
-		btnReturnToDashboard.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnReturnToDashboard.setBounds(562, 381, 135, 64);
-		frmTheShop.getContentPane().add(btnReturnToDashboard);
+		JButton btnPurchaseThisMonster = new JButton("Purchase this monster");
+		btnPurchaseThisMonster.setForeground(Color.WHITE);
+		btnPurchaseThisMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btnPurchaseThisMonster.setBackground(Color.RED);
+		btnPurchaseThisMonster.setBounds(508, 320, 199, 29);
+		panelPurchaseMonster.add(btnPurchaseThisMonster);
 		
-		JPanel panelBackground = new JPanel();
-		panelBackground.setLayout(null);
-		panelBackground.setBackground(Color.WHITE);
-		panelBackground.setBounds(0, 356, 748, 113);
-		frmTheShop.getContentPane().add(panelBackground);
+		JButton btnTradeInMonster = new JButton("Monster 1");
+		btnTradeInMonster.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnTradeInMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnTradeInMonster.setBackground(SystemColor.info);
+		btnTradeInMonster.setBounds(12, 224, 111, 25);
+		panelPurchaseMonster.add(btnTradeInMonster);
 		
-		JLabel lblActions = new JLabel("Actions");
-		lblActions.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblActions.setBounds(32, 25, 106, 22);
-		panelBackground.add(lblActions);
+		JButton btnTradeInMonster_1 = new JButton("Monster 1");
+		btnTradeInMonster_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnTradeInMonster_1.setBackground(SystemColor.info);
+		btnTradeInMonster_1.setBounds(155, 224, 111, 25);
+		panelPurchaseMonster.add(btnTradeInMonster_1);
 		
-		JLabel lblYourBalance_1_1_1_1 = new JLabel("0 points");
-		lblYourBalance_1_1_1_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblYourBalance_1_1_1_1.setBounds(32, 68, 101, 15);
-		panelBackground.add(lblYourBalance_1_1_1_1);
+		JButton btnTradeInMonster_1_1 = new JButton("Monster 1");
+		btnTradeInMonster_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnTradeInMonster_1_1.setBackground(SystemColor.info);
+		btnTradeInMonster_1_1.setBounds(299, 224, 111, 25);
+		panelPurchaseMonster.add(btnTradeInMonster_1_1);
 		
-		JLabel lblYourBalance_1_1_2 = new JLabel("0 golds");
-		lblYourBalance_1_1_2.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblYourBalance_1_1_2.setBounds(32, 53, 101, 15);
-		panelBackground.add(lblYourBalance_1_1_2);
+		JButton btnTradeInMonster_1_1_1 = new JButton("Monster 1");
+		btnTradeInMonster_1_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnTradeInMonster_1_1_1.setBackground(SystemColor.info);
+		btnTradeInMonster_1_1_1.setBounds(446, 224, 111, 25);
+		panelPurchaseMonster.add(btnTradeInMonster_1_1_1);
+		
+		JButton btnTradeInMonster_1_1_1_1 = new JButton("Monster 1");
+		btnTradeInMonster_1_1_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnTradeInMonster_1_1_1_1.setBackground(SystemColor.info);
+		btnTradeInMonster_1_1_1_1.setBounds(596, 224, 111, 25);
+		panelPurchaseMonster.add(btnTradeInMonster_1_1_1_1);
+		
+		JLabel lblYourCurrentSelection = new JLabel("Your current selection:");
+		lblYourCurrentSelection.setBounds(12, 275, 451, 15);
+		panelPurchaseMonster.add(lblYourCurrentSelection);
+		
+		JLabel lblTipClickTo = new JLabel("Tip: click to view properties, then press Purchase this monster.");
+		lblTipClickTo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		lblTipClickTo.setBounds(12, 334, 451, 15);
+		panelPurchaseMonster.add(lblTipClickTo);
+		
+		JPanel panelBuyFood = new JPanel();
+		tabbedPane.addTab("Delicatessen", null, panelBuyFood, null);
+		panelBuyFood.setLayout(null);
+		
+		JLabel lblTipClickTo_1 = new JLabel("<html><div>Welcome to New World Kaitaia's Service Deli. Please select a monster you would like to feed, then select the food you would like to buy.</div></html>");
+		lblTipClickTo_1.setBounds(12, 12, 352, 58);
+		lblTipClickTo_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		panelBuyFood.add(lblTipClickTo_1);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(154, 93, 210, 24);
+		panelBuyFood.add(comboBox);
+		
+		JLabel lblTipClickTo_1_1 = new JLabel("<html><div>Select a monster:</div></html>");
+		lblTipClickTo_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblTipClickTo_1_1.setBounds(12, 82, 124, 47);
+		panelBuyFood.add(lblTipClickTo_1_1);
+		
+		JLabel lblTipClickTo_1_1_1 = new JLabel("<html><div>Select food:</div></html>");
+		lblTipClickTo_1_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblTipClickTo_1_1_1.setBounds(12, 117, 124, 47);
+		panelBuyFood.add(lblTipClickTo_1_1_1);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(154, 128, 210, 24);
+		panelBuyFood.add(comboBox_1);
+		
+		JButton btnPurchaseAndFeed = new JButton("<html><div>Purchase and feed monster</div></html>");
+		btnPurchaseAndFeed.setForeground(Color.WHITE);
+		btnPurchaseAndFeed.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btnPurchaseAndFeed.setBackground(Color.RED);
+		btnPurchaseAndFeed.setBounds(12, 235, 353, 31);
+		panelBuyFood.add(btnPurchaseAndFeed);
+		
+		JLabel lblTipClickTo_1_3 = new JLabel("<html><div>You're selecting Pasta. Pasta increases adds 10% to the monster's health. Pasta costs 20 coins. </div></html>");
+		lblTipClickTo_1_3.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblTipClickTo_1_3.setBounds(12, 171, 420, 47);
+		panelBuyFood.add(lblTipClickTo_1_3);
+		
+		JPanel panelBuyPotion = new JPanel();
+		tabbedPane.addTab("Cafe", null, panelBuyPotion, null);
+		
+		JPanel panelTradeInMonster = new JPanel();
+		tabbedPane.addTab("Trade In Monster", null, panelTradeInMonster, null);
+		panelTradeInMonster.setLayout(null);
+		
+		JLabel lblTipClickTo_1_4 = new JLabel("<html><div>New World Kaitaia would like to buy these monsters from you, for these listed prices.</div></html>");
+		lblTipClickTo_1_4.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
+		lblTipClickTo_1_4.setBounds(12, 24, 352, 114);
+		panelTradeInMonster.add(lblTipClickTo_1_4);
+		
+		JPanel panelLottoCounter = new JPanel();
+		tabbedPane.addTab("Lotto Counter", null, panelLottoCounter, null);
+		panelLottoCounter.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/LottoLogo.png")));
+		lblNewLabel.setBounds(12, 12, 376, 168);
+		panelLottoCounter.add(lblNewLabel);
+		
+		JButton btnPurchaseTicket = new JButton("Purchase ticket");
+		btnPurchaseTicket.setForeground(Color.WHITE);
+		btnPurchaseTicket.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btnPurchaseTicket.setBackground(Color.RED);
+		btnPurchaseTicket.setBounds(402, 268, 167, 33);
+		panelLottoCounter.add(btnPurchaseTicket);
+		
+		JLabel lblTipClickTo_1_2 = new JLabel("<html><div>Welcome to Lotto NZ. Please play responsibly. Each ticket costs 30 coins, and you can select your own number from 0 to 10 inclusive. Results will be available overnight and notified to you.</div></html>");
+		lblTipClickTo_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblTipClickTo_1_2.setBounds(12, 192, 468, 64);
+		panelLottoCounter.add(lblTipClickTo_1_2);
+		
+		textField = new JTextField();
+		textField.setForeground(Color.BLACK);
+		textField.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
+		textField.setColumns(10);
+		textField.setBackground(Color.YELLOW);
+		textField.setBounds(253, 268, 137, 33);
+		panelLottoCounter.add(textField);
+		
+		JLabel lblTipClickTo_1_2_1 = new JLabel("<html><div>Enter a number between 0 and 10: </div></html>");
+		lblTipClickTo_1_2_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblTipClickTo_1_2_1.setBounds(12, 253, 468, 64);
+		panelLottoCounter.add(lblTipClickTo_1_2_1);
+		
+		JLabel lblYourBalance_1_1_2 = new JLabel("0 gold coins");
+		lblYourBalance_1_1_2.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblYourBalance_1_1_2.setBounds(341, 28, 101, 25);
+		window.getContentPane().add(lblYourBalance_1_1_2);
+		lblYourBalance_1_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		
+		JButton btnReturnToDashboard = new JButton("Return to Map");
+		btnReturnToDashboard.setBackground(SystemColor.info);
+		btnReturnToDashboard.setBounds(600, 28, 136, 25);
+		window.getContentPane().add(btnReturnToDashboard);
+		btnReturnToDashboard.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		
+		JButton btnInventory = new JButton("Inventory");
+		btnInventory.setBackground(SystemColor.info);
+		btnInventory.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnInventory.setBounds(487, 28, 101, 25);
+		window.getContentPane().add(btnInventory);
 	}
 }

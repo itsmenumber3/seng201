@@ -3,12 +3,14 @@ package main;
 import assets.enums.RoleType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
+import battles.Battle;
 import entities.Entity;
 import entities.monsters.Monster;
 import exceptions.InsufficientPlayerGoldBalanceException;
 import exceptions.InvalidInputException;
 import exceptions.UnallowedMethodException;
 import exceptions.UnexpectedNegativeNumberException;
+import ui.BattleScreen;
 
 import java.util.ArrayList;
 
@@ -380,4 +382,15 @@ public class Player implements Role {
     }
 
     // INVENTORY ----------------------------------------------------
+    
+    
+    private Battle playerSelectedBattle;
+    
+    public void setPlayerSelectedBattle(Battle inputPlayerSelectedBattle) {
+    	this.playerSelectedBattle = inputPlayerSelectedBattle;
+    }
+    
+    public Battle getPlayerSelectedBattle() {
+    	return this.playerSelectedBattle;
+    }
 }
