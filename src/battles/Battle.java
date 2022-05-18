@@ -6,6 +6,23 @@ import main.Shop;
 
 public class Battle {
 
+	// BATTLE TYPE ----------------------------------------------
+	
+	/**
+	 * BattleType can be either
+	 */
+    public BattleType battleType;
+
+    public void setBattleType(BattleType inputBattleType) {
+        this.battleType = inputBattleType;
+    }
+
+    public BattleType getBattleType(BattleType inputBattleType) {
+        return this.battleType;
+    }
+    
+ // BATTLE TYPE ----------------------------------------------
+
     public Shop battleShop = new Shop();
 
     public void setBattleShop(Shop inputShop) {
@@ -30,15 +47,7 @@ public class Battle {
         return this.battleName;
     }
 
-    public BattleType battleType;
 
-    public void setBattleType(BattleType inputBattleType) {
-        this.battleType = inputBattleType;
-    }
-
-    public BattleType getBattleType(BattleType inputBattleType) {
-        return this.battleType;
-    }
 
     public String battleDescription;
 

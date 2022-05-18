@@ -6,6 +6,4 @@ public class Potion extends Consumable {
     public Potion() {
         super();
     }
-
-
 }
