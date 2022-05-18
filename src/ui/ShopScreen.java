@@ -11,6 +11,7 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JPanel;
 import java.awt.Color;
+import javax.swing.JTabbedPane;
 
 public class ShopScreen {
 
@@ -49,14 +50,14 @@ public class ShopScreen {
 		frmTheShop.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTheShop.getContentPane().setLayout(null);
 		
-		JLabel lblNauMaiWelcome = new JLabel("Nau mai ki a The Shop");
+		JLabel lblNauMaiWelcome = new JLabel("New World Kaitaia");
 		lblNauMaiWelcome.setFont(new Font("Dialog", Font.BOLD, 24));
 		lblNauMaiWelcome.setBounds(31, 20, 458, 37);
 		frmTheShop.getContentPane().add(lblNauMaiWelcome);
 		
 		JLabel lblTodaysRange = new JLabel("Today's monster range");
 		lblTodaysRange.setFont(new Font("Dialog", Font.BOLD, 18));
-		lblTodaysRange.setBounds(31, 56, 273, 30);
+		lblTodaysRange.setBounds(31, 64, 273, 30);
 		frmTheShop.getContentPane().add(lblTodaysRange);
 		
 		JButton btnNewButton = new JButton("New button");
@@ -93,24 +94,14 @@ public class ShopScreen {
 		btnNewButton_2_1_1_1.setBounds(206, 266, 165, 73);
 		frmTheShop.getContentPane().add(btnNewButton_2_1_1_1);
 		
-		JButton btnNewButton_2_1_1_1_1 = new JButton("Confirm purchase");
-		btnNewButton_2_1_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		btnNewButton_2_1_1_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton_2_1_1_1_1.setBounds(411, 302, 273, 25);
-		frmTheShop.getContentPane().add(btnNewButton_2_1_1_1_1);
-		
-		JTextPane txtpnSdsds = new JTextPane();
-		txtpnSdsds.setText("Please select a monster to view information. After that, click Confirm Purchase to name the monster.");
-		txtpnSdsds.setBounds(394, 82, 303, 257);
-		frmTheShop.getContentPane().add(txtpnSdsds);
-		
 		JButton btnTopUpWeapon = new JButton("Top up weapon");
 		btnTopUpWeapon.setFont(new Font("Dialog", Font.PLAIN, 12));
 		btnTopUpWeapon.setBounds(357, 381, 196, 30);
 		frmTheShop.getContentPane().add(btnTopUpWeapon);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(-30, 172, 778, 443);
+		frmTheShop.getContentPane().add(tabbedPane);
 		
 		JButton btnViewInventory = new JButton("View inventory");
 		btnViewInventory.setFont(new Font("Dialog", Font.PLAIN, 12));

@@ -156,6 +156,10 @@ public class FirstMonsterSetupScreen {
 		window.getContentPane().add(panelBackground);
 		
 		JButton btnConfirmMonsterChoice = new JButton("Next");
+		btnConfirmMonsterChoice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnConfirmMonsterChoice.setBounds(599, 418, 109, 37);
 		panelBackground.add(btnConfirmMonsterChoice);
 		

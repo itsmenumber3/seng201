@@ -109,7 +109,7 @@ public class Tools {
     	}
     	
     	
-    	// Third step is to randomize its attack damage.
+    	// Third step is to randomize its attack damage and its resistance ability
     	if (inputPlayer.getPlayerDifficulty() == 1) {
     		if (monster.getMonsterType() == MonsterType.SKELETON) {
     			monster.setMonsterResistanceAbility(random.nextInt(8, 14));

@@ -55,7 +55,6 @@ public class GameEnvironment {
     
     public void closeFirstMonsterSetupScreen(FirstMonsterSetupScreen firstMonsterSetupWindow) {
     	firstMonsterSetupWindow.closeWindow();
-
     }
 
     public static void main(String[] args) {

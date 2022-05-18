@@ -22,6 +22,7 @@ import javax.swing.event.ChangeListener;
 import assets.libraries.Tools;
 
 import javax.swing.event.ChangeEvent;
+import java.awt.SystemColor;
 
 public class PlayerSetupScreen {
 
@@ -79,30 +80,30 @@ public class PlayerSetupScreen {
 		window.getContentPane().setLayout(null);
 		
 		JLabel lblConfigurations = new JLabel("Setup");
-		lblConfigurations.setFont(new Font("Dialog", Font.BOLD, 24));
+		lblConfigurations.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
 		lblConfigurations.setBounds(51, 31, 279, 37);
 		window.getContentPane().add(lblConfigurations);
 		
 		JLabel lblName = new JLabel("Player's name");
-		lblName.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblName.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		lblName.setBounds(51, 93, 127, 20);
 		window.getContentPane().add(lblName);
 		
 		playerNameTextField = new JTextField();
 		playerNameTextField.setForeground(Color.BLACK);
-		playerNameTextField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		playerNameTextField.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		playerNameTextField.setColumns(10);
-		playerNameTextField.setBackground(new Color(230, 230, 250));
+		playerNameTextField.setBackground(new Color(255, 255, 0));
 		playerNameTextField.setBounds(51, 127, 279, 33);
 		window.getContentPane().add(playerNameTextField);
 		
 		JLabel lblDifficulty = new JLabel("Difficulty");
-		lblDifficulty.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblDifficulty.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		lblDifficulty.setBounds(51, 189, 88, 31);
 		window.getContentPane().add(lblDifficulty);
 		
 		JLabel lblNumberOfDays = new JLabel("Number of Days");
-		lblNumberOfDays.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblNumberOfDays.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		lblNumberOfDays.setBounds(51, 251, 152, 31);
 		window.getContentPane().add(lblNumberOfDays);
 		
@@ -122,21 +123,12 @@ public class PlayerSetupScreen {
 		sliderNumberofDays.setMaximum(15);
 		sliderNumberofDays.setMajorTickSpacing(1);
 		sliderNumberofDays.setForeground(Color.BLACK);
-		sliderNumberofDays.setFont(new Font("Dialog", Font.PLAIN, 14));
+		sliderNumberofDays.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		sliderNumberofDays.setBounds(51, 294, 279, 50);
 		window.getContentPane().add(sliderNumberofDays);
 		
-		JLabel lblPhotoCover = new JLabel("");
-		lblPhotoCover.setIcon(new ImageIcon(PlayerSetupScreen.class.getResource("/assets/ui/img/SetupScreen.jpg")));
-		lblPhotoCover.setBounds(384, -15, 382, 569);
-		window.getContentPane().add(lblPhotoCover);
-		
-		JLabel lblNoOfMembersDynamic = new JLabel("4");
-		lblNoOfMembersDynamic.setBounds(253, 357, 78, 31);
-		lblNoOfMembersDynamic.setFont(new Font("Dialog", Font.PLAIN, 18));
-		window.getContentPane().add(lblNoOfMembersDynamic);
-		
 		JSlider sliderDifficulty = new JSlider();
+		sliderDifficulty.setBackground(Color.GRAY);
 		sliderDifficulty.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
 				int numberOfMembers = tools.howManyMonstersBasedOnDifficulty(sliderDifficulty.getValue());
@@ -153,25 +145,32 @@ public class PlayerSetupScreen {
 		sliderDifficulty.setMaximum(3);
 		sliderDifficulty.setMajorTickSpacing(1);
 		sliderDifficulty.setForeground(Color.BLACK);
-		sliderDifficulty.setFont(new Font("Dialog", Font.PLAIN, 14));
+		sliderDifficulty.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		sliderDifficulty.setBounds(156, 189, 174, 50);
 		window.getContentPane().add(sliderDifficulty);
-		
-		JButton btnNext = new JButton("Next");
-		btnNext.setBounds(51, 399, 279, 39);
-		window.getContentPane().add(btnNext);
 		
 		JLabel lblNoOfMembers = new JLabel("Max No of Monsters:");
 		lblNoOfMembers.setBounds(51, 357, 200, 31);
 		
-		lblNoOfMembers.setFont(new Font("Dialog", Font.PLAIN, 18));
+		lblNoOfMembers.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		window.getContentPane().add(lblNoOfMembers);
 		
 		JPanel panelBackground = new JPanel();
 		panelBackground.setLayout(null);
 		panelBackground.setBackground(Color.WHITE);
-		panelBackground.setBounds(0, 0, 440, 469);
+		panelBackground.setBounds(0, 0, 748, 469);
 		window.getContentPane().add(panelBackground);
+		
+		JButton btnNext = new JButton("Next");
+		btnNext.setBounds(234, 357, 96, 61);
+		panelBackground.add(btnNext);
+		btnNext.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
+		btnNext.setBackground(SystemColor.info);
+		
+		JLabel lblNoOfMembersDynamic = new JLabel("4");
+		lblNoOfMembersDynamic.setBounds(51, 387, 78, 31);
+		panelBackground.add(lblNoOfMembersDynamic);
+		lblNoOfMembersDynamic.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

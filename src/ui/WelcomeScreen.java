@@ -15,6 +15,7 @@ import java.awt.Color;
 import javax.swing.UIManager;
 
 import main.GameEnvironment;
+import java.awt.SystemColor;
 
 public class WelcomeScreen {
 
@@ -68,14 +69,16 @@ public class WelcomeScreen {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
 		
-		JLabel lblMonsterFighter = new JLabel("MONSTER FIGHTER");
+		JLabel lblMonsterFighter = new JLabel("<html><div><center>Monster Fighter</center></div></html>");
+		lblMonsterFighter.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonsterFighter.setForeground(Color.WHITE);
-		lblMonsterFighter.setFont(new Font("Dialog", Font.BOLD, 36));
-		lblMonsterFighter.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblMonsterFighter.setBounds(32, 12, 580, 67);
+		lblMonsterFighter.setFont(new Font("Century Schoolbook L", Font.BOLD, 56));
+		lblMonsterFighter.setBounds(0, 58, 748, 67);
 		window.getContentPane().add(lblMonsterFighter);
 		
-		JButton btnStartGame = new JButton("Start Game");
+		JButton btnStartGame = new JButton("Start your adventure");
+		btnStartGame.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
+		btnStartGame.setBackground(SystemColor.info);
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				finishedWindow();
@@ -84,8 +87,23 @@ public class WelcomeScreen {
 		btnStartGame.setBounds(32, 417, 547, 34);
 		window.getContentPane().add(btnStartGame);
 		
-		JButton btnHowToPlay = new JButton("How To Play");
+		JButton btnHowToPlay = new JButton("FAQ");
+		btnHowToPlay.setForeground(Color.WHITE);
+		btnHowToPlay.setBackground(Color.RED);
+		btnHowToPlay.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
 		btnHowToPlay.setBounds(591, 417, 120, 34);
 		window.getContentPane().add(btnHowToPlay);
+		
+		JLabel lblTheNewZealand = new JLabel("THE NEW ZEALAND EDITION");
+		lblTheNewZealand.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTheNewZealand.setForeground(Color.WHITE);
+		lblTheNewZealand.setFont(new Font("Century Schoolbook L", Font.PLAIN, 30));
+		lblTheNewZealand.setBounds(0, 117, 748, 67);
+		window.getContentPane().add(lblTheNewZealand);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(WelcomeScreen.class.getResource("/assets/ui/img/WelcomeScreenNewResized.jpg")));
+		label.setBounds(0, 0, 748, 469);
+		window.getContentPane().add(label);
 	}
 }
