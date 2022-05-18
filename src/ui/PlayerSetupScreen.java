@@ -162,7 +162,7 @@ public class PlayerSetupScreen {
 		window.getContentPane().add(panelBackground);
 		
 		JButton btnNext = new JButton("Next");
-		btnNext.setBounds(234, 357, 96, 61);
+		btnNext.setBounds(622, 387, 96, 61);
 		panelBackground.add(btnNext);
 		btnNext.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		btnNext.setBackground(SystemColor.info);

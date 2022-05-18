@@ -13,11 +13,13 @@ import main.GameEnvironment;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
+import javax.swing.ImageIcon;
 
 public class BattleScreen {
 
 	private JFrame window;
 	private GameEnvironment gameEnvironment;
+	private final JLabel lblNewLabel = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -96,6 +98,8 @@ public class BattleScreen {
 		panelItem.add(btnFarewellSpit_1);
 		btnFarewellSpit_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnFarewellSpit_1.setBackground(SystemColor.info);
+		lblNewLabel.setIcon(new ImageIcon(BattleScreen.class.getResource("/assets/ui/img/NinetyMilesBeach.jpg")));
+		lblNewLabel.setBounds(239, 0, 499, 469);
+		window.getContentPane().add(lblNewLabel);
 	}
-
 }
