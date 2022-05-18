@@ -122,7 +122,8 @@ public class MagicNumbers {
 
     public final int MAXIMUM_ENTITY_DESCRIPTION_CHARACTER_LENGTH = 200;
 
-    
+    public final int[] RESISTANCE_AND_ATTACK_RANGE = {10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31}
+
 
 
 
