@@ -1,5 +1,9 @@
 package assets.enums;
 
-public class BattleType {
-
+public enum BattleType {
+	NINETY_MILES_BEACH,
+	LAKE_TAUPO,
+	CANTERBURY_WETLANDS,
+	MOUNT_COOK,
+	SOUTHLAND_FARM
 }

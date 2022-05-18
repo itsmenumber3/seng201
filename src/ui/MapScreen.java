@@ -6,11 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.text.html.HTML;
 
+import main.GameEnvironment;
+
 import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.security.PublicKey;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JPanel;
@@ -18,7 +21,8 @@ import java.awt.Color;
 
 public class MapScreen {
 
-	private JFrame frmBattles;
+	private JFrame window;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
@@ -28,12 +32,26 @@ public class MapScreen {
 			public void run() {
 				try {
 					MapScreen window = new MapScreen();
-					window.frmBattles.setVisible(true);
+					window.window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+	
+	public MapScreen(GameEnvironment inputGameEnvironment) {
+		gameEnvironment = inputGameEnvironment;
+		initialize();
+		window.setVisible(true);
+	}
+	
+	public void closeWindow() {
+		window.dispose();
+	}
+	
+	public void finishedWindow() {
+		gameEnvironment.closeMapScreen(this);
 	}
 
 	/**
@@ -47,11 +65,11 @@ public class MapScreen {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmBattles = new JFrame();
-		frmBattles.setTitle("Battles");
-		frmBattles.setBounds(100, 100, 592, 744);
-		frmBattles.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmBattles.getContentPane().setLayout(null);
+		window = new JFrame();
+		window.setTitle("Battles");
+		window.setBounds(100, 100, 592, 744);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Mt Cook");
 		btnNewButton.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
@@ -64,35 +82,35 @@ public class MapScreen {
 		btnMilesBeach.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnMilesBeach.setBackground(SystemColor.info);
 		btnMilesBeach.setBounds(358, 111, 119, 25);
-		frmBattles.getContentPane().add(btnMilesBeach);
+		window.getContentPane().add(btnMilesBeach);
 		
 		JButton btnLakeTaupo = new JButton("Lake Taupo");
 		btnLakeTaupo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnLakeTaupo.setBackground(SystemColor.info);
 		btnLakeTaupo.setBounds(413, 248, 106, 25);
-		frmBattles.getContentPane().add(btnLakeTaupo);
+		window.getContentPane().add(btnLakeTaupo);
 		
 		JButton btnFarewellSpit = new JButton("<html><div>Canterbury Wetlands</div></html>");
 		btnFarewellSpit.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnFarewellSpit.setBackground(SystemColor.info);
 		btnFarewellSpit.setBounds(333, 401, 97, 42);
-		frmBattles.getContentPane().add(btnFarewellSpit);
+		window.getContentPane().add(btnFarewellSpit);
 		btnNewButton.setBackground(SystemColor.info);
 		btnNewButton.setBounds(130, 457, 97, 25);
-		frmBattles.getContentPane().add(btnNewButton);
+		window.getContentPane().add(btnNewButton);
 		
 		JButton btnSouthlandFarm = new JButton("Southland Farm");
 		btnSouthlandFarm.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnSouthlandFarm.setBackground(SystemColor.info);
 		btnSouthlandFarm.setBounds(163, 574, 126, 25);
-		frmBattles.getContentPane().add(btnSouthlandFarm);
+		window.getContentPane().add(btnSouthlandFarm);
 		
 		JPanel panelItem = new JPanel();
 		panelItem.setLayout(null);
 		panelItem.setOpaque(true);
 		panelItem.setBackground(new Color(0, 51, 153));
 		panelItem.setBounds(29, 39, 231, 219);
-		frmBattles.getContentPane().add(panelItem);
+		window.getContentPane().add(panelItem);
 		
 		JLabel lblNewLabel_1 = new JLabel("<html><div>" + "Your monsters are currently at " + "Wellington" + ". Please select your next battle location to travel to." + "</div></html>");
 		lblNewLabel_1.setForeground(Color.WHITE);
@@ -127,6 +145,6 @@ public class MapScreen {
 		JLabel lblMapCover = new JLabel("");
 		lblMapCover.setIcon(new ImageIcon(MapScreen.class.getResource("/assets/ui/img/CookMapResized.jpg")));
 		lblMapCover.setBounds(0, 0, 590, 720);
-		frmBattles.getContentPane().add(lblMapCover);
+		window.getContentPane().add(lblMapCover);
 	}
 }

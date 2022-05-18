@@ -124,6 +124,11 @@ public class ShopScreen {
 		lblTipClickTo.setBounds(12, 334, 451, 15);
 		panelPurchaseMonster.add(lblTipClickTo);
 		
+		JLabel lblTipClickTo_1_4_1 = new JLabel("<html><div>Fresh new monsters of the day</div></html>");
+		lblTipClickTo_1_4_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		lblTipClickTo_1_4_1.setBounds(12, 0, 386, 54);
+		panelPurchaseMonster.add(lblTipClickTo_1_4_1);
+		
 		JPanel panelBuyFood = new JPanel();
 		tabbedPane.addTab("Delicatessen", null, panelBuyFood, null);
 		panelBuyFood.setLayout(null);
@@ -167,12 +172,40 @@ public class ShopScreen {
 		tabbedPane.addTab("Cafe", null, panelBuyPotion, null);
 		
 		JPanel panelTradeInMonster = new JPanel();
-		tabbedPane.addTab("Trade In Monster", null, panelTradeInMonster, null);
 		panelTradeInMonster.setLayout(null);
+		tabbedPane.addTab("Trade in monsters", null, panelTradeInMonster, null);
+		
+		JButton btnPurchaseThisMonster_1 = new JButton("Sell back this monster");
+		btnPurchaseThisMonster_1.setForeground(Color.WHITE);
+		btnPurchaseThisMonster_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btnPurchaseThisMonster_1.setBackground(Color.RED);
+		btnPurchaseThisMonster_1.setBounds(502, 320, 205, 29);
+		panelTradeInMonster.add(btnPurchaseThisMonster_1);
+		
+		JButton btnTradeInMonster_1_2 = new JButton("Monster 1");
+		btnTradeInMonster_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnTradeInMonster_1_2.setBackground(SystemColor.info);
+		btnTradeInMonster_1_2.setBounds(155, 224, 111, 25);
+		panelTradeInMonster.add(btnTradeInMonster_1_2);
+		
+		JButton btnTradeInMonster_1_1_1_2 = new JButton("Monster 1");
+		btnTradeInMonster_1_1_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnTradeInMonster_1_1_1_2.setBackground(SystemColor.info);
+		btnTradeInMonster_1_1_1_2.setBounds(446, 224, 111, 25);
+		panelTradeInMonster.add(btnTradeInMonster_1_1_1_2);
+		
+		JLabel lblYourCurrentSelection_1 = new JLabel("Your current selection:");
+		lblYourCurrentSelection_1.setBounds(12, 275, 451, 15);
+		panelTradeInMonster.add(lblYourCurrentSelection_1);
+		
+		JLabel lblTipClickTo_2 = new JLabel("Tip: click to view properties, then press Purchase this monster.");
+		lblTipClickTo_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		lblTipClickTo_2.setBounds(12, 334, 451, 15);
+		panelTradeInMonster.add(lblTipClickTo_2);
 		
 		JLabel lblTipClickTo_1_4 = new JLabel("<html><div>New World Kaitaia would like to buy these monsters from you, for these listed prices.</div></html>");
-		lblTipClickTo_1_4.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
-		lblTipClickTo_1_4.setBounds(12, 24, 352, 114);
+		lblTipClickTo_1_4.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		lblTipClickTo_1_4.setBounds(12, 12, 386, 54);
 		panelTradeInMonster.add(lblTipClickTo_1_4);
 		
 		JPanel panelLottoCounter = new JPanel();
