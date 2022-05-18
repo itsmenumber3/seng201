@@ -128,119 +128,334 @@ public class Tools {
 						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15],
 						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[20]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[4],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[19]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[18]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[17]));
 				}
 			}
 			else if (monster.getEntityRarity() == 2){
 				if (monster.getMonsterType() == MonsterType.SKELETON) {
-    				monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16]));
     			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
-    				monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12]));
 				}	
 			}
 			else{
 				if (monster.getMonsterType() == MonsterType.SKELETON) {
-    				monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[17]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11]));
     			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
-    				monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[18]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[19]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[4],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[20]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[3],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[21]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[2],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7]));
 				}	
 			}
 		}
     	else if (inputPlayer.getPlayerDifficulty() == 2) {
 			if (monster.getEntityRarity() == 1){
     			if (monster.getMonsterType() == MonsterType.SKELETON) {
-    				monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[1],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[20]));
     			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
-    				monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[2],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[19]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[3],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[18]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[4],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[17]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16]));
 				}
 			}
 			else if (monster.getEntityRarity() == 2){
 				if (monster.getMonsterType() == MonsterType.SKELETON) {
-    				monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15]));
     			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
-    				monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11]));
 				}	
 			}
 			else{
 				if (monster.getMonsterType() == MonsterType.SKELETON) {
-    				monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10]));
     			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
-    				monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[17]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[4],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[18]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[3],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[19]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[2],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+					monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[20]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[1],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6]));
 				}	
 
     	} 
 		else {
 			if (monster.getEntityRarity() == 1){
     			if (monster.getMonsterType() == MonsterType.SKELETON) {
-    				monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[0],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[19]));
     			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
-    				monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[1],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[18]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[2],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[17]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[3],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[4],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15]));
 				}
 			}
 			else if (monster.getEntityRarity() == 2){
 				if (monster.getMonsterType() == MonsterType.SKELETON) {
-    				monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14]));
     			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
-    				monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10]));
 				}	
 			}
 			else{
 				if (monster.getMonsterType() == MonsterType.SKELETON) {
-    				monster.setMonsterResistanceAbility(random.nextInt(8, 14));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[10],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[15]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[4],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[9]));
     			} else if (monster.getMonsterType() == MonsterType.SPIRIT) {
-    				monster.setMonsterResistanceAbility(random.nextInt(11, 17));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[11],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[16]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[3],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[8]));
     			} else if(monster.getMonsterType() == MonsterType.TROLL) {
-    				monster.setMonsterResistanceAbility(random.nextInt(14, 20));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[12],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[17]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[2],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[7]));
     			} else if (monster.getMonsterType() == MonsterType.ZOMBIE) {
-    				monster.setMonsterResistanceAbility(random.nextInt(17, 23));
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[13],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[18]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[1],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[6]));
 				} else if (monster.getMonsterType() == MonsterType.DRAGON){
-					monster.setMonsterResistanceAbility(random.nextInt());
+    				monster.setMonsterResistanceAbility(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[14],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[19]));
+					monster.setMonsterAttackDamage(random.nextInt(
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[0],
+						magicNumbers.RESISTANCE_AND_ATTACK_RANGE[5]));
 				}	
 			}
     	} 
