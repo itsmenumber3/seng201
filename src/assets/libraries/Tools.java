@@ -479,35 +479,54 @@ public class Tools {
     	return magicNumbers.RANDOM_MONSTER_NAMES[random.nextInt(magicNumbers.RANDOM_MONSTER_NAMES.length)];
     }
 
-	public Monster generateRandomBattleMonster(MonsterType inputMonsterType) {
+	public Monster generateRandomBattleMonster(MonsterType inputMonsterType, Player inputPlayer) {
 		Monster monster;
 		try {
 			switch (inputMonsterType) {
 				case MUD_MONSTER:
 					monster = new MudMonster();
+					monster.setEntityName("Mud Boss Monster");
 					break;
 				case SAND_MONSTER:
 					monster = new SandMonster();
+					monster.setEntityName("Sand Boss Monster");
 					break;
 				case WATER_MONSTER:
 					monster = new WaterMonster();
+					monster.setEntityName("Water Boss Monster");
 					break;
 				case SNOW_MONSTER:
 					monster = new SnowMonster();
+					monster.setEntityName("Snow Boss Monster");
 					break;
 				case GRASS_MONSTER:
 					monster = new GrassMonster();
+					monster.setEntityName("Grass Boss Monster");
 					break;
 				default:
 					throw new InvalidInputException("Unallowed monster");
 			}
-			monster.setMonsterAttackDamage(10);
-			monster.setMonsterResistanceAbility(10);
+			
+			if (inputPlayer.getPlayerDifficulty() == 1) {
+				monster.setMonsterAttackDamage(magicNumbers.BATTLE_ATTACK_EASY);
+				monster.setMonsterResistanceAbility(magicNumbers.BATTLE_RESISTANCE_EASY);
+			}
+			else if (inputPlayer.getPlayerDifficulty() == 2) {
+				monster.setMonsterAttackDamage(magicNumbers.BATTLE_ATTACK_MED);
+				monster.setMonsterResistanceAbility(magicNumbers.BATTLE_RESISTANCE_MED);
+				
+			}
+			else {
+				monster.setMonsterAttackDamage(magicNumbers.BATTLE_ATTACK_HARD);
+				monster.setMonsterResistanceAbility(magicNumbers.BATTLE_RESISTANCE_HARD);
+				
+			}
 			monster.resetMonsterHealthLevel();
-			monster.setEntityName("BossMonster");
+			
 		} catch (InvalidInputException e) {
 			e.printStackTrace();
 		}
+		return monster;
 	}
 
 }
