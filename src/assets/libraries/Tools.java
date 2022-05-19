@@ -2,6 +2,7 @@ package assets.libraries;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,6 +10,10 @@ import java.util.regex.Pattern;
 import assets.enums.BattleType;
 import assets.enums.MonsterType;
 import battles.Battle;
+import battles.challenge.Challenge;
+import battles.challenge.FlipACoin;
+import battles.challenge.PaperScissorsRock;
+import battles.challenge.Quiz;
 import entities.monsters.battle_monsters.*;
 import entities.monsters.tradeable_monsters.Dragon;
 // Import the Exception classes
@@ -25,6 +30,7 @@ public class Tools {
 
     MagicNumbers magicNumbers = new MagicNumbers(); // get the constants in the MagicNumbers class
     SecureRandom random = new SecureRandom();
+	QuizData quizData = new QuizData();
 
 
     public boolean TrueFalseRandom(float inputProbability) {
@@ -542,5 +548,29 @@ public class Tools {
 		return String.format("%s is home to the monster %s. %s Kill it, and you get rewarded with %d gold coins. Lose it and game is over. The stakes are high. Are you ready?", 
 				inputBattle.getBattleName(), inputBattle.getBattleMonster().getEntityName(), creativeMonstersDescriptionStrings[random.nextInt(0, creativeMonstersDescriptionStrings.length)], 
 				inputBattle.getBattleMonster().getEntitySellValue());
+	}
+
+	public Challenge makeRandomChallenge() {
+		Challenge challenge;
+		switch (random.nextInt(0, 2)) {
+			case 0:
+				challenge = new PaperScissorsRock();
+				break;
+			case 1:
+				challenge = new FlipACoin();
+				break;
+			default:
+				challenge = makeRandomQuiz();
+		}
+		return challenge;
+	}
+
+	public Quiz makeRandomQuiz() {
+		Quiz quiz = new Quiz();
+		String[] questionData = this.quizData.getQuestion(random.nextInt(1, 10));
+		quiz.setQuizQuestion(questionData[0]);
+		quiz.setQuizChoices(Arrays.copyOfRange(questionData, 1, 5));
+		quiz.setQuizCorrectChoice(questionData[5]);
+		return quiz;
 	}
 }

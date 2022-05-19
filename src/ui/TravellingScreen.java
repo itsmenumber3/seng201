@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
+
+import main.GameEnvironment;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -15,6 +18,7 @@ public class TravellingScreen {
 	private JFrame window;
 	private boolean stateOfProgressBar = true;
 	private JProgressBar progressBar;
+	private GameEnvironment gameEnvironment;
 	/**
 	 * Launch the application.
 	 */
@@ -31,6 +35,13 @@ public class TravellingScreen {
 		});
 	}
 
+	public TravellingScreen(GameEnvironment inputGameEnvironment) {
+		this.gameEnvironment = gameEnvironment;
+	}
+	
+	public void closeWindow() {
+		window.dispose();
+	}
 	/**
 	 * Create the application.
 	 */

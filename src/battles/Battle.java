@@ -1,6 +1,9 @@
 package battles;
 
+import java.util.ArrayList;
+
 import assets.enums.BattleType;
+import battles.challenge.Challenge;
 import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 import main.Shop;
@@ -57,5 +60,15 @@ public class Battle{
     
     public Monster getBattleMonster() {
     	return this.battleMonster;
+    }
+    
+    private Challenge currentChallenge;
+
+    public void setCurrentChallenge(Challenge inputCurrentChallenge) {
+        this.currentChallenge = inputCurrentChallenge;
+    }
+
+    public Challenge getCurrentChallenge() {
+        return this.currentChallenge;
     }
 }

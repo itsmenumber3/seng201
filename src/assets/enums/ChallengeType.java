@@ -1,6 +1,7 @@
 package assets.enums;
 
 public enum ChallengeType {
-    RPS,
-    
+    PAPER_SCISSORS_ROCK,
+    QUIZ,
+    FLIP_A_COIN
 }

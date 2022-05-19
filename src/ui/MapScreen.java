@@ -64,8 +64,8 @@ public class MapScreen {
 		window.dispose();
 	}
 	
-	public void finishedWindow(JButton inputJButtonPressed) {
-		gameEnvironment.closeMapScreen(this, inputJButtonPressed);
+	public void finishedWindow() {
+		gameEnvironment.closeMapScreen(this);
 	}
 
 	/**
