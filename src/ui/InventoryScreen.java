@@ -20,6 +20,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import battles.Battle;
+import entities.items.consumables.Drink;
+import entities.items.consumables.Food;
+import entities.monsters.Monster;
 
 import java.awt.SystemColor;
 import javax.swing.JMenu;
@@ -87,7 +90,7 @@ public class InventoryScreen {
 	 */
 	private void initialize() {
 		window = new JFrame();
-		window.setTitle("New World Kaitaia");
+		window.setTitle("Inventory");
 		window.setBounds(100, 100, 750, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
@@ -141,6 +144,27 @@ public class InventoryScreen {
 		btnTradeInMonster_1_1_1.setBackground(SystemColor.info);
 		btnTradeInMonster_1_1_1.setBounds(446, 224, 111, 25);
 		panelPurchaseMonster.add(btnTradeInMonster_1_1_1);
+		
+		JLabel lblMonster1Img = new JLabel("");
+		lblMonster1Img.setIcon(new ImageIcon(InventoryScreen.class.getResource("/assets/ui/img/dragon-final.png")));
+		lblMonster1Img.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster1Img.setBounds(12, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster1Img);
+		
+		JLabel lblMonster1Img_1 = new JLabel("");
+		lblMonster1Img_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster1Img_1.setBounds(155, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster1Img_1);
+		
+		JLabel lblMonster1Img_1_1 = new JLabel("");
+		lblMonster1Img_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster1Img_1_1.setBounds(299, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster1Img_1_1);
+		
+		JLabel lblMonster1Img_1_1_1 = new JLabel("");
+		lblMonster1Img_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster1Img_1_1_1.setBounds(446, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster1Img_1_1_1);
 		
 		JPanel panelBuyFood = new JPanel();
 		tabbedPane.addTab("Dining Room", null, panelBuyFood, null);
