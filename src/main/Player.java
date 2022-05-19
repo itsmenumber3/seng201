@@ -393,4 +393,14 @@ public class Player implements Role {
     public Battle getPlayerSelectedBattle() {
     	return this.playerSelectedBattle;
     }
+    
+    private Battle playerPreviousBattle;
+    
+    public void setPlayerPreviousBattle(Battle inputPlayerPreviousBattle) {
+    	this.playerPreviousBattle = inputPlayerPreviousBattle;
+    }
+    
+    public Battle getPlayerPreviousBattle() {
+    	return this.playerPreviousBattle;
+    }
 }

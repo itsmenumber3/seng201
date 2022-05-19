@@ -10,6 +10,7 @@ import assets.enums.ChallengeType;
 import assets.enums.FightOutcomeType;
 import assets.enums.MonsterType;
 import assets.libraries.Tools;
+import battles.Battle;
 import battles.challenge.Challenge;
 import battles.challenge.FlipACoin;
 import battles.challenge.PaperScissorsRock;
@@ -132,6 +133,7 @@ public class GameEnvironment {
     
     public void closeTravellingScreen(TravellingScreen inputTravellingWindow) {
     	inputTravellingWindow.closeWindow();
+    	
     	makeNewChallengeAndLaunchScreen();
     }
     
@@ -218,6 +220,9 @@ public class GameEnvironment {
 
     public static void main(String[] args) {
         GameEnvironment game = new GameEnvironment();
+        Battle battle = new Battle();
+        battle.setBattleName("Wellington");
+        game.getPlayer().setPlayerSelectedBattle(battle);
         game.launchWelcomeScreen();
     }
 }
