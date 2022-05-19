@@ -84,15 +84,8 @@ public class WelcomeScreen {
 				finishedWindow();
 			}
 		});
-		btnStartGame.setBounds(32, 417, 547, 34);
+		btnStartGame.setBounds(0, 410, 748, 59);
 		window.getContentPane().add(btnStartGame);
-		
-		JButton btnHowToPlay = new JButton("FAQ");
-		btnHowToPlay.setForeground(Color.WHITE);
-		btnHowToPlay.setBackground(Color.RED);
-		btnHowToPlay.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
-		btnHowToPlay.setBounds(591, 417, 120, 34);
-		window.getContentPane().add(btnHowToPlay);
 		
 		JLabel lblTheNewZealand = new JLabel("THE KIWI EDITION");
 		lblTheNewZealand.setHorizontalAlignment(SwingConstants.CENTER);

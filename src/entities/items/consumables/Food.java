@@ -4,6 +4,7 @@ import entities.items.Item;
 import java.security.SecureRandom;
 
 public class Food extends Consumable {
+	SecureRandom random = new SecureRandom();
 	
 	private int healthIncrease;
 	

@@ -36,7 +36,6 @@ public class MapScreen {
 	
 	private JButton btnInventory;
 	private JButton btnVisitShop;
-	private JButton btnRandomlySelectBattle;
 
 	/**
 	 * Launch the application.
@@ -66,6 +65,16 @@ public class MapScreen {
 	
 	public void finishedWindow() {
 		gameEnvironment.closeMapScreen(this);
+	}
+	
+	public void finishedWindowInventory() {
+		
+	}
+	
+	public void finishedWindow 
+	
+	public void finishedWindowEndGame() {
+		
 	}
 
 	/**
@@ -110,7 +119,7 @@ public class MapScreen {
 		panelItem.setLayout(null);
 		panelItem.setOpaque(true);
 		panelItem.setBackground(new Color(0, 51, 153));
-		panelItem.setBounds(29, 39, 231, 255);
+		panelItem.setBounds(29, 39, 231, 218);
 		window.getContentPane().add(panelItem);
 		
 		JLabel lblDay = new JLabel(String.format("<html><div>Current day: %d of %d days</div></html>", 1, 15));
@@ -131,22 +140,16 @@ public class MapScreen {
 		panelItem.add(lblCurrentLocationInfo);
 		lblCurrentLocationInfo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		btnRandomlySelectBattle = new JButton("Randomly select next battle");
-		btnRandomlySelectBattle.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnRandomlySelectBattle.setBackground(SystemColor.info);
-		btnRandomlySelectBattle.setBounds(12, 153, 207, 25);
-		panelItem.add(btnRandomlySelectBattle);
-		
 		btnVisitShop = new JButton("Visit FreshChoice Takaka");
 		btnVisitShop.setForeground(Color.WHITE);
-		btnVisitShop.setBounds(12, 189, 207, 25);
+		btnVisitShop.setBounds(12, 145, 207, 25);
 		panelItem.add(btnVisitShop);
 		btnVisitShop.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnVisitShop.setBackground(Color.RED);
 		
 		btnInventory = new JButton("My inventory");
 		btnInventory.setForeground(Color.WHITE);
-		btnInventory.setBounds(12, 216, 207, 25);
+		btnInventory.setBounds(12, 172, 207, 25);
 		panelItem.add(btnInventory);
 		btnInventory.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnInventory.setBackground(new Color(0, 153, 51));
@@ -201,6 +204,10 @@ public class MapScreen {
 		window.getContentPane().add(btnSouthlandFarm);
 		
 		JButton btnEndGame = new JButton("End Game");
+		btnEndGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnEndGame.setBounds(458, 665, 97, 25);
 		window.getContentPane().add(btnEndGame);
 		btnEndGame.setForeground(Color.WHITE);

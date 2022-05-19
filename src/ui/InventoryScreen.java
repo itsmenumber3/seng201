@@ -165,7 +165,7 @@ public class InventoryScreen {
 		panelBuyFood.add(lblTipClickTo_1_3);
 		
 		JPanel panelBuyPotion = new JPanel();
-		tabbedPane.addTab("Potion Fridge", null, panelBuyPotion, null);
+		tabbedPane.addTab("Beverages", null, panelBuyPotion, null);
 		panelBuyPotion.setLayout(null);
 		
 		JLabel lblTipClickTo_1_1_2 = new JLabel("<html><div>Select a monster:</div></html>");
