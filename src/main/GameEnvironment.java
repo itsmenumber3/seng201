@@ -1,17 +1,24 @@
 package main;
 
+import java.net.NoRouteToHostException;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 
 import assets.enums.MonsterType;
 import assets.libraries.Tools;
+import battles.challenge.FlipACoin;
+import battles.challenge.PaperScissorsRock;
 import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 import ui.BattleScreen;
 import ui.FirstMonsterSetupScreen;
+import ui.FlipACoinScreen;
 import ui.MapScreen;
+import ui.PaperScissorsRockScreen;
 import ui.PlayerSetupScreen;
+import ui.QuizScreen;
+import ui.TravellingScreen;
 import ui.WelcomeScreen;
 
 /**
@@ -67,11 +74,6 @@ public class GameEnvironment {
     
     public void closeMapScreen(MapScreen inputMapWindow, JButton inputJButtonPressed) {
     	inputMapWindow.closeWindow();
-    	
-    	switch(inputJButtonPressed) {
-    	case btnInventory:
-    		
-    	}
     	this.launchBattleScreen();
     }
     
@@ -81,6 +83,41 @@ public class GameEnvironment {
     
     public void closeBattleScreen(BattleScreen inputBattleWindow) {
     	inputBattleWindow.closeWindow();
+    }
+    
+    public void launchTravellingScreen() {
+    	TravellingScreen travellingWindow = new TravellingScreen(this);
+    }
+    
+    public void closeTravellingScreen(TravellingScreen inputTravellingWindow) {
+    	inputTravellingWindow.closeWindow();
+    	this.getPlayer().getPlayerSelectedBattle().setCurrentChallenge(tools.makeRandomChallenge());
+    	
+    	switch (this.getPlayer().getPlayerSelectedBattle().getCurrentChallenge().getChallengeType()) {
+    	case PAPER_SCISSORS_ROCK:
+    		this.launchPaperScissorsRockScreen();
+    		break;
+    	case QUIZ:
+    		this.launchQuizScreen();
+    		break;
+    	default:
+    		this.launchFlipACoinScreen();
+    		break;
+    	}
+    }
+    
+    public void launchQuizScreen() {
+    	QuizScreen quizWindow = new QuizScreen(this);
+    }
+    
+    public void closeQuizScreen(QuizScreen inputQuizScreen
+    
+    public void launchPaperScissorsRockScreen() {
+    	PaperScissorsRockScreen paperScissorsRockWindow = new PaperScissorsRockScreen();
+    }
+    
+    public void launchFlipACoinScreen() {
+    	FlipACoinScreen flipACoinWindow = new FlipACoinScreen();
     }
 
     public static void main(String[] args) {

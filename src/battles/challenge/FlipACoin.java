@@ -1,6 +1,9 @@
 package battles.challenge;
 
+import assets.enums.ChallengeOutcomeType;
 import assets.enums.ChallengeType;
+
+import java.security.SecureRandom;
 
 public class FlipACoin extends Challenge {
 	public FlipACoin() {
@@ -15,5 +18,12 @@ public class FlipACoin extends Challenge {
 	
 	public boolean getIsPlayerChoosingHead() {
 		return this.isPlayerChoosingHead;
+	}
+
+	public void runFlipACoinResults() {
+		switch (this.random.nextInt(1)) {
+			case 0 -> this.setChallengeOutcome(ChallengeOutcomeType.WIN);
+			case 1 -> this.setChallengeOutcome(ChallengeOutcomeType.LOSE);
+		}
 	}
 }

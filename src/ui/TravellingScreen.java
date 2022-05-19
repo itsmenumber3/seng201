@@ -36,11 +36,17 @@ public class TravellingScreen {
 	}
 
 	public TravellingScreen(GameEnvironment inputGameEnvironment) {
-		this.gameEnvironment = gameEnvironment;
+		this.gameEnvironment = inputGameEnvironment;
+		initialize();
+		window.setVisible(true);
 	}
 	
 	public void closeWindow() {
 		window.dispose();
+	}
+	
+	public void finishedWindow() {
+		gameEnvironment.closeTravellingScreen(this);
 	}
 	/**
 	 * Create the application.

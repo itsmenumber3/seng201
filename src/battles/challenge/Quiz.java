@@ -1,5 +1,6 @@
 package battles.challenge;
 
+import assets.enums.ChallengeOutcomeType;
 import assets.enums.ChallengeType;
 
 public class Quiz extends Challenge {
@@ -36,5 +37,22 @@ public class Quiz extends Challenge {
 	public String getQuizCorrectChoice() {
 		return this.quizCorrectChoice;
 	}
-	
+
+	public String quizPlayerChoice;
+
+	public void setQuizPlayerChoice(String inputQuizPlayerChoice) {
+		this.quizPlayerChoice = inputQuizPlayerChoice;
+	}
+
+	public String getQuizPlayerChoice() {
+		return this.quizPlayerChoice;
+	}
+
+	public void runQuizResults() {
+		if (this.getQuizPlayerChoice() == this.getQuizCorrectChoice()) {
+			this.setChallengeOutcome(ChallengeOutcomeType.WIN);
+		} else {
+			this.setChallengeOutcome(ChallengeOutcomeType.LOSE);
+		}
+	}
 }

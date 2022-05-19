@@ -13,7 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 import javax.swing.JButton;
 
-public class FlipCoinScreen {
+public class FlipACoinScreen {
 
 	private JFrame frame;
 	private GameEnvironment gameEnvironment;
@@ -34,7 +34,7 @@ public class FlipCoinScreen {
 		});
 	}
 
-	public FlipCoinScreen(GameEnvironment inputGameEnvironment) {
+	public FlipACoinScreen(GameEnvironment inputGameEnvironment) {
 		this.gameEnvironment = inputGameEnvironment;
 		initialize();
 		frame.setVisible(true);
@@ -51,7 +51,7 @@ public class FlipCoinScreen {
 	/**
 	 * Create the application.
 	 */
-	public FlipCoinScreen() {
+	public FlipACoinScreen() {
 		initialize();
 	}
 
