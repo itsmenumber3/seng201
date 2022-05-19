@@ -1,6 +1,7 @@
 package ui;
 
 import main.GameEnvironment;
+import main.Player;
 
 import java.awt.EventQueue;
 
@@ -15,6 +16,9 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+
+import battles.Battle;
+
 import java.awt.SystemColor;
 import javax.swing.JMenu;
 import javax.swing.JList;
@@ -30,6 +34,9 @@ public class ShopScreen {
 	private JTextField textField;
 	private JTable table;
 	private GameEnvironment gameEnvironment;
+	private Player player;
+	private Inventory inventory;
+	private Battle battle;
 
 	/**
 	 * Launch the application.
@@ -49,6 +56,9 @@ public class ShopScreen {
 
 	public ShopScreen(GameEnvironment inputGameEnvironment) {
 		this.gameEnvironment = inputGameEnvironment;
+		this.player = gameEnvironment.getPlayer();
+		this.inventory = player.getPlayerInventory();
+		this.battle = player.getPlayerSelectedBattle();
 		initialize();
 		window.setVisible(true);
 	}
@@ -73,12 +83,12 @@ public class ShopScreen {
 	 */
 	private void initialize() {
 		window = new JFrame();
-		window.setTitle("New World Kaitaia");
+		window.setTitle(battle.getBattleShop().getShopName());
 		window.setBounds(100, 100, 750, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
 		
-		JLabel lblShopName = new JLabel("New World Kaitaia");
+		JLabel lblShopName = new JLabel(battle.getBattleShop().getShopName());
 		lblShopName.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
 		lblShopName.setBounds(23, 20, 261, 34);
 		window.getContentPane().add(lblShopName);
