@@ -17,15 +17,15 @@ public class Drink extends Consumable {
     private void generateDrink(DrinkType inputDrinkType) {
     	if (inputDrinkType == DrinkType.COFFEE) {
     		setDrinkType(inputDrinkType);
-    		super.setEntityName("Coffee");
-    		super.setEntityPurchaseValue(magicNumbers.COFFEE_SELL_VALUE);
+    		this.setEntityName("Coffee");
+    		this.setEntityPurchaseValue(magicNumbers.COFFEE_SELL_VALUE);
     		setHealthIncrease(random.nextInt(magicNumbers.COFFEE_SELL_VALUE, magicNumbers.COFFEE_SELL_VALUE + magicNumbers.DRINK_VAR));
     		
     	}
     	else {
     		setDrinkType(inputDrinkType);
-    		super.setEntityName("Energy Drink");
-    		super.setEntityPurchaseValue(magicNumbers.ENERGY_DRINK_SELL_VALUE);
+    		this.setEntityName("Energy Drink");
+    		this.setEntityPurchaseValue(magicNumbers.ENERGY_DRINK_SELL_VALUE);
     		setHealthIncrease(random.nextInt(magicNumbers.ENERGY_DRINK_SELL_VALUE, magicNumbers.ENERGY_DRINK_SELL_VALUE + magicNumbers.DRINK_VAR));
     	}
     }
