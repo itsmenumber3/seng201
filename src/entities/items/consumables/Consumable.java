@@ -44,6 +44,16 @@ public class Consumable extends Item {
 
     // HEAL VALUE -----------------------------------------------------------------
 
+    private int consumableHealValue;
+    
+    
+    public void setConsumableHealValue(int inputConsumableHealValue) {
+    	this.consumableHealValue = inputConsumableHealValue;
+    }
+    
+    public void getConsumableHealValue() {
+    	return this.consumableHealValue;
+    }
 
 
     // HEAL VALUE -----------------------------------------------------------------

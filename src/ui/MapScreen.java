@@ -33,6 +33,10 @@ public class MapScreen {
 	private JFrame window;
 	private GameEnvironment gameEnvironment;
 	private Tools tools = new Tools();
+	
+	private JButton btnInventory;
+	private JButton btnVisitShop;
+	private JButton btnRandomlySelectBattle;
 
 	/**
 	 * Launch the application.
@@ -60,8 +64,8 @@ public class MapScreen {
 		window.dispose();
 	}
 	
-	public void finishedWindow() {
-		gameEnvironment.closeMapScreen(this);
+	public void finishedWindow(JButton inputJButtonPressed) {
+		gameEnvironment.closeMapScreen(this, inputJButtonPressed);
 	}
 
 	/**
@@ -101,6 +105,51 @@ public class MapScreen {
 				finishedWindow();
 			}
 		});
+		
+		JPanel panelItem = new JPanel();
+		panelItem.setLayout(null);
+		panelItem.setOpaque(true);
+		panelItem.setBackground(new Color(0, 51, 153));
+		panelItem.setBounds(29, 39, 231, 255);
+		window.getContentPane().add(panelItem);
+		
+		JLabel lblDay = new JLabel(String.format("<html><div>Current day: %d of %d days</div></html>", 1, 15));
+		lblDay.setForeground(Color.WHITE);
+		lblDay.setBounds(12, 12, 207, 25);
+		panelItem.add(lblDay);
+		lblDay.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		
+		JLabel lblGoldsAndPoints = new JLabel("<html><div>" + "Gold: " + "0" + " coins. Points: " + "0" + "</div></html>");
+		lblGoldsAndPoints.setForeground(Color.WHITE);
+		lblGoldsAndPoints.setBounds(12, 23, 182, 44);
+		panelItem.add(lblGoldsAndPoints);
+		lblGoldsAndPoints.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		
+		JLabel lblCurrentLocationInfo = new JLabel("<html><div>" + "Your monsters are currently at " + "Wellington" + ". Please select your next battle location to travel to." + "</div></html>");
+		lblCurrentLocationInfo.setForeground(Color.WHITE);
+		lblCurrentLocationInfo.setBounds(12, 49, 207, 106);
+		panelItem.add(lblCurrentLocationInfo);
+		lblCurrentLocationInfo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		
+		btnRandomlySelectBattle = new JButton("Randomly select next battle");
+		btnRandomlySelectBattle.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnRandomlySelectBattle.setBackground(SystemColor.info);
+		btnRandomlySelectBattle.setBounds(12, 153, 207, 25);
+		panelItem.add(btnRandomlySelectBattle);
+		
+		btnVisitShop = new JButton("Visit FreshChoice Takaka");
+		btnVisitShop.setForeground(Color.WHITE);
+		btnVisitShop.setBounds(12, 189, 207, 25);
+		panelItem.add(btnVisitShop);
+		btnVisitShop.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnVisitShop.setBackground(Color.RED);
+		
+		btnInventory = new JButton("My inventory");
+		btnInventory.setForeground(Color.WHITE);
+		btnInventory.setBounds(12, 216, 207, 25);
+		panelItem.add(btnInventory);
+		btnInventory.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnInventory.setBackground(new Color(0, 153, 51));
 		btnMilesBeach.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnMilesBeach.setBackground(SystemColor.info);
 		btnMilesBeach.setBounds(358, 111, 119, 25);
@@ -151,57 +200,12 @@ public class MapScreen {
 		btnSouthlandFarm.setBounds(163, 574, 126, 25);
 		window.getContentPane().add(btnSouthlandFarm);
 		
-		JButton btnFarewellSpit_1_1_2 = new JButton("End Game");
-		btnFarewellSpit_1_1_2.setBounds(458, 665, 97, 25);
-		window.getContentPane().add(btnFarewellSpit_1_1_2);
-		btnFarewellSpit_1_1_2.setForeground(Color.WHITE);
-		btnFarewellSpit_1_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnFarewellSpit_1_1_2.setBackground(Color.RED);
-		
-		JPanel panelItem = new JPanel();
-		panelItem.setLayout(null);
-		panelItem.setOpaque(true);
-		panelItem.setBackground(new Color(0, 51, 153));
-		panelItem.setBounds(29, 39, 231, 255);
-		window.getContentPane().add(panelItem);
-		
-		JLabel lblNewLabel_1 = new JLabel("<html><div>" + "Your monsters are currently at " + "Wellington" + ". Please select your next battle location to travel to." + "</div></html>");
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(12, 49, 207, 106);
-		panelItem.add(lblNewLabel_1);
-		lblNewLabel_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		
-		JLabel lblNewLabel_1_1 = new JLabel("<html><div>" + "Gold: " + "0" + " coins. Points: " + "0" + "</div></html>");
-		lblNewLabel_1_1.setForeground(Color.WHITE);
-		lblNewLabel_1_1.setBounds(12, 23, 182, 44);
-		panelItem.add(lblNewLabel_1_1);
-		lblNewLabel_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		
-		JLabel lblDay = new JLabel(String.format("<html><div>Current day: %d of %d days</div></html>", 1, 15));
-		lblDay.setForeground(Color.WHITE);
-		lblDay.setBounds(12, 12, 207, 25);
-		panelItem.add(lblDay);
-		lblDay.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		
-		JButton btnFarewellSpit_1_1 = new JButton("Visit FreshChoice Takaka");
-		btnFarewellSpit_1_1.setForeground(Color.WHITE);
-		btnFarewellSpit_1_1.setBounds(12, 189, 207, 25);
-		panelItem.add(btnFarewellSpit_1_1);
-		btnFarewellSpit_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnFarewellSpit_1_1.setBackground(Color.RED);
-		
-		JButton btnFarewellSpit_1 = new JButton("Randomly select next battle");
-		btnFarewellSpit_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnFarewellSpit_1.setBackground(SystemColor.info);
-		btnFarewellSpit_1.setBounds(12, 153, 207, 25);
-		panelItem.add(btnFarewellSpit_1);
-		
-		JButton btnFarewellSpit_1_1_1 = new JButton("My inventory");
-		btnFarewellSpit_1_1_1.setForeground(Color.WHITE);
-		btnFarewellSpit_1_1_1.setBounds(12, 216, 207, 25);
-		panelItem.add(btnFarewellSpit_1_1_1);
-		btnFarewellSpit_1_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnFarewellSpit_1_1_1.setBackground(new Color(0, 153, 51));
+		JButton btnEndGame = new JButton("End Game");
+		btnEndGame.setBounds(458, 665, 97, 25);
+		window.getContentPane().add(btnEndGame);
+		btnEndGame.setForeground(Color.WHITE);
+		btnEndGame.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnEndGame.setBackground(Color.RED);
 		
 		JLabel lblMapCover = new JLabel("");
 		lblMapCover.setIcon(new ImageIcon(MapScreen.class.getResource("/assets/ui/img/CookMapResized.jpg")));

@@ -2,6 +2,8 @@ package main;
 
 import java.util.ArrayList;
 
+import javax.swing.JButton;
+
 import assets.enums.MonsterType;
 import assets.libraries.Tools;
 import entities.monsters.Monster;
@@ -63,8 +65,13 @@ public class GameEnvironment {
     	MapScreen mapWindow = new MapScreen(this);
     }
     
-    public void closeMapScreen(MapScreen inputMapWindow) {
+    public void closeMapScreen(MapScreen inputMapWindow, JButton inputJButtonPressed) {
     	inputMapWindow.closeWindow();
+    	
+    	switch(inputJButtonPressed) {
+    	case btnInventory:
+    		
+    	}
     	this.launchBattleScreen();
     }
     

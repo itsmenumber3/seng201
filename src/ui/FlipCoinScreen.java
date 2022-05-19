@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import main.GameEnvironment;
+
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 import javax.swing.JButton;
@@ -13,6 +16,7 @@ import javax.swing.JButton;
 public class FlipCoinScreen {
 
 	private JFrame frame;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
@@ -28,6 +32,20 @@ public class FlipCoinScreen {
 				}
 			}
 		});
+	}
+
+	public FlipCoinScreen(GameEnvironment inputGameEnvironment) {
+		this.gameEnvironment = inputGameEnvironment;
+		initialize();
+		frame.setVisible(true);
+	}
+
+	public void closeWindow() {
+		frame.dispose();
+	}
+
+	public void finishedWindow() {
+		gameEnvironment.closeFlipCoinScreen
 	}
 
 	/**
@@ -48,13 +66,13 @@ public class FlipCoinScreen {
 		
 		JLabel lblFlipACoin = new JLabel("Flip a Coin!");
 		lblFlipACoin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFlipACoin.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblFlipACoin.setFont(new Font("Century Schoolbook L", Font.PLAIN, 25));
 		lblFlipACoin.setBounds(197, 11, 356, 49);
 		frame.getContentPane().add(lblFlipACoin);
 		
 		JLabel lblselectHeadsOr = new JLabel("<html><div>Select Heads or Tails below to see if you win this chance to attack</div></html>");
 		lblselectHeadsOr.setHorizontalAlignment(SwingConstants.CENTER);
-		lblselectHeadsOr.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblselectHeadsOr.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		lblselectHeadsOr.setBounds(72, 71, 606, 90);
 		frame.getContentPane().add(lblselectHeadsOr);
 		
