@@ -1,13 +1,21 @@
 package ui;
 
 import main.GameEnvironment;
+import main.Player;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import battles.Battle;
+import battles.challenge.Challenge;
+import entities.monsters.Monster;
+
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
@@ -15,7 +23,11 @@ public class ChallengeResultScreen {
 
 	private JFrame frame;
 	private GameEnvironment gameEnvironment;
-
+	private Challenge challenge;
+	private Battle battle;
+	private Player player;
+	private Monster battleMonster;
+	private ArrayList<Monster> playerMonsters;
 	/**
 	 * Launch the application.
 	 */
@@ -34,6 +46,11 @@ public class ChallengeResultScreen {
 
 	public ChallengeResultScreen(GameEnvironment inputGameEnvironment) {
 		this.gameEnvironment = inputGameEnvironment;
+		player = gameEnvironment.getPlayer();
+		battle = player.getPlayerSelectedBattle();
+		challenge = battle.getCurrentChallenge();
+		battleMonster = battle.getBattleMonster();
+		playerMonsters = player.getPlayerInventory().getMonsters();
 		initialize();
 		frame.setVisible(true);
 	}
@@ -62,7 +79,9 @@ public class ChallengeResultScreen {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("You <win_or_lose> the challenge!");
+
+		
+		JLabel lblNewLabel = new JLabel(String.format("%s", message));
 		lblNewLabel.setBounds(190, 22, 320, 47);
 		lblNewLabel.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -123,7 +142,7 @@ public class ChallengeResultScreen {
 		panel_Boss.add(lblNewLabel_2);
 		
 		JButton btnContinueBattle = new JButton("Continue Battle");
-		btnContinueBattle.setFont(new Font("Century Schoolbook L", Font.BOLD, 16));
+		btnContinueBattle.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnContinueBattle.setBounds(266, 405, 184, 37);
 		frame.getContentPane().add(btnContinueBattle);
 	}

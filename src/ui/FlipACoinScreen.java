@@ -7,7 +7,12 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import battles.Battle;
+import battles.challenge.FlipACoin;
+import battles.challenge.Quiz;
+import entities.monsters.Monster;
 import main.GameEnvironment;
+import main.Player;
 
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
@@ -15,11 +20,18 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FlipACoinScreen {
 
 	private JFrame frame;
 	private GameEnvironment gameEnvironment;
+	private FlipACoin flipACoin;
+	private Battle battle;
+	private Player player;
+	private Monster battleMonster;
+	private Monster playerMonster;
 
 	/**
 	 * Launch the application.
@@ -38,7 +50,13 @@ public class FlipACoinScreen {
 	}
 
 	public FlipACoinScreen(GameEnvironment inputGameEnvironment) {
-		this.gameEnvironment = inputGameEnvironment;
+		gameEnvironment = inputGameEnvironment;
+		player = gameEnvironment.getPlayer();
+		battle = player.getPlayerSelectedBattle();
+		flipACoin = (FlipACoin) battle.getCurrentChallenge();
+		battleMonster = battle.getBattleMonster();
+		playerMonster = player.getPlayerInventory().getMonsters().get(0);
+		
 		initialize();
 		frame.setVisible(true);
 	}
@@ -48,7 +66,8 @@ public class FlipACoinScreen {
 	}
 
 	public void finishedWindow() {
-		gameEnvironment.closeFlipACoinScreen
+		flipACoin.runFlipACoinResults();
+		gameEnvironment.closeFlipACoinScreen(this);
 	}
 
 	/**
@@ -84,12 +103,24 @@ public class FlipACoinScreen {
 		frame.getContentPane().add(lblHeadsSymbol);
 		
 		JToggleButton tglbtnHeads = new JToggleButton("Heads");
+		tglbtnHeads.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				flipACoin.setIsPlayerChoosingHead(true);
+				finishedWindow();
+			}
+		});
 		tglbtnHeads.setBackground(Color.YELLOW);
 		tglbtnHeads.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		tglbtnHeads.setBounds(457, 356, 96, 31);
 		frame.getContentPane().add(tglbtnHeads);
 		
 		JToggleButton tglbtnTails = new JToggleButton("Tails");
+		tglbtnTails.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				flipACoin.setIsPlayerChoosingHead(false);
+				finishedWindow();
+			}
+		});
 		tglbtnTails.setBackground(SystemColor.info);
 		tglbtnTails.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		tglbtnTails.setBounds(207, 356, 96, 31);

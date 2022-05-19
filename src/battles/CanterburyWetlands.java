@@ -6,6 +6,7 @@ public class CanterburyWetlands extends Battle {
 	public CanterburyWetlands() {
 		this.setBattleName("Canterbury Wetlands");
 		this.setBattleType(BattleType.CANTERBURY_WETLANDS);
+		this.getBattleShop().setShopName("New World Kaikoura");
 	}
 
 }

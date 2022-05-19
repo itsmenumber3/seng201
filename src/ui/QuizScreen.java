@@ -19,6 +19,8 @@ import entities.monsters.Monster;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class QuizScreen {
 
@@ -64,6 +66,8 @@ public class QuizScreen {
 	}
 	
 	public void finishedWindow() {
+		battle.incrementChallengeCount();
+		quiz.runQuizResults();
 		gameEnvironment.closeQuizScreen(this);
 	}
 
@@ -127,7 +131,7 @@ public class QuizScreen {
 		panelItem.add(lblWhatIs_3_2);
 		lblWhatIs_3_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		JLabel lblWhatIs_3_2_1 = new JLabel("<html><div>Gold: 0 Points: 0 Battle: Farewell Spit</div></html>");
+		JLabel lblWhatIs_3_2_1 = new JLabel(String.format("<html><div>Gold: %d Points: %d Battle: %s</div></html>", player.getPlayerGold(), player.getPlayerPoints(), battle.getBattleName()));
 		lblWhatIs_3_2_1.setForeground(Color.WHITE);
 		lblWhatIs_3_2_1.setBounds(12, 0, 287, 38);
 		panelItem.add(lblWhatIs_3_2_1);
@@ -142,21 +146,45 @@ public class QuizScreen {
 		window.getContentPane().add(lblWhatIs_1);
 		
 		JButton btnJacindaArdern = new JButton(quiz.getQuizChoices()[0]);
+		btnJacindaArdern.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				quiz.setQuizPlayerChoice(quiz.getQuizChoices()[0]);
+				finishedWindow();
+			}
+		});
 		btnJacindaArdern.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnJacindaArdern.setBounds(12, 339, 166, 106);
 		window.getContentPane().add(btnJacindaArdern);
 		
 		JButton btnJudithCollins = new JButton(quiz.getQuizChoices()[1]);
+		btnJudithCollins.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				quiz.setQuizPlayerChoice(quiz.getQuizChoices()[1]);
+				finishedWindow();
+			}
+		});
 		btnJudithCollins.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnJudithCollins.setBounds(181, 339, 166, 106);
 		window.getContentPane().add(btnJudithCollins);
 		
 		JButton btnJacindaArdern_1_1 = new JButton(quiz.getQuizChoices()[2]);
+		btnJacindaArdern_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				quiz.setQuizPlayerChoice(quiz.getQuizChoices()[2]);
+				finishedWindow();
+			}
+		});
 		btnJacindaArdern_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnJacindaArdern_1_1.setBounds(350, 339, 166, 106);
 		window.getContentPane().add(btnJacindaArdern_1_1);
 		
 		JButton btnJacindaArdern_1_1_1 = new JButton(quiz.getQuizChoices()[3]);
+		btnJacindaArdern_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				quiz.setQuizPlayerChoice(quiz.getQuizChoices()[3]);
+				finishedWindow();
+			}
+		});
 		btnJacindaArdern_1_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnJacindaArdern_1_1_1.setBounds(520, 339, 166, 106);
 		window.getContentPane().add(btnJacindaArdern_1_1_1);

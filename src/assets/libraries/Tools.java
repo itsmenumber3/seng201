@@ -603,4 +603,17 @@ public class Tools {
 			}
 		}
 	}
+	
+	public String generateChallengeResultMessage(ChallengeOutcomeType inputChallengeOutcomeType) {
+		
+		switch (inputChallengeOutcomeType) {
+		
+		case WIN:
+			return "You win the challenge!";
+		case LOSE:
+			return "You've lost the challenge...";
+		default:
+			return "It was a draw. You and the boss monster got the same thing.";
+		}
+	}
 }
