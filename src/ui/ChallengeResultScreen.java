@@ -8,7 +8,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
+import assets.enums.ChallengeOutcomeType;
+import assets.libraries.Tools;
 import battles.Battle;
 import battles.challenge.Challenge;
 import entities.monsters.Monster;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ChallengeResultScreen {
 
@@ -27,6 +30,7 @@ public class ChallengeResultScreen {
 	private Battle battle;
 	private Player player;
 	private Monster battleMonster;
+	private Tools tools = new Tools();
 	private ArrayList<Monster> playerMonsters;
 	/**
 	 * Launch the application.
@@ -53,6 +57,14 @@ public class ChallengeResultScreen {
 		playerMonsters = player.getPlayerInventory().getMonsters();
 		initialize();
 		frame.setVisible(true);
+	}
+	
+	public String displayMonsterInformation(int inputIndex) {
+		try {
+			return String.format("%s' current health: %.2f", playerMonsters.get(inputIndex), playerMonsters.get(inputIndex).getMonsterHealthLevel());
+		} catch (ArrayIndexOutOfBoundsException e){
+			return "";
+		}
 	}
 
 	public void closeWindow() {
@@ -81,7 +93,7 @@ public class ChallengeResultScreen {
 		
 
 		
-		JLabel lblNewLabel = new JLabel(String.format("%s", message));
+		JLabel lblNewLabel = new JLabel(String.format("%s", tools.generateChallengeResultMessage(challenge.getChallengeOutcome())));
 		lblNewLabel.setBounds(190, 22, 320, 47);
 		lblNewLabel.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -92,28 +104,28 @@ public class ChallengeResultScreen {
 		frame.getContentPane().add(panel_Team);
 		panel_Team.setLayout(null);
 		
-		JLabel lblTeamTitle = new JLabel("Your team");
+		JLabel lblTeamTitle = new JLabel(String.format("%s's team", player.getPlayerName()));
 		lblTeamTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTeamTitle.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
-		lblTeamTitle.setBounds(91, 12, 109, 26);
+		lblTeamTitle.setBounds(68, 12, 152, 26);
 		panel_Team.add(lblTeamTitle);
 		
-		JLabel lblMonster1Health = new JLabel("<name> current health : <healthLevel>");
+		JLabel lblMonster1Health = new JLabel(displayMonsterInformation(0));
 		lblMonster1Health.setFont(new Font("Century Schoolbook L", Font.PLAIN, 13));
 		lblMonster1Health.setBounds(10, 45, 263, 26);
 		panel_Team.add(lblMonster1Health);
 		
-		JLabel lblMonster2Health = new JLabel("<name> current health : <healthLevel>");
+		JLabel lblMonster2Health = new JLabel(displayMonsterInformation(1));
 		lblMonster2Health.setFont(new Font("Century Schoolbook L", Font.PLAIN, 13));
 		lblMonster2Health.setBounds(10, 105, 263, 26);
 		panel_Team.add(lblMonster2Health);
 		
-		JLabel lblMonster3Health = new JLabel("<name> current health : <healthLevel>");
+		JLabel lblMonster3Health = new JLabel(displayMonsterInformation(2));
 		lblMonster3Health.setFont(new Font("Century Schoolbook L", Font.PLAIN, 13));
 		lblMonster3Health.setBounds(10, 164, 263, 26);
 		panel_Team.add(lblMonster3Health);
 		
-		JLabel lblMonster4Health = new JLabel("<name> current health : <healthLevel>");
+		JLabel lblMonster4Health = new JLabel(displayMonsterInformation(3));
 		lblMonster4Health.setFont(new Font("Century Schoolbook L", Font.PLAIN, 13));
 		lblMonster4Health.setBounds(10, 223, 263, 26);
 		panel_Team.add(lblMonster4Health);
@@ -123,13 +135,13 @@ public class ChallengeResultScreen {
 		frame.getContentPane().add(panel_Boss);
 		panel_Boss.setLayout(null);
 		
-		JLabel lblBossTitle = new JLabel("<location> boss");
+		JLabel lblBossTitle = new JLabel(battleMonster.getEntityName());
 		lblBossTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBossTitle.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
-		lblBossTitle.setBounds(57, 11, 136, 39);
+		lblBossTitle.setBounds(20, 11, 201, 39);
 		panel_Boss.add(lblBossTitle);
 		
-		JLabel lblNewLabel_1 = new JLabel("Current health : <healthLevel>");
+		JLabel lblNewLabel_1 = new JLabel(String.format("Current health : %.2f", battleMonster.getMonsterHealthLevel()));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 15));
 		lblNewLabel_1.setBounds(10, 61, 224, 68);
@@ -142,6 +154,11 @@ public class ChallengeResultScreen {
 		panel_Boss.add(lblNewLabel_2);
 		
 		JButton btnContinueBattle = new JButton("Continue Battle");
+		btnContinueBattle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				finishedWindow();
+			}
+		});
 		btnContinueBattle.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnContinueBattle.setBounds(266, 405, 184, 37);
 		frame.getContentPane().add(btnContinueBattle);

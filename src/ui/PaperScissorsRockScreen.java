@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import assets.enums.PapersScissorsRockType;
+import assets.libraries.Tools;
 import battles.Battle;
 import battles.challenge.PaperScissorsRock;
 import battles.challenge.Quiz;
@@ -34,7 +35,7 @@ public class PaperScissorsRockScreen {
 	private Player player;
 	private Monster battleMonster;
 	private Monster playerMonster;
-	
+	private Tools tools = new Tools();
 	/**
 	 * Launch the application.
 	 */
@@ -70,6 +71,7 @@ public class PaperScissorsRockScreen {
 	public void finishedWindow() {
 		battle.incrementChallengeCount();
 		paperScissorsRock.runPaperScissorsRockResults();
+		gameEnvironment.setFightOutcome(tools.runFight(player));
 		gameEnvironment.closePaperScissorsRockScreen(this);
 	}
 

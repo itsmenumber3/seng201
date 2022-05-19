@@ -2,11 +2,15 @@ package main;
 
 import java.net.NoRouteToHostException;
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 
 import javax.swing.JButton;
 
+import assets.enums.ChallengeType;
+import assets.enums.FightOutcomeType;
 import assets.enums.MonsterType;
 import assets.libraries.Tools;
+import battles.challenge.Challenge;
 import battles.challenge.FlipACoin;
 import battles.challenge.PaperScissorsRock;
 import entities.monsters.Monster;
@@ -20,6 +24,15 @@ public class GameEnvironment {
 
     private Player player = new Player();
     private Tools tools = new Tools();
+    private FightOutcomeType fightOutcome;
+    
+    public void setFightOutcome(FightOutcomeType inputFightOutcomeType) {
+    	fightOutcome = inputFightOutcomeType;
+    }
+    
+    public FightOutcomeType getFightOutcome() {
+    	return fightOutcome;
+    }
     
     public void setPlayer(Player inputPlayer) {
     	try {
@@ -104,8 +117,13 @@ public class GameEnvironment {
     	BattleScreen battleWindow = new BattleScreen(this);
     }
     
-    public void closeBattleScreen(BattleScreen inputBattleWindow) {
+    public void closeBattleScreen(BattleScreen inputBattleWindow, boolean isPlayerBattling) {
     	inputBattleWindow.closeWindow();
+    	if (isPlayerBattling) {
+        	launchTravellingScreen();
+    	} else {
+    		launchMapScreen();
+    	}
     }
     
     public void launchTravellingScreen() {
@@ -114,19 +132,7 @@ public class GameEnvironment {
     
     public void closeTravellingScreen(TravellingScreen inputTravellingWindow) {
     	inputTravellingWindow.closeWindow();
-    	this.getPlayer().getPlayerSelectedBattle().setCurrentChallenge(tools.makeRandomChallenge());
-    	
-    	switch (this.getPlayer().getPlayerSelectedBattle().getCurrentChallenge().getChallengeType()) {
-    	case PAPER_SCISSORS_ROCK:
-    		this.launchPaperScissorsRockScreen();
-    		break;
-    	case QUIZ:
-    		this.launchQuizScreen();
-    		break;
-    	default:
-    		this.launchFlipACoinScreen();
-    		break;
-    	}
+    	makeNewChallengeAndLaunchScreen();
     }
     
     public void launchQuizScreen() {
@@ -135,7 +141,7 @@ public class GameEnvironment {
     
     public void closeQuizScreen(QuizScreen inputQuizScreen) {
         inputQuizScreen.closeWindow();
-        // Redirect to next challenge
+        launchChallengeResultScreen();
     }
     
     public void launchPaperScissorsRockScreen() {
@@ -144,6 +150,7 @@ public class GameEnvironment {
 
     public void closePaperScissorsRockScreen(PaperScissorsRockScreen inputPapersScissorsRockWindow) {
         inputPapersScissorsRockWindow.closeWindow();
+        launchChallengeResultScreen();
 
     }
 
@@ -153,7 +160,34 @@ public class GameEnvironment {
 
     public void closeChallengeResultScreen(ChallengeResultScreen inputChallengeResultWindow) {
         inputChallengeResultWindow.closeWindow();
-        // Next challenge?
+        
+        switch (this.getFightOutcome()) {
+        case PLAYER_WINS_BATTLE:
+        	launchBattleResultScreen();
+        	break;
+        case BOTH_MONSTERS_STILL_HAVE_HEALTH:
+        	makeNewChallengeAndLaunchScreen();
+        	break;
+        case PLAYER_LOSES_MONSTER_BUT_BATTLE_CONTINUES:
+        	getPlayer().getPlayerInventory().getMonsters().remove(0);
+        	makeNewChallengeAndLaunchScreen();
+        	break;
+        default: // Game is over
+        	launchFinishGameScreen();
+        	break;
+        }
+    }
+    
+    public void makeNewChallengeAndLaunchScreen() {
+    	Challenge newChallenge = tools.makeRandomChallenge();
+        getPlayer().getPlayerSelectedBattle().setCurrentChallenge(newChallenge);
+        if (newChallenge.challengeType == ChallengeType.FLIP_A_COIN) {
+            launchFlipACoinScreen();
+        } else if(newChallenge.challengeType == ChallengeType.PAPER_SCISSORS_ROCK) {
+            launchPaperScissorsRockScreen();
+        } else {
+            launchQuizScreen();
+        }
     }
     
     public void launchFlipACoinScreen() {
@@ -162,6 +196,7 @@ public class GameEnvironment {
     
     public void closeFlipACoinScreen(FlipACoinScreen flipACoinWindow) {
     	flipACoinWindow.closeWindow();
+    	launchChallengeResultScreen();
     }
 
     public void launchBattleResultScreen() {

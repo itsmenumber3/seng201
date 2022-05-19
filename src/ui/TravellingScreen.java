@@ -56,15 +56,16 @@ public class TravellingScreen {
 	}
 	
 	public void fillProgressBar() {
-		for (int index = 0; index < 100; index++) {
+		for (int index = 0; index <= 100; index++) {
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			this.progressBar.setValue(i);
+			this.progressBar.setValue(index);
 			this.progressBar.update(this.progressBar.getGraphics());
 		}
+		// game decide random event
 	}
 
 	/**
@@ -76,7 +77,8 @@ public class TravellingScreen {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (stateOfProgressBar) {
-					
+					fillProgressBar();
+					stateOfProgressBar = false;
 				}
 			}
 		});

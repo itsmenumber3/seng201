@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import assets.libraries.Tools;
 import battles.Battle;
 import battles.challenge.FlipACoin;
 import battles.challenge.Quiz;
@@ -32,6 +33,7 @@ public class FlipACoinScreen {
 	private Player player;
 	private Monster battleMonster;
 	private Monster playerMonster;
+	private Tools tools = new Tools();
 
 	/**
 	 * Launch the application.
@@ -66,7 +68,9 @@ public class FlipACoinScreen {
 	}
 
 	public void finishedWindow() {
+		battle.incrementChallengeCount();
 		flipACoin.runFlipACoinResults();
+		gameEnvironment.setFightOutcome(tools.runFight(player));
 		gameEnvironment.closeFlipACoinScreen(this);
 	}
 

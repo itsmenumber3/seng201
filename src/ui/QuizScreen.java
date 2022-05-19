@@ -12,13 +12,13 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import assets.libraries.Tools;
 import battles.Battle;
 import battles.challenge.Quiz;
 import entities.monsters.Monster;
 
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -31,6 +31,7 @@ public class QuizScreen {
 	private Player player;
 	private Monster battleMonster;
 	private Monster playerMonster;
+	private Tools tools = new Tools();
 	
 	/**
 	 * Launch the application.
@@ -68,6 +69,7 @@ public class QuizScreen {
 	public void finishedWindow() {
 		battle.incrementChallengeCount();
 		quiz.runQuizResults();
+		gameEnvironment.setFightOutcome(tools.runFight(player));
 		gameEnvironment.closeQuizScreen(this);
 	}
 
