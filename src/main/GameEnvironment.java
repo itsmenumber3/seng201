@@ -42,6 +42,15 @@ public class GameEnvironment {
         this.launchPlayerSetupScreen();
     }
 
+    public void launchHowToPlayScreen() {
+        HowToPlayScreen howToPlayWindow = new HowToPlayScreen(this);
+    }
+
+    public void closeHowToPlayScreen(HowToPlayScreen howToPlayWindow) {
+        howToPlayWindow.closeWindow();
+        this.launchWelcomeScreen();
+    }
+
     public void launchPlayerSetupScreen() {
         PlayerSetupScreen playerSetupWindow = new PlayerSetupScreen(this);
     }
@@ -67,6 +76,28 @@ public class GameEnvironment {
     public void closeMapScreen(MapScreen inputMapWindow, JButton inputJButtonPressed) {
     	inputMapWindow.closeWindow();
     	this.launchBattleScreen();
+    }
+
+    public void launchInventoryScreen(boolean isPreviousWindowMapWindow) {
+        InventoryScreen inventoryWindow = new InventoryScreen(this, isPreviousWindowMapWindow);
+    }
+
+    public void closeInventoryScreen(InventoryScreen inputInventoryWindow) {
+        inputInventoryWindow.closeWindow();
+        if (inputInventoryWindow.getIsPreviousWindowMapWindow()) {
+            launchMapScreen();
+        } else {
+            launchShopScreen();
+        }
+    }
+
+    public void launchShopScreen() {
+        ShopScreen shopWindow = new ShopScreen(this);
+    }
+
+    public void closeShopScreen(ShopScreen inputShopWindow) {
+        inputShopWindow.closeWindow();
+        launchMapScreen();
     }
     
     public void launchBattleScreen() {
@@ -102,14 +133,35 @@ public class GameEnvironment {
     	QuizScreen quizWindow = new QuizScreen(this);
     }
     
-    public void closeQuizScreen(QuizScreen inputQuizScreen
+    public void closeQuizScreen(QuizScreen inputQuizScreen) {
+        inputQuizScreen.closeWindow();
+        // Redirect to next challenge
+    }
     
     public void launchPaperScissorsRockScreen() {
-    	PaperScissorsRockScreen paperScissorsRockWindow = new PaperScissorsRockScreen();
+    	PaperScissorsRockScreen paperScissorsRockWindow = new PaperScissorsRockScreen(this);
+    }
+
+    public void closePaperScissorsRockScreen(PaperScissorsRockScreen inputPapersScissorsRockWindow) {
+        inputPapersScissorsRockWindow.closeWindow();
+
+    }
+
+    public void launchChallengeResultScreen() {
+        ChallengeResultScreen challengeResultWindow = new ChallengeResultScreen(this);
+    }
+
+    public void closeChallengeResultScreen(ChallengeResultScreen inputChallengeResultWindow) {
+        inputChallengeResultWindow.closeWindow();
+        // Next challenge?
     }
     
     public void launchFlipACoinScreen() {
     	FlipACoinScreen flipACoinWindow = new FlipACoinScreen();
+    }
+    
+    public void closeFlipACoinScreen(FlipACoinScreen flipACoinWindow) {
+    	flipACoinWindow.closeWindow();
     }
 
     public void launchBattleResultScreen() {

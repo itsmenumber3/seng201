@@ -13,9 +13,9 @@ public class Monster extends Entity implements Role {
 
 	private RoleType roleType = RoleType.MONSTER; // This is the role type of the monster 
     private MonsterType monsterType; // This is the type of monster that is being represented
-    private int monsterHealthLevel; // This is the current health level of the monster
-    private int monsterAttackDamage; // This is the damage caused by the monster on its opponent
-    private int monsterResistanceAbility; // This is the resistance to an attack that the monster has
+    private double monsterHealthLevel; // This is the current health level of the monster
+    private double monsterAttackDamage; // This is the damage caused by the monster on its opponent
+    private double monsterResistanceAbility; // This is the resistance to an attack that the monster has
 
     /** Setter of the roleType
     *This is an unallowed method and will throw the UnallowedMethodException exception
@@ -97,7 +97,7 @@ public class Monster extends Entity implements Role {
     /** Restter for the getMonsterHealthLevel 
      * This method resets the health level to DEFAULT_HEALTH_LEVEL in MagicNumbers
      * The current health level is checked to see if it is within range
-     * @param DEFAULT_HEALTH_LEVEL @see MagicNumbers
+     * @see assets.libraries.MagicNumbers
      */
     public void resetMonsterHealthLevel() {
         try {
@@ -115,9 +115,19 @@ public class Monster extends Entity implements Role {
      * This method returns the health level
      * @return monsterHealthLevel: integer
      */
-    public int getMonsterHealthLevel() {
+    public double getMonsterHealthLevel() {
         return this.monsterHealthLevel;
     }
+
+    public void increaseMonsterHealthLevel(double inputIncreaseAmount) {
+        this.monsterHealthLevel += inputIncreaseAmount;
+    }
+
+    public void monsterGetsAttacked(double inputOpponentAttackDamage) {
+        this.monsterHealthLevel = this.monsterHealthLevel - (inputOpponentAttackDamage * ((100 - this.monsterResistanceAbility) / 100));
+    }
+
+
 
     // HEALTH LEVEL ---------------------------------------------------
     
@@ -129,7 +139,7 @@ public class Monster extends Entity implements Role {
      * This method sets the attack damage ability
      * @param inputMonsterAttackDamage
      */
-    public void setMonsterAttackDamage(int inputMonsterAttackDamage) {
+    public void setMonsterAttackDamage(double inputMonsterAttackDamage) {
         try {
             if (inputMonsterAttackDamage <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE  && inputMonsterAttackDamage >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
                 this.monsterAttackDamage = inputMonsterAttackDamage;
@@ -146,7 +156,7 @@ public class Monster extends Entity implements Role {
      * This method returns the monster attack damage
      * @return monsterAttackDamage: integer
      */
-    public int getMonsterAttackDamage() {
+    public double getMonsterAttackDamage() {
         return this.monsterAttackDamage;
     }
     // ATTACK DAMAGE --------------------------------------------------
@@ -159,7 +169,7 @@ public class Monster extends Entity implements Role {
     * This method sets the resistance of a monster from an attack
     * @param inputResistanceAbility
     */
-    public void setMonsterResistanceAbility(int inputResistanceAbility) {
+    public void setMonsterResistanceAbility(double inputResistanceAbility) {
         try {
             if (inputResistanceAbility <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE && inputResistanceAbility >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
                 this.monsterResistanceAbility = inputResistanceAbility;
@@ -176,7 +186,7 @@ public class Monster extends Entity implements Role {
      * This method returns the resistance ability of the monster from an attack
      * @return monsterResistanceAbility: integer
      */
-    public int getMonsterResistanceAbility() {
+    public double getMonsterResistanceAbility() {
         return this.monsterResistanceAbility;
     }
 

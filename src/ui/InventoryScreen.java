@@ -1,5 +1,7 @@
 package ui;
 
+import main.GameEnvironment;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,6 +26,12 @@ import javax.swing.JTextField;
 public class InventoryScreen {
 
 	private JFrame window;
+	private GameEnvironment gameEnvironment;
+	private boolean isPreviousWindowMapWindow;
+
+	public boolean getIsPreviousWindowMapWindow() {
+		return this.isPreviousWindowMapWindow;
+	}
 
 	/**
 	 * Launch the application.
@@ -41,6 +49,20 @@ public class InventoryScreen {
 		});
 	}
 
+	public InventoryScreen(GameEnvironment inputGameEnvironment, boolean inputIsPreviousWindowMapWindow) {
+		this.gameEnvironment = inputGameEnvironment;
+		this.isPreviousWindowMapWindow = inputIsPreviousWindowMapWindow;
+		initialize();
+		window.setVisible(true);
+	}
+
+	public void closeWindow() {
+		frame.dispose();
+	}
+
+	public void finishedWindow() {
+		gameEnvironment.closeInventoryScreen(this);
+	}
 	/**
 	 * Create the application.
 	 */

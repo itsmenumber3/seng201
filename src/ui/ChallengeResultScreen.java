@@ -1,5 +1,7 @@
 package ui;
 
+import main.GameEnvironment;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,6 +14,7 @@ import javax.swing.JButton;
 public class ChallengeResultScreen {
 
 	private JFrame frame;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
@@ -29,7 +32,21 @@ public class ChallengeResultScreen {
 		});
 	}
 
-	/**
+	public ChallengeResultScreen(GameEnvironment inputGameEnvironment) {
+		this.gameEnvironment = inputGameEnvironment;
+		initialize();
+		frame.setVisible(true);
+	}
+
+	public void closeWindow() {
+		frame.dispose();
+	}
+
+	public void finishedWindow() {
+		gameEnvironment.closeChallengeResultScreen(this);
+	}
+
+								 /**
 	 * Create the application.
 	 */
 	public ChallengeResultScreen() {

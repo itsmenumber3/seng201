@@ -12,6 +12,9 @@ import main.GameEnvironment;
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.SystemColor;
 
 public class FlipACoinScreen {
 
@@ -25,7 +28,7 @@ public class FlipACoinScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FlipCoinScreen window = new FlipCoinScreen();
+					FlipACoinScreen window = new FlipACoinScreen();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +48,7 @@ public class FlipACoinScreen {
 	}
 
 	public void finishedWindow() {
-		gameEnvironment.closeFlipCoinScreen
+		gameEnvironment.closeFlipACoinScreen
 	}
 
 	/**
@@ -64,46 +67,69 @@ public class FlipACoinScreen {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblFlipACoin = new JLabel("Flip a Coin!");
-		lblFlipACoin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFlipACoin.setFont(new Font("Century Schoolbook L", Font.PLAIN, 25));
-		lblFlipACoin.setBounds(197, 11, 356, 49);
-		frame.getContentPane().add(lblFlipACoin);
-		
-		JLabel lblselectHeadsOr = new JLabel("<html><div>Select Heads or Tails below to see if you win this chance to attack</div></html>");
+		JLabel lblselectHeadsOr = new JLabel("");
 		lblselectHeadsOr.setHorizontalAlignment(SwingConstants.CENTER);
 		lblselectHeadsOr.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
-		lblselectHeadsOr.setBounds(72, 71, 606, 90);
+		lblselectHeadsOr.setBounds(77, 133, 606, 90);
 		frame.getContentPane().add(lblselectHeadsOr);
 		
 		JLabel lblTailSymbol = new JLabel("");
-		lblTailSymbol.setIcon(new ImageIcon(FlipCoinScreen.class.getResource("/assets/ui/img/Tails.jpg")));
-		lblTailSymbol.setBounds(202, 194, 96, 96);
+		lblTailSymbol.setIcon(new ImageIcon(FlipACoinScreen.class.getResource("/assets/ui/img/Tails.jpg")));
+		lblTailSymbol.setBounds(207, 235, 96, 96);
 		frame.getContentPane().add(lblTailSymbol);
 		
 		JLabel lblHeadsSymbol = new JLabel("");
-		lblHeadsSymbol.setIcon(new ImageIcon(FlipCoinScreen.class.getResource("/assets/ui/img/Heads.jpg")));
-		lblHeadsSymbol.setBounds(452, 194, 96, 96);
+		lblHeadsSymbol.setIcon(new ImageIcon(FlipACoinScreen.class.getResource("/assets/ui/img/Heads.jpg")));
+		lblHeadsSymbol.setBounds(457, 235, 96, 96);
 		frame.getContentPane().add(lblHeadsSymbol);
 		
 		JToggleButton tglbtnHeads = new JToggleButton("Heads");
-		tglbtnHeads.setBounds(452, 315, 96, 23);
+		tglbtnHeads.setBackground(Color.YELLOW);
+		tglbtnHeads.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		tglbtnHeads.setBounds(457, 356, 96, 31);
 		frame.getContentPane().add(tglbtnHeads);
 		
 		JToggleButton tglbtnTails = new JToggleButton("Tails");
-		tglbtnTails.setBounds(202, 315, 96, 23);
+		tglbtnTails.setBackground(SystemColor.info);
+		tglbtnTails.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		tglbtnTails.setBounds(207, 356, 96, 31);
 		frame.getContentPane().add(tglbtnTails);
 		
-		JLabel lblSelectionDisplay = new JLabel("You've selected: <choice>");
-		lblSelectionDisplay.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSelectionDisplay.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblSelectionDisplay.setBounds(248, 356, 204, 33);
-		frame.getContentPane().add(lblSelectionDisplay);
+		JPanel panelItem = new JPanel();
+		panelItem.setLayout(null);
+		panelItem.setOpaque(true);
+		panelItem.setBackground(new Color(0, 51, 153));
+		panelItem.setBounds(375, 11, 361, 120);
+		frame.getContentPane().add(panelItem);
 		
-		JButton btnFlipCoin = new JButton("Flip the Coin");
-		btnFlipCoin.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnFlipCoin.setBounds(270, 400, 160, 42);
-		frame.getContentPane().add(btnFlipCoin);
+		JLabel lblWhatIs_3 = new JLabel("<html><bold>About battle monster:</bold><div>Health: 100%<br>Attack Damage: 20%<br>Resistance Ability: 20%</div></html>");
+		lblWhatIs_3.setForeground(Color.WHITE);
+		lblWhatIs_3.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblWhatIs_3.setBounds(183, 32, 166, 82);
+		panelItem.add(lblWhatIs_3);
+		
+		JLabel lblWhatIs_3_2 = new JLabel("<html><bold>About your monster</bold><div>Health: 100%<br>Attack Damage: 20%<br>Resistance Ability: 20%</div></html>");
+		lblWhatIs_3_2.setForeground(Color.WHITE);
+		lblWhatIs_3_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblWhatIs_3_2.setBounds(12, 32, 166, 82);
+		panelItem.add(lblWhatIs_3_2);
+		
+		JLabel lblWhatIs_3_2_1 = new JLabel("<html><div>Gold: 0 Points: 0 Battle: Farewell Spit</div></html>");
+		lblWhatIs_3_2_1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblWhatIs_3_2_1.setForeground(Color.WHITE);
+		lblWhatIs_3_2_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblWhatIs_3_2_1.setBounds(12, 0, 287, 38);
+		panelItem.add(lblWhatIs_3_2_1);
+		
+		JLabel lblchallengeFlip = new JLabel("<html><div>Challenge #1 Flip A Coin</div></html>");
+		lblchallengeFlip.setFont(new Font("Century Schoolbook L", Font.BOLD, 18));
+		lblchallengeFlip.setBounds(25, 12, 621, 45);
+		frame.getContentPane().add(lblchallengeFlip);
+		
+		JLabel lblWhatIs_2 = new JLabel("<html><div>Select Heads or Tails below to see if you win this chance to attack</div></html>");
+		lblWhatIs_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		lblWhatIs_2.setBounds(25, 35, 296, 120);
+		frame.getContentPane().add(lblWhatIs_2);
 	}
 
 }

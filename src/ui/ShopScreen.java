@@ -1,5 +1,7 @@
 package ui;
 
+import main.GameEnvironment;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -27,6 +29,7 @@ public class ShopScreen {
 	private JFrame window;
 	private JTextField textField;
 	private JTable table;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
@@ -42,6 +45,20 @@ public class ShopScreen {
 				}
 			}
 		});
+	}
+
+	public ShopScreen(GameEnvironment inputGameEnvironment) {
+		this.gameEnvironment = inputGameEnvironment;
+		initialize();
+		window.setVisible(true);
+	}
+
+	public void closeWindow() {
+		window.dispose();
+	}
+
+	public void finishedWindow() {
+		gameEnvironment.closeShopScreen(this);
 	}
 
 	/**

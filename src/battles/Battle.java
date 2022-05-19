@@ -71,4 +71,26 @@ public class Battle{
     public Challenge getCurrentChallenge() {
         return this.currentChallenge;
     }
+    
+    private int challengeCount = 0;
+    
+    public void setChallengeCount(int inputChallengeCount) {
+    	try {
+    		throw new UnallowedMethodException("Unallowed method");
+    	} catch (UnallowedMethodException e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    public void resetChallengeCount() {
+    	challengeCount = 0;
+    }
+    
+    public void incrementChallengeCount() {
+    	challengeCount++;
+    }
+    
+    public int getChallengeCount() {
+    	return challengeCount;
+    }
 }

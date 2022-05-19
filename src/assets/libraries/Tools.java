@@ -8,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import assets.enums.BattleType;
+import assets.enums.ChallengeOutcomeType;
+import assets.enums.FightOutcomeType;
 import assets.enums.MonsterType;
 import battles.Battle;
 import battles.challenge.Challenge;
@@ -572,5 +574,33 @@ public class Tools {
 		quiz.setQuizChoices(Arrays.copyOfRange(questionData, 1, 5));
 		quiz.setQuizCorrectChoice(questionData[5]);
 		return quiz;
+	}
+
+	public FightOutcomeType runFight(Player inputPlayer) {
+		if (inputPlayer.getPlayerSelectedBattle().getCurrentChallenge().getChallengeOutcome() == ChallengeOutcomeType.WIN) {
+			// Player monster attacks battle monster
+			inputPlayer.getPlayerSelectedBattle().getBattleMonster().monsterGetsAttacked(inputPlayer.getPlayerInventory().getMonsters().get(0).getMonsterAttackDamage());
+		} else if (inputPlayer.getPlayerSelectedBattle().getCurrentChallenge().getChallengeOutcome() == ChallengeOutcomeType.LOSE) {
+			// Player monster is attacked by battle monster
+			inputPlayer.getPlayerInventory().getMonsters().get(0).monsterGetsAttacked(inputPlayer.getPlayerSelectedBattle().getBattleMonster().getMonsterAttackDamage());
+		} // Skip entirely if draw RPS
+
+		if (inputPlayer.getPlayerInventory().getMonsters().get(0).getMonsterHealthLevel() > 0) {
+			if (inputPlayer.getPlayerSelectedBattle().getBattleMonster().getMonsterHealthLevel() <= 0) {
+				return FightOutcomeType.PLAYER_WINS_BATTLE;
+			} else {
+				inputPlayer.getPlayerSelectedBattle().setCurrentChallenge(this.makeRandomChallenge());
+				return FightOutcomeType.BOTH_MONSTERS_STILL_HAVE_HEALTH;
+			}
+		} else {
+			inputPlayer.getPlayerInventory().getMonsters().remove(0);
+
+			if (inputPlayer.getPlayerInventory().getMonsters().size() > 0) {
+				inputPlayer.getPlayerSelectedBattle().setCurrentChallenge(this.makeRandomChallenge());
+				return FightOutcomeType.PLAYER_LOSES_MONSTER_BUT_BATTLE_CONTINUES;
+			} else {
+				return FightOutcomeType.PLAYER_OUT_OF_MONSTERS_AND_LOSES_BATTLE_GAME_OVER;
+			}
+		}
 	}
 }
