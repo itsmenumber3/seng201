@@ -3,6 +3,7 @@ package ui;
 import main.GameEnvironment;
 import main.Inventory;
 import main.Player;
+import main.Shop;
 
 import java.awt.EventQueue;
 
@@ -38,6 +39,8 @@ public class ShopScreen {
 	private Player player;
 	private Inventory inventory;
 	private Battle battle;
+	private Shop shop;
+	
 
 	/**
 	 * Launch the application.
@@ -60,6 +63,7 @@ public class ShopScreen {
 		this.player = gameEnvironment.getPlayer();
 		this.inventory = player.getPlayerInventory();
 		this.battle = player.getPlayerSelectedBattle();
+		this.shop = battle.getBattleShop();
 		initialize();
 		window.setVisible(true);
 	}
@@ -111,7 +115,7 @@ public class ShopScreen {
 		btnPurchaseThisMonster.setBounds(508, 320, 199, 29);
 		panelPurchaseMonster.add(btnPurchaseThisMonster);
 		
-		JButton btnMonster1 = new JButton("Monster 1");
+		JButton btnMonster1 = new JButton(shop.getShopMonsterRange().get(0).getEntityName());
 		btnMonster1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -121,25 +125,25 @@ public class ShopScreen {
 		btnMonster1.setBounds(12, 224, 111, 25);
 		panelPurchaseMonster.add(btnMonster1);
 		
-		JButton btnMonster2 = new JButton("Monster 1");
+		JButton btnMonster2 = new JButton(shop.getShopMonsterRange().get(1).getEntityName());
 		btnMonster2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster2.setBackground(SystemColor.info);
 		btnMonster2.setBounds(155, 224, 111, 25);
 		panelPurchaseMonster.add(btnMonster2);
 		
-		JButton btnMonster3 = new JButton("Monster 1");
+		JButton btnMonster3 = new JButton(shop.getShopMonsterRange().get(2).getEntityName());
 		btnMonster3.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster3.setBackground(SystemColor.info);
 		btnMonster3.setBounds(299, 224, 111, 25);
 		panelPurchaseMonster.add(btnMonster3);
 		
-		JButton btnMonster4 = new JButton("Monster 1");
+		JButton btnMonster4 = new JButton(shop.getShopMonsterRange().get(3).getEntityName());
 		btnMonster4.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster4.setBackground(SystemColor.info);
 		btnMonster4.setBounds(446, 224, 111, 25);
 		panelPurchaseMonster.add(btnMonster4);
 		
-		JButton btnMonster5 = new JButton("Monster 1");
+		JButton btnMonster5 = new JButton(shop.getShopMonsterRange().get(4).getEntityName());
 		btnMonster5.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster5.setBackground(SystemColor.info);
 		btnMonster5.setBounds(596, 224, 111, 25);
@@ -157,30 +161,30 @@ public class ShopScreen {
 		
 		JLabel lblMonster1Img = new JLabel("");
 		lblMonster1Img.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMonster1Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/dragon-final.png")));
+		lblMonster1Img.setIcon(new ImageIcon(ShopScreen.class.getResource(shop.getShopMonsterRange().get(0).getEntityImagePath())));
 		lblMonster1Img.setBounds(12, 12, 111, 200);
 		panelPurchaseMonster.add(lblMonster1Img);
 		
 		JLabel lblMonster2Img = new JLabel("");
-		lblMonster2Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/skeleton-final.jpg")));
+		lblMonster2Img.setIcon(new ImageIcon(ShopScreen.class.getResource(shop.getShopMonsterRange().get(1).getEntityImagePath())));
 		lblMonster2Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster2Img.setBounds(155, 12, 111, 200);
 		panelPurchaseMonster.add(lblMonster2Img);
 		
 		JLabel lblMonster3Img = new JLabel("");
-		lblMonster3Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/spirit-final.jpg")));
+		lblMonster3Img.setIcon(new ImageIcon(ShopScreen.class.getResource(shop.getShopMonsterRange().get(2).getEntityImagePath())));
 		lblMonster3Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster3Img.setBounds(299, 12, 111, 200);
 		panelPurchaseMonster.add(lblMonster3Img);
 		
 		JLabel lblMonster4Img = new JLabel("");
-		lblMonster4Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/troll-final.png")));
+		lblMonster4Img.setIcon(new ImageIcon(ShopScreen.class.getResource(shop.getShopMonsterRange().get(3).getEntityImagePath())));
 		lblMonster4Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster4Img.setBounds(446, 12, 111, 200);
 		panelPurchaseMonster.add(lblMonster4Img);
 		
 		JLabel lblMonster5Img = new JLabel("");
-		lblMonster5Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/zombie-final.jpg")));
+		lblMonster5Img.setIcon(new ImageIcon(ShopScreen.class.getResource(shop.getShopMonsterRange().get(4).getEntityImagePath())));
 		lblMonster5Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster5Img.setBounds(596, 12, 111, 200);
 		panelPurchaseMonster.add(lblMonster5Img);
@@ -189,7 +193,7 @@ public class ShopScreen {
 		tabbedPane.addTab("Delicatessen", null, panelBuyFood, null);
 		panelBuyFood.setLayout(null);
 		
-		JLabel lblIntroduction = new JLabel("<html><div>Welcome to New World Kaitaia's Service Deli. Please select a monster you would like to feed, then select the food you would like to buy.</div></html>");
+		JLabel lblIntroduction = new JLabel(String.format("<html><div>Welcome to %s's Service Deli. Please select a monster you would like to feed, then select the food you would like to buy.</div></html>", shop.getShopName()));
 		lblIntroduction.setBounds(12, 12, 352, 58);
 		lblIntroduction.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		panelBuyFood.add(lblIntroduction);
