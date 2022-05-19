@@ -28,6 +28,9 @@ public abstract class Entity {
      * magicNumber: MagicNumbers s is an object storing all constants needed in this program.
      */
     public MagicNumbers magicNumbers = new MagicNumbers();
+    
+    public String entityImagePath;
+    
 
     // LIBRARIES ------------------------------------------
 
@@ -230,5 +233,12 @@ public abstract class Entity {
     }
 
     // SELL VALUE -----------------------------------------
+    
+	public String getEntityImagePath() {
+		return entityImagePath;
+	}
 
+	public void setEntityImagePath(String entityImagePath) {
+		this.entityImagePath = entityImagePath;
+	}
 }

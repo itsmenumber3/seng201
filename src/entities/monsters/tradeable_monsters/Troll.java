@@ -6,5 +6,6 @@ import entities.monsters.Monster;
 public class Troll extends Monster {
 	public Troll() {
 		this.setMonsterType(MonsterType.TROLL);
+		super.setEntityImagePath("/assets/ui/img/troll-final.png");
 	}
 }

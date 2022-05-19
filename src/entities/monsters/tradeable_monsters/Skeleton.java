@@ -7,5 +7,6 @@ import main.Player;
 public class Skeleton extends Monster {
 	public Skeleton() {
 		this.setMonsterType(MonsterType.SKELETON);
+		super.setEntityImagePath("/assets/ui/img/skeleton-final.png");
 	}
 }
