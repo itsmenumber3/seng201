@@ -144,6 +144,36 @@ public class ShopScreen {
 		lblTip.setBounds(12, 334, 361, 15);
 		panelPurchaseMonster.add(lblTip);
 		
+		JLabel lblMonster1Img = new JLabel("");
+		lblMonster1Img.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster1Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/dragon-final.png")));
+		lblMonster1Img.setBounds(12, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster1Img);
+		
+		JLabel lblMonster2Img = new JLabel("");
+		lblMonster2Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/skeleton-final.jpg")));
+		lblMonster2Img.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster2Img.setBounds(155, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster2Img);
+		
+		JLabel lblMonster3Img = new JLabel("");
+		lblMonster3Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/spirit-final.jpg")));
+		lblMonster3Img.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster3Img.setBounds(299, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster3Img);
+		
+		JLabel lblMonster4Img = new JLabel("");
+		lblMonster4Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/troll-final.png")));
+		lblMonster4Img.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster4Img.setBounds(446, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster4Img);
+		
+		JLabel lblMonster5Img = new JLabel("");
+		lblMonster5Img.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/zombie-final.jpg")));
+		lblMonster5Img.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMonster5Img.setBounds(596, 12, 111, 200);
+		panelPurchaseMonster.add(lblMonster5Img);
+		
 		JPanel panelBuyFood = new JPanel();
 		tabbedPane.addTab("Delicatessen", null, panelBuyFood, null);
 		panelBuyFood.setLayout(null);

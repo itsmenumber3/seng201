@@ -6,6 +6,7 @@ public class Dragon extends Monster {
 	
     public Dragon() {
     	this.setMonsterType(MonsterType.DRAGON);
+    	super.setEntityImagePath("/assets/ui/img/dragon-final.png");
     }
 	
 //    // INSTANTIATION --------------------------------------------------------

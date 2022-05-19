@@ -3,7 +3,6 @@ package entities.monsters;
 import assets.enums.MonsterType;
 import assets.enums.RoleType;
 import entities.Entity;
-import exceptions.InvalidInputException;
 import exceptions.InvalidMonsterNumericPropertyException;
 import exceptions.UnallowedMethodException;
 import main.Role;
