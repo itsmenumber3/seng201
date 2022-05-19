@@ -1,5 +1,7 @@
 package ui;
 
+import main.GameEnvironment;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,9 +10,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import java.awt.Font;
 
-public class FInishGameScreen {
+public class FinishGameScreen {
 
 	private JFrame frame;
+	private GameEnvironment gameEnvironment;
 
 	/**
 	 * Launch the application.
@@ -19,7 +22,7 @@ public class FInishGameScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FInishGameScreen window = new FInishGameScreen();
+					FinishGameScreen window = new FinishGameScreen();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -28,10 +31,25 @@ public class FInishGameScreen {
 		});
 	}
 
+	public FinishGameScreen(GameEnvironment inputGameEnvironment) {
+		this.gameEnvironment = inputGameEnvironment;
+		initialize();
+		frame.setVisible(true);
+	}
+
+	public void closeWindow() {
+		frame.dispose();
+	}
+
+	public void finishedWindow() {
+		gameEnvironment.closeFinishGameScreen(this);
+	}
+
+
 	/**
 	 * Create the application.
 	 */
-	public FInishGameScreen() {
+	public FinishGameScreen() {
 		initialize();
 	}
 

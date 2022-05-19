@@ -11,15 +11,7 @@ import battles.challenge.FlipACoin;
 import battles.challenge.PaperScissorsRock;
 import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
-import ui.BattleScreen;
-import ui.FirstMonsterSetupScreen;
-import ui.FlipACoinScreen;
-import ui.MapScreen;
-import ui.PaperScissorsRockScreen;
-import ui.PlayerSetupScreen;
-import ui.QuizScreen;
-import ui.TravellingScreen;
-import ui.WelcomeScreen;
+import ui.*;
 
 /**
  * The class Game is the master class in this game.
@@ -118,6 +110,23 @@ public class GameEnvironment {
     
     public void launchFlipACoinScreen() {
     	FlipACoinScreen flipACoinWindow = new FlipACoinScreen();
+    }
+
+    public void launchBattleResultScreen() {
+        BattleResultScreen battleResultWindow = new BattleResultScreen(this);
+    }
+
+    public void closeBattleResultScreen(BattleResultScreen inputBattleResultWindow) {
+        inputBattleResultWindow.closeWindow();
+        this.launchMapScreen();
+    }
+
+    public void launchFinishGameScreen() {
+        FinishGameScreen finishGameWindow = new FinishGameScreen(this);
+    }
+
+    public void closeFinishGameScreen(FinishGameScreen inputFinishGameWindow) {
+        inputFinishGameWindow.closeWindow();
     }
 
     public static void main(String[] args) {
