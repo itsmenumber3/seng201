@@ -16,6 +16,7 @@ import battles.NinetyMilesBeach;
 import battles.SouthlandFarm;
 import entities.monsters.battle_monsters.MudMonster;
 import main.GameEnvironment;
+import main.Shop;
 
 import java.awt.BorderLayout;
 import javax.swing.ImageIcon;
@@ -100,7 +101,9 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new MountCook();
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				
 				finishedWindow();
 			}
 		});
@@ -110,6 +113,7 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new NinetyMilesBeach();
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
 			}
@@ -163,6 +167,7 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new LakeTaupo();
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
 			}
@@ -177,6 +182,7 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new CanterburyWetlands();
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.MUD_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
 			}
@@ -194,6 +200,7 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new SouthlandFarm();
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.GRASS_MONSTER, gameEnvironment.getPlayer()));
+				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
 			}

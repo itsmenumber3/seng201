@@ -1,6 +1,7 @@
 package ui;
 
 import main.GameEnvironment;
+import main.Inventory;
 import main.Player;
 
 import java.awt.EventQueue;
