@@ -5,7 +5,7 @@ import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 import main.Shop;
 
-public class Battle {
+public class Battle{
 
 	// BATTLE TYPE ----------------------------------------------
 	

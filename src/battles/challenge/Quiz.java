@@ -1,6 +1,6 @@
-package assets.libraries;
+package battles.challenge;
 
-public class Quiz {
+public class Quiz extends Challenges {
     String[] question1 = {
             "When did Captain Cook come to the islands of NZ?",
             "A. 1709", // 1
@@ -14,18 +14,18 @@ public class Quiz {
             "What animal is on the $2 coin of NZ?",
             "A. Kotuko", // 1
             "B. Kiwi", // 2
-            "C. kakapo", // 3
+            "C. Kakapo", // 3
             "D. Takahe", // 4
             "A. Kotuko" // 5 which is the correct answer.
     };
 
     String[] question3 = {
-            "What is the te reo Māori word for 'science'?",
-            "A. Ahupūngao", // 1
-            "B. Pāngarau", // 2
+            "What is the te reo MÄ�ori word for 'science'?",
+            "A. AhupÅ«ngao", // 1
+            "B. PÄ�ngarau", // 2
             "C. Toi", // 3
-            "D. Pūtaiao", // 4
-            "D. Pūtaiao" // 5 which is the correct answer.
+            "D. PÅ«taiao", // 4
+            "D. PÅ«taiao" // 5 which is the correct answer.
     };
 
     String[] question4 = {
