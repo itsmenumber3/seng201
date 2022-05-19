@@ -50,7 +50,7 @@ public class BattleResultScreen {
 		
 		JLabel lblTitle = new JLabel("You ... <dynamic> the battle!");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		lblTitle.setFont(new Font("Century Schoolbook L", Font.PLAIN, 19));
 		lblTitle.setBounds(175, 11, 350, 35);
 		frame.getContentPane().add(lblTitle);
 		
@@ -61,12 +61,16 @@ public class BattleResultScreen {
 		WinPanel.setLayout(null);
 		
 		JLabel lblBeatTheMonster = new JLabel("You beat the <battle_monster>");
+		lblBeatTheMonster.setEnabled(false);
+		lblBeatTheMonster.setFont(new Font("Century Schoolbook L", Font.BOLD, 12));
 		lblBeatTheMonster.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBeatTheMonster.setBackground(SystemColor.info);
 		lblBeatTheMonster.setBounds(31, 11, 226, 21);
 		WinPanel.add(lblBeatTheMonster);
 		
 		JLabel lblMonsterReward = new JLabel("<html><div>You've been given $/battle_monster.sell_price/ as a reward from the NZ Government</div></html>");
+		lblMonsterReward.setFont(new Font("Century Schoolbook L", Font.BOLD, 12));
+		lblMonsterReward.setEnabled(false);
 		lblMonsterReward.setBackground(SystemColor.info);
 		lblMonsterReward.setBounds(56, 63, 137, 87);
 		WinPanel.add(lblMonsterReward);
@@ -82,10 +86,14 @@ public class BattleResultScreen {
 		LosePanel.setLayout(null);
 		
 		JLabel lblLostToTheMonster = new JLabel("You Lost to the <battle_monster>");
-		lblLostToTheMonster.setBounds(62, 37, 167, 14);
+		lblLostToTheMonster.setEnabled(false);
+		lblLostToTheMonster.setFont(new Font("Century Schoolbook L", Font.BOLD, 12));
+		lblLostToTheMonster.setBounds(62, 28, 167, 23);
 		LosePanel.add(lblLostToTheMonster);
 		
 		JLabel lblNewLabel = new JLabel("Noooooo........");
+		lblNewLabel.setEnabled(false);
+		lblNewLabel.setFont(new Font("Century Schoolbook L", Font.BOLD, 12));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(62, 79, 99, 37);
 		LosePanel.add(lblNewLabel);
