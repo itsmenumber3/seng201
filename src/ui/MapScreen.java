@@ -98,7 +98,7 @@ public class MapScreen {
 		btnMtCook.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnMtCook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new MountCook();
+				Battle battle = new MountCook(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer()));
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
@@ -108,7 +108,7 @@ public class MapScreen {
 		JButton btnMilesBeach = new JButton("90 Miles Beach");
 		btnMilesBeach.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new NinetyMilesBeach();
+				Battle battle = new NinetyMilesBeach(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer()));
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
@@ -161,7 +161,7 @@ public class MapScreen {
 		JButton btnLakeTaupo = new JButton("Lake Taupo");
 		btnLakeTaupo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new LakeTaupo();
+				Battle battle = new LakeTaupo(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
@@ -175,7 +175,7 @@ public class MapScreen {
 		JButton btnCanterburyWetlands = new JButton("<html><div>Canterbury Wetlands</div></html>");
 		btnCanterburyWetlands.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new CanterburyWetlands();
+				Battle battle = new CanterburyWetlands(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.MUD_MONSTER, gameEnvironment.getPlayer()));
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
@@ -192,7 +192,7 @@ public class MapScreen {
 		JButton btnSouthlandFarm = new JButton("Southland Farm");
 		btnSouthlandFarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new SouthlandFarm();
+				Battle battle = new SouthlandFarm(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.GRASS_MONSTER, gameEnvironment.getPlayer()));
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
 				finishedWindow();
