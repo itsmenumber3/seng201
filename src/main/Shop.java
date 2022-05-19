@@ -4,7 +4,7 @@ import assets.enums.EntityType;
 import assets.enums.ItemType;
 import assets.enums.RoleType;
 import entities.*;
-import entities.items.weapons.Weapon;
+
 import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 import java.util.ArrayList; //

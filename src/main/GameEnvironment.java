@@ -1,30 +1,22 @@
 package main;
 
-import java.net.NoRouteToHostException;
-import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
-
-import javax.swing.JButton;
-
 import assets.enums.ChallengeType;
 import assets.enums.FightOutcomeType;
-import assets.enums.MonsterType;
 import assets.libraries.Tools;
 import battles.Battle;
 import battles.challenge.Challenge;
-import battles.challenge.FlipACoin;
-import battles.challenge.PaperScissorsRock;
-import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 import ui.*;
+
+import javax.swing.*;
 
 /**
  * The class Game is the master class in this game.
  */
 public class GameEnvironment {
 
-    private Player player = new Player();
-    private Tools tools = new Tools();
+    private final Player player = new Player();
+    private final Tools tools = new Tools();
     private FightOutcomeType fightOutcome;
     
     public void setFightOutcome(FightOutcomeType inputFightOutcomeType) {
@@ -56,14 +48,6 @@ public class GameEnvironment {
         this.launchPlayerSetupScreen();
     }
 
-    public void launchHowToPlayScreen() {
-        HowToPlayScreen howToPlayWindow = new HowToPlayScreen(this);
-    }
-
-    public void closeHowToPlayScreen(HowToPlayScreen howToPlayWindow) {
-        howToPlayWindow.closeWindow();
-        this.launchWelcomeScreen();
-    }
 
     public void launchPlayerSetupScreen() {
         PlayerSetupScreen playerSetupWindow = new PlayerSetupScreen(this);

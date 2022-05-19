@@ -6,6 +6,6 @@ import entities.monsters.Monster;
 public class Zombie extends Monster {
 	public Zombie() {
 		this.setMonsterType(MonsterType.ZOMBIE);
-		super.setEntityImagePath("/assets/ui/img/zombie-final.png");
+		this.setEntityImagePath("/assets/ui/img/zombie-final.png");
 	}
 }

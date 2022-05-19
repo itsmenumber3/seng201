@@ -4,7 +4,6 @@ import assets.enums.EntityType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
 import exceptions.InvalidInputException;
-import exceptions.MaximumStringLengthExceededException;
 import exceptions.UnexpectedNegativeNumberException;
 
 /**
@@ -174,7 +173,7 @@ public abstract class Entity {
      */
     public void setEntityPurchaseValue(int inputEntityPurchaseValue) {
         try {
-            if (inputEntityPurchaseValue >= magicNumbers.MINIMUM_MONSTER_SELL_PRICE) {
+            if (inputEntityPurchaseValue >= magicNumbers.MINIMUM_ENTITY_SELL_PRICE) {
                 this.entityPurchaseValue = inputEntityPurchaseValue;
             } else {
                 throw new UnexpectedNegativeNumberException("Unexpected negative number");

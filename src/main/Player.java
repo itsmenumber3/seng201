@@ -64,7 +64,6 @@ public class Player implements Role {
         }
         catch (InvalidInputException e) { // If playerNameValidation throws this error
             System.out.println("Name not valid");
-            this.setPlayerName(tools.readPlayerStringInput("Please enter player name: "));
         }
     }
 
@@ -136,7 +135,7 @@ public class Player implements Role {
                 this.playerDays = inputPlayerDays;
             }
         } catch (InvalidInputException e) { // Catch the error if it occurs.
-            this.setPlayerDays(Integer.parseInt(tools.readPlayerStringInput("Enter player days: ")));
+            e.printStackTrace(); // Handle it
         }
     }
 
