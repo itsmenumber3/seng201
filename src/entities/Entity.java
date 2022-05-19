@@ -210,7 +210,7 @@ public abstract class Entity {
      */
     public void setEntitySellValue(int inputEntitySellValue) {
         try {
-            if (inputEntitySellValue >= magicNumbers.MINIMUM_MONSTER_SELL_PRICE) {
+            if (inputEntitySellValue >= magicNumbers.MINIMUM_ENTITY_SELL_PRICE) {
                 this.entitySellValue = inputEntitySellValue;
             } else {
                 throw new UnexpectedNegativeNumberException("Unexpected negative number");

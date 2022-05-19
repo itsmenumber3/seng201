@@ -101,7 +101,7 @@ public class MagicNumbers {
     public int WITHER_VALUE;
     public int MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE = 100;
     public int MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE = 0;
-    public final int MINIMUM_MONSTER_SELL_PRICE = 0;
+    public final int MINIMUM_ENTITY_SELL_PRICE = 0;
     public final int MINIMUM_MONSTER_PURCHASE_PRICE = 0;
 
     public final int MINIMUM_RARITY = 1;
@@ -132,6 +132,16 @@ public class MagicNumbers {
     
     public final int BATTLE_ATTACK_HARD = 20;
     public final int BATTLE_RESISTANCE_HARD = 15;
+    
+    public final int PASTA_SELL_VALUE = 16;
+    public final int APPLE_SELL_VALUE = 7;
+    public final int FOOD_VAR = 8;
+    
+    public final int COFFEE_SELL_VALUE = 5;
+    public final int ENERGY_DRINK_SELL_VALUE = 12;
+    public final int DRINK_VAR = 6;
+    
+    
 
 
 

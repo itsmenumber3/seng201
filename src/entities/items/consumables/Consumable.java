@@ -7,9 +7,15 @@ import entities.items.Item;
 /**
  * The interface Consumable provides for a blueprint to implement the classes food and potion.
  * @see Food
- * @see Potion
+ * @see Drink
  */
 public class Consumable extends Item {
+	
+	private int consumableHealValue;
+	
+	/** Constructor method
+	 * 
+	 */
     public Consumable() {
         super();
     }
@@ -43,8 +49,6 @@ public class Consumable extends Item {
 
 
     // HEAL VALUE -----------------------------------------------------------------
-
-    private int consumableHealValue;
     
     
     public void setConsumableHealValue(int inputConsumableHealValue) {
