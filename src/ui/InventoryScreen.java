@@ -1,6 +1,8 @@
 package ui;
 
 import main.GameEnvironment;
+import main.Inventory;
+import main.Player;
 
 import java.awt.EventQueue;
 
@@ -8,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Font;
@@ -15,6 +18,9 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+
+import battles.Battle;
+
 import java.awt.SystemColor;
 import javax.swing.JMenu;
 import javax.swing.JList;
@@ -28,7 +34,13 @@ public class InventoryScreen {
 	private JFrame window;
 	private GameEnvironment gameEnvironment;
 	private boolean isPreviousWindowMapWindow;
-
+	private Player player;
+	private Battle battle;
+	private Inventory inventory;
+	private ArrayList<Monster> monsters;
+	private ArrayList<Food> foods;
+	private ArrayList<Drink> drinks;
+	
 	public boolean getIsPreviousWindowMapWindow() {
 		return this.isPreviousWindowMapWindow;
 	}
