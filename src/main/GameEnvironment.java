@@ -71,9 +71,21 @@ public class GameEnvironment {
     	MapScreen mapWindow = new MapScreen(this);
     }
     
-    public void closeMapScreen(MapScreen inputMapWindow, JButton inputJButtonPressed) {
+    public void closeMapScreen(MapScreen inputMapWindow) {
     	inputMapWindow.closeWindow();
-    	this.launchBattleScreen();
+    	switch (inputMapWindow.getNextScreen()) {
+    	case 1:
+    		launchBattleScreen();
+    		break;
+    	case 2:
+    		launchShopScreen();
+    		break;
+    	case 3:
+    		launchFinishGameScreen();
+    		break;
+    	default:
+    		launchInventoryScreen(true);
+    	}
     }
 
     public void launchInventoryScreen(boolean isPreviousWindowMapWindow) {

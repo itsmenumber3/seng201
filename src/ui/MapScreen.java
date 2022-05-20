@@ -39,7 +39,12 @@ public class MapScreen {
 	private Battle battle;
 	private JButton btnInventory;
 	private JButton btnVisitShop;
-
+	private int nextScreen;
+	
+	public int getNextScreen() {
+		return nextScreen;
+	}
+	
 	/**
 	 * Launch the application.
 	 */
@@ -72,16 +77,6 @@ public class MapScreen {
 		gameEnvironment.closeMapScreen(this);
 	}
 	
-	public void finishedWindowInventory() {
-		
-	}
-	
-	public void finishedWindow 
-	
-	public void finishedWindowEndGame() {
-		
-	}
-
 	/**
 	 * Create the application.
 	 */
@@ -105,9 +100,9 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new MountCook(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer()));
-				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
+				gameEnvironment.getPlayer().setPlayerPreviewBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
-				
+				nextScreen = 1;
 				finishedWindow();
 			}
 		});
@@ -117,8 +112,9 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new NinetyMilesBeach(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer()));
-				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
+				gameEnvironment.getPlayer().setPlayerPreviewBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
 				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				nextScreen = 1;
 				finishedWindow();
 			}
 		});
@@ -148,7 +144,13 @@ public class MapScreen {
 		panelItem.add(lblCurrentLocationInfo);
 		lblCurrentLocationInfo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		btnVisitShop = new JButton("Visit FreshChoice Takaka");
+		btnVisitShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
+		btnVisitShop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				nextScreen = 1;
+				finishedWindow();
+			}
+		});
 		btnVisitShop.setForeground(Color.WHITE);
 		btnVisitShop.setBounds(12, 145, 207, 25);
 		panelItem.add(btnVisitShop);
@@ -156,6 +158,12 @@ public class MapScreen {
 		btnVisitShop.setBackground(Color.RED);
 		
 		btnInventory = new JButton("My inventory");
+		btnInventory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				nextScreen = 4;
+				finishedWindow();
+			}
+		});
 		btnInventory.setForeground(Color.WHITE);
 		btnInventory.setBounds(12, 172, 207, 25);
 		panelItem.add(btnInventory);
@@ -172,6 +180,7 @@ public class MapScreen {
 				Battle battle = new LakeTaupo(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
 				player.setPlayerPreviewBattle(battle);
+				nextScreen = 1;
 				finishedWindow();
 			}
 		});
@@ -184,7 +193,9 @@ public class MapScreen {
 		btnCanterburyWetlands.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new CanterburyWetlands(gameEnvironment.getPlayer());
+				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
 				player.setPlayerPreviewBattle(battle);
+				nextScreen = 1;
 				finishedWindow();
 			}
 		});
@@ -200,7 +211,9 @@ public class MapScreen {
 		btnSouthlandFarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new SouthlandFarm(gameEnvironment.getPlayer());
+				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
 				player.setPlayerPreviewBattle(battle);
+				nextScreen = 1;
 				finishedWindow();
 			}
 		});
@@ -212,6 +225,8 @@ public class MapScreen {
 		JButton btnEndGame = new JButton("End Game");
 		btnEndGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				nextScreen = 3;
+				finishedWindow();
 			}
 		});
 		btnEndGame.setBounds(458, 665, 97, 25);
