@@ -103,4 +103,14 @@ public class Battle{
     public int getChallengeCount() {
     	return challengeCount;
     }
+
+    public String battleImagePath;
+
+    public void setBattleImagePath(String inputBattleImagePath) {
+        battleImagePath = inputBattleImagePath;
+    }
+
+    public String getBattleImagePath() {
+        return battleImagePath;
+    }
 }

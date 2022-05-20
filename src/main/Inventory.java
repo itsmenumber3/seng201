@@ -1,17 +1,13 @@
 package main;
 
 import assets.libraries.Tools;
-import entities.items.Item;
 import entities.items.LottoTicket;
 import entities.items.consumables.Drink;
 import entities.items.consumables.Food;
 import entities.monsters.Monster;
-import exceptions.FullTeamException;
 import exceptions.UnallowedMethodException;
 
 import java.util.ArrayList;
-
-import org.w3c.dom.UserDataHandler;
 
 public class Inventory {
 

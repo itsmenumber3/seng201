@@ -5,13 +5,18 @@ public class LottoTicket extends Item {
         super();
     }
 
-    public int lottoTicketNumber;
+    private int lottoTicketNumber;
 
-    public void setLottoTicketChanceIncreasePercentage(int inputLottoTicketChanceIncreasePercentage) {
-        this.lottoTicketNumber = inputLottoTicketChanceIncreasePercentage;
+    public boolean setLottoTicketNumber(int inputTicketNumber) {
+        if (inputTicketNumber <= 5 && inputTicketNumber >= 1) {
+            lottoTicketNumber = inputTicketNumber;
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public int getLottoTicketChanceIncreasePercentage() {
-        return this.lottoTicketNumber;
+    public int getLottoTicketNumber() {
+        return lottoTicketNumber;
     }
 }

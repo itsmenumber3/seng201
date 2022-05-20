@@ -3,7 +3,6 @@ package assets.libraries;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,7 +21,6 @@ import entities.monsters.tradeable_monsters.Skeleton;
 import entities.monsters.tradeable_monsters.Spirit;
 import entities.monsters.tradeable_monsters.Troll;
 import entities.monsters.tradeable_monsters.Zombie;
-import exceptions.FullTeamException;
 import exceptions.InvalidInputException;
 import main.Player;
 
@@ -619,35 +617,18 @@ public class Tools {
 
 
 	public String runRandomOvernightEvent(Player inputPlayer) {
-		int randNumber = random.nextInt(1, 21);
-
+		int randNumber = random.nextInt(1, 11);
+		String message = "";
 		if (inputPlayer.getPlayerInventory().getLottoTicket() != null) {
-			if (inputPlayer.getPlayerInventory().getLottoTicket().)
-		} else {
-			if (randNumber == 21) {
-				// Do good thing
-			} else if (randNumber >= 11 && randNumber <= 20) {
-				// Do bad luck
+			if (inputPlayer.getPlayerInventory().getLottoTicket().getLottoTicketNumber() == randNumber) {
+				randomGoodThingOvernight(inputPlayer);
 			}
+		} else if (randNumber == 11) {
+			message = randomGoodThingOvernight(inputPlayer);
+		} else if (randNumber == 6) {
+			message = randomBadThingOvernight(inputPlayer);
 		}
-
-
-
-		if (inputPlayer.getPlayerInventory().getLottoTicket() != null) {
-			int randomNumber = random.nextInt(1, 10);
-			if (randomNumber == inputPlayer.getPlayerInventory().getLottoTicket().lottoTicketNumber) {
-				return randomGoodThingOvernight(inputPlayer);
-			} else if (15 == random.nextInt(1, 15)) {
-				// Do a random bad thing
-			}
-		} else {
-			int randomNumber = random.nextInt(1, 15);
-			if (1 == randomNumber) {
-				return randomGoodThingOvernight(inputPlayer);
-			} else if (15 == randomNumber) {
-				// Do a random bad thing
-			}
-		}
+		return message;
 	}
 
 	public String randomGoodThingOvernight(Player inputPlayer) {
@@ -684,5 +665,7 @@ public class Tools {
 		}
 	}
 
-	//public String randomBadThingOvernight(Pl)
+	public String randomBadThingOvernight(Player inputPlayer) {
+		return "";
+	}
 }

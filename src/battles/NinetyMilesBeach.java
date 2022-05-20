@@ -13,5 +13,6 @@ public class NinetyMilesBeach extends Battle {
         this.setBattleType(BattleType.NINETY_MILES_BEACH);
         this.getBattleShop().setShopName("Pak'nSAVE Kaitaia");
 		this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));
+        this.setBattleImagePath("/assets/ui/img/NinetyMilesBeach.jpg");
     }
 }

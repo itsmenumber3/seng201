@@ -13,6 +13,7 @@ public class CanterburyWetlands extends Battle {
 		this.setBattleIsland("South Island");
 		this.getBattleShop().setShopName("New World Kaikoura");
 		this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));
+		this.setBattleImagePath("/assets/ui/img/CanterburyWetlands.jpg");
 	}
 
 }

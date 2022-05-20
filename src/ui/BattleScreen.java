@@ -4,12 +4,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JPanel;
 import assets.libraries.Tools;
-import assets.libraries.UiTools;
+
+import battles.Battle;
 import main.GameEnvironment;
 import main.Player;
 
@@ -23,10 +24,10 @@ public class BattleScreen {
 
 	private JFrame window;
 	private GameEnvironment gameEnvironment;
-	private Tools tools = new Tools();
-	private UiTools uiTools = new UiTools();
+	private final Tools tools = new Tools();
 	private final JLabel lblPhoto = new JLabel("");
 	private Player player;
+	private Battle battle;
 
 	/**
 	 * Launch the application.
@@ -47,6 +48,7 @@ public class BattleScreen {
 	public BattleScreen(GameEnvironment inputGameEnvironment) {
 		this.gameEnvironment = inputGameEnvironment;
 		player = gameEnvironment.getPlayer();
+		battle = player.getPlayerPreviewBattle();
 		initialize();
 		window.setVisible(true);
 	}
@@ -82,19 +84,19 @@ public class BattleScreen {
 		panelItem.setBounds(0, 0, 434, 469);
 		window.getContentPane().add(panelItem);
 		
-		JLabel lblBattleName = new JLabel(String.format("<html><div>%s</div></html>", gameEnvironment.getPlayer().getPlayerSelectedBattle().getBattleName()));
+		JLabel lblBattleName = new JLabel(String.format("<html><div>%s</div></html>", battle.getBattleName()));
 		lblBattleName.setBounds(34, 26, 329, 77);
 		panelItem.add(lblBattleName);
 		lblBattleName.setForeground(Color.WHITE);
 		lblBattleName.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
 		
-		JLabel lblBattleDescription = new JLabel(String.format("<html><div>%s</div></html>", tools.makeBattleDescription(gameEnvironment.getPlayer().getPlayerSelectedBattle())));
+		JLabel lblBattleDescription = new JLabel(String.format("<html><div>%s</div></html>", tools.makeBattleDescription(battle)));
 		lblBattleDescription.setBounds(34, 89, 329, 213);
 		panelItem.add(lblBattleDescription);
 		lblBattleDescription.setForeground(Color.WHITE);
 		lblBattleDescription.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		
-		JButton btnFarewellSpit_1_1 = new JButton(String.format("<html><div>Travel to %s</div></html>", gameEnvironment.getPlayer().getPlayerSelectedBattle().getBattleName()));
+		JButton btnFarewellSpit_1_1 = new JButton(String.format("<html><div>Travel to %s</div></html>", battle.getBattleName()));
 		btnFarewellSpit_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				finishedWindow(true);
@@ -116,7 +118,7 @@ public class BattleScreen {
 		panelItem.add(btnFarewellSpit_1);
 		btnFarewellSpit_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnFarewellSpit_1.setBackground(SystemColor.info);
-		lblPhoto.setIcon(new ImageIcon(BattleScreen.class.getResource(uiTools.battleScreenImagePicker(gameEnvironment.getPlayer().getPlayerSelectedBattle()))));
+		lblPhoto.setIcon(new ImageIcon(BattleScreen.class.getResource(battle.getBattleImagePath())));
 		lblPhoto.setBounds(239, 0, 499, 469);
 		window.getContentPane().add(lblPhoto);
 	}

@@ -13,5 +13,6 @@ public class MountCook extends Battle {
         this.setBattleIsland("North Island");
         this.getBattleShop().setShopName("Four Square Tekapo");
 		this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));
+        this.setBattleImagePath("/assets/ui/img/MountCook.jpg");
     }
 }
