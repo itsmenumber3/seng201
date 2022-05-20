@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Font;
@@ -31,6 +32,7 @@ import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.JSpinner;
 
 public class ShopScreen {
 
@@ -45,6 +47,7 @@ public class ShopScreen {
 	private String displayInfo;
 	private Monster selectedMonster;
 	private JButton selectedMonsterBtn;
+	private ArrayList<String> monsterList = new ArrayList<String>() ;
 	
 
 	/**
@@ -69,6 +72,7 @@ public class ShopScreen {
 		this.inventory = player.getPlayerInventory();
 		this.battle = player.getPlayerSelectedBattle();
 		this.shop = battle.getBattleShop();
+		setMonsterNameList();
 		initialize();
 		window.setVisible(true);
 	}
@@ -86,6 +90,14 @@ public class ShopScreen {
 	 */
 	public ShopScreen() {
 		initialize();
+	}
+	
+	public void setMonsterNameList(){
+		int monsterLength = inventory.getMonsters().size();
+		
+		for (int i = 0; (i < monsterLength); i++) {
+			monsterList.add(inventory.getMonsters().get(i).getEntityName());
+		}
 	}
 	
 	public String getMonsterDisplayInfo(Monster monster) {
