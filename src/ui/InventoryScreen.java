@@ -72,7 +72,7 @@ public class InventoryScreen {
 	}
 
 	public void closeWindow() {
-		frame.dispose();
+		window.dispose();
 	}
 
 	public void finishedWindow() {
@@ -233,6 +233,15 @@ public class InventoryScreen {
 		lblTipClickTo_1_3_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblTipClickTo_1_3_1.setBounds(12, 115, 420, 47);
 		panelBuyPotion.add(lblTipClickTo_1_3_1);
+		
+		JPanel panelFuel = new JPanel();
+		tabbedPane.addTab("Fuel", null, panelFuel, null);
+		panelFuel.setLayout(null);
+		
+		JLabel lblTipClickTo_1_3_2 = new JLabel(String.format("<html><div>You have %.2f/100.00 of fuel left. To travel between the North Island and the South Island, it takes 20% of your fuel. To travel within an island, it takes 10% of your fuel.</div></html>", inventory.getFuelAmount()));
+		lblTipClickTo_1_3_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblTipClickTo_1_3_2.setBounds(27, 22, 420, 47);
+		panelFuel.add(lblTipClickTo_1_3_2);
 		
 		JLabel lblYourBalance_1_1_2 = new JLabel("0 gold coins");
 		lblYourBalance_1_1_2.setHorizontalAlignment(SwingConstants.TRAILING);

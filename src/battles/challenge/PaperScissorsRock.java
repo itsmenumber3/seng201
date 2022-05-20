@@ -3,6 +3,7 @@ package battles.challenge;
 import assets.enums.ChallengeOutcomeType;
 import assets.enums.ChallengeType;
 import assets.enums.PapersScissorsRockType;
+
 import assets.libraries.Tools;
 
 import java.security.SecureRandom;

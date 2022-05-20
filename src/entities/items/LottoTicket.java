@@ -5,13 +5,13 @@ public class LottoTicket extends Item {
         super();
     }
 
-    public int lottoTicketChanceIncreasePercentage;
+    public int lottoTicketNumber;
 
     public void setLottoTicketChanceIncreasePercentage(int inputLottoTicketChanceIncreasePercentage) {
-        this.lottoTicketChanceIncreasePercentage = inputLottoTicketChanceIncreasePercentage;
+        this.lottoTicketNumber = inputLottoTicketChanceIncreasePercentage;
     }
 
     public int getLottoTicketChanceIncreasePercentage() {
-        return this.lottoTicketChanceIncreasePercentage;
+        return this.lottoTicketNumber;
     }
 }

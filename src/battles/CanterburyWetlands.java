@@ -10,6 +10,7 @@ public class CanterburyWetlands extends Battle {
 	public CanterburyWetlands(Player player) {
 		this.setBattleName("Canterbury Wetlands");
 		this.setBattleType(BattleType.CANTERBURY_WETLANDS);
+		this.setBattleIsland("South Island");
 		this.getBattleShop().setShopName("New World Kaikoura");
 		this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));
 	}

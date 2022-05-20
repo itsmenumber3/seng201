@@ -191,7 +191,11 @@ public class GameEnvironment {
 
     public void closeBattleResultScreen(BattleResultScreen inputBattleResultWindow) {
         inputBattleResultWindow.closeWindow();
-        this.launchMapScreen();
+        if (getPlayer().hasGameBeenWon()) {
+        	this.launchFinishGameScreen();
+        } else {
+        	this.launchMapScreen();
+        }
     }
 
     public void launchFinishGameScreen() {
@@ -200,13 +204,20 @@ public class GameEnvironment {
 
     public void closeFinishGameScreen(FinishGameScreen inputFinishGameWindow) {
         inputFinishGameWindow.closeWindow();
+        if (inputFinishGameWindow.getQuitGame() == false) {
+        	GameEnvironment game = new GameEnvironment();
+            Battle battle = new Battle();
+            battle.setBattleName("Wellington");
+            game.getPlayer().setNextDayNextBattle(battle);
+            game.launchWelcomeScreen();
+        }
     }
 
     public static void main(String[] args) {
         GameEnvironment game = new GameEnvironment();
         Battle battle = new Battle();
         battle.setBattleName("Wellington");
-        game.getPlayer().setPlayerSelectedBattle(battle);
+        game.getPlayer().setNextDayNextBattle(battle);
         game.launchWelcomeScreen();
     }
 }

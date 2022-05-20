@@ -25,6 +25,16 @@ public class Battle{
         return this.battleType;
     }
     
+    public String battleIsland;
+    
+    public void setBattleIsland(String inputBattleIsland) {
+    	battleIsland = inputBattleIsland;
+    }
+    
+    public String getBattleIsland() {
+    	return battleIsland;
+    }
+    
  // BATTLE TYPE ----------------------------------------------
 
     public Shop battleShop = new Shop();

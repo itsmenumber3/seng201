@@ -9,6 +9,7 @@ public class SouthlandFarm extends Battle {
 	
     public SouthlandFarm(Player player) {
     	this.setBattleName("Southland Farm");
+    	this.setBattleIsland("South Island");
         this.setBattleType(BattleType.SOUTHLAND_FARM);
         this.getBattleShop().setShopName("Countdown Gore");
 		this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));

@@ -24,7 +24,10 @@ public class Shop implements Role {
     public RoleType getRoleType() {
         return RoleType.SHOP;
     }
-    
+
+    /**
+     * Shop
+     */
     private String shopName;
     
     public void setShopName(String inputShopName) {

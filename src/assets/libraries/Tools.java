@@ -7,15 +7,13 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import assets.enums.BattleType;
-import assets.enums.ChallengeOutcomeType;
-import assets.enums.FightOutcomeType;
-import assets.enums.MonsterType;
+import assets.enums.*;
 import battles.Battle;
 import battles.challenge.Challenge;
 import battles.challenge.FlipACoin;
 import battles.challenge.PaperScissorsRock;
 import battles.challenge.Quiz;
+import entities.items.consumables.Food;
 import entities.monsters.battle_monsters.*;
 import entities.monsters.tradeable_monsters.Dragon;
 // Import the Exception classes
@@ -24,6 +22,7 @@ import entities.monsters.tradeable_monsters.Skeleton;
 import entities.monsters.tradeable_monsters.Spirit;
 import entities.monsters.tradeable_monsters.Troll;
 import entities.monsters.tradeable_monsters.Zombie;
+import exceptions.FullTeamException;
 import exceptions.InvalidInputException;
 import main.Player;
 
@@ -616,4 +615,74 @@ public class Tools {
 			return "It was a draw. You and the boss monster got the same thing.";
 		}
 	}
+
+
+
+	public String runRandomOvernightEvent(Player inputPlayer) {
+		int randNumber = random.nextInt(1, 21);
+
+		if (inputPlayer.getPlayerInventory().getLottoTicket() != null) {
+			if (inputPlayer.getPlayerInventory().getLottoTicket().)
+		} else {
+			if (randNumber == 21) {
+				// Do good thing
+			} else if (randNumber >= 11 && randNumber <= 20) {
+				// Do bad luck
+			}
+		}
+
+
+
+		if (inputPlayer.getPlayerInventory().getLottoTicket() != null) {
+			int randomNumber = random.nextInt(1, 10);
+			if (randomNumber == inputPlayer.getPlayerInventory().getLottoTicket().lottoTicketNumber) {
+				return randomGoodThingOvernight(inputPlayer);
+			} else if (15 == random.nextInt(1, 15)) {
+				// Do a random bad thing
+			}
+		} else {
+			int randomNumber = random.nextInt(1, 15);
+			if (1 == randomNumber) {
+				return randomGoodThingOvernight(inputPlayer);
+			} else if (15 == randomNumber) {
+				// Do a random bad thing
+			}
+		}
+	}
+
+	public String randomGoodThingOvernight(Player inputPlayer) {
+		int randomNumber = random.nextInt(1, 3);
+		switch (randomNumber) {
+			case 1:
+				if (inputPlayer.getPlayerInventory().getMonsters().size() >= howManyMonstersBasedOnDifficulty(inputPlayer.getPlayerDifficulty())) {
+					int randomNumber2 = random.nextInt(2, 4);
+					for (int index = 0; index < 2; index++) {
+						inputPlayer.getPlayerInventory().addToFoods(new Food(FoodType.PASTA));
+					}
+					return (String.format("Wow! You found a food bag of %d food items! Open inventory to see new foods.", randomNumber2));
+				} else {
+					Monster monster = this.generateRandomMonster(inputPlayer);
+					monster.setEntityName(magicNumbers.RANDOM_MONSTER_NAMES[random.nextInt(0, magicNumbers.RANDOM_MONSTER_NAMES.length)]);
+					inputPlayer.getPlayerInventory().addMonster(monster);
+					return String.format("A new monster, %s,joined your team overnight! Open inventory to view it.", monster.getEntityName());
+				}
+			case 2:
+				int randomNumber2 = random.nextInt(2, 4);
+				for (int index = 0; index < 2; index++) {
+					inputPlayer.getPlayerInventory().addToFoods(new Food(FoodType.PASTA));
+				}
+				return (String.format("Wow! You found a food bag of %d food items! Open inventory to see new foods.", randomNumber2));
+			default:
+				Monster monsterWithLowestHealthLevel = inputPlayer.getPlayerInventory().getMonsters().get(0);
+				for (int index = 1; index < inputPlayer.getPlayerInventory().getMonsters().size(); index++) {
+					if (inputPlayer.getPlayerInventory().getMonsters().get(index).getMonsterHealthLevel() < monsterWithLowestHealthLevel.getMonsterHealthLevel()) {
+						monsterWithLowestHealthLevel = inputPlayer.getPlayerInventory().getMonsters().get(index);
+					}
+				}
+				monsterWithLowestHealthLevel.resetMonsterHealthLevel();
+				return (String.format("%s had the lowest health level in your team, but it found a bag full of food overnight. It has eaten so much that its health is now 100%", monsterWithLowestHealthLevel.getEntityName()));
+		}
+	}
+
+	//public String randomBadThingOvernight(Pl)
 }

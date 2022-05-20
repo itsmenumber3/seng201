@@ -16,6 +16,7 @@ import battles.NinetyMilesBeach;
 import battles.SouthlandFarm;
 import entities.monsters.battle_monsters.MudMonster;
 import main.GameEnvironment;
+import main.Player;
 import main.Shop;
 
 import java.awt.BorderLayout;
@@ -34,7 +35,8 @@ public class MapScreen {
 	private JFrame window;
 	private GameEnvironment gameEnvironment;
 	private Tools tools = new Tools();
-	
+	private Player player;
+	private Battle battle;
 	private JButton btnInventory;
 	private JButton btnVisitShop;
 
@@ -56,6 +58,8 @@ public class MapScreen {
 	
 	public MapScreen(GameEnvironment inputGameEnvironment) {
 		gameEnvironment = inputGameEnvironment;
+		player = gameEnvironment.getPlayer();
+		battle = player.getPlayerSelectedBattle();
 		initialize();
 		window.setVisible(true);
 	}
@@ -126,13 +130,13 @@ public class MapScreen {
 		panelItem.setBounds(29, 39, 231, 218);
 		window.getContentPane().add(panelItem);
 		
-		JLabel lblDay = new JLabel(String.format("<html><div>Current day: %d of %d days</div></html>", 1, 15));
+		JLabel lblDay = new JLabel(String.format("<html><div>Current day: %d of %d days</div></html>", player.getPlayerCurrentDay(), player.getPlayerDays()));
 		lblDay.setForeground(Color.WHITE);
 		lblDay.setBounds(12, 12, 207, 25);
 		panelItem.add(lblDay);
 		lblDay.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		JLabel lblGoldsAndPoints = new JLabel("<html><div>" + "Gold: " + "0" + " coins. Points: " + "0" + "</div></html>");
+		JLabel lblGoldsAndPoints = new JLabel(String.format("<html><div>Gold: %d coins. Points: %d</div></html>", player.getPlayerGold(), player.getPlayerPoints()));
 		lblGoldsAndPoints.setForeground(Color.WHITE);
 		lblGoldsAndPoints.setBounds(12, 23, 182, 44);
 		panelItem.add(lblGoldsAndPoints);
@@ -167,8 +171,7 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new LakeTaupo(gameEnvironment.getPlayer());
 				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
-				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
-				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				player.setPlayerPreviewBattle(battle);
 				finishedWindow();
 			}
 		});
@@ -181,9 +184,7 @@ public class MapScreen {
 		btnCanterburyWetlands.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new CanterburyWetlands(gameEnvironment.getPlayer());
-				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.MUD_MONSTER, gameEnvironment.getPlayer()));
-				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
-				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				player.setPlayerPreviewBattle(battle);
 				finishedWindow();
 			}
 		});
@@ -199,9 +200,7 @@ public class MapScreen {
 		btnSouthlandFarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle battle = new SouthlandFarm(gameEnvironment.getPlayer());
-				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.GRASS_MONSTER, gameEnvironment.getPlayer()));
-				gameEnvironment.getPlayer().setPlayerPreviousBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
-				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				player.setPlayerPreviewBattle(battle);
 				finishedWindow();
 			}
 		});

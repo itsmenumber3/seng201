@@ -18,6 +18,9 @@ import java.util.ArrayList;
  *
  */
 public class Player implements Role {
+    public Player() {
+        playerInventory.resetFuelAmount();
+    }
 
     // LIBRARIES --------------------------------------------------
 
@@ -167,6 +170,21 @@ public class Player implements Role {
         } catch (UnallowedMethodException e) {
             e.printStackTrace();
         }
+    }
+    
+    public boolean hasGameBeenWon() {
+    	if (playerCurrentDay == playerDays) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
+    
+    public void setNextDayNextBattle(Battle inputBattle) {
+    	playerCurrentDay += 1;
+    	playerPreviousBattle = playerSelectedBattle;
+    	playerSelectedBattle = inputBattle;
+    	boolean hasEnoughFuel = getPlayerInventory().hasEnoughFuelIfTrueUseFuel(10);
     }
 
     /**
@@ -393,13 +411,39 @@ public class Player implements Role {
     	return this.playerSelectedBattle;
     }
     
-    private Battle playerPreviousBattle;
+//    private Battle playerPreviousBattle;
+//    
+//    public void setPlayerPreviousBattle(Battle inputPlayerPreviousBattle) {
+//    	this.playerPreviousBattle = inputPlayerPreviousBattle;
+//    }
+//    
+//    public Battle getPlayerPreviousBattle() {
+//    	return this.playerPreviousBattle;
+//    }
     
-    public void setPlayerPreviousBattle(Battle inputPlayerPreviousBattle) {
-    	this.playerPreviousBattle = inputPlayerPreviousBattle;
+    private Battle playerPreviewBattle;
+    
+    public void setPlayerPreviewBattle(Battle inputBattle) {
+    	playerPreviewBattle = inputBattle;
     }
     
-    public Battle getPlayerPreviousBattle() {
-    	return this.playerPreviousBattle;
+    public Battle getPlayerPreviewBattle() {
+    	return playerPreviewBattle;
+    }
+    
+    public boolean travelToPreviewBattle() {
+    	int fuelAmountNeeded;
+    	if (playerSelectedBattle.getBattleIsland() == playerPreviewBattle.getBattleIsland()) {
+    		fuelAmountNeeded = 10;
+    	} else {
+    		fuelAmountNeeded = 20;
+    	}
+    	if (getPlayerInventory().hasEnoughFuelIfTrueUseFuel(fuelAmountNeeded)) {
+    		setPlayerSelectedBattle(playerPreviewBattle);
+    		return true;
+    	} else {
+    		return false;
+    	}
+    	
     }
 }

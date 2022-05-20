@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import assets.libraries.Tools;
 import assets.libraries.UiTools;
 import main.GameEnvironment;
+import main.Player;
 
 import javax.swing.JButton;
 import java.awt.SystemColor;
@@ -25,6 +26,7 @@ public class BattleScreen {
 	private Tools tools = new Tools();
 	private UiTools uiTools = new UiTools();
 	private final JLabel lblPhoto = new JLabel("");
+	private Player player;
 
 	/**
 	 * Launch the application.
@@ -44,6 +46,7 @@ public class BattleScreen {
 	
 	public BattleScreen(GameEnvironment inputGameEnvironment) {
 		this.gameEnvironment = inputGameEnvironment;
+		player = gameEnvironment.getPlayer();
 		initialize();
 		window.setVisible(true);
 	}
@@ -75,7 +78,6 @@ public class BattleScreen {
 		
 		JPanel panelItem = new JPanel();
 		panelItem.setLayout(null);
-		panelItem.setOpaque(true);
 		panelItem.setBackground(new Color(0, 51, 153));
 		panelItem.setBounds(0, 0, 434, 469);
 		window.getContentPane().add(panelItem);
@@ -106,6 +108,7 @@ public class BattleScreen {
 		JButton btnFarewellSpit_1 = new JButton("Go back to Map");
 		btnFarewellSpit_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				finishedWindow(false);
 			}
 		});

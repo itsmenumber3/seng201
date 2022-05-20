@@ -1,6 +1,9 @@
 package ui;
 
+import battles.Battle;
+import entities.monsters.Monster;
 import main.GameEnvironment;
+import main.Player;
 
 import java.awt.EventQueue;
 
@@ -12,11 +15,16 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BattleResultScreen {
 
 	private JFrame frame;
 	private GameEnvironment gameEnvironment;
+	private Player player;
+	private Battle battle;
+	private Monster battleMonster;
 	/**
 	 * Launch the application.
 	 */
@@ -35,6 +43,9 @@ public class BattleResultScreen {
 
 	public BattleResultScreen(GameEnvironment inputGameEnvironment) {
 		this.gameEnvironment = inputGameEnvironment;
+		player = gameEnvironment.getPlayer();
+		battle = player.getPlayerSelectedBattle();
+		battleMonster = battle.getBattleMonster();
 		initialize();
 		frame.setVisible(true);
 	}
@@ -64,7 +75,7 @@ public class BattleResultScreen {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblTitle = new JLabel("You defeated <boss> and won the battle!");
+		JLabel lblTitle = new JLabel(String.format("You defeated %s and won the battle!", battleMonster.getEntityName()));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Century Schoolbook L", Font.PLAIN, 19));
 		lblTitle.setBounds(120, 31, 493, 35);
@@ -76,7 +87,7 @@ public class BattleResultScreen {
 		frame.getContentPane().add(WinPanel);
 		WinPanel.setLayout(null);
 		
-		JLabel lblMonsterReward = new JLabel("<html><div>You've been given $/battle_monster.sell_price/ as a reward from the NZ Government</div></html>");
+		JLabel lblMonsterReward = new JLabel(String.format("<html><div>You can steal all the gold coins the monster had. %d coins has been added to your gold balance</div></html>", battleMonster.getEntitySellValue()));
 		lblMonsterReward.setFont(new Font("Century Schoolbook L", Font.BOLD, 12));
 		lblMonsterReward.setEnabled(false);
 		lblMonsterReward.setBackground(SystemColor.info);
@@ -84,6 +95,11 @@ public class BattleResultScreen {
 		WinPanel.add(lblMonsterReward);
 		
 		JButton btnBackToMap = new JButton("Back to Map");
+		btnBackToMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				finishedWindow();
+			}
+		});
 		btnBackToMap.setBounds(152, 231, 124, 23);
 		WinPanel.add(btnBackToMap);
 	}

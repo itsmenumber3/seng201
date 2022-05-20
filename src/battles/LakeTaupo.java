@@ -10,6 +10,7 @@ public class LakeTaupo extends Battle {
     public LakeTaupo(Player player) {
     	this.setBattleName("Lake Taupo");
         this.setBattleType(BattleType.LAKE_TAUPO);
+        this.setBattleIsland("North Island");
         this.getBattleShop().setShopName("The Warehouse Taupo");
 		this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));
     }

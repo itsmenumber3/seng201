@@ -2,11 +2,16 @@ package main;
 
 import assets.libraries.Tools;
 import entities.items.Item;
+import entities.items.LottoTicket;
+import entities.items.consumables.Drink;
+import entities.items.consumables.Food;
 import entities.monsters.Monster;
 import exceptions.FullTeamException;
 import exceptions.UnallowedMethodException;
 
 import java.util.ArrayList;
+
+import org.w3c.dom.UserDataHandler;
 
 public class Inventory {
 
@@ -55,19 +60,21 @@ public class Inventory {
 
 
     // ARRAY LIST TO HOLD MONSTERS --------------------------------
+    
+    // Please reimplement - separate array lists for food, drinks, lotto, and fuel.
 
     // ARRAY LIST TO HOLD ITEMS --------------------------------
 
     /**
      * This is an ArrayList holding objects of Entity type.
      */
-    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Food> foods = new ArrayList<>();
 
     /**
      * This method resets the inventory i.e. a blank ArrayList
      */
-    public void resetItems() {
-        this.items = new ArrayList<>();
+    public void resetFoods() {
+        this.foods = new ArrayList<>();
     }
 
     /**
@@ -76,7 +83,7 @@ public class Inventory {
      *
      * @see UnallowedMethodException
      */
-    public void setItems() {
+    public void setFoods() {
         try {
             throw new UnallowedMethodException("Unallowed method");
         } catch (UnallowedMethodException e) {
@@ -89,12 +96,83 @@ public class Inventory {
      *
      * @return this.entities: ArrayList
      */
-    public ArrayList<Item> getItems() {
-        return this.items;
+    public ArrayList<Food> getFoods() {
+        return this.foods;
     }
 
-    public void addToItems(Item inputItem) {
-        this.items.add(inputItem);
+    public void addToFoods(Food inputFood) {
+        this.foods.add(inputFood);
+    }
+
+    private ArrayList<Drink> drinks = new ArrayList<>();
+
+    public void resetDrinks() {
+        drinks = new ArrayList<>();
+    }
+
+    public void setDrinks(ArrayList<Drink> inputDrinks) {
+        try {
+            throw new UnallowedMethodException("Unallowed method");
+        } catch (UnallowedMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Drink> getDrinks() {
+        return drinks;
+    }
+
+    public void addDrink(Drink inputDrink) {
+        drinks.add(inputDrink);
+    }
+
+    public void removeDrink(Drink inputDrink) {
+        drinks.remove(inputDrink);
+    }
+
+    private double fuelAmount;
+    
+    public void setFuelAmount(double inputFuel) {
+        try {
+            throw new UnallowedMethodException("Unallowed method");
+        } catch (UnallowedMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public double getFuelAmount() {
+        return this.fuelAmount;
+    }
+
+    public void refillFuel(double inputRefillAmount) {
+        this.fuelAmount += inputRefillAmount;
+    }
+
+    public void resetFuelAmount() {
+        fuelAmount = 50;
+    }
+
+    private LottoTicket lottoTicket = null;
+
+    public void setLottoTicket(LottoTicket inputLottoTicket) {
+        lottoTicket = inputLottoTicket;
+    }
+
+    public LottoTicket getLottoTicket() {
+        return lottoTicket;
+    }
+
+    public void resetLottoTicket() {
+        lottoTicket = null;
+    }
+    
+    public boolean hasEnoughFuelIfTrueUseFuel(double inputFuelAmount) {
+    	if (inputFuelAmount >= fuelAmount) {
+    		fuelAmount -= inputFuelAmount;
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 }
 
@@ -124,6 +202,7 @@ public class Inventory {
 
 
     // REMOVE AN ENTITY OBJECT FROM THE ARRAY LIST ----------------
+
 
 
     // IF AN ENTITY RUNS OUT OF ALL THE UNITS IT HAS --------------
