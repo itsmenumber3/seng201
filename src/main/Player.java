@@ -384,18 +384,13 @@ public class Player implements Role {
         }
     }
 
-    public void playerPurchaseEntity(Entity inputEntity) {
-        try {
-            if (this.hasPlayerGotEnoughGoldToPurchase(inputEntity)) {
-                System.out.println("Purchased successfully");  // If yes, purchased successfully.
-                this.decrementPlayerGoldBy(inputEntity.getEntityPurchaseValue()); // Decrement playerGold.
-                playerInventory.addToInventory(inputEntity);
-            } else {
-                throw new InsufficientPlayerGoldBalanceException("Not enough gold");
-            }
-        } catch (InsufficientPlayerGoldBalanceException e) {
-            e.printStackTrace();
-        }
+    public boolean playerPurchaseEntity(Entity inputEntity) {
+    	boolean enoughGold = false;
+    	if (this.hasPlayerGotEnoughGoldToPurchase(inputEntity)) {
+    		System.out.println("Purchased successfully");  // If yes, purchased successfully.
+    		this.decrementPlayerGoldBy(inputEntity.getEntityPurchaseValue()); // Decrement playerGold.
+    	} 
+    	return enoughGold;
     }
 
     // INVENTORY ----------------------------------------------------

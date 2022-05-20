@@ -14,5 +14,7 @@ public class MountCook extends Battle {
         this.getBattleShop().setShopName("Four Square Tekapo");
 		this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));
         this.setBattleImagePath("/assets/ui/img/MountCook.jpg");
+		this.getBattleShop().setShopDrinkRange();
+		this.getBattleShop().setShopFoodRange();
     }
 }

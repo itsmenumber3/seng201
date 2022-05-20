@@ -1,13 +1,13 @@
 package main;
 
-import assets.enums.EntityType;
-import assets.enums.ItemType;
-import assets.enums.RoleType;
-import entities.*;
-
-import entities.monsters.Monster;
-import exceptions.UnallowedMethodException;
 import java.util.ArrayList; //
+
+import assets.enums.DrinkType;
+import assets.enums.FoodType;
+import assets.enums.RoleType;
+import entities.items.consumables.Drink;
+import entities.items.consumables.Food;
+import entities.monsters.Monster;
 
 /**
  * The class Shop provides for a shop where a player can come to trade.
@@ -15,6 +15,7 @@ import java.util.ArrayList; //
  * @author Francis
  */
 public class Shop implements Role {
+	
 
     /**
      * This method returns the RoleType of the shop, which is SHOP.
@@ -41,10 +42,10 @@ public class Shop implements Role {
     /**
      * The ArrayList shopRange contains a list of entities for sale on a particular day.
      */
-    private final ArrayList<Monster> shopMonsterRange = new ArrayList<>();
+    private ArrayList<Monster> shopMonsterRange;
 
 
-    private final ArrayList<Monster> monstersWhichPlayerPurchasedToday = new ArrayList<>();
+    //private final ArrayList<Monster> monstersWhichPlayerPurchasedToday = new ArrayList<>();
 
     /**
      * This method isn't allowed. Instead, use one of the following methods:
@@ -53,11 +54,7 @@ public class Shop implements Role {
      * @param inputShopMonsterRange ArrayList<Monster>
      */
     public void setShopMonsterRange(ArrayList<Monster> inputShopMonsterRange) {
-        try {
-            throw new UnallowedMethodException("Unallowed method");
-        } catch (UnallowedMethodException e) {
-            e.printStackTrace();
-        }
+    	this.shopMonsterRange = inputShopMonsterRange;
     }
 
     /**
@@ -69,19 +66,11 @@ public class Shop implements Role {
     }
 
     /**
-     * This method manually adds an entity to shopRange.
-     * @param inputEntity Entity, entity to be added to range
-     */
-    private void addMonsterToShopMonsterRange(Monster inputMonster) {
-        this.getShopMonsterRange().add(inputMonster);
-    }
-
-    /**
      * This method removes an entity from the shop range.
      * @param inputEntity Entity
      */
     private void removeMonsterFromShopMonsterRange(Monster removeMonster) {
-        this.getShopMonsterRange().remove(inputEntity); // Remove it from the shop range
+        this.getShopMonsterRange().remove(removeMonster); // Remove it from the shop range
     }
 
     /**
@@ -90,23 +79,63 @@ public class Shop implements Role {
      */
     public void uponMonsterBeingPurchasedByPlayer(Monster inputMonster) {
         this.removeMonsterFromShopMonsterRange(inputMonster);
-        this.
+        
+    }
+
+
+    
+    private ArrayList<Food> shopFoodRange;
+    
+    public void setShopFoodRange() {
+    	Food apple = new Food(FoodType.APPLE);
+    	Food pasta = new Food(FoodType.PASTA);
+    	this.shopFoodRange.add(apple);
+    	this.shopFoodRange.add(pasta);
     }
 
     /**
-     * This method triggers relevant methods when an entity is sold by the player to the shop.
+     * This method returns the current shopRange.
+     * @return shopRange ArrayList<Monster>
+     */
+    public ArrayList<Food> getShopFoodRange() {
+        return this.shopFoodRange;
+    }
+
+    /**
+     * This method removes an entity from the shop range.
+     * @param inputEntity Entity
+     */
+    /**
+    private void removeFoodFromShopFoodRange(Food removeFood) {
+        this.getShopFoodRange().remove(removeFood); // Remove it from the shop range
+    }
+	*/
+    /**
+     * This method triggers relevant methods when an entity is purchased from the shop by the player.
      * @param inputEntity Entity, the entity in question
      */
-    public void uponEntityBeingSoldToShop(Entity inputEntity) {
-        this.addEntityToShopMonsterRange(inputEntity);
+    /**
+    public void uponFoodBeingPurchasedByPlayer(Food inputFood) {
+        this.removeFoodFromShopFoodRange(inputFood);
+        
     }
-
+    */
+    
+    private ArrayList<Drink> shopDrinkRange;
+    
+    public void setShopDrinkRange() {
+    	Drink coffee = new Drink(DrinkType.COFFEE);
+    	Drink energyDrink = new Drink(DrinkType.ENERGY_DRINKS);
+    	this.shopDrinkRange.add(coffee);
+    	this.shopDrinkRange.add(energyDrink);
+    }
 
     /**
-     * This method refreshes the monster range of a shop by:
-     * 1. For existing monsters, randomly update the
+     * This method returns the current shopRange.
+     * @return shopRange ArrayList<Monster>
      */
-    public void overnightRefreshShopMonsterRange() {
-
+    public ArrayList<Drink> getShopDrinkRange() {
+        return this.shopDrinkRange;
     }
+    
 }

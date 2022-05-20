@@ -47,7 +47,9 @@ public class ShopScreen {
 	private String displayInfo;
 	private Monster selectedMonster;
 	private JButton selectedMonsterBtn;
-	private ArrayList<String> monsterList = new ArrayList<String>() ;
+	private ArrayList<String> monsterNameList = new ArrayList<String>();
+	private ArrayList<String> foodNameList = new ArrayList<String>();
+	private ArrayList<String> drinkNameList = new ArrayList<String>();
 	
 
 	/**
@@ -73,6 +75,8 @@ public class ShopScreen {
 		this.battle = player.getPlayerSelectedBattle();
 		this.shop = battle.getBattleShop();
 		setMonsterNameList();
+		setFoodNameList();
+		setDrinkNameList();
 		initialize();
 		window.setVisible(true);
 	}
@@ -96,7 +100,23 @@ public class ShopScreen {
 		int monsterLength = inventory.getMonsters().size();
 		
 		for (int i = 0; (i < monsterLength); i++) {
-			monsterList.add(inventory.getMonsters().get(i).getEntityName());
+			monsterNameList.add(inventory.getMonsters().get(i).getEntityName());
+		}
+	}
+	
+	public void setFoodNameList() {
+		int foodLength = shop.getShopFoodRange().size();
+		
+		for (int i = 0; (i < foodLength); i++) {
+			foodNameList.add(shop.getShopFoodRange().get(i).getEntityName());
+		}
+	}
+	
+	public void setDrinkNameList() {
+		int drinkLength = shop.getShopDrinkRange().size();
+		
+		for (int i = 0; (i < drinkLength);i++) {
+			drinkNameList.add(shop.getShopDrinkRange().get(i).getEntityName());
 		}
 	}
 	
@@ -151,6 +171,8 @@ public class ShopScreen {
 					JOptionPane.showMessageDialog(window, "Error: Too many Monsters");
 				}
 				else {
+					player.playerPurchaseEntity(selectedMonster);
+					inventory.addMonster(selectedMonster);
 					selectedMonsterBtn.setEnabled(false);
 				}
 			}
