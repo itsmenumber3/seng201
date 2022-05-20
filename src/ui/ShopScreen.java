@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Font;
@@ -20,15 +21,18 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import battles.Battle;
+import entities.monsters.Monster;
 
 import java.awt.SystemColor;
 import javax.swing.JMenu;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.JSpinner;
 
 public class ShopScreen {
 
@@ -40,6 +44,10 @@ public class ShopScreen {
 	private Inventory inventory;
 	private Battle battle;
 	private Shop shop;
+	private String displayInfo;
+	private Monster selectedMonster;
+	private JButton selectedMonsterBtn;
+	private ArrayList<String> monsterList = new ArrayList<String>() ;
 	
 
 	/**
@@ -64,6 +72,7 @@ public class ShopScreen {
 		this.inventory = player.getPlayerInventory();
 		this.battle = player.getPlayerSelectedBattle();
 		this.shop = battle.getBattleShop();
+		setMonsterNameList();
 		initialize();
 		window.setVisible(true);
 	}
@@ -81,6 +90,26 @@ public class ShopScreen {
 	 */
 	public ShopScreen() {
 		initialize();
+	}
+	
+	public void setMonsterNameList(){
+		int monsterLength = inventory.getMonsters().size();
+		
+		for (int i = 0; (i < monsterLength); i++) {
+			monsterList.add(inventory.getMonsters().get(i).getEntityName());
+		}
+	}
+	
+	public String getMonsterDisplayInfo(Monster monster) {
+		String tempName = monster.getEntityName();
+		double tempAttackVal = monster.getMonsterAttackDamage();
+		double tempResistanceVal = monster.getMonsterResistanceAbility();
+		int tempPurchasePrice = monster.getEntityPurchaseValue();
+		
+		String displayString = String.format("<html><div>Selected monster details:<br>Name: %s<br>Attack Damage: %.2f<br>Resistance Ability: %.2f<br>Price: $%.2f</div></html>",
+				tempName, tempAttackVal, tempResistanceVal, tempPurchasePrice);
+		
+		return displayString;
 	}
 
 	/**
@@ -108,7 +137,24 @@ public class ShopScreen {
 		tabbedPane.setBackgroundAt(0, Color.WHITE);
 		panelPurchaseMonster.setLayout(null);
 		
+		JLabel lblYourCurrentSelection = new JLabel();
+		lblYourCurrentSelection.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		lblYourCurrentSelection.setBounds(12, 249, 258, 89);
+		panelPurchaseMonster.add(lblYourCurrentSelection);
+		
 		JButton btnPurchaseThisMonster = new JButton("Purchase this monster");
+		btnPurchaseThisMonster.setEnabled(false);
+		btnPurchaseThisMonster.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean teamFull = inventory.addMonster(selectedMonster);
+				if (teamFull){
+					JOptionPane.showMessageDialog(window, "Error: Too many Monsters");
+				}
+				else {
+					selectedMonsterBtn.setEnabled(false);
+				}
+			}
+		});
 		btnPurchaseThisMonster.setForeground(Color.WHITE);
 		btnPurchaseThisMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnPurchaseThisMonster.setBackground(Color.RED);
@@ -118,6 +164,11 @@ public class ShopScreen {
 		JButton btnMonster1 = new JButton(shop.getShopMonsterRange().get(0).getEntityName());
 		btnMonster1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				selectedMonsterBtn = btnMonster1;
+				selectedMonster = shop.getShopMonsterRange().get(0);
+				displayInfo = getMonsterDisplayInfo(selectedMonster);
+				lblYourCurrentSelection.setText(displayInfo);
+				btnPurchaseThisMonster.setEnabled(true);
 			}
 		});
 		btnMonster1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
@@ -126,37 +177,68 @@ public class ShopScreen {
 		panelPurchaseMonster.add(btnMonster1);
 		
 		JButton btnMonster2 = new JButton(shop.getShopMonsterRange().get(1).getEntityName());
+		btnMonster2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedMonsterBtn = btnMonster2;
+				selectedMonster = shop.getShopMonsterRange().get(1);
+				displayInfo = getMonsterDisplayInfo(selectedMonster);
+				lblYourCurrentSelection.setText(displayInfo);
+				btnPurchaseThisMonster.setEnabled(true);
+			}
+		});
 		btnMonster2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster2.setBackground(SystemColor.info);
 		btnMonster2.setBounds(155, 224, 111, 25);
 		panelPurchaseMonster.add(btnMonster2);
 		
 		JButton btnMonster3 = new JButton(shop.getShopMonsterRange().get(2).getEntityName());
+		btnMonster3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedMonsterBtn = btnMonster3;
+				selectedMonster = shop.getShopMonsterRange().get(2);
+				displayInfo = getMonsterDisplayInfo(selectedMonster);
+				lblYourCurrentSelection.setText(displayInfo);
+				btnPurchaseThisMonster.setEnabled(true);
+			}
+		});
 		btnMonster3.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster3.setBackground(SystemColor.info);
 		btnMonster3.setBounds(299, 224, 111, 25);
 		panelPurchaseMonster.add(btnMonster3);
 		
 		JButton btnMonster4 = new JButton(shop.getShopMonsterRange().get(3).getEntityName());
+		btnMonster4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedMonsterBtn = btnMonster4;
+				selectedMonster = shop.getShopMonsterRange().get(3);
+				displayInfo = getMonsterDisplayInfo(selectedMonster);
+				lblYourCurrentSelection.setText(displayInfo);
+				btnPurchaseThisMonster.setEnabled(true);
+			}
+		});
 		btnMonster4.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster4.setBackground(SystemColor.info);
 		btnMonster4.setBounds(446, 224, 111, 25);
 		panelPurchaseMonster.add(btnMonster4);
 		
 		JButton btnMonster5 = new JButton(shop.getShopMonsterRange().get(4).getEntityName());
+		btnMonster5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedMonsterBtn = btnMonster5;
+				selectedMonster = shop.getShopMonsterRange().get(4);
+				displayInfo = getMonsterDisplayInfo(selectedMonster);
+				lblYourCurrentSelection.setText(displayInfo);
+				btnPurchaseThisMonster.setEnabled(true);
+			}
+		});
 		btnMonster5.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster5.setBackground(SystemColor.info);
 		btnMonster5.setBounds(596, 224, 111, 25);
 		panelPurchaseMonster.add(btnMonster5);
 		
-		JLabel lblYourCurrentSelection = new JLabel("Your current selection:");
-		lblYourCurrentSelection.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblYourCurrentSelection.setBounds(12, 275, 258, 47);
-		panelPurchaseMonster.add(lblYourCurrentSelection);
-		
 		JLabel lblTip = new JLabel("Tip: click to view properties, then press Purchase this monster.");
 		lblTip.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		lblTip.setBounds(12, 334, 361, 15);
+		lblTip.setBounds(12, 350, 361, 15);
 		panelPurchaseMonster.add(lblTip);
 		
 		JLabel lblMonster1Img = new JLabel("");

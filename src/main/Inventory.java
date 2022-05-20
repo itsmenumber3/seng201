@@ -13,6 +13,7 @@ public class Inventory {
 
     Player player;
     Tools tools = new Tools();
+    private boolean teamFull = false;
 
     public Inventory(Player inputPlayer) {
         this.player = inputPlayer;
@@ -38,16 +39,14 @@ public class Inventory {
         return this.monsters;
     }
 
-    public void addMonster(Monster inputMonster) {
-        try {
-            if (monsters.size() >= tools.howManyMonstersBasedOnDifficulty(player.getPlayerDifficulty())) {
-                throw new FullTeamException("Cannot add more monsters");
-            } else {
-                getMonsters().add(inputMonster);
-            }
-        } catch (FullTeamException e) {
-            e.printStackTrace();
-        }
+    public boolean addMonster(Monster inputMonster) {
+    	if (monsters.size() >= tools.howManyMonstersBasedOnDifficulty(player.getPlayerDifficulty())) {
+    		teamFull = true;
+    	}
+    	else {
+    	getMonsters().add(inputMonster);
+    	}
+    	return teamFull;
     }
 
     public void reorderMonsters() {
