@@ -7,5 +7,6 @@ public class Troll extends Monster {
 	public Troll() {
 		this.setMonsterType(MonsterType.TROLL);
 		this.setEntityImagePath("/assets/ui/img/troll-final.png");
-	}
+		this.setEntityName("Troll");
+		}
 }
