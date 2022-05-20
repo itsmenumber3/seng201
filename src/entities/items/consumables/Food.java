@@ -5,7 +5,6 @@ import java.security.SecureRandom;
 
 public class Food extends Consumable {
 	SecureRandom random = new SecureRandom();
-	
 	private int healthIncrease;
 	private FoodType foodType;
 	
@@ -38,9 +37,7 @@ public class Food extends Consumable {
 		this.healthIncrease = healthIncrease;
 	}
 
-	public FoodType getFoodType() {
-		return foodType;
-	}
+
 
 	public void setFoodType(FoodType foodType) {
 		this.foodType = foodType;

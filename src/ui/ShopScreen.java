@@ -1,5 +1,8 @@
 package ui;
 
+import entities.Entity;
+import entities.items.consumables.Drink;
+import entities.items.consumables.Food;
 import main.GameEnvironment;
 import main.Inventory;
 import main.Player;
@@ -46,7 +49,13 @@ public class ShopScreen {
 	private Shop shop;
 	private String displayInfo;
 	private Monster selectedMonster;
+
+	private String selectedMonsterName;
 	private JButton selectedMonsterBtn;
+
+	private Food selectedFood;
+
+	private Drink selectedDrink;
 	private ArrayList<String> monsterNameList = new ArrayList<String>();
 	private ArrayList<String> foodNameList = new ArrayList<String>();
 	private ArrayList<String> drinkNameList = new ArrayList<String>();
@@ -103,6 +112,11 @@ public class ShopScreen {
 			monsterNameList.add(inventory.getMonsters().get(i).getEntityName());
 		}
 	}
+
+	public Monster getMonsterFromName(){
+		int monsterIndex = monsterNameList.indexOf(selectedMonsterName);
+		return inventory.getMonsters().get(monsterIndex);
+	}
 	
 	public void setFoodNameList() {
 		int foodLength = shop.getShopFoodRange().size();
@@ -125,11 +139,9 @@ public class ShopScreen {
 		double tempAttackVal = monster.getMonsterAttackDamage();
 		double tempResistanceVal = monster.getMonsterResistanceAbility();
 		int tempPurchasePrice = monster.getEntityPurchaseValue();
-		
-		String displayString = String.format("<html><div>Selected monster details:<br>Name: %s<br>Attack Damage: %.2f<br>Resistance Ability: %.2f<br>Price: $%.2f</div></html>",
+
+		return String.format("<html><div>Selected monster details:<br>Name: %s<br>Attack Damage: %.2f<br>Resistance Ability: %.2f<br>Price: $%.2f</div></html>",
 				tempName, tempAttackVal, tempResistanceVal, tempPurchasePrice);
-		
-		return displayString;
 	}
 
 	/**
@@ -171,9 +183,13 @@ public class ShopScreen {
 					JOptionPane.showMessageDialog(window, "Error: Too many Monsters");
 				}
 				else {
-					player.playerPurchaseEntity(selectedMonster);
-					inventory.addMonster(selectedMonster);
-					selectedMonsterBtn.setEnabled(false);
+					if (player.playerPurchaseEntity(selectedMonster)){
+						inventory.addMonster(selectedMonster);
+						selectedMonsterBtn.setEnabled(false);
+					}
+					else{
+						JOptionPane.showMessageDialog(window, "Error: Insufficient Funds");
+					}
 				}
 			}
 		});
@@ -297,26 +313,27 @@ public class ShopScreen {
 		tabbedPane.addTab("Delicatessen", null, panelBuyFood, null);
 		panelBuyFood.setLayout(null);
 		
-		JLabel lblIntroduction = new JLabel(String.format("<html><div>Welcome to %s's Service Deli. Please select a monster you would like to feed, then select the food you would like to buy.</div></html>", shop.getShopName()));
-		lblIntroduction.setBounds(12, 12, 352, 58);
-		lblIntroduction.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		panelBuyFood.add(lblIntroduction);
+		JLabel lblIntroductionDeli = new JLabel(String.format("<html><div>Welcome to %s's Service Deli. Please select a monster you would like to feed, then select the food you would like to buy.</div></html>", shop.getShopName()));
+		lblIntroductionDeli.setBounds(12, 12, 352, 58);
+		lblIntroductionDeli.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		panelBuyFood.add(lblIntroductionDeli);
 		
-		JComboBox comboBoxMonster = new JComboBox();
-		comboBoxMonster.setBounds(154, 93, 210, 24);
-		panelBuyFood.add(comboBoxMonster);
+		JComboBox comboBoxMonsterFood = new JComboBox(monsterNameList);
+
+		comboBoxMonsterFood.setBounds(154, 93, 210, 24);
+		panelBuyFood.add(comboBoxMonsterFood);
 		
-		JLabel lblSelectAMonster = new JLabel("<html><div>Select a monster:</div></html>");
-		lblSelectAMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblSelectAMonster.setBounds(12, 82, 124, 47);
-		panelBuyFood.add(lblSelectAMonster);
+		JLabel lblSelectAMonsterFood = new JLabel("<html><div>Select a monster:</div></html>");
+		lblSelectAMonsterFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblSelectAMonsterFood.setBounds(12, 82, 124, 47);
+		panelBuyFood.add(lblSelectAMonsterFood);
 		
 		JLabel lblSelectFood = new JLabel("<html><div>Select food:</div></html>");
 		lblSelectFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblSelectFood.setBounds(12, 117, 124, 47);
 		panelBuyFood.add(lblSelectFood);
 		
-		JComboBox comboBoxFood = new JComboBox();
+		JComboBox comboBoxFood = new JComboBox(foodNameList);
 		comboBoxFood.setBounds(154, 128, 210, 24);
 		panelBuyFood.add(comboBoxFood);
 		
@@ -326,69 +343,75 @@ public class ShopScreen {
 		panelBuyFood.add(lblYourCurrentFoodSelection);
 		
 		JButton btnPurchaseAndFeed = new JButton("<html><div>Purchase and feed monster</div></html>");
+		btnPurchaseAndFeed.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (player.playerPurchaseEntity(selectedFood)){
+					inventory.getMonsters().get selectedFood.getHealthIncrease(); //
+				}
+				else{
+					JOptionPane.showMessageDialog(window, "Error: Insufficient Funds");
+				}
+			}
+		});
 		btnPurchaseAndFeed.setForeground(Color.WHITE);
 		btnPurchaseAndFeed.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnPurchaseAndFeed.setBackground(Color.RED);
 		btnPurchaseAndFeed.setBounds(12, 235, 353, 31);
 		panelBuyFood.add(btnPurchaseAndFeed);
 		
-		JButton btnPurchaseAndStore = new JButton("<html><div>Purchase and store in inventory</div></html>");
-		btnPurchaseAndStore.setForeground(Color.WHITE);
-		btnPurchaseAndStore.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
-		btnPurchaseAndStore.setBackground(Color.RED);
-		btnPurchaseAndStore.setBounds(12, 278, 353, 31);
+		JButton btnPurchaseAndStoreFood = new JButton("<html><div>Purchase and store in inventory</div></html>");
+		btnPurchaseAndStoreFood.setForeground(Color.WHITE);
+		btnPurchaseAndStoreFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btnPurchaseAndStoreFood.setBackground(Color.RED);
+		btnPurchaseAndStoreFood.setBounds(12, 278, 353, 31);
 		panelBuyFood.add(btnPurchaseAndStore);
 		
-		JPanel panelBuyPotion = new JPanel();
-		tabbedPane.addTab("Cafe", null, panelBuyPotion, null);
-		panelBuyPotion.setLayout(null);
+		JPanel panelBuyCafe = new JPanel();
+		tabbedPane.addTab("Cafe", null, panelBuyCafe, null);
+		panelBuyCafe.setLayout(null);
+
 		
-		JPanel panelBuyFood_1 = new JPanel();
-		panelBuyFood_1.setLayout(null);
-		panelBuyFood_1.setBounds(0, 0, 719, 361);
-		panelBuyPotion.add(panelBuyFood_1);
+		JLabel lblIntroductionCafe = new JLabel("<html><div>Welcome to New World Kaitaia's Cafe. Please select a monster you would like to feed, then select the food you would like to buy.</div></html>");
+		lblIntroductionCafe.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblIntroductionCafe.setBounds(12, 12, 352, 58);
+		panelBuyCafe.add(lblIntroduction_1);
 		
-		JLabel lblIntroduction_1 = new JLabel("<html><div>Welcome to New World Kaitaia's Cafe. Please select a monster you would like to feed, then select the food you would like to buy.</div></html>");
-		lblIntroduction_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblIntroduction_1.setBounds(12, 12, 352, 58);
-		panelBuyFood_1.add(lblIntroduction_1);
+		JComboBox comboBoxMonsterDrink = new JComboBox(monsterNameList);
+		comboBoxMonsterDrink.setBounds(154, 93, 210, 24);
+		panelBuyCafe.add(comboBoxMonsterDrink);
 		
-		JComboBox comboBoxMonster_1 = new JComboBox();
-		comboBoxMonster_1.setBounds(154, 93, 210, 24);
-		panelBuyFood_1.add(comboBoxMonster_1);
+		JLabel lblSelectAMonsterCafe = new JLabel("<html><div>Select a monster:</div></html>");
+		lblSelectAMonsterCafe.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblSelectAMonsterCafe.setBounds(12, 82, 124, 47);
+		panelBuyCafe.add(lblSelectAMonsterCafe);
 		
-		JLabel lblSelectAMonster_1 = new JLabel("<html><div>Select a monster:</div></html>");
-		lblSelectAMonster_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblSelectAMonster_1.setBounds(12, 82, 124, 47);
-		panelBuyFood_1.add(lblSelectAMonster_1);
+		JLabel lblSelectDrink = new JLabel("<html><div>Select food:</div></html>");
+		lblSelectDrink.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblSelectDrink.setBounds(12, 117, 124, 47);
+		panelBuyCafe.add(lblSelectDrink);
 		
-		JLabel lblSelectFood_1 = new JLabel("<html><div>Select food:</div></html>");
-		lblSelectFood_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblSelectFood_1.setBounds(12, 117, 124, 47);
-		panelBuyFood_1.add(lblSelectFood_1);
+		JComboBox comboBoxDrink = new JComboBox(drinkNameList);
+		comboBoxDrink.setBounds(154, 128, 210, 24);
+		panelBuyCafe.add(comboBoxDrink);
 		
-		JComboBox comboBoxFood_1 = new JComboBox();
-		comboBoxFood_1.setBounds(154, 128, 210, 24);
-		panelBuyFood_1.add(comboBoxFood_1);
+		JLabel lblYourCurrentDrinkSelection = new JLabel("<html><div>You're selecting Pasta. Pasta increases adds 10% to the monster's health. Pasta costs 20 coins. </div></html>");
+		lblYourCurrentDrinkSelection.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblYourCurrentDrinkSelection.setBounds(12, 171, 420, 47);
+		panelBuyCafe.add(lblYourCurrentDrinkSelection);
 		
-		JLabel lblYourCurrentFoodSelection_1 = new JLabel("<html><div>You're selecting Pasta. Pasta increases adds 10% to the monster's health. Pasta costs 20 coins. </div></html>");
-		lblYourCurrentFoodSelection_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblYourCurrentFoodSelection_1.setBounds(12, 171, 420, 47);
-		panelBuyFood_1.add(lblYourCurrentFoodSelection_1);
+		JButton btnPurchaseAndDrink = new JButton("<html><div>Purchase and feed monster</div></html>");
+		btnPurchaseAndDrink.setForeground(Color.WHITE);
+		btnPurchaseAndDrink.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btnPurchaseAndDrink.setBackground(Color.RED);
+		btnPurchaseAndDrink.setBounds(12, 235, 353, 31);
+		panelBuyCafe.add(btnPurchaseAndDrink);
 		
-		JButton btnPurchaseAndFeed_1 = new JButton("<html><div>Purchase and feed monster</div></html>");
-		btnPurchaseAndFeed_1.setForeground(Color.WHITE);
-		btnPurchaseAndFeed_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
-		btnPurchaseAndFeed_1.setBackground(Color.RED);
-		btnPurchaseAndFeed_1.setBounds(12, 235, 353, 31);
-		panelBuyFood_1.add(btnPurchaseAndFeed_1);
-		
-		JButton btnPurchaseAndStore_1 = new JButton("<html><div>Purchase and store in inventory</div></html>");
-		btnPurchaseAndStore_1.setForeground(Color.WHITE);
-		btnPurchaseAndStore_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
-		btnPurchaseAndStore_1.setBackground(Color.RED);
-		btnPurchaseAndStore_1.setBounds(12, 278, 353, 31);
-		panelBuyFood_1.add(btnPurchaseAndStore_1);
+		JButton btnPurchaseAndStoreDrink = new JButton("<html><div>Purchase and store in inventory</div></html>");
+		btnPurchaseAndStoreDrink.setForeground(Color.WHITE);
+		btnPurchaseAndStoreDrink.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
+		btnPurchaseAndStoreDrink.setBackground(Color.RED);
+		btnPurchaseAndStoreDrink.setBounds(12, 278, 353, 31);
+		panelBuyCafe.add(btnPurchaseAndStoreDrink);
 		
 		JPanel panelTradeInMonster = new JPanel();
 		panelTradeInMonster.setLayout(null);
