@@ -1,12 +1,7 @@
 package main;
 
-import java.util.ArrayList; //
 
-import assets.enums.DrinkType;
-import assets.enums.FoodType;
 import assets.enums.RoleType;
-import entities.items.consumables.Drink;
-import entities.items.consumables.Food;
 import entities.monsters.Monster;
 
 /**
@@ -82,40 +77,5 @@ public class Shop implements Role {
         
     }
 
-
-    
-    private ArrayList<Food> shopFoodRange;
-    
-    public void setShopFoodRange() {
-    	Food apple = new Food(FoodType.APPLE);
-    	Food pasta = new Food(FoodType.PASTA);
-    	this.shopFoodRange.add(apple);
-    	this.shopFoodRange.add(pasta);
-    }
-
-    /**
-     * This method returns the current shopRange.
-     * @return shopRange ArrayList<Monster>
-     */
-    public ArrayList<Food> getShopFoodRange() {
-        return this.shopFoodRange;
-    }
-    
-    private ArrayList<Drink> shopDrinkRange;
-    
-    public void setShopDrinkRange() {
-    	Drink coffee = new Drink(DrinkType.COFFEE);
-    	Drink energyDrink = new Drink(DrinkType.ENERGY_DRINKS);
-    	this.shopDrinkRange.add(coffee);
-    	this.shopDrinkRange.add(energyDrink);
-    }
-
-    /**
-     * This method returns the current shopRange.
-     * @return shopRange ArrayList<Monster>
-     */
-    public ArrayList<Drink> getShopDrinkRange() {
-        return this.shopDrinkRange;
-    }
     
 }

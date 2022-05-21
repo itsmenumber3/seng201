@@ -14,7 +14,5 @@ public class SouthlandFarm extends Battle {
         Tools tools = new Tools();
         this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));
         this.setBattleImagePath("/assets/ui/img/SouthlandFarm.jpg");
-		this.getBattleShop().setShopDrinkRange();
-		this.getBattleShop().setShopFoodRange();
     }
 }

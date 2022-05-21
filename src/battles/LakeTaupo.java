@@ -14,7 +14,5 @@ public class LakeTaupo extends Battle {
         this.getBattleShop().setShopName("The Warehouse Taupo");
 		this.getBattleShop().setShopMonsterRange(tools.generateManyRandomMonsters(player, 5));
         this.setBattleImagePath("/assets/ui/img/LakeTaupo.jpg");
-		this.getBattleShop().setShopDrinkRange();
-		this.getBattleShop().setShopFoodRange();
     }
 }

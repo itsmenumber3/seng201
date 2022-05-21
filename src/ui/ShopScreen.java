@@ -51,13 +51,23 @@ public class ShopScreen {
 	private String displayInfo;
 	private Monster selectedMonster;
 
-	private String selectedMonsterName;
 	private JButton selectedMonsterBtn;
 
+	private String selectedFoodMonsterName;
+
+	private Monster selectedFoodMonster;
+
+	private String selectedDrinkMonsterName;
+
+	private Monster selectedDrinkMonster;
+
+	private String selectedFoodName;
 	private Food selectedFood;
 
+	private String selectedDrinkName;
+
 	private Drink selectedDrink;
-	private ArrayList<String> monsterNameList = new ArrayList<String>();
+	private ArrayList<String> shopMonsterNameList = new ArrayList<String>();
 	private ArrayList<String> foodNameList = new ArrayList<String>();
 	private ArrayList<String> drinkNameList = new ArrayList<String>();
 
@@ -111,29 +121,39 @@ public class ShopScreen {
 		int monsterLength = inventory.getMonsters().size();
 		
 		for (int i = 0; (i < monsterLength); i++) {
-			monsterNameList.add(inventory.getMonsters().get(i).getEntityName());
+			shopMonsterNameList.add(inventory.getMonsters().get(i).getEntityName());
 		}
 	}
 
-	public Monster getMonsterFromName(){
+	public Monster getMonsterFromName(String selectedMonsterName){
 		int monsterIndex = monsterNameList.indexOf(selectedMonsterName);
 		return inventory.getMonsters().get(monsterIndex);
 	}
 	
 	public void setFoodNameList() {
-		int foodLength = shop.getShopFoodRange().size();
+		int foodLength = player.getFoodRange().size();
 		
 		for (int i = 0; (i < foodLength); i++) {
-			foodNameList.add(shop.getShopFoodRange().get(i).getEntityName());
+			foodNameList.add(player.getFoodRange().get(i).getEntityName());
 		}
+	}
+
+	public Food getFoodFromName(){
+		int foodIndex = foodNameList.indexOf(selectedFoodName);
+		return player.getFoodRange().get(foodIndex);
 	}
 	
 	public void setDrinkNameList() {
-		int drinkLength = shop.getShopDrinkRange().size();
+		int drinkLength = player.getDrinkRange().size();
 		
 		for (int i = 0; (i < drinkLength);i++) {
-			drinkNameList.add(shop.getShopDrinkRange().get(i).getEntityName());
+			drinkNameList.add(player.getDrinkRange().get(i).getEntityName());
 		}
+	}
+
+	public Drink getDrinkFromName(){
+		int drinkIndex = drinkNameList.indexOf(selectedDrinkName);
+		return player.getDrinkRange().get(drinkIndex);
 	}
 	
 	public String getMonsterDisplayInfo(Monster monster) {
@@ -320,17 +340,13 @@ public class ShopScreen {
 		lblIntroductionDeli.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		panelBuyFood.add(lblIntroductionDeli);
 		
-		
-		monsterNameList.add("Jalpaiguri");
-		monsterNameList.add("Mumbai");
-		monsterNameList.add("Noida");
-		monsterNameList.add("Kolkata");
-		monsterNameList.add("New Delhi");
-		final String[] monsterNameLister = monsterNameList.toArray(new String[monsterNameList.size()]);
-		
-		JComboBox comboBoxMonsterFood = new JComboBox(monsterNameLister);
-		//comboBoxMonsterFood.setModel(new DefaultComboBoxModel());
-
+		JComboBox comboBoxMonsterFood = new JComboBox(monsterNameList);
+		comboBoxMonsterFood.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedFoodMonsterName = comboBoxMonsterFood.getSelectedItem();
+				selectedFoodMonster = getMonsterFromName(selectedFoodMonsterName);
+			}
+		});
 		comboBoxMonsterFood.setBounds(154, 93, 210, 24);
 		panelBuyFood.add(comboBoxMonsterFood);
 		
@@ -344,11 +360,18 @@ public class ShopScreen {
 		lblSelectFood.setBounds(12, 117, 124, 47);
 		panelBuyFood.add(lblSelectFood);
 		
-		JComboBox comboBoxFood = new JComboBox();
+		JComboBox comboBoxFood = new JComboBox(foodNameList);
+		comboBoxFood.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedFoodName = comboBoxFood.getSelectedItem();
+				selectedFood = getFoodFromName();
+			}
+		});
 		comboBoxFood.setBounds(154, 128, 210, 24);
 		panelBuyFood.add(comboBoxFood);
 		
-		JLabel lblYourCurrentFoodSelection = new JLabel("<html><div>You're selecting Pasta. Pasta increases adds 10% to the monster's health. Pasta costs 20 coins. </div></html>");
+		JLabel lblYourCurrentFoodSelection = new JLabel(String.format("<html><div>You're selecting %1$s. %1$s increases adds %:.2f% to the monster's health. %1$s costs %:.2f coins. </div></html>",
+				selectedFood.getEntityName(), selectedFood.getHealthIncrease(), selectedFood.getEntitySellValue()));
 		lblYourCurrentFoodSelection.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblYourCurrentFoodSelection.setBounds(12, 171, 420, 47);
 		panelBuyFood.add(lblYourCurrentFoodSelection);
@@ -388,6 +411,12 @@ public class ShopScreen {
 		panelBuyCafe.add(lblIntroductionCafe);
 		
 		JComboBox comboBoxMonsterDrink = new JComboBox();
+		comboBoxMonsterDrink.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedDrinkMonsterName = comboBoxMonsterDrink.getSelectedItem();
+				selectedDrinkMonster = getMonsterFromName(selectedDrinkMonsterName);
+			}
+		});
 		comboBoxMonsterDrink.setBounds(154, 93, 210, 24);
 		panelBuyCafe.add(comboBoxMonsterDrink);
 		
@@ -402,10 +431,17 @@ public class ShopScreen {
 		panelBuyCafe.add(lblSelectDrink);
 		
 		JComboBox comboBoxDrink = new JComboBox();
+		comboBoxDrink.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedDrinkName = comboBoxDrink.getSelectedItem();
+				selectedDrink = getDrinkFromName();
+			}
+		});
 		comboBoxDrink.setBounds(154, 128, 210, 24);
 		panelBuyCafe.add(comboBoxDrink);
 		
-		JLabel lblYourCurrentDrinkSelection = new JLabel("<html><div>You're selecting Pasta. Pasta increases adds 10% to the monster's health. Pasta costs 20 coins. </div></html>");
+		JLabel lblYourCurrentDrinkSelection = new JLabel(String.format("<html><div>You're selecting %1$s. %1$s increases adds %:.2f% to the monster's health. %1$s costs %:.2f coins. </div></html>",
+				selectedDrink.getEntityName(), selectedDrink.getHealthIncrease(), selectedDrink.getEntitySellValue()));
 		lblYourCurrentDrinkSelection.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblYourCurrentDrinkSelection.setBounds(12, 171, 420, 47);
 		panelBuyCafe.add(lblYourCurrentDrinkSelection);
