@@ -32,6 +32,7 @@ import javax.swing.JList;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JTable;
@@ -59,6 +60,7 @@ public class ShopScreen {
 	private ArrayList<String> monsterNameList = new ArrayList<String>();
 	private ArrayList<String> foodNameList = new ArrayList<String>();
 	private ArrayList<String> drinkNameList = new ArrayList<String>();
+
 	
 
 	/**
@@ -318,7 +320,16 @@ public class ShopScreen {
 		lblIntroductionDeli.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		panelBuyFood.add(lblIntroductionDeli);
 		
-		JComboBox comboBoxMonsterFood = new JComboBox(monsterNameList);
+		
+		monsterNameList.add("Jalpaiguri");
+		monsterNameList.add("Mumbai");
+		monsterNameList.add("Noida");
+		monsterNameList.add("Kolkata");
+		monsterNameList.add("New Delhi");
+		final String[] monsterNameLister = monsterNameList.toArray(new String[monsterNameList.size()]);
+		
+		JComboBox comboBoxMonsterFood = new JComboBox(monsterNameLister);
+		//comboBoxMonsterFood.setModel(new DefaultComboBoxModel());
 
 		comboBoxMonsterFood.setBounds(154, 93, 210, 24);
 		panelBuyFood.add(comboBoxMonsterFood);
@@ -333,7 +344,7 @@ public class ShopScreen {
 		lblSelectFood.setBounds(12, 117, 124, 47);
 		panelBuyFood.add(lblSelectFood);
 		
-		JComboBox comboBoxFood = new JComboBox(foodNameList);
+		JComboBox comboBoxFood = new JComboBox();
 		comboBoxFood.setBounds(154, 128, 210, 24);
 		panelBuyFood.add(comboBoxFood);
 		
@@ -346,7 +357,7 @@ public class ShopScreen {
 		btnPurchaseAndFeed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (player.playerPurchaseEntity(selectedFood)){
-					inventory.getMonsters().get selectedFood.getHealthIncrease(); //
+					//inventory.getMonsters().get selectedFood.getHealthIncrease();
 				}
 				else{
 					JOptionPane.showMessageDialog(window, "Error: Insufficient Funds");
@@ -364,7 +375,7 @@ public class ShopScreen {
 		btnPurchaseAndStoreFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnPurchaseAndStoreFood.setBackground(Color.RED);
 		btnPurchaseAndStoreFood.setBounds(12, 278, 353, 31);
-		panelBuyFood.add(btnPurchaseAndStore);
+		panelBuyFood.add(btnPurchaseAndStoreFood);
 		
 		JPanel panelBuyCafe = new JPanel();
 		tabbedPane.addTab("Cafe", null, panelBuyCafe, null);
@@ -374,9 +385,9 @@ public class ShopScreen {
 		JLabel lblIntroductionCafe = new JLabel("<html><div>Welcome to New World Kaitaia's Cafe. Please select a monster you would like to feed, then select the food you would like to buy.</div></html>");
 		lblIntroductionCafe.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblIntroductionCafe.setBounds(12, 12, 352, 58);
-		panelBuyCafe.add(lblIntroduction_1);
+		panelBuyCafe.add(lblIntroductionCafe);
 		
-		JComboBox comboBoxMonsterDrink = new JComboBox(monsterNameList);
+		JComboBox comboBoxMonsterDrink = new JComboBox();
 		comboBoxMonsterDrink.setBounds(154, 93, 210, 24);
 		panelBuyCafe.add(comboBoxMonsterDrink);
 		
@@ -390,7 +401,7 @@ public class ShopScreen {
 		lblSelectDrink.setBounds(12, 117, 124, 47);
 		panelBuyCafe.add(lblSelectDrink);
 		
-		JComboBox comboBoxDrink = new JComboBox(drinkNameList);
+		JComboBox comboBoxDrink = new JComboBox();
 		comboBoxDrink.setBounds(154, 128, 210, 24);
 		panelBuyCafe.add(comboBoxDrink);
 		
