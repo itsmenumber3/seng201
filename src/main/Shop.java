@@ -100,26 +100,6 @@ public class Shop implements Role {
     public ArrayList<Food> getShopFoodRange() {
         return this.shopFoodRange;
     }
-
-    /**
-     * This method removes an entity from the shop range.
-     * @param inputEntity Entity
-     */
-    /**
-    private void removeFoodFromShopFoodRange(Food removeFood) {
-        this.getShopFoodRange().remove(removeFood); // Remove it from the shop range
-    }
-	*/
-    /**
-     * This method triggers relevant methods when an entity is purchased from the shop by the player.
-     * @param inputEntity Entity, the entity in question
-     */
-    /**
-    public void uponFoodBeingPurchasedByPlayer(Food inputFood) {
-        this.removeFoodFromShopFoodRange(inputFood);
-        
-    }
-    */
     
     private ArrayList<Drink> shopDrinkRange;
     
