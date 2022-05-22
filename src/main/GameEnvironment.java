@@ -19,14 +19,28 @@ public class GameEnvironment {
     private final Tools tools = new Tools();
     private FightOutcomeType fightOutcome;
     
+    /**
+     * Sets the fight outcome of a challenge
+     * e.g Flip a coin or a quiz question
+     * @param inputFightOutcomeType
+     */
     public void setFightOutcome(FightOutcomeType inputFightOutcomeType) {
     	fightOutcome = inputFightOutcomeType;
     }
     
+    /**
+     * Gets the fight outcome for setting the following screen after a challenge
+     * @return fightOutcome: FightOutcomeType
+     */
     public FightOutcomeType getFightOutcome() {
     	return fightOutcome;
     }
-    
+
+    /**
+     * Unallowed set method for creating a player
+     * @param inputPlayer
+     * @throws UnallowedMethodException
+     */
     public void setPlayer(Player inputPlayer) {
     	try {
     		throw new UnallowedMethodException("Unallowed method");
@@ -34,37 +48,63 @@ public class GameEnvironment {
     		e.printStackTrace();
     	}
     }
-    
+
+    /**
+     * Gets the current player within the current game environment
+     * @return player: Player
+     */
     public Player getPlayer() {
-    	return this.player;
+    	return player;
     }
 
+    /**
+     * Launches the welcome screen to start process of configuring the game
+     */
     public void launchWelcomeScreen() {
         WelcomeScreen welcomeWindow = new WelcomeScreen(this);
     }
 
+    /**
+     * Closes the welcome screen and calls the player setup screen
+     * @param inputWelcomeWindow
+     */
     public void closeWelcomeScreen(WelcomeScreen inputWelcomeWindow) {
         inputWelcomeWindow.closeWindow();
-        this.launchPlayerSetupScreen();
+        launchPlayerSetupScreen();
     }
 
-
+    /**
+     * Launches the player setup screen to configure
+     * the player name, difficulty and duration of the game.
+     */
     public void launchPlayerSetupScreen() {
         PlayerSetupScreen playerSetupWindow = new PlayerSetupScreen(this);
     }
-    
+
+    /**
+     * Closes the player setup screen and calls the launch first monster set up screen
+     * @param inputPlayerSetupWindow
+     */
     public void closePlayerSetupScreen(PlayerSetupScreen inputPlayerSetupWindow) {
     	inputPlayerSetupWindow.closeWindow();
     	this.launchFirstMonsterSetupScreen();
     }
-    
+
+    /**
+     * Launches the first monster setup screen where the player will
+     * be able to choose and name the first monster in their team
+     */
     public void launchFirstMonsterSetupScreen() {
-    	
     	FirstMonsterSetupScreen firstMonsterSetupWindow = new FirstMonsterSetupScreen(this);
     }
-    
+
+    /**
+     * Closes the first monster setup screen
+     * @param firstMonsterSetupWindow
+     */
     public void closeFirstMonsterSetupScreen(FirstMonsterSetupScreen firstMonsterSetupWindow) {
     	firstMonsterSetupWindow.closeWindow();
+        launchMapScreen();
     }
     
     public void launchMapScreen() {
