@@ -144,13 +144,16 @@ public class MapScreen {
 		panelItem.add(lblCurrentLocationInfo);
 		lblCurrentLocationInfo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		btnVisitShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
-		btnVisitShop.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				nextScreen = 1;
-				finishedWindow();
-			}
-		});
+		if (battle.getBattleName() != "Wellington") {
+			btnVisitShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
+			btnVisitShop.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					nextScreen = 1;
+					finishedWindow();
+				}
+			});
+		}
+		
 		btnVisitShop.setForeground(Color.WHITE);
 		btnVisitShop.setBounds(12, 145, 207, 25);
 		panelItem.add(btnVisitShop);
