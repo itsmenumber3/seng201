@@ -66,7 +66,7 @@ public class GameEnvironment {
 
     /**
      * Closes the welcome screen and calls the player setup screen
-     * @param inputWelcomeWindow
+     * @param inputWelcomeWindow: WelcomeScreen
      */
     public void closeWelcomeScreen(WelcomeScreen inputWelcomeWindow) {
         inputWelcomeWindow.closeWindow();
@@ -83,7 +83,7 @@ public class GameEnvironment {
 
     /**
      * Closes the player setup screen and calls the launch first monster set up screen
-     * @param inputPlayerSetupWindow
+     * @param inputPlayerSetupWindow: PlayerSetupScreen
      */
     public void closePlayerSetupScreen(PlayerSetupScreen inputPlayerSetupWindow) {
     	inputPlayerSetupWindow.closeWindow();
@@ -99,18 +99,28 @@ public class GameEnvironment {
     }
 
     /**
-     * Closes the first monster setup screen
-     * @param firstMonsterSetupWindow
+     * Closes the first monster setup screen and launches the map screen
+     * @param firstMonsterSetupWindow: FirstMonsterSetupScreen
      */
     public void closeFirstMonsterSetupScreen(FirstMonsterSetupScreen firstMonsterSetupWindow) {
     	firstMonsterSetupWindow.closeWindow();
         launchMapScreen();
     }
-    
+
+    /**
+     * Launches the map screen to select the location for the next battle
+     */
     public void launchMapScreen() {
     	MapScreen mapWindow = new MapScreen(this);
     }
-    
+
+    /**
+     * Closes the map screen and calls the next window
+     * based on the getNextScreen parameter within the map window
+     * the calls are for: a battle screen; a shop screen; a finish game screen
+     * the default is to call the inventory screen
+     * @param inputMapWindow: MapScreen
+     */
     public void closeMapScreen(MapScreen inputMapWindow) {
     	inputMapWindow.closeWindow();
     	switch (inputMapWindow.getNextScreen()) {
@@ -128,10 +138,19 @@ public class GameEnvironment {
     	}
     }
 
+    /**
+     * Launches the inventory screen to see the currently owned monsters, food, drinks or fuel
+     * @param isPreviousWindowMapWindow: boolean
+     */
     public void launchInventoryScreen(boolean isPreviousWindowMapWindow) {
         InventoryScreen inventoryWindow = new InventoryScreen(this, isPreviousWindowMapWindow);
     }
 
+    /**
+     * Closes the inventory screen and launches either
+     * the map screen or shop screen
+     * @param inputInventoryWindow: InventoryScreen
+     */
     public void closeInventoryScreen(InventoryScreen inputInventoryWindow) {
         inputInventoryWindow.closeWindow();
         if (inputInventoryWindow.getIsPreviousWindowMapWindow()) {
@@ -141,19 +160,39 @@ public class GameEnvironment {
         }
     }
 
+    /**
+     * Launches the shop screen to buy new or more:
+     * monsters, food, drinks, fuel or a lotto ticket
+     * can also sell a monster if they no longer want it however this monster is not retrievable
+     */
     public void launchShopScreen() {
         ShopScreen shopWindow = new ShopScreen(this);
     }
 
+    /**
+     * Closes the shop screen and calls the map screen
+     * @param inputShopWindow: ShopScreen
+     */
     public void closeShopScreen(ShopScreen inputShopWindow) {
         inputShopWindow.closeWindow();
         launchMapScreen();
     }
-    
+
+    /**
+     * Launches the battle screen where the player can decide
+     * to travel to that location or go back to the map and choose a different location
+     */
     public void launchBattleScreen() {
     	BattleScreen battleWindow = new BattleScreen(this);
     }
-    
+
+    /**
+     * Closes the battle screen and has 2 options to call:
+     * If the player wants to continue to their selected location the travelling screen will be called.
+     * If the player wants to return to the map screen will be called.
+     * @param inputBattleWindow: BattleScreen
+     * @param isPlayerBattling: boolean
+     */
     public void closeBattleScreen(BattleScreen inputBattleWindow, boolean isPlayerBattling) {
     	inputBattleWindow.closeWindow();
     	if (isPlayerBattling) {
@@ -162,40 +201,76 @@ public class GameEnvironment {
     		launchMapScreen();
     	}
     }
-    
+
+    /**
+     * Launches the travelling screen where a random event may occur
+     */
     public void launchTravellingScreen() {
     	TravellingScreen travellingWindow = new TravellingScreen(this);
     }
-    
+
+    /**
+     * Closes the travelling screen and calls the make and launch challenge screen
+     * @param inputTravellingWindow: TravellingScreen
+     */
     public void closeTravellingScreen(TravellingScreen inputTravellingWindow) {
     	inputTravellingWindow.closeWindow();
-    	
     	makeNewChallengeAndLaunchScreen();
     }
-    
+
+    /**
+     * Launches the quiz screen where the player
+     * answers a question to decide whether the player gets to attack in the battle
+     */
     public void launchQuizScreen() {
     	QuizScreen quizWindow = new QuizScreen(this);
     }
-    
+
+    /**
+     * Closes the quiz screen and calls the launch challenge result screen
+     * @param inputQuizScreen: QuizScreen
+     */
     public void closeQuizScreen(QuizScreen inputQuizScreen) {
         inputQuizScreen.closeWindow();
         launchChallengeResultScreen();
     }
-    
+
+    /**
+     * Launches the paper, scissors, rock screen where the player
+     * plays paper, scissors, rock to decide whether the player gets to attack in the battle
+     */
     public void launchPaperScissorsRockScreen() {
     	PaperScissorsRockScreen paperScissorsRockWindow = new PaperScissorsRockScreen(this);
     }
 
+    /**
+     * Closes the paper, scissors, rock screen and calls the launch challenge result screen
+     * @param inputPapersScissorsRockWindow: PaperScissorsRockScreen
+     */
     public void closePaperScissorsRockScreen(PaperScissorsRockScreen inputPapersScissorsRockWindow) {
         inputPapersScissorsRockWindow.closeWindow();
         launchChallengeResultScreen();
 
     }
 
+    /**
+     * Launches the challenge result screen which displays
+     * the players monsters and stats and the opponent monsters stats
+     */
     public void launchChallengeResultScreen() {
         ChallengeResultScreen challengeResultWindow = new ChallengeResultScreen(this);
     }
 
+    /**
+     * Closes the challenge result window and has 4 options to call:
+     * If the player wins the battle the launch battle screen is called
+     * If both monsters still have health > 0 the battle continues and a new challenge is called
+     * If the players current monster's health < 0 and has more monsters in their team
+     * and the battle monster has health > 0 the battle continues and a new challenge is called
+     * If the players current monster's health < 0 and there are no more monsters in the team
+     * the battle and subsequently game is over and the finish game screen is called
+     * @param inputChallengeResultWindow: ChallengeResultScreen
+     */
     public void closeChallengeResultScreen(ChallengeResultScreen inputChallengeResultWindow) {
         inputChallengeResultWindow.closeWindow();
         
@@ -207,7 +282,6 @@ public class GameEnvironment {
         	makeNewChallengeAndLaunchScreen();
         	break;
         case PLAYER_LOSES_MONSTER_BUT_BATTLE_CONTINUES:
-        	getPlayer().getPlayerInventory().getMonsters().remove(0);
         	makeNewChallengeAndLaunchScreen();
         	break;
         default: // Game is over
@@ -215,7 +289,11 @@ public class GameEnvironment {
         	break;
         }
     }
-    
+
+    /**
+     * Chooses the next challenge and launches the relevant screen:
+     * flip a coin Or paper, scissors, rock Or quiz
+     */
     public void makeNewChallengeAndLaunchScreen() {
     	Challenge newChallenge = tools.makeRandomChallenge();
         getPlayer().getPlayerSelectedBattle().setCurrentChallenge(newChallenge);
@@ -227,7 +305,11 @@ public class GameEnvironment {
             launchQuizScreen();
         }
     }
-    
+
+    /**
+     * Launches the flip a coin screen where the player
+     * plays flip a coin to decide whether the player gets to attack in the battle
+     */
     public void launchFlipACoinScreen() {
     	FlipACoinScreen flipACoinWindow = new FlipACoinScreen();
     }
