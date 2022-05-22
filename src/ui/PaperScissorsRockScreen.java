@@ -71,8 +71,11 @@ public class PaperScissorsRockScreen {
 	public void finishedWindow() {
 		battle.incrementChallengeCount();
 		paperScissorsRock.runPaperScissorsRockResults();
+
 		gameEnvironment.setFightOutcome(tools.runFight(player));
+
 		gameEnvironment.closePaperScissorsRockScreen(this);
+
 	}
 
 	/**

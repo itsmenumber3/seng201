@@ -280,6 +280,7 @@ public class GameEnvironment {
      */
     public void closePaperScissorsRockScreen(PaperScissorsRockScreen inputPapersScissorsRockWindow) {
         inputPapersScissorsRockWindow.closeWindow();
+        System.out.println(getPlayer().getPlayerSelectedBattle().getCurrentChallenge().getChallengeOutcome().toString());
         launchChallengeResultScreen();
 
     }

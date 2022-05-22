@@ -684,7 +684,7 @@ public class Tools {
 		for (Monster monster : monsters) {
 			monsterNameArrayList.add(monster.getEntityName());
 		}
-
-		return (String[]) monsterNameArrayList.toArray();
+		String[] strings = (String[]) monsterNameArrayList.toArray();
+		return ;
 	}
 }
