@@ -63,14 +63,15 @@ public class Player implements Role {
      * If it is invalid, tools.playerNameValidation will throw the error InvalidInputException and will not assign.
      * @param inputPlayerName: String, player-chosen playerName
      */
-    public void setPlayerName(String inputPlayerName) {
+    public boolean setPlayerName(String inputPlayerName) {
         try {
             // If playerName does not meet criteria, playerNameValidation will throw an InvalidInputException
             // Else, playerNameValidation returns that exact inputPlayerName: String.
             this.playerName = tools.nameValidation(inputPlayerName);
+            return true;
         }
         catch (InvalidInputException e) { // If playerNameValidation throws this error
-            System.out.println("Name not valid");
+            return false;
         }
     }
 
@@ -446,13 +447,13 @@ public class Player implements Role {
     	
     }
 
-    private ArrayList<Food> FoodRange;
+    private ArrayList<Food> foodRange;
 
     public void setFoodRange() {
         Food apple = new Food(FoodType.APPLE);
         Food pasta = new Food(FoodType.PASTA);
-        this.shopFoodRange.add(apple);
-        this.shopFoodRange.add(pasta);
+        this.foodRange.add(apple);
+        this.foodRange.add(pasta);
     }
 
     /**
@@ -460,16 +461,16 @@ public class Player implements Role {
      * @return FoodRange ArrayList<Food>
      */
     public ArrayList<Food> getFoodRange() {
-        return this.FoodRange;
+        return this.foodRange;
     }
 
-    private ArrayList<Drink> DrinkRange;
+    private ArrayList<Drink> drinkRange;
 
     public void setDrinkRange() {
         Drink coffee = new Drink(DrinkType.COFFEE);
         Drink energyDrink = new Drink(DrinkType.ENERGY_DRINKS);
-        this.shopDrinkRange.add(coffee);
-        this.shopDrinkRange.add(energyDrink);
+        this.drinkRange.add(coffee);
+        this.drinkRange.add(energyDrink);
     }
 
     /**
@@ -477,6 +478,6 @@ public class Player implements Role {
      * @return DrinkRange ArrayList<Drink>
      */
     public ArrayList<Drink> getDrinkRange() {
-        return this.DrinkRange;
+        return this.drinkRange;
     }
 }

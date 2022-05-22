@@ -7,7 +7,7 @@ package exceptions;
  */
 public class InvalidInputException extends Exception {
 	public InvalidInputException() {
-		super("This method is not allowed.");
+		super("Input is not legal.");
 	}
 	
     public InvalidInputException(String message) {

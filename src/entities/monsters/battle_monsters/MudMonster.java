@@ -5,6 +5,6 @@ import entities.monsters.Monster;
 
 public class MudMonster extends Monster {
     public MudMonster() {
-        this.setMonsterType(MonsterType.MUD_MONSTER);
+        setMonsterType(MonsterType.MUD_MONSTER);
     }
 }

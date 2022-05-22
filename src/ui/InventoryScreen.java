@@ -315,7 +315,7 @@ public class InventoryScreen {
 		JButton btnFeedNow = new JButton("<html><div>Feed</div></html>");
 		btnFeedNow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				int monsterNameInQuestion = (int) comboBoxMonster.getSelectedIndex();
+				String monsterNameInQuestion = (String) comboBoxMonster.getSelectedItem();
 				String foodInQuestion = (String) comboBoxFood.getSelectedItem();
 				// comboBoxFood.getSe
 			}

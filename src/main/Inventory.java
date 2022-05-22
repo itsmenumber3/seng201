@@ -5,6 +5,7 @@ import entities.items.LottoTicket;
 import entities.items.consumables.Drink;
 import entities.items.consumables.Food;
 import entities.monsters.Monster;
+import exceptions.InvalidInputException;
 import exceptions.UnallowedMethodException;
 
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ public class Inventory {
 
     Player player;
     Tools tools = new Tools();
-    private boolean teamFull = false;
 
     public Inventory(Player inputPlayer) {
         this.player = inputPlayer;
@@ -41,16 +41,23 @@ public class Inventory {
 
     public boolean addMonster(Monster inputMonster) {
     	if (monsters.size() >= tools.howManyMonstersBasedOnDifficulty(player.getPlayerDifficulty())) {
-    		teamFull = true;
+    		return false;
+    	} else {
+            getMonsters().add(inputMonster);
+            return true;
     	}
-    	else {
-    	getMonsters().add(inputMonster);
-    	}
-    	return teamFull;
     }
 
-    public void reorderMonsters() {
-        System.out.println("Implement me");
+    public boolean removeMonster(int index) {
+        try {
+            if (index >= getMonsters().size()) {
+                throw new InvalidInputException();
+            } else {
+                getMonsters().remove(index);
+            }
+        } catch (InvalidInputException e) {
+
+        }
     }
 
 

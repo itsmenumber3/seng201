@@ -2,24 +2,19 @@ package ui;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import main.GameEnvironment;
 
-import javax.swing.JSlider;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.JPanel;
 import javax.management.loading.PrivateClassLoader;
-import javax.swing.ImageIcon;
 import javax.swing.event.ChangeListener;
 
 import assets.libraries.Tools;
+import main.Player;
 
 import javax.swing.event.ChangeEvent;
 import java.awt.SystemColor;
@@ -30,6 +25,8 @@ public class PlayerSetupScreen {
 	private JTextField playerNameTextField;
 	private GameEnvironment gameEnvironment;
 	private Tools tools = new Tools();
+
+	private Player player;
 
 	/**
 	 * Launch the application.
@@ -49,6 +46,7 @@ public class PlayerSetupScreen {
 
 	public PlayerSetupScreen(GameEnvironment inputGameEnvironment) {
 		gameEnvironment = inputGameEnvironment;
+		player = player;
 		initialize();
 		window.setVisible(true);
 	}
@@ -126,6 +124,17 @@ public class PlayerSetupScreen {
 		sliderNumberofDays.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		sliderNumberofDays.setBounds(51, 294, 279, 50);
 		window.getContentPane().add(sliderNumberofDays);
+
+		JPanel panelBackground = new JPanel();
+		panelBackground.setLayout(null);
+		panelBackground.setBackground(Color.WHITE);
+		panelBackground.setBounds(0, 0, 748, 469);
+		window.getContentPane().add(panelBackground);
+
+		JLabel lblNoOfMembersDynamic = new JLabel("4");
+		lblNoOfMembersDynamic.setBounds(51, 387, 78, 31);
+		panelBackground.add(lblNoOfMembersDynamic);
+		lblNoOfMembersDynamic.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		
 		JSlider sliderDifficulty = new JSlider();
 		sliderDifficulty.setBackground(Color.GRAY);
@@ -155,11 +164,7 @@ public class PlayerSetupScreen {
 		lblNoOfMembers.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		window.getContentPane().add(lblNoOfMembers);
 		
-		JPanel panelBackground = new JPanel();
-		panelBackground.setLayout(null);
-		panelBackground.setBackground(Color.WHITE);
-		panelBackground.setBounds(0, 0, 748, 469);
-		window.getContentPane().add(panelBackground);
+
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.setBounds(622, 387, 96, 61);
@@ -167,19 +172,20 @@ public class PlayerSetupScreen {
 		btnNext.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		btnNext.setBackground(SystemColor.info);
 		
-		JLabel lblNoOfMembersDynamic = new JLabel("4");
-		lblNoOfMembersDynamic.setBounds(51, 387, 78, 31);
-		panelBackground.add(lblNoOfMembersDynamic);
-		lblNoOfMembersDynamic.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
+
 		
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				gameEnvironment.getPlayer().setPlayerName(lblName.getText());
-				gameEnvironment.getPlayer().setPlayerDifficulty(sliderDifficulty.getValue());
-				gameEnvironment.getPlayer().setPlayerDays(sliderNumberofDays.getValue());
-				gameEnvironment.getPlayer().resetPlayerCurrentDay();
-				gameEnvironment.getPlayer().resetPlayerPoint();
-				gameEnvironment.getPlayer().resetPlayerGold();
+				boolean successStatus = player.setPlayerName(lblName.getText());
+				if (!successStatus) {
+					JOptionPane.showMessageDialog(window, "This name is not legal...");
+				}
+				player.setPlayerDifficulty(sliderDifficulty.getValue());
+				player.setPlayerDays(sliderNumberofDays.getValue());
+				player.resetPlayerCurrentDay();
+				player.resetPlayerPoint();
+				player.resetPlayerGold();
+				finishedWindow();
 			}
 		});
 	}

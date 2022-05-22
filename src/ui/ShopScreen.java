@@ -52,25 +52,20 @@ public class ShopScreen {
 	private String displayInfo;
 	private Monster selectedMonster;
 
-	private JButton selectedMonsterBtn;
+	private JButton btnSelectedMonster;
 
 	private String selectedFoodMonsterName;
-
 	private Monster selectedFoodMonster;
-
 	private String selectedDrinkMonsterName;
-
 	private Monster selectedDrinkMonster;
-
 	private String selectedFoodName;
 	private Food selectedFood;
-
 	private String selectedDrinkName;
 
 	private Drink selectedDrink;
-	private ArrayList<String> monsterNameList = new ArrayList<String>();
-	private ArrayList<String> foodNameList = new ArrayList<String>();
-	private ArrayList<String> drinkNameList = new ArrayList<String>();
+	private final ArrayList<String> monsterNameList = new ArrayList<>();
+	private final ArrayList<String> foodNameList = new ArrayList<>();
+	private final ArrayList<String> drinkNameList = new ArrayList<>();
 
 	
 
@@ -185,9 +180,10 @@ public class ShopScreen {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(12, 69, 724, 388);
 		window.getContentPane().add(tabbedPane);
-		
+
+		// FIRST TAB (BUY MONSTERS) ------------------------------------------------
 		JPanel panelPurchaseMonster = new JPanel();
-		tabbedPane.addTab("Buy Monster", null, panelPurchaseMonster, "");
+		tabbedPane.addTab("Buy Monsters", null, panelPurchaseMonster, "");
 		tabbedPane.setEnabledAt(0, true);
 		tabbedPane.setBackgroundAt(0, Color.WHITE);
 		panelPurchaseMonster.setLayout(null);
@@ -201,20 +197,22 @@ public class ShopScreen {
 		btnPurchaseThisMonster.setEnabled(false);
 		btnPurchaseThisMonster.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean teamFull = inventory.addMonster(selectedMonster);
-				if (teamFull){
-					JOptionPane.showMessageDialog(window, "Error: Too many Monsters");
-				}
-				else {
-					if (player.playerPurchaseEntity(selectedMonster)){
+				boolean successStatusAddMonster = inventory.addMonster(selectedMonster);
+				if (successStatusAddMonster) {
+					boolean successStatusPurchaseEntity = player.playerPurchaseEntity(selectedMonster);
+					if (successStatusPurchaseEntity){
 						inventory.addMonster(selectedMonster);
-						selectedMonsterBtn.setEnabled(false);
+						btnSelectedMonster.setEnabled(false);
+					} else {
+
+						JOptionPane.showMessageDialog(window, "Insufficient funds.");
+
 					}
-					else{
-						JOptionPane.showMessageDialog(window, "Error: Insufficient Funds");
-					}
+				} else {
+					JOptionPane.showMessageDialog(window, "You've already got the maximum number of monsters allowed.");
 				}
 			}
+
 		});
 		btnPurchaseThisMonster.setForeground(Color.WHITE);
 		btnPurchaseThisMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
@@ -225,7 +223,7 @@ public class ShopScreen {
 		JButton btnMonster1 = new JButton(shop.getShopMonsterRange().get(0).getEntityName());
 		btnMonster1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectedMonsterBtn = btnMonster1;
+				btnSelectedMonster = btnMonster1;
 				selectedMonster = shop.getShopMonsterRange().get(0);
 				displayInfo = getMonsterDisplayInfo(selectedMonster);
 				lblYourCurrentSelection.setText(displayInfo);
@@ -240,7 +238,7 @@ public class ShopScreen {
 		JButton btnMonster2 = new JButton(shop.getShopMonsterRange().get(1).getEntityName());
 		btnMonster2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectedMonsterBtn = btnMonster2;
+				btnSelectedMonster = btnMonster2;
 				selectedMonster = shop.getShopMonsterRange().get(1);
 				displayInfo = getMonsterDisplayInfo(selectedMonster);
 				lblYourCurrentSelection.setText(displayInfo);
@@ -255,7 +253,7 @@ public class ShopScreen {
 		JButton btnMonster3 = new JButton(shop.getShopMonsterRange().get(2).getEntityName());
 		btnMonster3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectedMonsterBtn = btnMonster3;
+				btnSelectedMonster = btnMonster3;
 				selectedMonster = shop.getShopMonsterRange().get(2);
 				displayInfo = getMonsterDisplayInfo(selectedMonster);
 				lblYourCurrentSelection.setText(displayInfo);
@@ -270,7 +268,7 @@ public class ShopScreen {
 		JButton btnMonster4 = new JButton(shop.getShopMonsterRange().get(3).getEntityName());
 		btnMonster4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectedMonsterBtn = btnMonster4;
+				btnSelectedMonster = btnMonster4;
 				selectedMonster = shop.getShopMonsterRange().get(3);
 				displayInfo = getMonsterDisplayInfo(selectedMonster);
 				lblYourCurrentSelection.setText(displayInfo);
@@ -285,7 +283,7 @@ public class ShopScreen {
 		JButton btnMonster5 = new JButton(shop.getShopMonsterRange().get(4).getEntityName());
 		btnMonster5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectedMonsterBtn = btnMonster5;
+				btnSelectedMonster = btnMonster5;
 				selectedMonster = shop.getShopMonsterRange().get(4);
 				displayInfo = getMonsterDisplayInfo(selectedMonster);
 				lblYourCurrentSelection.setText(displayInfo);
