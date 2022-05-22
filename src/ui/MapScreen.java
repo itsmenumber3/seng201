@@ -14,6 +14,7 @@ import battles.LakeTaupo;
 import battles.MountCook;
 import battles.NinetyMilesBeach;
 import battles.SouthlandFarm;
+import entities.monsters.Monster;
 import entities.monsters.battle_monsters.MudMonster;
 import main.GameEnvironment;
 import main.Player;
@@ -99,7 +100,8 @@ public class MapScreen {
 		btnMtCook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new MountCook(gameEnvironment.getPlayer());
-				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer()));
+				Monster previewMonster = tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(previewMonster);
 				gameEnvironment.getPlayer().setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
@@ -110,7 +112,8 @@ public class MapScreen {
 		btnMilesBeach.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new NinetyMilesBeach(gameEnvironment.getPlayer());
-				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer()));
+				Monster previewMonster = tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(previewMonster);
 				gameEnvironment.getPlayer().setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
@@ -186,7 +189,8 @@ public class MapScreen {
 		btnLakeTaupo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new LakeTaupo(gameEnvironment.getPlayer());
-				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
+				Monster previewMonster = tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(previewMonster);
 				player.setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
@@ -201,7 +205,8 @@ public class MapScreen {
 		btnCanterburyWetlands.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new CanterburyWetlands(gameEnvironment.getPlayer());
-				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.MUD_MONSTER, gameEnvironment.getPlayer()));
+				Monster previewMonster = tools.generateRandomBattleMonster(MonsterType.MUD_MONSTER, gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(previewMonster);
 				player.setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
@@ -219,7 +224,8 @@ public class MapScreen {
 		btnSouthlandFarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new SouthlandFarm(gameEnvironment.getPlayer());
-				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.GRASS_MONSTER, gameEnvironment.getPlayer()));
+				Monster previewMonster = tools.generateRandomBattleMonster(MonsterType.GRASS_MONSTER, gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(previewMonster);
 				player.setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();

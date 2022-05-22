@@ -242,7 +242,7 @@ public class GameEnvironment {
      */
     public void closeTravellingScreen(TravellingScreen inputTravellingWindow) {
     	inputTravellingWindow.closeWindow();
-    	//makeNewChallengeAndLaunchScreen();
+    	makeNewChallengeAndLaunchScreen();
     }
     // TRAVELLING SCREEN ------------------------------------------
 
@@ -291,7 +291,7 @@ public class GameEnvironment {
      * plays flip a coin to decide whether the player gets to attack in the battle
      */
     public void launchFlipACoinScreen() {
-        FlipACoinScreen flipACoinWindow = new FlipACoinScreen();
+        FlipACoinScreen flipACoinWindow = new FlipACoinScreen(this);
     }
 
     /**

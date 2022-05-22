@@ -556,7 +556,8 @@ public class Tools {
 
 	public Challenge makeRandomChallenge() {
 		Challenge challenge;
-		switch (random.nextInt(0, 2)) {
+		int randomNumber = 0; //random.nextInt(0, 2);
+		switch (randomNumber) {
 			case 0:
 				challenge = new PaperScissorsRock();
 				break;
