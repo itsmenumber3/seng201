@@ -158,7 +158,7 @@ public class FirstMonsterSetupScreen {
 		JButton btnConfirmMonsterChoice = new JButton("Next");
 		btnConfirmMonsterChoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				finishedWindow();
 			}
 		});
 		btnConfirmMonsterChoice.setBounds(599, 418, 109, 37);

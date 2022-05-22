@@ -2,6 +2,7 @@ package battles;
 
 import assets.enums.BattleType;
 import assets.libraries.Tools;
+import entities.monsters.battle_monsters.GrassMonster;
 import main.Player;
 
 public class SouthlandFarm extends Battle {

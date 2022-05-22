@@ -2,6 +2,7 @@ package battles;
 
 import assets.enums.BattleType;
 import assets.libraries.Tools;
+import entities.monsters.battle_monsters.MudMonster;
 import main.Player;
 
 public class CanterburyWetlands extends Battle {

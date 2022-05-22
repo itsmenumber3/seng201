@@ -98,10 +98,10 @@ public class MapScreen {
 		btnMtCook.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnMtCook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new MountCook(gameEnvironment.getPlayer());
-				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer()));
+				Battle previewBattle = new MountCook(gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer()));
 				gameEnvironment.getPlayer().setPlayerPreviewBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
-				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				gameEnvironment.getPlayer().setPlayerSelectedBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
 			}
@@ -110,10 +110,10 @@ public class MapScreen {
 		JButton btnMilesBeach = new JButton("90 Miles Beach");
 		btnMilesBeach.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new NinetyMilesBeach(gameEnvironment.getPlayer());
-				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer()));
+				Battle previewBattle = new NinetyMilesBeach(gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer()));
 				gameEnvironment.getPlayer().setPlayerPreviewBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
-				gameEnvironment.getPlayer().setPlayerSelectedBattle(battle);
+				gameEnvironment.getPlayer().setPlayerSelectedBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
 			}
@@ -144,21 +144,28 @@ public class MapScreen {
 		panelItem.add(lblCurrentLocationInfo);
 		lblCurrentLocationInfo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		if (battle.getBattleName() != "Wellington") {
-			btnVisitShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
-			btnVisitShop.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					nextScreen = 1;
-					finishedWindow();
-				}
-			});
-		}
+		
+		btnVisitShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
+		btnVisitShop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				nextScreen = 1;
+				finishedWindow();
+			}
+		});
+		btnVisitShop.setEnabled(true);
+		
+		
 		
 		btnVisitShop.setForeground(Color.WHITE);
 		btnVisitShop.setBounds(12, 145, 207, 25);
 		panelItem.add(btnVisitShop);
 		btnVisitShop.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnVisitShop.setBackground(Color.RED);
+		
+		if (battle.getBattleName() == "Wellington") {
+			btnVisitShop.setText("No shop at starting location");
+			btnVisitShop.setEnabled(false);
+		}
 		
 		btnInventory = new JButton("My inventory");
 		btnInventory.addActionListener(new ActionListener() {
@@ -180,9 +187,9 @@ public class MapScreen {
 		JButton btnLakeTaupo = new JButton("Lake Taupo");
 		btnLakeTaupo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new LakeTaupo(gameEnvironment.getPlayer());
-				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
-				player.setPlayerPreviewBattle(battle);
+				Battle previewBattle = new LakeTaupo(gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
+				player.setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
 			}
@@ -195,9 +202,9 @@ public class MapScreen {
 		JButton btnCanterburyWetlands = new JButton("<html><div>Canterbury Wetlands</div></html>");
 		btnCanterburyWetlands.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new CanterburyWetlands(gameEnvironment.getPlayer());
-				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
-				player.setPlayerPreviewBattle(battle);
+				Battle previewBattle = new CanterburyWetlands(gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
+				player.setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
 			}
@@ -213,9 +220,9 @@ public class MapScreen {
 		JButton btnSouthlandFarm = new JButton("Southland Farm");
 		btnSouthlandFarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Battle battle = new SouthlandFarm(gameEnvironment.getPlayer());
-				battle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
-				player.setPlayerPreviewBattle(battle);
+				Battle previewBattle = new SouthlandFarm(gameEnvironment.getPlayer());
+				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
+				player.setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
 			}

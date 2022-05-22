@@ -2,6 +2,7 @@ package battles;
 
 import assets.enums.BattleType;
 import assets.libraries.Tools;
+import entities.monsters.battle_monsters.WaterMonster;
 import main.Player;
 
 public class LakeTaupo extends Battle {
