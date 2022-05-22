@@ -129,12 +129,12 @@ public class GameEnvironment {
     }
 
     public void launchInventoryScreen(boolean isPreviousWindowMapWindow) {
-        InventoryScreen inventoryWindow = new InventoryScreen(this, isPreviousWindowMapWindow);
+        InventoryScreen inventoryWindow = new InventoryScreen(this);
     }
 
     public void closeInventoryScreen(InventoryScreen inputInventoryWindow) {
         inputInventoryWindow.closeWindow();
-        if (inputInventoryWindow.getIsPreviousWindowMapWindow()) {
+        if (inputInventoryWindow.nextWindowIsMap()) {
             launchMapScreen();
         } else {
             launchShopScreen();

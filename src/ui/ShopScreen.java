@@ -54,13 +54,8 @@ public class ShopScreen {
 
 	private JButton btnSelectedMonster;
 
-	private String selectedFoodMonsterName;
-	private Monster selectedFoodMonster;
-	private String selectedDrinkMonsterName;
-	private Monster selectedDrinkMonster;
-	private String selectedFoodName;
-	private Food selectedFood;
-	private String selectedDrinkName;
+	private int selectedFoodIndex;
+	private int selectedFoodMonsterIndex;
 
 	private Drink selectedDrink;
 	private final ArrayList<String> monsterNameList = new ArrayList<>();
@@ -204,9 +199,8 @@ public class ShopScreen {
 						inventory.addMonster(selectedMonster);
 						btnSelectedMonster.setEnabled(false);
 					} else {
-
+						inventory.getMonsters().remove(selectedMonster);
 						JOptionPane.showMessageDialog(window, "Insufficient funds.");
-
 					}
 				} else {
 					JOptionPane.showMessageDialog(window, "You've already got the maximum number of monsters allowed.");
@@ -329,6 +323,10 @@ public class ShopScreen {
 		lblMonster5Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster5Img.setBounds(596, 12, 111, 200);
 		panelPurchaseMonster.add(lblMonster5Img);
+
+		// FIRST TAB (BUY MONSTERS) ------------------------------------------------
+
+		// SECOND TAB (DELI) -------------------------------------------------------
 		
 		JPanel panelBuyFood = new JPanel();
 		tabbedPane.addTab("Delicatessen", null, panelBuyFood, null);
@@ -342,8 +340,7 @@ public class ShopScreen {
 		JComboBox comboBoxMonsterFood = new JComboBox((ComboBoxModel) monsterNameList);
 		comboBoxMonsterFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectedFoodMonsterName = comboBoxMonsterFood.getSelectedItem();
-				selectedFoodMonster = getMonsterFromName(selectedFoodMonsterName);
+				selectedFoodMonsterIndex = (int) comboBoxMonsterFood.getSelectedItem();
 			}
 		});
 		comboBoxMonsterFood.setBounds(154, 93, 210, 24);
@@ -362,8 +359,7 @@ public class ShopScreen {
 		JComboBox comboBoxFood = new JComboBox((ComboBoxModel) foodNameList);
 		comboBoxFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectedFoodName = comboBoxFood.getSelectedItem();
-				selectedFood = getFoodFromName();
+				
 			}
 		});
 		comboBoxFood.setBounds(154, 128, 210, 24);

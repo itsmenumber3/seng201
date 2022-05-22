@@ -1,14 +1,15 @@
 package main;
 
+import assets.enums.FoodType;
 import assets.libraries.Tools;
 import entities.items.LottoTicket;
 import entities.items.consumables.Drink;
 import entities.items.consumables.Food;
 import entities.monsters.Monster;
-import exceptions.InvalidInputException;
 import exceptions.UnallowedMethodException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Inventory {
 
@@ -17,6 +18,10 @@ public class Inventory {
 
     public Inventory(Player inputPlayer) {
         this.player = inputPlayer;
+        resetFoods();
+        resetDrinks();
+        resetMonsters();
+        resetLottoTicket();
     }
 
     // ARRAY LIST TO HOLD MONSTERS --------------------------------
@@ -48,17 +53,7 @@ public class Inventory {
     	}
     }
 
-    public boolean removeMonster(int index) {
-        try {
-            if (index >= getMonsters().size()) {
-                throw new InvalidInputException();
-            } else {
-                getMonsters().remove(index);
-            }
-        } catch (InvalidInputException e) {
 
-        }
-    }
 
 
     // ARRAY LIST TO HOLD MONSTERS --------------------------------
@@ -70,13 +65,15 @@ public class Inventory {
     /**
      * This is an ArrayList holding objects of Entity type.
      */
-    private ArrayList<Food> foods = new ArrayList<>();
+    private HashMap<Food, Integer> foods = new HashMap<>();
 
     /**
      * This method resets the inventory i.e. a blank ArrayList
      */
     public void resetFoods() {
-        this.foods = new ArrayList<>();
+        this.foods = new HashMap<>();
+        foods.put(player.getFoodRange().get(0), 0);
+        foods.put(player.getFoodRange().get(1), 0);
     }
 
     /**
@@ -85,12 +82,20 @@ public class Inventory {
      *
      * @see UnallowedMethodException
      */
-    public void setFoods() {
+    public void setFoods(HashMap<Drink, Integer> inputFoods) {
         try {
             throw new UnallowedMethodException("Unallowed method");
         } catch (UnallowedMethodException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addFood(Food inputFood) {
+        foods.put(inputFood, foods.get(inputFood) + 1);
+    }
+
+    public void removeFood(Food inputFood) {
+        foods.put(inputFood, foods.get(inputFood) - 1);
     }
 
     /**
@@ -98,21 +103,19 @@ public class Inventory {
      *
      * @return this.entities: ArrayList
      */
-    public ArrayList<Food> getFoods() {
+    public HashMap<Food, Integer> getFoods() {
         return this.foods;
     }
 
-    public void addToFoods(Food inputFood) {
-        this.foods.add(inputFood);
-    }
-
-    private ArrayList<Drink> drinks = new ArrayList<>();
+    private HashMap<Drink, Integer> drinks = new HashMap<>();
 
     public void resetDrinks() {
-        drinks = new ArrayList<>();
+        drinks = new HashMap<>();
+        drinks.put(player.getDrinkRange().get(0), 0);
+        drinks.put(player.getDrinkRange().get(1), 0);
     }
 
-    public void setDrinks(ArrayList<Drink> inputDrinks) {
+    public void setDrinks(HashMap<Drink, Integer> inputDrinks) {
         try {
             throw new UnallowedMethodException("Unallowed method");
         } catch (UnallowedMethodException e) {
@@ -120,16 +123,16 @@ public class Inventory {
         }
     }
 
-    public ArrayList<Drink> getDrinks() {
+    public HashMap<Drink, Integer> getDrinks() {
         return drinks;
     }
 
     public void addDrink(Drink inputDrink) {
-        drinks.add(inputDrink);
+        drinks.put(inputDrink, foods.get(inputDrink) + 1);
     }
 
     public void removeDrink(Drink inputDrink) {
-        drinks.remove(inputDrink);
+        drinks.put(inputDrink, foods.get(inputDrink) - 1);
     }
 
     private double fuelAmount;

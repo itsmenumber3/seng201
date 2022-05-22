@@ -668,4 +668,15 @@ public class Tools {
 	public String randomBadThingOvernight(Player inputPlayer) {
 		return "";
 	}
+
+	public String[] getMonsterNames(Player inputPlayer) {
+		ArrayList<Monster> monsters = inputPlayer.getPlayerInventory().getMonsters();
+		ArrayList<String> monsterNameArrayList= new ArrayList<>();
+
+		for (Monster monster : monsters) {
+			monsterNameArrayList.add(monster.getEntityName());
+		}
+
+		return (String[]) monsterNameArrayList.toArray();
+	}
 }

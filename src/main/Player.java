@@ -465,12 +465,15 @@ public class Player implements Role {
     }
 
     private ArrayList<Drink> drinkRange;
+    drinkRange.add(new Drink(DrinkType.COFFEE));
+    drinkRange.add(new Drink(DrinkType.ENERGY_DRINK));
 
-    public void setDrinkRange() {
-        Drink coffee = new Drink(DrinkType.COFFEE);
-        Drink energyDrink = new Drink(DrinkType.ENERGY_DRINKS);
-        this.drinkRange.add(coffee);
-        this.drinkRange.add(energyDrink);
+    public boolean setDrinkRange(ArrayList<Drink> drinkRange) {
+        try {
+        	throw new UnallowedMethodException("unallowed method");
+        } catch (UnallowedMethodException e) {
+        	e.
+        }
     }
 
     /**
