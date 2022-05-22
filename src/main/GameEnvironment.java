@@ -97,7 +97,7 @@ public class GameEnvironment {
      */
     public void closePlayerSetupScreen(PlayerSetupScreen inputPlayerSetupWindow) {
     	inputPlayerSetupWindow.closeWindow();
-    	this.launchFirstMonsterSetupScreen();
+    	launchFirstMonsterSetupScreen();
     }
     // PLAYER SETUP SCREEN ----------------------------------------
 
@@ -326,7 +326,7 @@ public class GameEnvironment {
     public void closeChallengeResultScreen(ChallengeResultScreen inputChallengeResultWindow) {
         inputChallengeResultWindow.closeWindow();
         
-        switch (this.getFightOutcome()) {
+        switch (getFightOutcome()) {
         case PLAYER_WINS_BATTLE:
         	launchBattleResultScreen();
         	break;
@@ -384,9 +384,9 @@ public class GameEnvironment {
     public void closeBattleResultScreen(BattleResultScreen inputBattleResultWindow) {
         inputBattleResultWindow.closeWindow();
         if (getPlayer().hasGameBeenWon()) {
-        	this.launchFinishGameScreen();
+        	launchFinishGameScreen();
         } else {
-        	this.launchMapScreen();
+        	launchMapScreen();
         }
     }
     // BATTLE RESULT SCREEN ---------------------------------------

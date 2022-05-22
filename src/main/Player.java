@@ -41,13 +41,14 @@ public class Player implements Role {
     private int playerCurrentDay; // Current day for player within game
     private int playerPoints; // Points that the player has accumulated throughout the game
     private int playerGold; // Amount of gold the player has to purchase items and monsters
-    private final Inventory playerInventory = new Inventory(this); // PLEASE NOTE THAT there is a main.Inventory() class.
-    // this is a constant and will never change.
-    private Battle playerSelectedBattle;
-    private Battle playerPreviewBattle;
-    private Food[] foodRange = {new Food(FoodType.APPLE), new Food(FoodType.PASTA)};
-
-    private Drink[] drinkRange = {new Drink(DrinkType.COFFEE), new Drink(DrinkType.ENERGY_DRINK)};
+    private final Inventory playerInventory = new Inventory(this); /* PLEASE NOTE THAT there is a main.Inventory() class.
+    	this is a constant and will never change. */
+    private Battle playerSelectedBattle; // Current battle location the player is in
+    private Battle playerPreviewBattle; // Battle location that player is going to travel to next
+    private Food[] foodRange = {new Food(FoodType.APPLE), new Food(FoodType.PASTA)}; /* The food range sets the default values 
+    	for the 2 food options for whole game */
+    private Drink[] drinkRange = {new Drink(DrinkType.COFFEE), new Drink(DrinkType.ENERGY_DRINK)}; /* The drink range sets the default values
+    	for the 2 drink options for the whole game */
 
     // CONSTRUCTOR ------------------------------------------------
     /**
@@ -55,13 +56,12 @@ public class Player implements Role {
      */
     public Player() {
         playerInventory.resetFuelAmount();
-
     }
     // CONSTRUCTOR ------------------------------------------------
 
     // GET ROLE TYPE ----------------------------------------------
     /**
-     *
+     * Overrides the <code>Role</code> interface and default returns <code>RoleType.PLAYER</code>
      */
     @Override
     public RoleType getRoleType() {
@@ -69,59 +69,53 @@ public class Player implements Role {
     }
     // GET ROLE TYPE ----------------------------------------------
 
-
-
     // USERNAME----------------------------------------------------
-
     /**
-     * This method accepts a string and set playerName to that string. There are many conditions to a valid playerName:
+     * This method accepts a string and set <code>playerName</code> to that string. There are many conditions to a valid <code>playerName</code>:
      * 1. The playerName length must be 5-13 characters inclusive.
      * 2. The playerName must only contain alphanumeric characters.
      * This method tries to assign the input playerName to playerName via the method playerNameValidation as in Tools().
      * If it is invalid, tools.playerNameValidation will throw the error InvalidInputException and will not assign.
-     * @param inputPlayerName: String, player-chosen playerName
+     * @param inputPlayerName String, player-chosen playerName
+     * @return true boolean, if input name meets validation rules
+     * 	false boolean, if input name does not meet validation rules
      */
     public boolean setPlayerName(String inputPlayerName) {
         try {
-            // If playerName does not meet criteria, playerNameValidation will throw an InvalidInputException
-            // Else, playerNameValidation returns that exact inputPlayerName: String.
             if (inputPlayerName.length() >=3) {
-                this.playerName = inputPlayerName;
+                playerName = inputPlayerName;
             } else {
                 throw new InvalidInputException();
             }
 
             return true;
         }
-        catch (InvalidInputException e) { // If playerNameValidation throws this error
+        catch (InvalidInputException e) {
             return false;
         }
     }
 
     /**
-     * This method returns the playerName of the player
-     * @return playerName: String
+     * This method returns the <code>playerName</code> of the player
+     * @return playerName String
      */
     public String getPlayerName() {
-        return this.playerName;
+        return playerName;
     }
-
     // USERNAME----------------------------------------------------
 
-
-
-    // DIFFICULTY----------------------------------------------------
-
+    // DIFFICULTY--------------------------------------------------
     /**
      * This method sets the difficulty level.
-     * Difficulty is an enum class defined in Difficulty.java
-     * There can be three Difficulty values: EASY, MEDIUM and HARD.
-     * @param inputPlayerDifficulty: Difficulty
+     * There can be three Difficulty values: EASY(1), MEDIUM(2) and HARD(3).
+     * It will throw an error if inputPlayerDifficulty is an invalid value.
+     * @param inputPlayerDifficulty integer
+     * @throws InvalidInputException
      */
     public void setPlayerDifficulty(int inputPlayerDifficulty) {
-        try {  // Should throw an error if inputPlayerDifficulty is an invalid value.
+        try {
             if (inputPlayerDifficulty >= 1 && inputPlayerDifficulty <= 3) {
-                this.playerDifficulty = inputPlayerDifficulty;
+                playerDifficulty = inputPlayerDifficulty;
             } else {
                 throw new InvalidInputException("Invalid input");
             }
@@ -133,22 +127,20 @@ public class Player implements Role {
 
     /**
      * This method returns the difficulty level.
-     * @return playerDifficulty: Difficulty
+     * @return playerDifficulty integer
      */
     public int getPlayerDifficulty() {
-        return this.playerDifficulty;
+        return playerDifficulty;
     }
+    // DIFFICULTY--------------------------------------------------
 
-    // DIFFICULTY----------------------------------------------------
-
-
-
-    // DAYS OF THE GAME----------------------------------------------
+    // DAYS OF THE GAME--------------------------------------------
     /**
      * This method allows player to set how many days the game will last
      * The maximum number and minimum number of days is set in MagicNumbers().
      * Anything outside this range, an InvalidInputException will be thrown
      * @param inputPlayerDays integer, from player input
+     * @throws InvalidInputException
      */
     public void setPlayerDays(int inputPlayerDays) {
         try { // If the day is out of the valid range, throw an error.
@@ -158,7 +150,7 @@ public class Player implements Role {
                         magicNumbers.MINIMUM_USER_DAYS, magicNumbers.MAXIMUM_USER_DAYS
                 ));
             } else { // If not violated, assign
-                this.playerDays = inputPlayerDays;
+                playerDays = inputPlayerDays;
             }
         } catch (InvalidInputException e) { // Catch the error if it occurs.
             e.printStackTrace(); // Handle it
@@ -167,22 +159,21 @@ public class Player implements Role {
 
     /**
      * This method returns the chosen number of days
-     * @return the chosen number of days of type int
+     * @return playerDays integer, the chosen number of days
      */
     public int getPlayerDays() {
-        return this.playerDays;
+        return playerDays;
     }
+    // DAYS OF THE GAME--------------------------------------------
 
-    // DAYS OF THE GAME----------------------------------------------
-
-
-
-    // CURRENT DAY OF THE GAME --------------------------------------
+    // CURRENT DAY OF THE GAME ------------------------------------
     /**
+     * This method is not allowed.
      * It is not possible to set the current day, as we want to avoid jumping days.
      * To set the next day, use setNextDay() which increments playerCurrentDay.
      * To reset, use resetCurrentDay() to reset it to 1.
-     * @param inputPlayerCurrentDay: integer
+     * @param inputPlayerCurrentDay integer
+     * @throws UnallowedMethodException
      */
     public void setPlayerCurrentDay(int inputPlayerCurrentDay) {
         try { // This method is simply not allowed, so throw an error straight away
@@ -192,6 +183,11 @@ public class Player implements Role {
         }
     }
     
+    /**
+     * Checks the current day of the game against the selected duration of the game
+     * @return true boolean, if the player has completed the duration of the game
+     * 	false boolean, if the player has not reached the selected duration
+     */
     public boolean hasGameBeenWon() {
     	if (playerCurrentDay == playerDays) {
     		return true;
@@ -200,6 +196,9 @@ public class Player implements Role {
     	}
     }
     
+    /**
+     * Change to next day when the player moves to the next battle
+     */
     public void setNextDayNextBattle() {
     	playerCurrentDay += 1;
     	playerSelectedBattle = playerPreviewBattle;
@@ -210,40 +209,38 @@ public class Player implements Role {
      * This method resets the current day to MagicNumbers.RESET_CURRENT_DAY_VALUE (which should be 0)
      */
     public void resetPlayerCurrentDay() {
-        this.playerCurrentDay = magicNumbers.RESET_CURRENT_DAY_VALUE; // Should be 0
+        playerCurrentDay = magicNumbers.RESET_CURRENT_DAY_VALUE;
     }
 
     /**
      * This method checks if the player has won the game. This is done by comparing the current day to what is the last day.
      * If the player has won the game, return true to Game(). Else, we increment the playerCurrentDay and return false.
-     * @return true:  boolean if player has won the game (the current day is the last day)
-     *         false: boolean if player hasn't won the game
+     * @return true  boolean if player has won the game (the current day is the last day)
+     * 	false boolean if player hasn't won the game
      */
     public boolean hasPlayerWonGameElseSetPlayerNextDay() {
-        if (this.getPlayerCurrentDay() == this.getPlayerDays()) { // Player has won the game
-            return true; // Return true to Game() to conclude the game
-        } else { // If Player has not won game
-            this.playerCurrentDay++; // Increment to the next day
-            return false; // Return false to Game() to start the next day
+        if (getPlayerCurrentDay() == getPlayerDays()) {
+            return true;
+        } else {
+            playerCurrentDay++;
+            return false;
         }
     }
 
     /**
      * This method gets the current day and returns it
-     * @return playerCurrentDay: integer
+     * @return playerCurrentDay integer
      */
     public int getPlayerCurrentDay() {
-        return this.playerCurrentDay;
+        return playerCurrentDay;
     }
+    // CURRENT DAY OF THE GAME ------------------------------------
 
-    // CURRENT DAY OF THE GAME --------------------------------------
-
-
-
-    // USER POINTS --------------------------------------------------
+    // USER POINTS ------------------------------------------------
     /**
-     * Modifying the playerPoints directly is not allowed.
-     * @param inputPlayerPoints: integer
+     * This method is not allowed.
+     * Modifying the playerPoints directly is not possible as we do not want the points to be incremented unreasonably
+     * @param inputPlayerPoints integer
      */
     public void setPlayerPoints(int inputPlayerPoints) {
         try {
@@ -256,18 +253,19 @@ public class Player implements Role {
     /**
      * This method will reset the player points to zero.
      */
-    public void resetPlayerPoint() { this.playerPoints = 0; }
+    public void resetPlayerPoint() { playerPoints = 0; }
 
     /**
-     * This method increments the player point. Must pass a non-negative integer argument!
+     * This method increments the player points. Must pass a positive integer argument!
      * Throws an error if a negative integer is passed.
-     * @param inputIncrementAmount: integer
+     * @param inputIncrementAmount integer
+     * @throws UnexpectedNegativeNumberException
      */
     public void incrementPlayerPointsBy(int inputIncrementAmount) {
         try {
-            if (inputIncrementAmount >= 0) { // Check if this is indeed a non-negative number.
-                this.playerPoints = this.getPlayerPoints() + inputIncrementAmount; // Increment player point if correct number.
-            } else { // If violated, throw an error.
+            if (inputIncrementAmount >= 0) {
+                playerPoints = getPlayerPoints() + inputIncrementAmount;
+            } else {
                 throw new UnexpectedNegativeNumberException("Cannot increment player points by a negative number.");
             }
         } catch (UnexpectedNegativeNumberException e) {
@@ -277,13 +275,14 @@ public class Player implements Role {
 
     /**
      * This method decrements the player points by an amount. Must pass a positive integer as argument!
-     * @param inputDecrementAmount: integer
+     * @param inputDecrementAmount integer
+     * @throws UnexpectedNegativeNumberException
      */
     public void decrementPlayerPointsBy(int inputDecrementAmount) {
         try {
-            if (inputDecrementAmount >= 0) { // Check if this is indeed a non-negative number.
-                this.playerPoints = this.getPlayerPoints() - inputDecrementAmount; // Decrement if correct number.
-            } else { // If violated, throw an error.
+            if (inputDecrementAmount >= 0) {
+                playerPoints = getPlayerPoints() - inputDecrementAmount;
+            } else {
                 throw new UnexpectedNegativeNumberException("Cannot decrement player points by a negative number.");
             }
         } catch (UnexpectedNegativeNumberException e) {
@@ -293,20 +292,19 @@ public class Player implements Role {
 
     /**
      * This method returns the player points
-     * @return playerPoints: integer
+     * @return playerPoints integer
      */
     public int getPlayerPoints() {
-        return this.playerPoints;
+        return playerPoints;
     }
 
-    // USER POINTS --------------------------------------------------
+    // USER POINTS ------------------------------------------------
 
-
-
-    // USER GOLDS ---------------------------------------------------
+    // USER GOLDS -------------------------------------------------
     /**
-     * Setting a new gold balance for the player isn't allowed.
-     * @param newPlayerGold: integer
+     * This method is not allowed.
+     * Setting a new gold balance for the player is not possible as we do not want the players gold incremented unreasonably
+     * @param newPlayerGold integer
      */
     public void setPlayerGold(int newPlayerGold) {
         try { throw new UnallowedMethodException("Method is not allowed"); }
@@ -316,15 +314,16 @@ public class Player implements Role {
     /**
      * This method resets the gold balance to zero.
      */
-    public void resetPlayerGold() { this.playerGold = 0; }
+    public void resetPlayerGold() { playerGold = 0; }
 
     /**
      * This method increments player golds. Only accepts a positive integer as argument.
-     * @param inputIncrementAmount: integer
+     * @param inputIncrementAmount integer
+     * @throws UnexpectedNegativeNumberException
      */
     public void incrementPlayerGoldBy(int inputIncrementAmount) {
         try {
-            if (inputIncrementAmount >= 0) { this.playerGold = this.playerGold + inputIncrementAmount; }
+            if (inputIncrementAmount >= 0) { playerGold = playerGold + inputIncrementAmount; }
             else { throw new UnexpectedNegativeNumberException("Cannot accept a negative number"); }
         } catch (UnexpectedNegativeNumberException e) {
             e.printStackTrace();
@@ -333,11 +332,12 @@ public class Player implements Role {
 
     /**
      * This method decrements player golds. Only accepts a positive integer.
-     * @param inputDecrementAmount: integer
+     * @param inputDecrementAmount integer
+     * @throws UnexpectedNegativeNumberException
      */
     public void decrementPlayerGoldBy(int inputDecrementAmount) {
         try {
-            if (inputDecrementAmount >= 0) { this.playerGold = this.playerGold - inputDecrementAmount; }
+            if (inputDecrementAmount >= 0) { playerGold = playerGold - inputDecrementAmount; }
             else { throw new UnexpectedNegativeNumberException("Cannot accept a negative number"); }
         } catch (UnexpectedNegativeNumberException e) {
             e.printStackTrace();
@@ -346,27 +346,26 @@ public class Player implements Role {
 
     /**
      * This method returns the gold balance of the player
-     * @return the gold balance of the player
+     * @return playerGold integer, the gold balance of the player
      */
-    public int getPlayerGold() { return this.playerGold; }
+    public int getPlayerGold() { return playerGold; }
 
-    // USER GOLDS ---------------------------------------------------
+    // USER GOLDS -------------------------------------------------
 
-
-
-    // USER INVENTORY -----------------------------------------------
+    // USER INVENTORY ---------------------------------------------
     /**
      * This method returns the object that is the inventory of the player.
      * WARNING: it returns the object rather than the ArrayList main.Inventory.entities.items;
      * To return only the ArrayList, use main.Inventory().getItems;
-     * @return the object playerInventory of type main.Inventory;
+     * @return playerInventory Inventory
      */
-    public Inventory getPlayerInventory() { return this.playerInventory; }
+    public Inventory getPlayerInventory() { return playerInventory; }
 
     /**
-     * Setting playerInventory is not allowed. To add a new item, drop an item, or reset inventory, use
+     * Setting playerInventory is not allowed. To add a new item, remove an item, or reset inventory, use
      * main.Inventory().addToInventory(item), .removeFromInventory(item), and .resetInventory()
-     * @param inputPlayerInventory: Inventory
+     * @param inputPlayerInventory Inventory
+     * @throws UnallowedMethodException
      */
     public void setPlayerInventory(Inventory inputPlayerInventory) {
         try {
@@ -377,43 +376,64 @@ public class Player implements Role {
         }
     }
 
-
-
+    /**
+     * Checks whether the player can purchase the selected entity(monster or item) given the amount of gold they have
+     * @param inputEntity Entity
+     * @return successStatus boolean, whether the player has enough gold to purchase the item 
+     * 		and the amount has been remove from the players gold balance
+     */
     public boolean playerPurchaseEntity(Entity inputEntity) {
-    	boolean successStatus = this.getPlayerGold() >= inputEntity.getEntityPurchaseValue();
+    	boolean successStatus = getPlayerGold() >= inputEntity.getEntityPurchaseValue();
     	if (successStatus) {
-    		this.decrementPlayerGoldBy(inputEntity.getEntityPurchaseValue()); // Decrement playerGold.
+    		decrementPlayerGoldBy(inputEntity.getEntityPurchaseValue()); // Decrement playerGold.
     	} 
     	return successStatus;
     }
-
-    // INVENTORY ----------------------------------------------------
+    // INVENTORY --------------------------------------------------
+    
+    // SELECTED BATTLE --------------------------------------------
+    /**
+     * Sets the selected battle location that the player is visiting
+     * @param inputPlayerSelectedBattle Battle
+     */
     public void setPlayerSelectedBattle(Battle inputPlayerSelectedBattle) {
-    	this.playerSelectedBattle = inputPlayerSelectedBattle;
+    	playerSelectedBattle = inputPlayerSelectedBattle;
     }
     
+    /**
+     * Gets the location of the battle that the player is at
+     * @return playerSelectedBattle Battle
+     */
     public Battle getPlayerSelectedBattle() {
-    	return this.playerSelectedBattle;
+    	return playerSelectedBattle;
     }
+    // SELECTED BATTLE --------------------------------------------
     
-//    private Battle playerPreviousBattle;
-//    
-//    public void setPlayerPreviousBattle(Battle inputPlayerPreviousBattle) {
-//    	this.playerPreviousBattle = inputPlayerPreviousBattle;
-//    }
-//    
-//    public Battle getPlayerPreviousBattle() {
-//    	return this.playerPreviousBattle;
-//    }
-    
+    // PREVIEW BATTLE ---------------------------------------------
+    /**
+     * Sets the battle location that the player needs to confirm they are visiting.
+     * Used for creation of battle screen and changes to the selected battle when they travel
+     * @param inputBattle Battle
+     */
     public void setPlayerPreviewBattle(Battle inputBattle) {
     	playerPreviewBattle = inputBattle;
     }
     
+    /**
+     * Gets the location of the battle the player is previewing to visit next
+     * @return playerPreviewBattle Battle
+     */
     public Battle getPlayerPreviewBattle() {
     	return playerPreviewBattle;
     }
     
+    /**
+     * Makes the changes required when traveling to the next battle location
+     * The required fuel amount is checked that it is available and if so then it is removed from the players inventory
+     * @return true boolean, If the player has enough fuel they can proceed to travel to the next battle location
+     *	false boolean, If the player does not have enough fuel they will be reverted back to the map
+     *	where they can go to the shop and buy more fuel
+     */
     public boolean travelToPreviewBattle() {
     	int fuelAmountNeeded;
     	if (playerSelectedBattle.getBattleIsland() == playerPreviewBattle.getBattleIsland()) {
@@ -427,13 +447,13 @@ public class Player implements Role {
     	} else {
     		return false;
     	}
-    	
     }
-    //
+    // PREVIEW BATTLE ---------------------------------------------
 
     // FOOD RANGE -------------------------------------------------
     /**
-     * Unallowed method, food range declared within player class constructor
+     * This method is not allowed.
+     * The food range is never to be set in a fixed location
      * @return boolean
      */
     public boolean setFoodRange() {
@@ -447,8 +467,8 @@ public class Player implements Role {
     }
 
     /**
-     * This method returns the current shopRange.
-     * @return FoodRange ArrayList<Food>
+     * This method returns the a new shopRange.
+     * @return FoodRange Food[]
      */
     public Food[] getFoodRange() {
         return new Food[]{new Food(FoodType.APPLE), new Food(FoodType.PASTA)};
@@ -457,7 +477,8 @@ public class Player implements Role {
 
     // DRINK RANGE ------------------------------------------------
     /**
-     *Unallowed method, drink range declared within player class constructor
+     * This method is not allowed.
+     * The drink range is never to be set in a fixed location
      * @return boolean
      */
     public boolean setDrinkRange() {
@@ -472,7 +493,7 @@ public class Player implements Role {
 
     /**
      * This method returns the current shopRange.
-     * @return DrinkRange ArrayList<Drink>
+     * @return DrinkRange Drink[]
      */
     public Drink[] getDrinkRange() {
         return new Drink[]{new Drink(DrinkType.COFFEE), new Drink(DrinkType.ENERGY_DRINK)};
