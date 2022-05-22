@@ -1,10 +1,14 @@
 package main;
 
+import assets.enums.DrinkType;
+import assets.enums.FoodType;
 import assets.enums.RoleType;
 import assets.libraries.MagicNumbers;
 import assets.libraries.Tools;
 import battles.Battle;
 import entities.Entity;
+import entities.items.consumables.Drink;
+import entities.items.consumables.Food;
 import entities.monsters.Monster;
 import exceptions.InsufficientPlayerGoldBalanceException;
 import exceptions.InvalidInputException;
@@ -440,5 +444,39 @@ public class Player implements Role {
     		return false;
     	}
     	
+    }
+
+    private ArrayList<Food> FoodRange;
+
+    public void setFoodRange() {
+        Food apple = new Food(FoodType.APPLE);
+        Food pasta = new Food(FoodType.PASTA);
+        this.shopFoodRange.add(apple);
+        this.shopFoodRange.add(pasta);
+    }
+
+    /**
+     * This method returns the current shopRange.
+     * @return FoodRange ArrayList<Food>
+     */
+    public ArrayList<Food> getFoodRange() {
+        return this.FoodRange;
+    }
+
+    private ArrayList<Drink> DrinkRange;
+
+    public void setDrinkRange() {
+        Drink coffee = new Drink(DrinkType.COFFEE);
+        Drink energyDrink = new Drink(DrinkType.ENERGY_DRINKS);
+        this.shopDrinkRange.add(coffee);
+        this.shopDrinkRange.add(energyDrink);
+    }
+
+    /**
+     * This method returns the current shopRange.
+     * @return DrinkRange ArrayList<Drink>
+     */
+    public ArrayList<Drink> getDrinkRange() {
+        return this.DrinkRange;
     }
 }
