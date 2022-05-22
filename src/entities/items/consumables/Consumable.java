@@ -11,7 +11,7 @@ import entities.items.Item;
  */
 public class Consumable extends Item {
 	
-	private int consumableHealValue;
+	private double consumableHealValue;
 	
 	/** Constructor method
 	 * 
@@ -55,7 +55,7 @@ public class Consumable extends Item {
     	this.consumableHealValue = inputConsumableHealValue;
     }
     
-    public void getConsumableHealValue() {
+    public double getConsumableHealValue() {
     	return this.consumableHealValue;
     }
 

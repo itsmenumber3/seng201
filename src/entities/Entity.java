@@ -109,11 +109,11 @@ public abstract class Entity {
      * @see InvalidInputException
      */
     public void setEntityName(String inputEntityName) {
-        try {
-            this.entityName = tools.nameValidation(inputEntityName);
-        } catch (InvalidInputException e) {
-            e.printStackTrace();
-        }
+        //try {
+            this.entityName = inputEntityName;
+        //} catch (InvalidInputException e) {
+          //  e.printStackTrace();
+        //}
     }
 
     /**

@@ -72,8 +72,8 @@ public class Inventory {
      */
     public void resetFoods() {
         this.foods = new HashMap<>();
-        foods.put(player.getFoodRange().get(0), 0);
-        foods.put(player.getFoodRange().get(1), 0);
+        foods.put(player.getFoodRange()[0], 0);
+        foods.put(player.getFoodRange()[1], 0);
     }
 
     /**
@@ -111,8 +111,8 @@ public class Inventory {
 
     public void resetDrinks() {
         drinks = new HashMap<>();
-        drinks.put(player.getDrinkRange().get(0), 0);
-        drinks.put(player.getDrinkRange().get(1), 0);
+        drinks.put(player.getDrinkRange()[0], 0);
+        drinks.put(player.getDrinkRange()[1], 0);
     }
 
     public void setDrinks(HashMap<Drink, Integer> inputDrinks) {

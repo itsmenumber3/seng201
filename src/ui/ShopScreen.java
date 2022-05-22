@@ -93,9 +93,7 @@ public class ShopScreen {
 		this.inventory = player.getPlayerInventory();
 		this.battle = player.getPlayerSelectedBattle();
 		this.shop = battle.getBattleShop();
-		setMonsterNameList();
-		setFoodNameList();
-		setDrinkNameList();
+
 		initialize();
 		window.setVisible(true);
 	}
@@ -311,37 +309,17 @@ public class ShopScreen {
 		panelBuyFood.add(lblSelectFood);
 		
 		JLabel lblYourCurrentFoodSelection;
-		JButton btnPurchaseAndStoreFood;
-		
-		JComboBox comboBoxFood = new JComboBox(foodNames);
-		comboBoxFood.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				selectedFood = player.getFoodRange().get(comboBoxFood.getSelectedIndex());
-				lblYourCurrentFoodSelection.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>", 
-						foodNames[comboBoxFood.getSelectedIndex()],
-						selectedFood.getHealthIncrease(),
-						selectedFood.getEntityPurchaseValue()
-						)
-				);
-				
-				btnPurchaseAndStoreFood.setEnabled(true);
-				
-			}
-		});
-		comboBoxFood.setModel(new DefaultComboBoxModel(foodNames));
-		comboBoxFood.setBounds(318, 147, 210, 24);
-		panelBuyFood.add(comboBoxFood);
-		
-		lblYourCurrentFoodSelection = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>", 
-				foodNames[comboBoxFood.getSelectedIndex()],
+		lblYourCurrentFoodSelection = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>",
+				foodNames[0],
 				selectedFood.getHealthIncrease(),
 				selectedFood.getEntityPurchaseValue()
-			)
+		)
 		);
 		lblYourCurrentFoodSelection.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblYourCurrentFoodSelection.setBounds(176, 195, 358, 47);
 		panelBuyFood.add(lblYourCurrentFoodSelection);
-		
+
+		JButton btnPurchaseAndStoreFood;
 		btnPurchaseAndStoreFood = new JButton("<html><div>Purchase</div></html>");
 		btnPurchaseAndStoreFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -360,6 +338,29 @@ public class ShopScreen {
 		btnPurchaseAndStoreFood.setBounds(176, 260, 353, 31);
 		panelBuyFood.add(btnPurchaseAndStoreFood);
 		
+		JComboBox comboBoxFood = new JComboBox(foodNames);
+		comboBoxFood.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectedFood = player.getFoodRange()[comboBoxFood.getSelectedIndex()];
+				lblYourCurrentFoodSelection.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>", 
+						foodNames[comboBoxFood.getSelectedIndex()],
+						selectedFood.getHealthIncrease(),
+						selectedFood.getEntityPurchaseValue()
+						)
+				);
+				
+				btnPurchaseAndStoreFood.setEnabled(true);
+				
+			}
+		});
+		comboBoxFood.setModel(new DefaultComboBoxModel(foodNames));
+		comboBoxFood.setBounds(318, 147, 210, 24);
+		panelBuyFood.add(comboBoxFood);
+		
+
+		
+
+		
 		JPanel panelBuyCafe = new JPanel();
 		tabbedPane.addTab("Cafe", null, panelBuyCafe, null);
 		panelBuyCafe.setLayout(null);
@@ -376,12 +377,22 @@ public class ShopScreen {
 		panelBuyCafe.add(lblselectADrink);
 		
 		JLabel lblYourCurrentDrinkSelection;
+		lblYourCurrentDrinkSelection = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>",
+				drinkNames[0],
+				selectedDrink.getHealthIncrease(),
+				selectedDrink.getEntityPurchaseValue()
+		)
+		);
+		lblYourCurrentDrinkSelection.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblYourCurrentDrinkSelection.setBounds(171, 189, 358, 47);
+		panelBuyCafe.add(lblYourCurrentDrinkSelection);
+
 		JButton btnPurchaseAndStoreDrink;
 		
 		JComboBox comboBoxDrinks = new JComboBox(drinkNames);
 		comboBoxDrinks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				selectedDrink = player.getDrinkRange().get(comboBoxDrinks.getSelectedIndex());
+				selectedDrink = player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()];
 				lblYourCurrentDrinkSelection.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>", 
 						drinkNames[comboBoxDrinks.getSelectedIndex()],
 						selectedDrink.getHealthIncrease(),
@@ -393,15 +404,7 @@ public class ShopScreen {
 		comboBoxDrinks.setBounds(313, 141, 210, 24);
 		panelBuyCafe.add(comboBoxDrinks);
 		
-		lblYourCurrentDrinkSelection = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>", 
-				drinkNames[comboBoxDrinks.getSelectedIndex()],
-				selectedDrink.getHealthIncrease(),
-				selectedDrink.getEntityPurchaseValue()
-				)
-			);
-		lblYourCurrentDrinkSelection.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblYourCurrentDrinkSelection.setBounds(171, 189, 358, 47);
-		panelBuyCafe.add(lblYourCurrentDrinkSelection);
+
 		
 		btnPurchaseAndStoreDrink = new JButton("<html><div>Purchase</div></html>");
 		btnPurchaseAndStoreDrink.addActionListener(new ActionListener() {

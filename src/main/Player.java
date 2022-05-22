@@ -45,8 +45,9 @@ public class Player implements Role {
     // this is a constant and will never change.
     private Battle playerSelectedBattle;
     private Battle playerPreviewBattle;
-    private ArrayList<Food> foodRange;
-    private ArrayList<Drink> drinkRange;
+    private Food[] foodRange = {new Food(FoodType.APPLE), new Food(FoodType.PASTA)};
+
+    private Drink[] drinkRange = {new Drink(DrinkType.COFFEE), new Drink(DrinkType.ENERGY_DRINK)};
 
     // CONSTRUCTOR ------------------------------------------------
     /**
@@ -54,10 +55,7 @@ public class Player implements Role {
      */
     public Player() {
         playerInventory.resetFuelAmount();
-        drinkRange.add(new Drink(DrinkType.COFFEE));
-        drinkRange.add(new Drink(DrinkType.ENERGY_DRINK));
-        foodRange.add(new Food(FoodType.APPLE));
-        foodRange.add(new Food(FoodType.PASTA));
+
     }
     // CONSTRUCTOR ------------------------------------------------
 
@@ -87,7 +85,12 @@ public class Player implements Role {
         try {
             // If playerName does not meet criteria, playerNameValidation will throw an InvalidInputException
             // Else, playerNameValidation returns that exact inputPlayerName: String.
-            this.playerName = tools.nameValidation(inputPlayerName);
+            if (inputPlayerName.length() >=3) {
+                this.playerName = inputPlayerName;
+            } else {
+                throw new InvalidInputException();
+            }
+
             return true;
         }
         catch (InvalidInputException e) { // If playerNameValidation throws this error
@@ -447,8 +450,8 @@ public class Player implements Role {
      * This method returns the current shopRange.
      * @return FoodRange ArrayList<Food>
      */
-    public ArrayList<Food> getFoodRange() {
-        return foodRange;
+    public Food[] getFoodRange() {
+        return new Food[]{new Food(FoodType.APPLE), new Food(FoodType.PASTA)};
     }
     // FOOD RANGE -------------------------------------------------
 
@@ -471,8 +474,8 @@ public class Player implements Role {
      * This method returns the current shopRange.
      * @return DrinkRange ArrayList<Drink>
      */
-    public ArrayList<Drink> getDrinkRange() {
-        return drinkRange;
+    public Drink[] getDrinkRange() {
+        return new Drink[]{new Drink(DrinkType.COFFEE), new Drink(DrinkType.ENERGY_DRINK)};
     }
     // DRINK RANGE ------------------------------------------------
 }

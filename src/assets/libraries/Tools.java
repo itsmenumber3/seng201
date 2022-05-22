@@ -479,7 +479,12 @@ public class Tools {
     }
     
     public String makeStringDescriptionFromMonsterInformation(Monster inputMonster) {
-    	return String.format("This monster is a %s. It has an attack damage of %d and its resistance ability is %d. It is of rarity level %d. Currently, its health is %d out of 100.", inputMonster.getMonsterType().toString(), inputMonster.getMonsterAttackDamage(), inputMonster.getMonsterResistanceAbility(), inputMonster.getMonsterHealthLevel());
+    	return String.format("This monster is a %s. It has an attack damage of %.2f and its resistance ability is %.2f. It is of rarity level %d. Currently, its health is %.2f out of 100.",
+				inputMonster.getMonsterType().toString(),
+				inputMonster.getMonsterAttackDamage(),
+				inputMonster.getMonsterResistanceAbility(),
+				inputMonster.getEntityRarity(),
+				inputMonster.getMonsterHealthLevel());
     }
     
     public String generateRandomMonsterName() {
@@ -639,8 +644,8 @@ public class Tools {
 			case 1:
 				if (inputPlayer.getPlayerInventory().getMonsters().size() >= howManyMonstersBasedOnDifficulty(inputPlayer.getPlayerDifficulty())) {
 					int randomNumber2 = random.nextInt(2, 4);
-					for (int index = 0; index < 2; index++) {
-						inputPlayer.getPlayerInventory().addToFoods(new Food(FoodType.PASTA));
+					for (int index = 0; index < randomNumber2; index++) {
+						inputPlayer.getPlayerInventory().addFood(new Food(FoodType.PASTA));
 					}
 					return (String.format("Wow! You found a food bag of %d food items! Open inventory to see new foods.", randomNumber2));
 				} else {
@@ -651,8 +656,8 @@ public class Tools {
 				}
 			case 2:
 				int randomNumber2 = random.nextInt(2, 4);
-				for (int index = 0; index < 2; index++) {
-					inputPlayer.getPlayerInventory().addToFoods(new Food(FoodType.PASTA));
+				for (int index = 0; index < randomNumber2; index++) {
+					inputPlayer.getPlayerInventory().addFood(new Food(FoodType.PASTA));
 				}
 				return (String.format("Wow! You found a food bag of %d food items! Open inventory to see new foods.", randomNumber2));
 			default:
