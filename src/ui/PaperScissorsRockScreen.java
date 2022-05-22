@@ -97,7 +97,7 @@ public class PaperScissorsRockScreen {
 		lblWhatIs.setBounds(22, 22, 621, 45);
 		window.getContentPane().add(lblWhatIs);
 		
-		JLabel lblWhatIs_2 = new JLabel(String.format("<html><div>The monster, %s, has asked you to play Paper, Scissors, Rock with it. Select Paper, Scissors or Rock below to see if you win this chance to attack.</div></html>", battleMonster.getEntityName()));
+		JLabel lblWhatIs_2 = new JLabel(String.format("<html><div>The monster, get%s, has asked you to play Paper, Scissors, Rock with it. Select Paper, Scissors or Rock below to see if you win this chance to attack.</div></html>", battleMonster.getEntityName()));
 		lblWhatIs_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		lblWhatIs_2.setBounds(22, 45, 296, 120);
 		window.getContentPane().add(lblWhatIs_2);

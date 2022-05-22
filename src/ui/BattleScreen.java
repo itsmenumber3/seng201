@@ -99,6 +99,7 @@ public class BattleScreen {
 		JButton btnTravelTo = new JButton(String.format("<html><div>Travel to %s</div></html>", battle.getBattleName()));
 		btnTravelTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				player.setPlayerSelectedBattle(player.getPlayerPreviewBattle());
 				finishedWindow(true);
 			}
 		});

@@ -137,19 +137,27 @@ public class FlipACoinScreen {
 		panelItem.setBounds(375, 11, 361, 120);
 		frame.getContentPane().add(panelItem);
 		
-		JLabel lblWhatIs_3 = new JLabel("<html><bold>About battle monster:</bold><div>Health: 100%<br>Attack Damage: 20%<br>Resistance Ability: 20%</div></html>");
+		JLabel lblWhatIs_3 = new JLabel(String.format("<html><bold>About %s</bold><div>Health: %.2f<br>Attack Damage: %.2f<br>Resistance Ability: %.2f</div></html>", 
+				battleMonster.getEntityName(),
+				battleMonster.getMonsterHealthLevel(),
+				battleMonster.getMonsterAttackDamage(),
+				battleMonster.getMonsterResistanceAbility()));
 		lblWhatIs_3.setForeground(Color.WHITE);
 		lblWhatIs_3.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblWhatIs_3.setBounds(183, 32, 166, 82);
 		panelItem.add(lblWhatIs_3);
 		
-		JLabel lblWhatIs_3_2 = new JLabel("<html><bold>About your monster</bold><div>Health: 100%<br>Attack Damage: 20%<br>Resistance Ability: 20%</div></html>");
+		JLabel lblWhatIs_3_2 = new JLabel(String.format("<html><bold>About %s</bold><div>Health: %.2f<br>Attack Damage: %.2f<br>Resistance Ability: %.2f</div></html>", 
+				playerMonster.getEntityName(),
+				playerMonster.getMonsterHealthLevel(),
+				playerMonster.getMonsterAttackDamage(),
+				playerMonster.getMonsterResistanceAbility()));
 		lblWhatIs_3_2.setForeground(Color.WHITE);
 		lblWhatIs_3_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblWhatIs_3_2.setBounds(12, 32, 166, 82);
 		panelItem.add(lblWhatIs_3_2);
 		
-		JLabel lblWhatIs_3_2_1 = new JLabel("<html><div>Gold: 0 Points: 0 Battle: Farewell Spit</div></html>");
+		JLabel lblWhatIs_3_2_1 = new JLabel(String.format("<html><div>Gold: 0 Points: 0 Battle: %s</div></html>",battle.getBattleName()));
 		lblWhatIs_3_2_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblWhatIs_3_2_1.setForeground(Color.WHITE);
 		lblWhatIs_3_2_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
