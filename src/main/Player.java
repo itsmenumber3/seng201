@@ -9,51 +9,71 @@ import battles.Battle;
 import entities.Entity;
 import entities.items.consumables.Drink;
 import entities.items.consumables.Food;
-import entities.monsters.Monster;
-import exceptions.InsufficientPlayerGoldBalanceException;
 import exceptions.InvalidInputException;
 import exceptions.UnallowedMethodException;
 import exceptions.UnexpectedNegativeNumberException;
-import ui.BattleScreen;
 
 import java.util.ArrayList;
 
 /**
- *
+ * The class player is where all player dependent variables are accessed from
  */
 public class Player implements Role {
-    public Player() {
-        playerInventory.resetFuelAmount();
-    }
 
     // LIBRARIES --------------------------------------------------
-
     /**
      * MagicNumbers is a class that holds all constants in this game programme.
      */
-    MagicNumbers magicNumbers = new MagicNumbers();
+    private final MagicNumbers magicNumbers = new MagicNumbers();
     // Some numerical values are dependent on the difficulty level chosen by the player.
     // magicNumbers will be assigned again when difficulty level is known.
 
-    Tools tools = new Tools(); // Tools is a class that provides some basic functionalities, such as playerName validation
-    // and random number generator!
-
+    /**
+     * Tools is a class that provides some basic functionalities, such as playerName validation
+     * and random number generator!
+     */
+    private final Tools tools = new Tools();
     // LIBRARIES --------------------------------------------------
 
+    private String playerName; // Player name that is entered in setup screen
+    private int playerDifficulty; // difficulty is an enum type. Defined in Difficulty.java and has three values: EASY, MEDIUM, HARD
+    private int playerDays; // Players selected duration that is chosen in set up screen
+    private int playerCurrentDay; // Current day for player within game
+    private int playerPoints; // Points that the player has accumulated throughout the game
+    private int playerGold; // Amount of gold the player has to purchase items and monsters
+    private final Inventory playerInventory = new Inventory(this); // PLEASE NOTE THAT there is a main.Inventory() class.
+    // this is a constant and will never change.
+    private Battle playerSelectedBattle;
+    private Battle playerPreviewBattle;
+    private ArrayList<Food> foodRange;
+    private ArrayList<Drink> drinkRange;
 
-    // GET ROLE TYPE
+    // CONSTRUCTOR ------------------------------------------------
+    /**
+     * Constructor for player class that default sets the fuel amount to 50
+     */
+    public Player() {
+        playerInventory.resetFuelAmount();
+        drinkRange.add(new Drink(DrinkType.COFFEE));
+        drinkRange.add(new Drink(DrinkType.ENERGY_DRINK));
+        foodRange.add(new Food(FoodType.APPLE));
+        foodRange.add(new Food(FoodType.PASTA));
+    }
+    // CONSTRUCTOR ------------------------------------------------
 
+    // GET ROLE TYPE ----------------------------------------------
+    /**
+     *
+     */
     @Override
     public RoleType getRoleType() {
         return RoleType.PLAYER;
     }
-
+    // GET ROLE TYPE ----------------------------------------------
 
 
 
     // USERNAME----------------------------------------------------
-
-    private String playerName;
 
     /**
      * This method accepts a string and set playerName to that string. There are many conditions to a valid playerName:
@@ -89,8 +109,6 @@ public class Player implements Role {
 
     // DIFFICULTY----------------------------------------------------
 
-    private int playerDifficulty; // difficulty is an enum type. Defined in Difficulty.java and has three values: EASY, MEDIUM, HARD
-
     /**
      * This method sets the difficulty level.
      * Difficulty is an enum class defined in Difficulty.java
@@ -123,9 +141,6 @@ public class Player implements Role {
 
 
     // DAYS OF THE GAME----------------------------------------------
-
-    private int playerDays;
-
     /**
      * This method allows player to set how many days the game will last
      * The maximum number and minimum number of days is set in MagicNumbers().
@@ -160,9 +175,6 @@ public class Player implements Role {
 
 
     // CURRENT DAY OF THE GAME --------------------------------------
-
-    private int playerCurrentDay;
-
     /**
      * It is not possible to set the current day, as we want to avoid jumping days.
      * To set the next day, use setNextDay() which increments playerCurrentDay.
@@ -226,9 +238,6 @@ public class Player implements Role {
 
 
     // USER POINTS --------------------------------------------------
-
-    public int playerPoints;
-
     /**
      * Modifying the playerPoints directly is not allowed.
      * @param inputPlayerPoints: integer
@@ -292,9 +301,6 @@ public class Player implements Role {
 
 
     // USER GOLDS ---------------------------------------------------
-
-    private int playerGold;
-
     /**
      * Setting a new gold balance for the player isn't allowed.
      * @param newPlayerGold: integer
@@ -346,11 +352,6 @@ public class Player implements Role {
 
 
     // USER INVENTORY -----------------------------------------------
-
-
-    private final Inventory playerInventory = new Inventory(this); // PLEASE NOTE THAT there is a main.Inventory() class.
-                                                             // this is a constant and will never change.
-
     /**
      * This method returns the object that is the inventory of the player.
      * WARNING: it returns the object rather than the ArrayList main.Inventory.entities.items;
@@ -398,10 +399,6 @@ public class Player implements Role {
     }
 
     // INVENTORY ----------------------------------------------------
-    
-    
-    private Battle playerSelectedBattle;
-    
     public void setPlayerSelectedBattle(Battle inputPlayerSelectedBattle) {
     	this.playerSelectedBattle = inputPlayerSelectedBattle;
     }
@@ -419,8 +416,6 @@ public class Player implements Role {
 //    public Battle getPlayerPreviousBattle() {
 //    	return this.playerPreviousBattle;
 //    }
-    
-    private Battle playerPreviewBattle;
     
     public void setPlayerPreviewBattle(Battle inputBattle) {
     	playerPreviewBattle = inputBattle;
@@ -445,14 +440,21 @@ public class Player implements Role {
     	}
     	
     }
+    //
 
-    private ArrayList<Food> foodRange;
-
-    public void setFoodRange() {
-        Food apple = new Food(FoodType.APPLE);
-        Food pasta = new Food(FoodType.PASTA);
-        this.foodRange.add(apple);
-        this.foodRange.add(pasta);
+    // FOOD RANGE -------------------------------------------------
+    /**
+     * Unallowed method, food range declared within player class constructor
+     * @return boolean
+     */
+    public boolean setFoodRange() {
+        boolean allowed = true;
+        try {
+            throw new UnallowedMethodException("unallowed method");
+        } catch (UnallowedMethodException e) {
+            allowed = false;
+        }
+        return allowed;
     }
 
     /**
@@ -460,19 +462,23 @@ public class Player implements Role {
      * @return FoodRange ArrayList<Food>
      */
     public ArrayList<Food> getFoodRange() {
-        return this.foodRange;
+        return foodRange;
     }
+    // FOOD RANGE -------------------------------------------------
 
-    private ArrayList<Drink> drinkRange;
-    drinkRange.add(new Drink(DrinkType.COFFEE));
-    drinkRange.add(new Drink(DrinkType.ENERGY_DRINK));
-
-    public boolean setDrinkRange(ArrayList<Drink> drinkRange) {
+    // DRINK RANGE ------------------------------------------------
+    /**
+     *Unallowed method, drink range declared within player class constructor
+     * @return boolean
+     */
+    public boolean setDrinkRange() {
+        boolean allowed = true;
         try {
         	throw new UnallowedMethodException("unallowed method");
         } catch (UnallowedMethodException e) {
-        	e.
+        	allowed = false;
         }
+        return allowed;
     }
 
     /**
@@ -480,6 +486,7 @@ public class Player implements Role {
      * @return DrinkRange ArrayList<Drink>
      */
     public ArrayList<Drink> getDrinkRange() {
-        return this.drinkRange;
+        return drinkRange;
     }
+    // DRINK RANGE ------------------------------------------------
 }

@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class Inventory {
 
-    Player player;
+    Player player; //
     Tools tools = new Tools();
 
     public Inventory(Player inputPlayer) {

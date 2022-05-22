@@ -7,7 +7,6 @@ import battles.Battle;
 import battles.challenge.Challenge;
 import exceptions.UnallowedMethodException;
 import ui.*;
-
 import javax.swing.*;
 
 /**
@@ -15,14 +14,18 @@ import javax.swing.*;
  */
 public class GameEnvironment {
 
-    private final Player player = new Player();
-    private final Tools tools = new Tools();
-    private FightOutcomeType fightOutcome;
-    
+    // LIBRARIES --------------------------------------------------
+    private final Player player = new Player(); // Player of the game
+    private final Tools tools = new Tools(); // Access to the tools class
+    // LIBRARIES --------------------------------------------------
+
+    private FightOutcomeType fightOutcome; // Fight outcome for each fight
+
+    // FIGHT OUTCOME ----------------------------------------------
     /**
      * Sets the fight outcome of a challenge
      * e.g Flip a coin or a quiz question
-     * @param inputFightOutcomeType: FightOutcomeType
+     * @param inputFightOutcomeType FightOutcomeType
      */
     public void setFightOutcome(FightOutcomeType inputFightOutcomeType) {
     	fightOutcome = inputFightOutcomeType;
@@ -35,10 +38,12 @@ public class GameEnvironment {
     public FightOutcomeType getFightOutcome() {
     	return fightOutcome;
     }
+    // FIGHT OUTCOME ----------------------------------------------
 
+    // PLAYER -----------------------------------------------------
     /**
      * Unallowed set method for creating a player
-     * @param inputPlayer: Player
+     * @param inputPlayer Player
      * @throws UnallowedMethodException
      */
     public void setPlayer(Player inputPlayer) {
@@ -51,12 +56,14 @@ public class GameEnvironment {
 
     /**
      * Gets the current player within the current game environment
-     * @return player: Player
+     * @return player Player
      */
     public Player getPlayer() {
     	return player;
     }
+    // PLAYER -----------------------------------------------------
 
+    // WELCOME SCREEN ---------------------------------------------
     /**
      * Launches the welcome screen to start process of configuring the game
      */
@@ -66,13 +73,15 @@ public class GameEnvironment {
 
     /**
      * Closes the welcome screen and calls the player setup screen
-     * @param inputWelcomeWindow: WelcomeScreen
+     * @param inputWelcomeWindow WelcomeScreen
      */
     public void closeWelcomeScreen(WelcomeScreen inputWelcomeWindow) {
         inputWelcomeWindow.closeWindow();
         launchPlayerSetupScreen();
     }
+    // WELCOME SCREEN ---------------------------------------------
 
+    // PLAYER SETUP SCREEN ----------------------------------------
     /**
      * Launches the player setup screen to configure
      * the player name, difficulty and duration of the game.
@@ -83,13 +92,15 @@ public class GameEnvironment {
 
     /**
      * Closes the player setup screen and calls the launch first monster set up screen
-     * @param inputPlayerSetupWindow: PlayerSetupScreen
+     * @param inputPlayerSetupWindow PlayerSetupScreen
      */
     public void closePlayerSetupScreen(PlayerSetupScreen inputPlayerSetupWindow) {
     	inputPlayerSetupWindow.closeWindow();
     	this.launchFirstMonsterSetupScreen();
     }
+    // PLAYER SETUP SCREEN ----------------------------------------
 
+    // FIRST MONSTER SETUP SCREEN ---------------------------------
     /**
      * Launches the first monster setup screen where the player will
      * be able to choose and name the first monster in their team
@@ -100,13 +111,15 @@ public class GameEnvironment {
 
     /**
      * Closes the first monster setup screen and launches the map screen
-     * @param firstMonsterSetupWindow: FirstMonsterSetupScreen
+     * @param firstMonsterSetupWindow FirstMonsterSetupScreen
      */
     public void closeFirstMonsterSetupScreen(FirstMonsterSetupScreen firstMonsterSetupWindow) {
     	firstMonsterSetupWindow.closeWindow();
         launchMapScreen();
     }
+    // FIRST MONSTER SETUP SCREEN ---------------------------------
 
+    // MAP SCREEN -------------------------------------------------
     /**
      * Launches the map screen to select the location for the next battle
      */
@@ -119,7 +132,7 @@ public class GameEnvironment {
      * based on the getNextScreen parameter within the map window
      * the calls are for: a battle screen; a shop screen; a finish game screen
      * the default is to call the inventory screen
-     * @param inputMapWindow: MapScreen
+     * @param inputMapWindow MapScreen
      */
     public void closeMapScreen(MapScreen inputMapWindow) {
     	inputMapWindow.closeWindow();
@@ -137,10 +150,12 @@ public class GameEnvironment {
     		launchInventoryScreen(true);
     	}
     }
+    // MAP SCREEN -------------------------------------------------
 
+    // INVENTORY SCREEN -------------------------------------------
     /**
      * Launches the inventory screen to see the currently owned monsters, food, drinks or fuel
-     * @param isPreviousWindowMapWindow: boolean
+     * @param isPreviousWindowMapWindow boolean
      */
     public void launchInventoryScreen(boolean isPreviousWindowMapWindow) {
         InventoryScreen inventoryWindow = new InventoryScreen(this);
@@ -149,7 +164,7 @@ public class GameEnvironment {
     /**
      * Closes the inventory screen and launches either
      * the map screen or shop screen
-     * @param inputInventoryWindow: InventoryScreen
+     * @param inputInventoryWindow InventoryScreen
      */
     public void closeInventoryScreen(InventoryScreen inputInventoryWindow) {
         inputInventoryWindow.closeWindow();
@@ -159,7 +174,35 @@ public class GameEnvironment {
             launchShopScreen();
         }
     }
+    // INVENTORY SCREEN -------------------------------------------
 
+    // BATTLE SCREEN ----------------------------------------------
+    /**
+     * Launches the battle screen where the player can decide
+     * to travel to that location or go back to the map and choose a different location
+     */
+    public void launchBattleScreen() {
+        BattleScreen battleWindow = new BattleScreen(this);
+    }
+
+    /**
+     * Closes the battle screen and has 2 options to call:
+     * If the player wants to continue to their selected location the travelling screen will be called.
+     * If the player wants to return to the map screen will be called.
+     * @param inputBattleWindow BattleScreen
+     * @param isPlayerBattling boolean
+     */
+    public void closeBattleScreen(BattleScreen inputBattleWindow, boolean isPlayerBattling) {
+        inputBattleWindow.closeWindow();
+        if (isPlayerBattling) {
+            launchTravellingScreen();
+        } else {
+            launchMapScreen();
+        }
+    }
+    // BATTLE SCREEN ----------------------------------------------
+
+    // SHOP SCREEN ------------------------------------------------
     /**
      * Launches the shop screen to buy new or more:
      * monsters, food, drinks, fuel or a lotto ticket
@@ -171,37 +214,20 @@ public class GameEnvironment {
 
     /**
      * Closes the shop screen and calls the map screen
-     * @param inputShopWindow: ShopScreen
+     * @param inputShopWindow ShopScreen
      */
     public void closeShopScreen(ShopScreen inputShopWindow) {
         inputShopWindow.closeWindow();
         launchMapScreen();
     }
+    // SHOP SCREEN ------------------------------------------------
 
-    /**
-     * Launches the battle screen where the player can decide
-     * to travel to that location or go back to the map and choose a different location
-     */
-    public void launchBattleScreen() {
-    	BattleScreen battleWindow = new BattleScreen(this);
-    }
+    // FINISH GAME SCREEN -----------------------------------------
 
-    /**
-     * Closes the battle screen and has 2 options to call:
-     * If the player wants to continue to their selected location the travelling screen will be called.
-     * If the player wants to return to the map screen will be called.
-     * @param inputBattleWindow: BattleScreen
-     * @param isPlayerBattling: boolean
-     */
-    public void closeBattleScreen(BattleScreen inputBattleWindow, boolean isPlayerBattling) {
-    	inputBattleWindow.closeWindow();
-    	if (isPlayerBattling) {
-        	launchTravellingScreen();
-    	} else {
-    		launchMapScreen();
-    	}
-    }
 
+    // FINISH GAME SCREEN -----------------------------------------
+
+    // TRAVELLING SCREEN ------------------------------------------
     /**
      * Launches the travelling screen where a random event may occur
      */
@@ -211,13 +237,15 @@ public class GameEnvironment {
 
     /**
      * Closes the travelling screen and calls the make and launch challenge screen
-     * @param inputTravellingWindow: TravellingScreen
+     * @param inputTravellingWindow TravellingScreen
      */
     public void closeTravellingScreen(TravellingScreen inputTravellingWindow) {
     	inputTravellingWindow.closeWindow();
     	makeNewChallengeAndLaunchScreen();
     }
+    // TRAVELLING SCREEN ------------------------------------------
 
+    // QUIZ SCREEN ------------------------------------------------
     /**
      * Launches the quiz screen where the player
      * answers a question to decide whether the player gets to attack in the battle
@@ -228,13 +256,15 @@ public class GameEnvironment {
 
     /**
      * Closes the quiz screen and calls the launch challenge result screen
-     * @param inputQuizScreen: QuizScreen
+     * @param inputQuizScreen QuizScreen
      */
     public void closeQuizScreen(QuizScreen inputQuizScreen) {
         inputQuizScreen.closeWindow();
         launchChallengeResultScreen();
     }
+    // QUIZ SCREEN ------------------------------------------------
 
+    // PAPER SCISSOR ROCK SCREEN ----------------------------------
     /**
      * Launches the paper, scissors, rock screen where the player
      * plays paper, scissors, rock to decide whether the player gets to attack in the battle
@@ -245,14 +275,35 @@ public class GameEnvironment {
 
     /**
      * Closes the paper, scissors, rock screen and calls the launch challenge result screen
-     * @param inputPapersScissorsRockWindow: PaperScissorsRockScreen
+     * @param inputPapersScissorsRockWindow PaperScissorsRockScreen
      */
     public void closePaperScissorsRockScreen(PaperScissorsRockScreen inputPapersScissorsRockWindow) {
         inputPapersScissorsRockWindow.closeWindow();
         launchChallengeResultScreen();
 
     }
+    // PAPER SCISSOR ROCK SCREEN ----------------------------------
 
+    // FLIP A COIN SCREEN -----------------------------------------
+    /**
+     * Launches the flip a coin screen where the player
+     * plays flip a coin to decide whether the player gets to attack in the battle
+     */
+    public void launchFlipACoinScreen() {
+        FlipACoinScreen flipACoinWindow = new FlipACoinScreen();
+    }
+
+    /**
+     * Closes the flip a coin screen and calls the launch challenge result screen
+     * @param flipACoinWindow FlipACoinScreen
+     */
+    public void closeFlipACoinScreen(FlipACoinScreen flipACoinWindow) {
+        flipACoinWindow.closeWindow();
+        launchChallengeResultScreen();
+    }
+    // FLIP A COIN SCREEN -----------------------------------------
+
+    // CHALLENGE RESULT SCREEN ------------------------------------
     /**
      * Launches the challenge result screen which displays
      * the players monsters and stats and the opponent monsters stats
@@ -269,7 +320,7 @@ public class GameEnvironment {
      * and the battle monster has health > 0 the battle continues and a new challenge is called
      * If the players current monster's health < 0 and there are no more monsters in the team
      * the battle and subsequently game is over and the finish game screen is called
-     * @param inputChallengeResultWindow: ChallengeResultScreen
+     * @param inputChallengeResultWindow ChallengeResultScreen
      */
     public void closeChallengeResultScreen(ChallengeResultScreen inputChallengeResultWindow) {
         inputChallengeResultWindow.closeWindow();
@@ -289,7 +340,9 @@ public class GameEnvironment {
         	break;
         }
     }
+    // CHALLENGE RESULT SCREEN ------------------------------------
 
+    // NEW CHALLENGE SCREEN ---------------------------------------
     /**
      * Chooses the next challenge and launches the relevant screen:
      * flip a coin Or paper, scissors, rock Or quiz
@@ -305,24 +358,9 @@ public class GameEnvironment {
             launchQuizScreen();
         }
     }
+    // NEW CHALLENGE SCREEN ---------------------------------------
 
-    /**
-     * Launches the flip a coin screen where the player
-     * plays flip a coin to decide whether the player gets to attack in the battle
-     */
-    public void launchFlipACoinScreen() {
-    	FlipACoinScreen flipACoinWindow = new FlipACoinScreen();
-    }
-
-    /**
-     * Closes the flip a coin screen and calls the launch challenge result screen
-     * @param flipACoinWindow: FlipACoinScreen
-     */
-    public void closeFlipACoinScreen(FlipACoinScreen flipACoinWindow) {
-    	flipACoinWindow.closeWindow();
-    	launchChallengeResultScreen();
-    }
-
+    // BATTLE RESULT SCREEN ---------------------------------------
     /**
      * Launches the battle result screen which shows the reward they steal from the opponent monster
      */
@@ -335,7 +373,7 @@ public class GameEnvironment {
      * If the player has reached the chosen game duration the game has been won
      * and the launch finish game screen is called
      * Otherwise the map screen is called
-     * @param inputBattleResultWindow: BattleResultScreen
+     * @param inputBattleResultWindow BattleResultScreen
      */
     public void closeBattleResultScreen(BattleResultScreen inputBattleResultWindow) {
         inputBattleResultWindow.closeWindow();
@@ -345,7 +383,9 @@ public class GameEnvironment {
         	this.launchMapScreen();
         }
     }
+    // BATTLE RESULT SCREEN ---------------------------------------
 
+    // FINISH GAME SCREEN -----------------------------------------
     /**
      * Launches the finish game screen which displays:
      * player name, game duration, gold gained, points gained
@@ -357,7 +397,7 @@ public class GameEnvironment {
     /**
      * Closes the finish game screen
      * If the player chooses to restart then a new game environment is created and a new game is launched
-     * @param inputFinishGameWindow
+     * @param inputFinishGameWindow FinishGameScreen
      */
     public void closeFinishGameScreen(FinishGameScreen inputFinishGameWindow) {
         inputFinishGameWindow.closeWindow();
@@ -370,7 +410,9 @@ public class GameEnvironment {
             game.launchWelcomeScreen();
         }
     }
+    // FINISH GAME SCREEN -----------------------------------------
 
+    // CREATE GAME ------------------------------------------------
     /**
      * Starts the game and sets default parameters
      */
@@ -382,4 +424,5 @@ public class GameEnvironment {
         game.getPlayer().setNextDayNextBattle();
         game.launchWelcomeScreen();
     }
+    // CREATE GAME ------------------------------------------------
 }
