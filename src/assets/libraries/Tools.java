@@ -479,7 +479,7 @@ public class Tools {
     }
     
     public String makeStringDescriptionFromMonsterInformation(Monster inputMonster) {
-    	return String.format("This monster is a %s. It has an attack damage of %.2f.<br> Its resistance ability is %.2f. <br>It is of rarity level %d. <br>Currently, its health is %.2f out of 100.",
+    	return String.format("This monster is a %s.<br> It has an attack damage of %.2f.<br> Its resistance ability is %.2f. <br>It is of rarity level %d. <br>Currently, its health is %.2f out of 100.",
 				inputMonster.getMonsterType().toString(),
 				inputMonster.getMonsterAttackDamage(),
 				inputMonster.getMonsterResistanceAbility(),
@@ -610,16 +610,20 @@ public class Tools {
 	}
 	
 	public String generateChallengeResultMessage(ChallengeOutcomeType inputChallengeOutcomeType) {
-		
+		String returnString;
+		System.out.println(inputChallengeOutcomeType);
 		switch (inputChallengeOutcomeType) {
-		
 		case WIN:
-			return "You win the challenge!";
+			returnString = "You win the challenge!";
+			break;
 		case LOSE:
-			return "You've lost the challenge...";
+			returnString = "You've lost the challenge...";
+			break;
 		default:
-			return "It was a draw. You and the boss monster got the same thing.";
+			returnString = "It was a draw. You and the boss monster got the same thing.";
+			break;
 		}
+		return returnString;
 	}
 
 

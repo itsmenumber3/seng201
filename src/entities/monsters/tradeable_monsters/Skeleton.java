@@ -6,7 +6,7 @@ import entities.monsters.Monster;
 public class Skeleton extends Monster {
 	public Skeleton() {
 		this.setMonsterType(MonsterType.SKELETON);
-		this.setEntityImagePath("/assets/ui/img/skeleton-final.png");
+		this.setEntityImagePath("/assets/ui/img/skeleton-final.jpg");
 		this.setEntityName("Skeleton");
 	}
 }

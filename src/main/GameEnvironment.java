@@ -5,7 +5,9 @@ import assets.enums.FightOutcomeType;
 import assets.libraries.Tools;
 import battles.Battle;
 import battles.challenge.Challenge;
+import battles.challenge.FlipACoin;
 import battles.challenge.PaperScissorsRock;
+import battles.challenge.Quiz;
 import exceptions.UnallowedMethodException;
 import ui.*;
 import javax.swing.*;
@@ -97,7 +99,7 @@ public class GameEnvironment {
      */
     public void closePlayerSetupScreen(PlayerSetupScreen inputPlayerSetupWindow) {
     	inputPlayerSetupWindow.closeWindow();
-    	this.launchFirstMonsterSetupScreen();
+    	launchFirstMonsterSetupScreen();
     }
     // PLAYER SETUP SCREEN ----------------------------------------
 
@@ -327,7 +329,7 @@ public class GameEnvironment {
     public void closeChallengeResultScreen(ChallengeResultScreen inputChallengeResultWindow) {
         inputChallengeResultWindow.closeWindow();
         
-        switch (this.getFightOutcome()) {
+        switch (getFightOutcome()) {
         case PLAYER_WINS_BATTLE:
         	launchBattleResultScreen();
         	break;
@@ -351,17 +353,16 @@ public class GameEnvironment {
      */
     public void makeNewChallengeAndLaunchScreen() {
     	Challenge newChallenge = tools.makeRandomChallenge();
-        getPlayer().getPlayerSelectedBattle().setCurrentChallenge(newChallenge);
-        System.out.println("1");
         if (newChallenge.challengeType == ChallengeType.FLIP_A_COIN) {
-        	System.out.println("2");
+        	getPlayer().getPlayerSelectedBattle().setCurrentChallenge(new FlipACoin());
             launchFlipACoinScreen();
         }
         else if(newChallenge.challengeType == ChallengeType.PAPER_SCISSORS_ROCK) {
-        	System.out.println("3");
+        	getPlayer().getPlayerSelectedBattle().setCurrentChallenge(new PaperScissorsRock());
+            System.out.println(getPlayer().getPlayerSelectedBattle().getCurrentChallenge());
             launchPaperScissorsRockScreen();
         } else {
-        	System.out.println("4");
+        	getPlayer().getPlayerSelectedBattle().setCurrentChallenge(new Quiz());
             launchQuizScreen();
         }
     }
@@ -385,9 +386,9 @@ public class GameEnvironment {
     public void closeBattleResultScreen(BattleResultScreen inputBattleResultWindow) {
         inputBattleResultWindow.closeWindow();
         if (getPlayer().hasGameBeenWon()) {
-        	this.launchFinishGameScreen();
+        	launchFinishGameScreen();
         } else {
-        	this.launchMapScreen();
+        	launchMapScreen();
         }
     }
     // BATTLE RESULT SCREEN ---------------------------------------

@@ -91,9 +91,9 @@ public class ChallengeResultScreen {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-
-		
-		JLabel lblNewLabel = new JLabel(String.format("%s", tools.generateChallengeResultMessage(challenge.getChallengeOutcome())));
+		System.out.println(challenge.getChallengeOutcomeType());
+		String generatedResultMessage = tools.generateChallengeResultMessage(challenge.getChallengeOutcomeType());
+		JLabel lblNewLabel = new JLabel(String.format("%s", generatedResultMessage));
 		lblNewLabel.setBounds(190, 22, 320, 47);
 		lblNewLabel.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);

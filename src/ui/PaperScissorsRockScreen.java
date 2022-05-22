@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import assets.enums.PapersScissorsRockType;
 import assets.libraries.Tools;
 import battles.Battle;
+import battles.challenge.Challenge;
 import battles.challenge.PaperScissorsRock;
 import battles.challenge.Quiz;
 import entities.monsters.Monster;
@@ -59,7 +60,8 @@ public class PaperScissorsRockScreen {
 		paperScissorsRock = (PaperScissorsRock) battle.getCurrentChallenge();
 		battleMonster = battle.getBattleMonster();
 		playerMonster = player.getPlayerInventory().getMonsters().get(0);
-		
+		System.out.println(gameEnvironment.getPlayer().getPlayerSelectedBattle().getCurrentChallenge());
+
 		initialize();
 		window.setVisible(true);
 	}
@@ -70,12 +72,11 @@ public class PaperScissorsRockScreen {
 
 	public void finishedWindow() {
 		battle.incrementChallengeCount();
-		paperScissorsRock.runPaperScissorsRockResults();
-
+		battle.getCurrentChallenge().setChallengeOutcomeType(paperScissorsRock.runPaperScissorsRockResults());
+		System.out.println(battle.getCurrentChallenge());
+		System.out.println(battle.getCurrentChallenge().getChallengeOutcomeType());
 		gameEnvironment.setFightOutcome(tools.runFight(player));
-
 		gameEnvironment.closePaperScissorsRockScreen(this);
-
 	}
 
 	/**
@@ -100,7 +101,7 @@ public class PaperScissorsRockScreen {
 		lblWhatIs.setBounds(22, 22, 621, 45);
 		window.getContentPane().add(lblWhatIs);
 		
-		JLabel lblWhatIs_2 = new JLabel(String.format("<html><div>The monster, get%s, has asked you to play Paper, Scissors, Rock with it. Select Paper, Scissors or Rock below to see if you win this chance to attack.</div></html>", battleMonster.getEntityName()));
+		JLabel lblWhatIs_2 = new JLabel(String.format("<html><div>The monster, %s, has asked you to play Paper, Scissors, Rock with it. Select Paper, Scissors or Rock below to see if you win this chance to attack.</div></html>", battleMonster.getEntityName()));
 		lblWhatIs_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		lblWhatIs_2.setBounds(22, 45, 296, 120);
 		window.getContentPane().add(lblWhatIs_2);

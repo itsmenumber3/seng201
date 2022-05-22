@@ -8,22 +8,22 @@ import java.security.SecureRandom;
 public class Challenge {
 	public ChallengeType challengeType;
 	SecureRandom random = new SecureRandom();
+	public ChallengeOutcomeType challengeOutcome;
 	
-	public void setChallengeType(ChallengeType inpuChallengeType) {
-		this.challengeType = inpuChallengeType;
+	public void setChallengeType(ChallengeType inputChallengeType) {
+		challengeType = inputChallengeType;
 	}
 	
 	public ChallengeType getChallengeType() {
-		return this.challengeType;
+		return challengeType;
 	}
 
-	public ChallengeOutcomeType challengeOutcome;
 
 	public void setChallengeOutcome(ChallengeOutcomeType inputChallengeOutcome) {
-		this.challengeOutcome = inputChallengeOutcome;
+		challengeOutcome = inputChallengeOutcome;
 	}
 
 	public ChallengeOutcomeType getChallengeOutcome(){
-		return this.challengeOutcome;
+		return challengeOutcome;
 	}
 }
