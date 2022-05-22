@@ -479,7 +479,7 @@ public class Tools {
     }
     
     public String makeStringDescriptionFromMonsterInformation(Monster inputMonster) {
-    	return String.format("This monster is a %s. It has an attack damage of %.2f.<br> Its resistance ability is %.2f. <br>It is of rarity level %d. <br>Currently, its health is %.2f out of 100.",
+    	return String.format("This monster is a %s.<br> It has an attack damage of %.2f.<br> Its resistance ability is %.2f. <br>It is of rarity level %d. <br>Currently, its health is %.2f out of 100.",
 				inputMonster.getMonsterType().toString(),
 				inputMonster.getMonsterAttackDamage(),
 				inputMonster.getMonsterResistanceAbility(),
@@ -684,7 +684,7 @@ public class Tools {
 		for (Monster monster : monsters) {
 			monsterNameArrayList.add(monster.getEntityName());
 		}
-
-		return (String[]) monsterNameArrayList.toArray();
+		String[] toReturn = monsterNameArrayList.toArray(new String[monsterNameArrayList.size()]);
+		return (toReturn) ;
 	}
 }

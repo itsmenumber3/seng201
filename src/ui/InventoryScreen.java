@@ -94,6 +94,7 @@ public class InventoryScreen {
 		this.gameEnvironment = inputGameEnvironment;
 		this.player = gameEnvironment.getPlayer();
 		this.inventory = player.getPlayerInventory();
+		battle = player.getPlayerSelectedBattle();
 		monsters = inventory.getMonsters();
 		monsterNames = tools.getMonsterNames(player);
 		inventoryFoods = inventory.getFoods();
@@ -232,22 +233,22 @@ public class InventoryScreen {
 		btnMonster4.setBounds(446, 224, 111, 25);
 		panelMonsters.add(btnMonster4);
 		
-		JLabel lblMonster1Img = new JLabel("");
+		lblMonster1Img = new JLabel("");
 		lblMonster1Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster1Img.setBounds(12, 12, 111, 200);
 		panelMonsters.add(lblMonster1Img);
 		
-		JLabel lblMonster2Img = new JLabel("");
+		lblMonster2Img = new JLabel("");
 		lblMonster2Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster2Img.setBounds(155, 12, 111, 200);
 		panelMonsters.add(lblMonster2Img);
 		
-		JLabel lblMonster3Img = new JLabel("");
+		lblMonster3Img = new JLabel("");
 		lblMonster3Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster3Img.setBounds(299, 12, 111, 200);
 		panelMonsters.add(lblMonster3Img);
 		
-		JLabel lblMonster4Img = new JLabel("");
+		lblMonster4Img = new JLabel("");
 		lblMonster4Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster4Img.setBounds(446, 12, 111, 200);
 		panelMonsters.add(lblMonster4Img);
@@ -329,7 +330,7 @@ public class InventoryScreen {
 		comboBoxFood.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				comboBoxIndex = comboBoxFood.getSelectedIndex();
-				lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
+				lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %d/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
 						foodNames[comboBoxFood.getSelectedIndex()],
 						player.getFoodRange()[comboBoxFood.getSelectedIndex()].getHealthIncrease(),
 						inventoryFoods.get(player.getFoodRange()[comboBoxFood.getSelectedIndex()])
@@ -337,7 +338,7 @@ public class InventoryScreen {
 				);
 				if (inventoryFoods.get(player.getFoodRange()[comboBoxFood.getSelectedIndex()]) > 0) {
 					finalBtnFeedNow1.setEnabled(true);
-				}lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
+				}lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %d/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
 						foodNames[comboBoxFood.getSelectedIndex()],
 						player.getFoodRange()[comboBoxFood.getSelectedIndex()].getHealthIncrease(),
 						inventoryFoods.get(player.getFoodRange()[comboBoxFood.getSelectedIndex()])
@@ -378,7 +379,7 @@ public class InventoryScreen {
 		panelDrinks.setLayout(null);
 		
 		JLabel lblSelectedMonster_Drinks;
-		lblSelectedMonster_Drinks = new JLabel(String.format("<html><div>The health level of %s is %.2f/100.</div></html>",
+		lblSelectedMonster_Drinks = new JLabel(String.format("<html><div>The health level of %s is %.0f/100.</div></html>",
 				monsters.get(0).getEntityName(),
 				monsters.get(0).getMonsterHealthLevel()));
 		lblSelectedMonster_Drinks.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
@@ -388,7 +389,7 @@ public class InventoryScreen {
 		JComboBox comboBoxMonster_Drinks = new JComboBox(monsterNames);
 		comboBoxMonster_Drinks.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				lblSelectedMonster_Drinks.setText(String.format("<html><div>The health level of %s is %.2f/100.</div></html>", 
+				lblSelectedMonster_Drinks.setText(String.format("<html><div>The health level of %s is %.0f/100.</div></html>", 
 						monsters.get(comboBoxMonster.getSelectedIndex()).getEntityName(), 
 						monsters.get(comboBoxMonster.getSelectedIndex()).getMonsterHealthLevel()
 						));
@@ -401,7 +402,7 @@ public class InventoryScreen {
 
 		
 		JLabel lblSelectedDrink;
-		lblSelectedDrink = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>",
+		lblSelectedDrink = new JLabel(String.format("<html><div>You're selecting %s which adds %d/100 to a monster's health. You have %d of these in your inventory.</div></html>",
 				drinkNames[0],
 				player.getDrinkRange()[0].getHealthIncrease(),
 				inventoryFoods.get(player.getDrinkRange()[0])
@@ -416,7 +417,7 @@ public class InventoryScreen {
 		JComboBox comboBoxDrinks = new JComboBox(drinkNames);
 		comboBoxDrinks.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				lblSelectedDrink.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
+				lblSelectedDrink.setText(String.format("<html><div>You're selecting %s which adds %d/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
 						drinkNames[comboBoxDrinks.getSelectedIndex()],
 						player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()].getHealthIncrease(),
 						inventoryFoods.get(player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()])
@@ -464,7 +465,8 @@ public class InventoryScreen {
 		tabbedPane.addTab("Fuel", null, panelFuel, null);
 		panelFuel.setLayout(null);
 		
-		JLabel lblFuelInformation = new JLabel(String.format("<html><div>You have %.2f/100.00 of fuel left. To travel between the North Island and the South Island, it takes 20% of your fuel. To travel within an island, it takes 10% of your fuel.</div></html>", inventory.getFuelAmount()));
+		JLabel lblFuelInformation = new JLabel(String.format("<html><div>You have %.2f/100.00 of fuel left. To travel between the North Island and the South Island, it takes 20 units of your fuel. To travel within an island, it takes 10 units of your fuel.</div></html>", 
+				inventory.getFuelAmount()));
 		lblFuelInformation.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblFuelInformation.setBounds(27, 22, 420, 47);
 		panelFuel.add(lblFuelInformation);
@@ -488,6 +490,9 @@ public class InventoryScreen {
 		btnReturnToMap.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
 		JButton btnShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
+		if (battle.getBattleName() == null) {
+			btnShop.setText("Shop Unavailable");
+		}
 		btnShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				nextWindowIsMap = false;
