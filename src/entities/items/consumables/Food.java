@@ -18,13 +18,13 @@ public class Food extends Consumable {
     	if (inputFoodType == FoodType.PASTA) {
     		setFoodType(inputFoodType);
     		this.setEntityName("Pasta");
-    		this.setEntitySellValue(magicNumbers.PASTA_SELL_VALUE);
+    		this.setEntitySellbackValue(magicNumbers.PASTA_SELL_VALUE);
     		setHealthIncrease(random.nextInt(magicNumbers.PASTA_SELL_VALUE, magicNumbers.PASTA_SELL_VALUE + magicNumbers.FOOD_VAR));	
     	}
     	else {
     		setFoodType(inputFoodType);
     		this.setEntityName("Apple");
-    		this.setEntitySellValue(magicNumbers.APPLE_SELL_VALUE);
+    		this.setEntitySellbackValue(magicNumbers.APPLE_SELL_VALUE);
     		setHealthIncrease(random.nextInt(magicNumbers.APPLE_SELL_VALUE, magicNumbers.APPLE_SELL_VALUE + magicNumbers.FOOD_VAR));
     	}
     }

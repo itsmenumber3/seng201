@@ -6,6 +6,10 @@ package exceptions;
  * Can include a message.
  */
 public class InvalidInputException extends Exception {
+	public InvalidInputException() {
+		super("This method is not allowed.");
+	}
+	
     public InvalidInputException(String message) {
         super(message);
     }

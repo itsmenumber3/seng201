@@ -56,7 +56,7 @@ public abstract class Entity {
         this.setEntityName(inputEntityName);
         this.setEntityRarity(inputEntityRarity);
         this.setEntityPurchaseValue(inputEntityPurchaseValue);
-        this.setEntitySellValue(inputEntitySellValue);
+        this.setEntitySellbackValue(inputEntitySellValue);
     }
 
 
@@ -210,7 +210,7 @@ public abstract class Entity {
      *                             be equal or greater than constant MINIMUM_MONSTER_SELL_PRICE: integer
      *                             set in class MagicNumbers otherwise it will throw an error - UnexpectedNegativeNumberException
      */
-    public void setEntitySellValue(int inputEntitySellValue) {
+    public void setEntitySellbackValue(int inputEntitySellValue) {
         try {
             if (inputEntitySellValue >= magicNumbers.MINIMUM_ENTITY_SELL_PRICE) {
                 this.entitySellValue = inputEntitySellValue;

@@ -7,6 +7,10 @@ package exceptions;
 
  */
 public class InsufficientPlayerGoldBalanceException extends Exception {
+	public InsufficientPlayerGoldBalanceException() {
+		super("You haven't got enough gold coins to purchase this entity.");
+	}
+	
     public InsufficientPlayerGoldBalanceException(String message) {
         super(message);
 

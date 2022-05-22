@@ -535,7 +535,7 @@ public class Tools {
 			e.printStackTrace();
 		}
 		
-		monster.setEntitySellValue(random.nextInt(70, 100));
+		monster.setEntitySellbackValue(random.nextInt(70, 100));
 		
 		return monster;
 	}
