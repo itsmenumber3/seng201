@@ -94,7 +94,7 @@ public class TravellingScreen {
 		progressBar.setBounds(12, 12, 724, 35);
 		window.getContentPane().add(progressBar);
 		
-		JLabel lblIntroduction_1 = new JLabel("<html><div>Your monster is being transported from point A to point B...</div></html>");
+		JLabel lblIntroduction_1 = new JLabel("<html><div>Your monsters are being transported...</div></html>");
 		lblIntroduction_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblIntroduction_1.setBounds(12, 59, 515, 42);
 		window.getContentPane().add(lblIntroduction_1);

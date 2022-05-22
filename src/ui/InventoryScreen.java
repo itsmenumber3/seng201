@@ -182,7 +182,7 @@ public class InventoryScreen {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
 		
-		JLabel lblNauMaiWelcome = new JLabel("Player's Inventory");
+		JLabel lblNauMaiWelcome = new JLabel(String.format("%s's Inventory", player.getPlayerName()));
 		lblNauMaiWelcome.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
 		lblNauMaiWelcome.setBounds(12, 20, 261, 34);
 		window.getContentPane().add(lblNauMaiWelcome);
