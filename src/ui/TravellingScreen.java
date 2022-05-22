@@ -17,7 +17,6 @@ public class TravellingScreen {
 
 	private JFrame window;
 	private boolean stateOfProgressBar = true;
-	private JProgressBar progressBar;
 	private GameEnvironment gameEnvironment;
 	/**
 	 * Launch the application.
@@ -55,39 +54,23 @@ public class TravellingScreen {
 		initialize();
 	}
 	
-	public void fillProgressBar() {
-		for (int index = 0; index <= 100; index++) {
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			this.progressBar.setValue(index);
-			this.progressBar.update(this.progressBar.getGraphics());
-		}
+	//public void fillProgressBar() {
+
 		// game decide random event
-	}
+	//}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		window = new JFrame();
-		window.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				if (stateOfProgressBar) {
-					fillProgressBar();
-					stateOfProgressBar = false;
-				}
-			}
-		});
+
 		window.setTitle("Travelling...");
 		window.setBounds(100, 100, 750, 520);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
 		
-		JProgressBar progressBar = new JProgressBar();
+		JProgressBar progressBar = new JProgressBar(0,100);
 		progressBar.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		progressBar.setStringPainted(true);
 		progressBar.setForeground(Color.BLACK);
@@ -98,5 +81,24 @@ public class TravellingScreen {
 		lblIntroduction_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblIntroduction_1.setBounds(12, 59, 515, 42);
 		window.getContentPane().add(lblIntroduction_1);
+		
+		window.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (stateOfProgressBar) {
+					for (int index = 0; index <= 100; index++) {
+						try {
+							Thread.sleep(10);
+						} catch (InterruptedException ex) {
+							ex.printStackTrace();
+						}
+						progressBar.setValue(index);
+						progressBar.update(progressBar.getGraphics());
+					}
+					stateOfProgressBar = false;
+					finishedWindow();
+				}
+			}
+		});
 	}
 }
