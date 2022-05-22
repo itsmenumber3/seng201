@@ -54,10 +54,6 @@ public class TravellingScreen {
 		initialize();
 	}
 	
-	//public void fillProgressBar() {
-
-		// game decide random event
-	//}
 
 	/**
 	 * Initialize the contents of the frame.

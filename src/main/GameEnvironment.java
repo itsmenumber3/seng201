@@ -350,11 +350,16 @@ public class GameEnvironment {
     public void makeNewChallengeAndLaunchScreen() {
     	Challenge newChallenge = tools.makeRandomChallenge();
         getPlayer().getPlayerSelectedBattle().setCurrentChallenge(newChallenge);
+        System.out.println("1");
         if (newChallenge.challengeType == ChallengeType.FLIP_A_COIN) {
+        	System.out.println("2");
             launchFlipACoinScreen();
-        } else if(newChallenge.challengeType == ChallengeType.PAPER_SCISSORS_ROCK) {
+        }
+        else if(newChallenge.challengeType == ChallengeType.PAPER_SCISSORS_ROCK) {
+        	System.out.println("3");
             launchPaperScissorsRockScreen();
         } else {
+        	System.out.println("4");
             launchQuizScreen();
         }
     }
