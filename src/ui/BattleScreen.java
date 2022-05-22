@@ -96,28 +96,28 @@ public class BattleScreen {
 		lblBattleDescription.setForeground(Color.WHITE);
 		lblBattleDescription.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		
-		JButton btnFarewellSpit_1_1 = new JButton(String.format("<html><div>Travel to %s</div></html>", battle.getBattleName()));
-		btnFarewellSpit_1_1.addActionListener(new ActionListener() {
+		JButton btnTravelTo = new JButton(String.format("<html><div>Travel to %s</div></html>", battle.getBattleName()));
+		btnTravelTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				finishedWindow(true);
 			}
 		});
-		btnFarewellSpit_1_1.setBounds(34, 347, 364, 43);
-		panelItem.add(btnFarewellSpit_1_1);
-		btnFarewellSpit_1_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
-		btnFarewellSpit_1_1.setBackground(SystemColor.info);
+		btnTravelTo.setBounds(34, 347, 364, 43);
+		panelItem.add(btnTravelTo);
+		btnTravelTo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
+		btnTravelTo.setBackground(SystemColor.info);
 		
-		JButton btnFarewellSpit_1 = new JButton("Go back to Map");
-		btnFarewellSpit_1.addActionListener(new ActionListener() {
+		JButton btnGoBackToMap = new JButton("Go back to Map");
+		btnGoBackToMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				finishedWindow(false);
 			}
 		});
-		btnFarewellSpit_1.setBounds(34, 402, 364, 25);
-		panelItem.add(btnFarewellSpit_1);
-		btnFarewellSpit_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		btnFarewellSpit_1.setBackground(SystemColor.info);
+		btnGoBackToMap.setBounds(34, 402, 364, 25);
+		panelItem.add(btnGoBackToMap);
+		btnGoBackToMap.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		btnGoBackToMap.setBackground(SystemColor.info);
 		lblPhoto.setIcon(new ImageIcon(BattleScreen.class.getResource(battle.getBattleImagePath())));
 		lblPhoto.setBounds(239, 0, 499, 469);
 		window.getContentPane().add(lblPhoto);
