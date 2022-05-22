@@ -373,28 +373,14 @@ public class Player implements Role {
         }
     }
 
-    /**
-     * This method helps the player to purchase an item.
-     * 1. Add that item to array list playerInventory.entities.items.
-     * 2. Decrement player gold balance.
-     * If there isn't enough gold, throw an error InsufficientPlayerGoldBalanceException.
-     * @param inputItem: Item, as in Item.java
-     */
-    public boolean hasPlayerGotEnoughGoldToPurchase(Entity inputEntity) {
-        if (this.getPlayerGold() >= inputEntity.getEntityPurchaseValue()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
     public boolean playerPurchaseEntity(Entity inputEntity) {
-    	boolean enoughGold = false;
-    	if (this.hasPlayerGotEnoughGoldToPurchase(inputEntity)) {
-    		System.out.println("Purchased successfully");  // If yes, purchased successfully.
+    	boolean successStatus = this.getPlayerGold() >= inputEntity.getEntityPurchaseValue();
+    	if (successStatus) {
     		this.decrementPlayerGoldBy(inputEntity.getEntityPurchaseValue()); // Decrement playerGold.
     	} 
-    	return enoughGold;
+    	return successStatus;
     }
 
     // INVENTORY ----------------------------------------------------

@@ -1,6 +1,8 @@
 package main;
 
 
+import java.util.ArrayList;
+
 import assets.enums.RoleType;
 import entities.monsters.Monster;
 
@@ -60,6 +62,8 @@ public class Shop implements Role {
         return this.shopMonsterRange;
     }
 
+    // -- DELETE -- CHECK IF SAFE
+    
     /**
      * This method removes an entity from the shop range.
      * @param inputEntity Entity

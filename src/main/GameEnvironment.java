@@ -134,21 +134,20 @@ public class GameEnvironment {
     		launchFinishGameScreen();
     		break;
     	default:
-    		launchInventoryScreen(true);
+    		launchInventoryScreen();
     	}
     }
 
     /**
      * Launches the inventory screen to see the currently owned monsters, food, drinks or fuel
-     * @param isPreviousWindowMapWindow: boolean
      */
-    public void launchInventoryScreen(boolean isPreviousWindowMapWindow) {
+    public void launchInventoryScreen() {
         InventoryScreen inventoryWindow = new InventoryScreen(this);
     }
 
     /**
      * Closes the inventory screen and launches either
-     * the map screen or shop screen
+     * the map screen or shop screen (depending on the button that was pressed)
      * @param inputInventoryWindow: InventoryScreen
      */
     public void closeInventoryScreen(InventoryScreen inputInventoryWindow) {
@@ -170,12 +169,16 @@ public class GameEnvironment {
     }
 
     /**
-     * Closes the shop screen and calls the map screen
+     * Closes the shop screen and calls the map screen or inventory screen (depending on the button pressed)
      * @param inputShopWindow: ShopScreen
      */
     public void closeShopScreen(ShopScreen inputShopWindow) {
         inputShopWindow.closeWindow();
-        launchMapScreen();
+        if (inputShopWindow.getNextWindowIsInventory()) {
+        	launchInventoryScreen();
+        } else {
+        	launchMapScreen();
+        }
     }
 
     /**

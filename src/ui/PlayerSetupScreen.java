@@ -104,26 +104,6 @@ public class PlayerSetupScreen {
 		lblNumberOfDays.setFont(new Font("Century Schoolbook L", Font.PLAIN, 18));
 		lblNumberOfDays.setBounds(51, 251, 152, 31);
 		window.getContentPane().add(lblNumberOfDays);
-		
-		JSlider sliderNumberofDays = new JSlider();
-		sliderNumberofDays.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				
-			}
-		});
-		sliderNumberofDays.setValue(2);
-		sliderNumberofDays.setSnapToTicks(true);
-		sliderNumberofDays.setPaintTicks(true);
-		sliderNumberofDays.setPaintLabels(true);
-		sliderNumberofDays.setOpaque(false);
-		sliderNumberofDays.setMinorTickSpacing(1);
-		sliderNumberofDays.setMinimum(5);
-		sliderNumberofDays.setMaximum(15);
-		sliderNumberofDays.setMajorTickSpacing(1);
-		sliderNumberofDays.setForeground(Color.BLACK);
-		sliderNumberofDays.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		sliderNumberofDays.setBounds(51, 294, 279, 50);
-		window.getContentPane().add(sliderNumberofDays);
 
 		JPanel panelBackground = new JPanel();
 		panelBackground.setLayout(null);

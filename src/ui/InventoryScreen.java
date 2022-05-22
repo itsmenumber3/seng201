@@ -182,7 +182,7 @@ public class InventoryScreen {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
 		
-		JLabel lblNauMaiWelcome = new JLabel(String.format("%s's Inventory", player.getPlayerName()));
+		JLabel lblNauMaiWelcome = new JLabel("Inventory");
 		lblNauMaiWelcome.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
 		lblNauMaiWelcome.setBounds(12, 20, 261, 34);
 		window.getContentPane().add(lblNauMaiWelcome);
@@ -191,64 +191,64 @@ public class InventoryScreen {
 		tabbedPane.setBounds(12, 69, 724, 388);
 		window.getContentPane().add(tabbedPane);
 		
-		JPanel panelPurchaseMonster = new JPanel();
-		tabbedPane.addTab("Player's Monsters", null, panelPurchaseMonster, "");
+		JPanel panelMonsters = new JPanel();
+		tabbedPane.addTab("Your Monsters", null, panelMonsters, "");
 		tabbedPane.setEnabledAt(0, true);
-		tabbedPane.setBackgroundAt(0, Color.WHITE);
-		panelPurchaseMonster.setLayout(null);
+		tabbedPane.setBackgroundAt(0, SystemColor.menu);
+		panelMonsters.setLayout(null);
 		
 		JLabel lblMonsterInfo = new JLabel();
 		lblMonsterInfo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblMonsterInfo.setBounds(12, 261, 377, 88);
-		panelPurchaseMonster.add(lblMonsterInfo);
+		panelMonsters.add(lblMonsterInfo);
 		
 		btnMonster1 = new JButton("");
 		btnMonster1.setEnabled(false);
 		btnMonster1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster1.setBackground(SystemColor.info);
 		btnMonster1.setBounds(12, 224, 111, 25);
-		panelPurchaseMonster.add(btnMonster1);
+		panelMonsters.add(btnMonster1);
 		
 		btnMonster2 = new JButton("");
 		btnMonster2.setEnabled(false);
 		btnMonster2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster2.setBackground(SystemColor.info);
 		btnMonster2.setBounds(155, 224, 111, 25);
-		panelPurchaseMonster.add(btnMonster2);
+		panelMonsters.add(btnMonster2);
 		
 		btnMonster3 = new JButton("");
 		btnMonster3.setEnabled(false);
 		btnMonster3.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster3.setBackground(SystemColor.info);
 		btnMonster3.setBounds(299, 224, 111, 25);
-		panelPurchaseMonster.add(btnMonster3);
+		panelMonsters.add(btnMonster3);
 		
 		btnMonster4 = new JButton("");
 		btnMonster4.setEnabled(false);
 		btnMonster4.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		btnMonster4.setBackground(SystemColor.info);
 		btnMonster4.setBounds(446, 224, 111, 25);
-		panelPurchaseMonster.add(btnMonster4);
+		panelMonsters.add(btnMonster4);
 		
 		JLabel lblMonster1Img = new JLabel("");
 		lblMonster1Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster1Img.setBounds(12, 12, 111, 200);
-		panelPurchaseMonster.add(lblMonster1Img);
+		panelMonsters.add(lblMonster1Img);
 		
 		JLabel lblMonster2Img = new JLabel("");
 		lblMonster2Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster2Img.setBounds(155, 12, 111, 200);
-		panelPurchaseMonster.add(lblMonster2Img);
+		panelMonsters.add(lblMonster2Img);
 		
 		JLabel lblMonster3Img = new JLabel("");
 		lblMonster3Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster3Img.setBounds(299, 12, 111, 200);
-		panelPurchaseMonster.add(lblMonster3Img);
+		panelMonsters.add(lblMonster3Img);
 		
 		JLabel lblMonster4Img = new JLabel("");
 		lblMonster4Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster4Img.setBounds(446, 12, 111, 200);
-		panelPurchaseMonster.add(lblMonster4Img);
+		panelMonsters.add(lblMonster4Img);
 		
 		updateMonsters();
 		
@@ -265,11 +265,11 @@ public class InventoryScreen {
 		btnInFrontOfTeam.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnInFrontOfTeam.setBackground(Color.RED);
 		btnInFrontOfTeam.setBounds(407, 309, 300, 40);
-		panelPurchaseMonster.add(btnInFrontOfTeam);
+		panelMonsters.add(btnInFrontOfTeam);
 		
-		JPanel panelDiningRoom = new JPanel();
-		tabbedPane.addTab("Dining Room", null, panelDiningRoom, null);
-		panelDiningRoom.setLayout(null);
+		JPanel panelFood = new JPanel();
+		tabbedPane.addTab("Food Chest", null, panelFood, null);
+		panelFood.setLayout(null);
 		
 		JLabel lblSelectedMonster;
 		
@@ -285,7 +285,7 @@ public class InventoryScreen {
 		});
 		comboBoxMonster.setBounds(157, 26, 210, 24);
 		comboBoxMonster.setModel(new DefaultComboBoxModel(monsterNames));
-		panelDiningRoom.add(comboBoxMonster);
+		panelFood.add(comboBoxMonster);
 		
 		lblSelectedMonster = new JLabel(String.format("<html><div>The health level of %s is %.2f/100.</div></html>", 
 				monsters.get(comboBoxMonster.getSelectedIndex()).getEntityName(), 
@@ -293,7 +293,7 @@ public class InventoryScreen {
 		
 		lblSelectedMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblSelectedMonster.setBounds(12, 109, 420, 47);
-		panelDiningRoom.add(lblSelectedMonster);
+		panelFood.add(lblSelectedMonster);
 		
 		
 		
@@ -311,12 +311,20 @@ public class InventoryScreen {
 				);
 				if (inventoryFoods.get(player.getFoodRange().get(comboBoxFood.getSelectedIndex())) > 0) {
 					btnFeedNow.setEnabled(true);
+				}lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
+						foodNames[comboBoxFood.getSelectedIndex()],
+						player.getFoodRange().get(comboBoxFood.getSelectedIndex()).getHealthIncrease(),
+						inventoryFoods.get(player.getFoodRange().get(comboBoxFood.getSelectedIndex()))
+						)
+				);
+				if (inventoryFoods.get(player.getFoodRange().get(comboBoxFood.getSelectedIndex())) > 0) {
+					btnFeedNow.setEnabled(true);
 				}
 			}
 		});
 		comboBoxFood.setModel(new DefaultComboBoxModel(foodNames));
 		comboBoxFood.setBounds(157, 61, 210, 24);
-		panelDiningRoom.add(comboBoxFood);
+		panelFood.add(comboBoxFood);
 		
 		lblSelectedFood = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
 				foodNames[comboBoxFood.getSelectedIndex()],
@@ -325,17 +333,17 @@ public class InventoryScreen {
 				));
 		lblSelectedFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblSelectedFood.setBounds(12, 171, 420, 47);
-		panelDiningRoom.add(lblSelectedFood);
+		panelFood.add(lblSelectedFood);
 		
 		JLabel lblTellUserToSelectMonster = new JLabel("<html><div>Select a monster:</div></html>");
 		lblTellUserToSelectMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblTellUserToSelectMonster.setBounds(15, 15, 124, 47);
-		panelDiningRoom.add(lblTellUserToSelectMonster);
+		panelFood.add(lblTellUserToSelectMonster);
 		
 		JLabel lblTellUserToSelectFood = new JLabel("<html><div>Select food:</div></html>");
 		lblTellUserToSelectFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblTellUserToSelectFood.setBounds(15, 50, 124, 47);
-		panelDiningRoom.add(lblTellUserToSelectFood);
+		panelFood.add(lblTellUserToSelectFood);
 		
 		btnFeedNow = new JButton("<html><div>Feed</div></html>");
 		btnFeedNow.setEnabled(false);
@@ -352,7 +360,7 @@ public class InventoryScreen {
 		btnFeedNow.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnFeedNow.setBackground(Color.RED);
 		btnFeedNow.setBounds(12, 235, 353, 31);
-		panelDiningRoom.add(btnFeedNow);
+		panelFood.add(btnFeedNow);
 		
 		// CHILLY BIN --------------
 		
@@ -444,39 +452,39 @@ public class InventoryScreen {
 		tabbedPane.addTab("Fuel", null, panelFuel, null);
 		panelFuel.setLayout(null);
 		
-		JLabel lblTipClickTo_1_3_2 = new JLabel(String.format("<html><div>You have %.2f/100.00 of fuel left. To travel between the North Island and the South Island, it takes 20% of your fuel. To travel within an island, it takes 10% of your fuel.</div></html>", inventory.getFuelAmount()));
-		lblTipClickTo_1_3_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblTipClickTo_1_3_2.setBounds(27, 22, 420, 47);
-		panelFuel.add(lblTipClickTo_1_3_2);
+		JLabel lblFuelInformation = new JLabel(String.format("<html><div>You have %.2f/100.00 of fuel left. To travel between the North Island and the South Island, it takes 20% of your fuel. To travel within an island, it takes 10% of your fuel.</div></html>", inventory.getFuelAmount()));
+		lblFuelInformation.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblFuelInformation.setBounds(27, 22, 420, 47);
+		panelFuel.add(lblFuelInformation);
 		
-		JLabel lblYourBalance_1_1_2 = new JLabel(String.format("%d gold coins", player.getPlayerGold()));
-		lblYourBalance_1_1_2.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblYourBalance_1_1_2.setBounds(254, 28, 101, 25);
-		window.getContentPane().add(lblYourBalance_1_1_2);
-		lblYourBalance_1_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		JLabel lblBalance = new JLabel(String.format("%d gold coins", player.getPlayerGold()));
+		lblBalance.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblBalance.setBounds(254, 28, 101, 25);
+		window.getContentPane().add(lblBalance);
+		lblBalance.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		JButton btnReturnToDashboard = new JButton("Return to Map");
-		btnReturnToDashboard.addActionListener(new ActionListener() {
+		JButton btnReturnToMap = new JButton("Return to Map");
+		btnReturnToMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				nextWindowIsMap = true;
 				finishedWindow();
 			}
 		});
-		btnReturnToDashboard.setBackground(SystemColor.info);
-		btnReturnToDashboard.setBounds(600, 28, 136, 25);
-		window.getContentPane().add(btnReturnToDashboard);
-		btnReturnToDashboard.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnReturnToMap.setBackground(SystemColor.info);
+		btnReturnToMap.setBounds(600, 28, 136, 25);
+		window.getContentPane().add(btnReturnToMap);
+		btnReturnToMap.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		JButton btnInventory = new JButton("Visit New World Kaitaia");
-		btnInventory.addActionListener(new ActionListener() {
+		JButton btnShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
+		btnShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				nextWindowIsMap = false;
 				finishedWindow();
 			}
 		});
-		btnInventory.setBackground(SystemColor.info);
-		btnInventory.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		btnInventory.setBounds(380, 28, 208, 25);
-		window.getContentPane().add(btnInventory);
+		btnShop.setBackground(SystemColor.info);
+		btnShop.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		btnShop.setBounds(380, 28, 208, 25);
+		window.getContentPane().add(btnShop);
 	}
 }
