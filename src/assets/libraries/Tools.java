@@ -576,10 +576,12 @@ public class Tools {
 	public FightOutcomeType runFight(Player inputPlayer) {
 		if (inputPlayer.getPlayerSelectedBattle().getCurrentChallenge().getChallengeOutcome() == ChallengeOutcomeType.WIN) {
 			// Player monster attacks battle monster
-			inputPlayer.getPlayerSelectedBattle().getBattleMonster().monsterGetsAttacked(inputPlayer.getPlayerInventory().getMonsters().get(0).getMonsterAttackDamage());
+			inputPlayer.getPlayerSelectedBattle().getBattleMonster().monsterGetsAttacked(
+					inputPlayer.getPlayerInventory().getMonsters().get(0).getMonsterAttackDamage());
 		} else if (inputPlayer.getPlayerSelectedBattle().getCurrentChallenge().getChallengeOutcome() == ChallengeOutcomeType.LOSE) {
 			// Player monster is attacked by battle monster
-			inputPlayer.getPlayerInventory().getMonsters().get(0).monsterGetsAttacked(inputPlayer.getPlayerSelectedBattle().getBattleMonster().getMonsterAttackDamage());
+			inputPlayer.getPlayerInventory().getMonsters().get(0).monsterGetsAttacked(
+					inputPlayer.getPlayerSelectedBattle().getBattleMonster().getMonsterAttackDamage());
 		} // Skip entirely if draw RPS
 
 		if (inputPlayer.getPlayerInventory().getMonsters().get(0).getMonsterHealthLevel() > 0) {
