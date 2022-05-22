@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import assets.enums.PapersScissorsRockType;
 import assets.libraries.Tools;
 import battles.Battle;
+import battles.challenge.Challenge;
 import battles.challenge.PaperScissorsRock;
 import battles.challenge.Quiz;
 import entities.monsters.Monster;
@@ -59,6 +60,7 @@ public class PaperScissorsRockScreen {
 		paperScissorsRock = (PaperScissorsRock) battle.getCurrentChallenge();
 		battleMonster = battle.getBattleMonster();
 		playerMonster = player.getPlayerInventory().getMonsters().get(0);
+		System.out.println(gameEnvironment.getPlayer().getPlayerSelectedBattle().getCurrentChallenge());
 		
 		initialize();
 		window.setVisible(true);
@@ -70,7 +72,9 @@ public class PaperScissorsRockScreen {
 
 	public void finishedWindow() {
 		battle.incrementChallengeCount();
-		paperScissorsRock.runPaperScissorsRockResults();
+		battle.getCurrentChallenge().setChallengeOutcomeType(paperScissorsRock.runPaperScissorsRockResults());
+		System.out.println(battle.getCurrentChallenge());
+		System.out.println(battle.getCurrentChallenge().getChallengeOutcomeType());
 		gameEnvironment.setFightOutcome(tools.runFight(player));
 		gameEnvironment.closePaperScissorsRockScreen(this);
 	}
@@ -97,7 +101,7 @@ public class PaperScissorsRockScreen {
 		lblWhatIs.setBounds(22, 22, 621, 45);
 		window.getContentPane().add(lblWhatIs);
 		
-		JLabel lblWhatIs_2 = new JLabel(String.format("<html><div>The monster, get%s, has asked you to play Paper, Scissors, Rock with it. Select Paper, Scissors or Rock below to see if you win this chance to attack.</div></html>", battleMonster.getEntityName()));
+		JLabel lblWhatIs_2 = new JLabel("<html><div>The monster, get<dynamic>, has asked you to play Paper, Scissors, Rock with it.<br> Select Paper, Scissors or Rock below to see if you win this chance to attack.</div></html>");
 		lblWhatIs_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		lblWhatIs_2.setBounds(22, 45, 296, 120);
 		window.getContentPane().add(lblWhatIs_2);
@@ -106,7 +110,7 @@ public class PaperScissorsRockScreen {
 		panelItem.setLayout(null);
 		panelItem.setOpaque(true);
 		panelItem.setBackground(new Color(0, 51, 153));
-		panelItem.setBounds(364, 22, 361, 120);
+		panelItem.setBounds(364, 22, 361, 143);
 		window.getContentPane().add(panelItem);
 		
 		JLabel lblWhatIs_3 = new JLabel(String.format("<html><bold>About %s</bold><div>Health: %.2f<br>Attack Damage: %.2f<br>Resistance Ability: %.2f</div></html>", 
@@ -116,7 +120,7 @@ public class PaperScissorsRockScreen {
 				battleMonster.getMonsterResistanceAbility()));
 		lblWhatIs_3.setForeground(Color.WHITE);
 		lblWhatIs_3.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblWhatIs_3.setBounds(183, 32, 166, 82);
+		lblWhatIs_3.setBounds(183, 32, 166, 100);
 		panelItem.add(lblWhatIs_3);
 		
 		JLabel lblWhatIs_3_2 = new JLabel(String.format("<html><bold>About %s</bold><div>Health: %.2f<br>Attack Damage: %.2f<br>Resistance Ability: %.2f</div></html>", 
@@ -126,7 +130,7 @@ public class PaperScissorsRockScreen {
 				playerMonster.getMonsterResistanceAbility()));
 		lblWhatIs_3_2.setForeground(Color.WHITE);
 		lblWhatIs_3_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblWhatIs_3_2.setBounds(12, 32, 166, 82);
+		lblWhatIs_3_2.setBounds(12, 32, 166, 100);
 		panelItem.add(lblWhatIs_3_2);
 		
 		JLabel lblWhatIs_3_2_1 = new JLabel(String.format("<html><div>Gold: %d Points: %d Battle: %s</div></html>", player.getPlayerGold(), player.getPlayerPoints(), battle.getBattleName()));

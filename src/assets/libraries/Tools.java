@@ -610,16 +610,20 @@ public class Tools {
 	}
 	
 	public String generateChallengeResultMessage(ChallengeOutcomeType inputChallengeOutcomeType) {
-		
+		String returnString;
+		System.out.println(inputChallengeOutcomeType);
 		switch (inputChallengeOutcomeType) {
-		
 		case WIN:
-			return "You win the challenge!";
+			returnString = "You win the challenge!";
+			break;
 		case LOSE:
-			return "You've lost the challenge...";
+			returnString = "You've lost the challenge...";
+			break;
 		default:
-			return "It was a draw. You and the boss monster got the same thing.";
+			returnString = "It was a draw. You and the boss monster got the same thing.";
+			break;
 		}
+		return returnString;
 	}
 
 

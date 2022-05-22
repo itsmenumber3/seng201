@@ -10,67 +10,66 @@ import java.security.SecureRandom;
 
 public class PaperScissorsRock extends Challenge {
 
-
+	public PapersScissorsRockType playerChoice;
+	public PapersScissorsRockType battleMonsterChoice;
+	
 	public PaperScissorsRock() {
-		this.challengeType = ChallengeType.PAPER_SCISSORS_ROCK;
+		challengeType = ChallengeType.PAPER_SCISSORS_ROCK;
 	}
 	
-	public PapersScissorsRockType playerChoice;
 	
 	public void setPlayerChoice(PapersScissorsRockType inputPlayerChoice) {
-		this.playerChoice = inputPlayerChoice;
+		playerChoice = inputPlayerChoice;
 	}
 	
 	public PapersScissorsRockType getPlayerChoice() {
-		return this.playerChoice;
+		return playerChoice;
 	}
 	
-	public PapersScissorsRockType battleMonsterChoice;
-	
 	public void setBattleMonsterChoice(PapersScissorsRockType inputBattleMonsterChoice) {
-		this.battleMonsterChoice = inputBattleMonsterChoice;
+		battleMonsterChoice = inputBattleMonsterChoice;
 	}
 	
 	public PapersScissorsRockType getBattleMonsterChoice() {
-		return this.battleMonsterChoice;
+		return battleMonsterChoice;
 	}
 
 	public void runPaperScissorsRockResults() {
 		switch (random.nextInt(1, 3)) {
 			case 1:
-				this.setBattleMonsterChoice(PapersScissorsRockType.PAPER);
+				setBattleMonsterChoice(PapersScissorsRockType.PAPER);
 				break;
 			case 2:
-				this.setBattleMonsterChoice(PapersScissorsRockType.SCISSORS);
+				setBattleMonsterChoice(PapersScissorsRockType.SCISSORS);
 				break;
 			default:
-				this.setBattleMonsterChoice(PapersScissorsRockType.ROCK);
+				setBattleMonsterChoice(PapersScissorsRockType.ROCK);
 				break;
 		}
 
-		if (this.getPlayerChoice() == PapersScissorsRockType.PAPER) {
-			if (this.getBattleMonsterChoice() == PapersScissorsRockType.SCISSORS) {
-				this.setChallengeOutcome(ChallengeOutcomeType.LOSE);
-			} else if (this.getBattleMonsterChoice() == PapersScissorsRockType.ROCK) {
-				this.setChallengeOutcome(ChallengeOutcomeType.WIN);
+		if (getPlayerChoice() == PapersScissorsRockType.PAPER) {
+			if (getBattleMonsterChoice() == PapersScissorsRockType.SCISSORS) {
+				setChallengeOutcome(ChallengeOutcomeType.LOSE);
+			} else if (getBattleMonsterChoice() == PapersScissorsRockType.ROCK) {
+				setChallengeOutcome(ChallengeOutcomeType.WIN);
 			} else {
-				this.setChallengeOutcome(ChallengeOutcomeType.DRAW);
+				setChallengeOutcome(ChallengeOutcomeType.DRAW);
 			}
-		} else if (this.getPlayerChoice() == PapersScissorsRockType.SCISSORS) {
-			if (this.getBattleMonsterChoice() == PapersScissorsRockType.PAPER) {
-				this.setChallengeOutcome(ChallengeOutcomeType.WIN);
-			} else if (this.getBattleMonsterChoice() == PapersScissorsRockType.ROCK) {
-				this.setChallengeOutcome(ChallengeOutcomeType.LOSE);
+		} else if (getPlayerChoice() == PapersScissorsRockType.SCISSORS) {
+			if (getBattleMonsterChoice() == PapersScissorsRockType.PAPER) {
+				setChallengeOutcome(ChallengeOutcomeType.WIN);
+			} else if (getBattleMonsterChoice() == PapersScissorsRockType.ROCK) {
+				setChallengeOutcome(ChallengeOutcomeType.LOSE);
 			} else {
-				this.setChallengeOutcome(ChallengeOutcomeType.DRAW);
+				setChallengeOutcome(ChallengeOutcomeType.DRAW);
 			}
 		} else {
-			if (this.getBattleMonsterChoice() == PapersScissorsRockType.PAPER) {
-				this.setChallengeOutcome(ChallengeOutcomeType.LOSE);
-			} else if (this.getBattleMonsterChoice() == PapersScissorsRockType.SCISSORS) {
-				this.setChallengeOutcome(ChallengeOutcomeType.WIN);
+			if (getBattleMonsterChoice() == PapersScissorsRockType.PAPER) {
+				setChallengeOutcome(ChallengeOutcomeType.LOSE);
+			} else if (getBattleMonsterChoice() == PapersScissorsRockType.SCISSORS) {
+				setChallengeOutcome(ChallengeOutcomeType.WIN);
 			} else {
-				this.setChallengeOutcome(ChallengeOutcomeType.DRAW);
+				setChallengeOutcome(ChallengeOutcomeType.DRAW);
 			}
 		}
 	}
