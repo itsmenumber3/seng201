@@ -22,7 +22,7 @@ public class GameEnvironment {
     /**
      * Sets the fight outcome of a challenge
      * e.g Flip a coin or a quiz question
-     * @param inputFightOutcomeType
+     * @param inputFightOutcomeType: FightOutcomeType
      */
     public void setFightOutcome(FightOutcomeType inputFightOutcomeType) {
     	fightOutcome = inputFightOutcomeType;
@@ -38,7 +38,7 @@ public class GameEnvironment {
 
     /**
      * Unallowed set method for creating a player
-     * @param inputPlayer
+     * @param inputPlayer: Player
      * @throws UnallowedMethodException
      */
     public void setPlayer(Player inputPlayer) {
@@ -313,16 +313,30 @@ public class GameEnvironment {
     public void launchFlipACoinScreen() {
     	FlipACoinScreen flipACoinWindow = new FlipACoinScreen();
     }
-    
+
+    /**
+     * Closes the flip a coin screen and calls the launch challenge result screen
+     * @param flipACoinWindow: FlipACoinScreen
+     */
     public void closeFlipACoinScreen(FlipACoinScreen flipACoinWindow) {
     	flipACoinWindow.closeWindow();
     	launchChallengeResultScreen();
     }
 
+    /**
+     * Launches the battle result screen which shows the reward they steal from the opponent monster
+     */
     public void launchBattleResultScreen() {
         BattleResultScreen battleResultWindow = new BattleResultScreen(this);
     }
 
+    /**
+     * Closes the battle result screen and has 2 options to call
+     * If the player has reached the chosen game duration the game has been won
+     * and the launch finish game screen is called
+     * Otherwise the map screen is called
+     * @param inputBattleResultWindow: BattleResultScreen
+     */
     public void closeBattleResultScreen(BattleResultScreen inputBattleResultWindow) {
         inputBattleResultWindow.closeWindow();
         if (getPlayer().hasGameBeenWon()) {
@@ -332,10 +346,19 @@ public class GameEnvironment {
         }
     }
 
+    /**
+     * Launches the finish game screen which displays:
+     * player name, game duration, gold gained, points gained
+     */
     public void launchFinishGameScreen() {
         FinishGameScreen finishGameWindow = new FinishGameScreen(this);
     }
 
+    /**
+     * Closes the finish game screen
+     * If the player chooses to restart then a new game environment is created and a new game is launched
+     * @param inputFinishGameWindow
+     */
     public void closeFinishGameScreen(FinishGameScreen inputFinishGameWindow) {
         inputFinishGameWindow.closeWindow();
         if (inputFinishGameWindow.getQuitGame() == false) {
@@ -348,6 +371,9 @@ public class GameEnvironment {
         }
     }
 
+    /**
+     * Starts the game and sets default parameters
+     */
     public static void main(String[] args) {
         GameEnvironment game = new GameEnvironment();
         Battle battle = new Battle();
