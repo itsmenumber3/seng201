@@ -15,6 +15,7 @@ import javax.swing.JTextPane;
 import assets.libraries.Tools;
 import entities.monsters.Monster;
 import main.GameEnvironment;
+import main.Inventory;
 import main.Player;
 
 import java.awt.Color;
@@ -28,8 +29,8 @@ public class FirstMonsterSetupScreen {
 	private GameEnvironment gameEnvironment;
 	private Tools tools = new Tools();
 	private ArrayList<Monster> monsters;
-	
-
+	private Inventory inventory;
+	private Monster selectedMonster;
 	/**
 	 * Launch the application.
 	 */
@@ -48,6 +49,7 @@ public class FirstMonsterSetupScreen {
 	
 	public FirstMonsterSetupScreen(GameEnvironment inputGameEnvironment) {
 		gameEnvironment = inputGameEnvironment;
+		inventory = gameEnvironment.getPlayer().getPlayerInventory();
 		monsters = tools.generateManyRandomMonsters(gameEnvironment.getPlayer(), 4);
 		initialize();
 		window.setVisible(true);
@@ -95,6 +97,7 @@ public class FirstMonsterSetupScreen {
 		JButton buttonMonster1 = new JButton(monsters.get(0).getMonsterType().toString());
 		buttonMonster1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				selectedMonster = monsters.get(0);
 				lblMonsterInfo.setText("<html><div>" + tools.makeStringDescriptionFromMonsterInformation(monsters.get(0)) + "</div></html>");
 			}
 		});
@@ -104,6 +107,7 @@ public class FirstMonsterSetupScreen {
 		JButton btnMonster2 = new JButton(monsters.get(1).getMonsterType().toString());
 		btnMonster2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				selectedMonster = monsters.get(1);
 				lblMonsterInfo.setText("<html><div>" + tools.makeStringDescriptionFromMonsterInformation(monsters.get(1)) + "</div></html>");
 			}
 		});
@@ -113,6 +117,7 @@ public class FirstMonsterSetupScreen {
 		JButton btnMonster3 = new JButton(monsters.get(2).getMonsterType().toString());
 		btnMonster3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				selectedMonster = monsters.get(2);
 				lblMonsterInfo.setText("<html><div>" + tools.makeStringDescriptionFromMonsterInformation(monsters.get(2)) + "</div></html>");
 			}
 		});
@@ -122,6 +127,7 @@ public class FirstMonsterSetupScreen {
 		JButton btnMonster4 = new JButton(monsters.get(3).getMonsterType().toString());
 		btnMonster4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				selectedMonster = monsters.get(3);
 				lblMonsterInfo.setText("<html><div>" + tools.makeStringDescriptionFromMonsterInformation(monsters.get(3)) + "</div></html>");
 			}
 		});
@@ -158,6 +164,8 @@ public class FirstMonsterSetupScreen {
 		JButton btnConfirmMonsterChoice = new JButton("Next");
 		btnConfirmMonsterChoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				selectedMonster.setEntityName(textFieldMonsterName.getText());
+				inventory.addMonster(selectedMonster);
 				finishedWindow();
 			}
 		});

@@ -5,6 +5,7 @@ import assets.enums.FightOutcomeType;
 import assets.libraries.Tools;
 import battles.Battle;
 import battles.challenge.Challenge;
+import battles.challenge.PaperScissorsRock;
 import exceptions.UnallowedMethodException;
 import ui.*;
 import javax.swing.*;
@@ -241,7 +242,7 @@ public class GameEnvironment {
      */
     public void closeTravellingScreen(TravellingScreen inputTravellingWindow) {
     	inputTravellingWindow.closeWindow();
-    	makeNewChallengeAndLaunchScreen();
+    	//makeNewChallengeAndLaunchScreen();
     }
     // TRAVELLING SCREEN ------------------------------------------
 

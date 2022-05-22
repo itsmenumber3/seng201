@@ -100,8 +100,7 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new MountCook(gameEnvironment.getPlayer());
 				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SNOW_MONSTER, gameEnvironment.getPlayer()));
-				gameEnvironment.getPlayer().setPlayerPreviewBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
-				gameEnvironment.getPlayer().setPlayerSelectedBattle(previewBattle);
+				gameEnvironment.getPlayer().setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
 			}
@@ -112,8 +111,7 @@ public class MapScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new NinetyMilesBeach(gameEnvironment.getPlayer());
 				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.SAND_MONSTER, gameEnvironment.getPlayer()));
-				gameEnvironment.getPlayer().setPlayerPreviewBattle(gameEnvironment.getPlayer().getPlayerSelectedBattle());
-				gameEnvironment.getPlayer().setPlayerSelectedBattle(previewBattle);
+				gameEnvironment.getPlayer().setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
 			}
@@ -203,7 +201,7 @@ public class MapScreen {
 		btnCanterburyWetlands.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new CanterburyWetlands(gameEnvironment.getPlayer());
-				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
+				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.MUD_MONSTER, gameEnvironment.getPlayer()));
 				player.setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
@@ -221,7 +219,7 @@ public class MapScreen {
 		btnSouthlandFarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Battle previewBattle = new SouthlandFarm(gameEnvironment.getPlayer());
-				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.WATER_MONSTER, gameEnvironment.getPlayer()));
+				previewBattle.setBattleMonster(tools.generateRandomBattleMonster(MonsterType.GRASS_MONSTER, gameEnvironment.getPlayer()));
 				player.setPlayerPreviewBattle(previewBattle);
 				nextScreen = 1;
 				finishedWindow();
