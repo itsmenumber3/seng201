@@ -153,7 +153,7 @@ public class GameEnvironment {
      */
     public void closeInventoryScreen(InventoryScreen inputInventoryWindow) {
         inputInventoryWindow.closeWindow();
-        if (inputInventoryWindow.nextWindowIsMap()) {
+        if (inputInventoryWindow.getNextWindowIsMap()) {
             launchMapScreen();
         } else {
             launchShopScreen();

@@ -68,7 +68,7 @@ public class InventoryScreen {
 	private boolean nextWindowIsMap;
 	private Tools tools = new Tools();
 	
-	public boolean getIsPreviousWindowMapWindow() {
+	public boolean getNextWindowIsMap() {
 		return this.nextWindowIsMap;
 	}
 
