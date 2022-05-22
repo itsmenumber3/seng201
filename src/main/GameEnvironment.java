@@ -260,7 +260,8 @@ public class GameEnvironment {
         	GameEnvironment game = new GameEnvironment();
             Battle battle = new Battle();
             battle.setBattleName("Wellington");
-            game.getPlayer().setNextDayNextBattle(battle);
+            getPlayer().setPlayerPreviewBattle(battle);
+            game.getPlayer().setNextDayNextBattle();
             game.launchWelcomeScreen();
         }
     }
@@ -269,7 +270,8 @@ public class GameEnvironment {
         GameEnvironment game = new GameEnvironment();
         Battle battle = new Battle();
         battle.setBattleName("Wellington");
-        game.getPlayer().setNextDayNextBattle(battle);
+        game.getPlayer().setPlayerPreviewBattle(battle);
+        game.getPlayer().setNextDayNextBattle();
         game.launchWelcomeScreen();
     }
 }

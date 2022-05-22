@@ -185,10 +185,9 @@ public class Player implements Role {
     	}
     }
     
-    public void setNextDayNextBattle(Battle inputBattle) {
+    public void setNextDayNextBattle() {
     	playerCurrentDay += 1;
-    	playerPreviousBattle = playerSelectedBattle;
-    	playerSelectedBattle = inputBattle;
+    	playerSelectedBattle = playerPreviewBattle;
     	boolean hasEnoughFuel = getPlayerInventory().hasEnoughFuelIfTrueUseFuel(10);
     }
 
