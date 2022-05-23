@@ -267,7 +267,9 @@ public class GameEnvironment {
             System.out.println(getPlayer().getPlayerSelectedBattle().getCurrentChallenge());
             launchPaperScissorsRockScreen();
         } else {
-        	getPlayer().getPlayerSelectedBattle().setCurrentChallenge(new Quiz());
+
+        	
+        	getPlayer().getPlayerSelectedBattle().setCurrentChallenge(tools.makeRandomQuiz());
             launchQuizScreen();
         }
     }
