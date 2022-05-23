@@ -20,6 +20,8 @@ import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PaperScissorsRockScreen {
 
@@ -83,6 +85,15 @@ public class PaperScissorsRockScreen {
 	 */
 	private void initialize() {
 		window = new JFrame();
+		window.getContentPane().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (gameEnvironment.getRandomEventMessage() != "") {
+					JOptionPane.showMessageDialog(window, gameEnvironment.getRandomEventMessage());
+					gameEnvironment.resetRandomEventMessage();
+				}
+			}
+		});
 		window.setTitle("Paper Scissors Rock");
 		window.setBounds(100, 100, 750, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

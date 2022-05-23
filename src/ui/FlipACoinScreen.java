@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
@@ -23,6 +25,8 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FlipACoinScreen {
 
@@ -86,6 +90,15 @@ public class FlipACoinScreen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (gameEnvironment.getRandomEventMessage() != "") {
+					JOptionPane.showMessageDialog(frame, gameEnvironment.getRandomEventMessage());
+					gameEnvironment.resetRandomEventMessage();
+				}
+			}
+		});
 		frame.setBounds(100, 100, 750, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -164,7 +177,7 @@ public class FlipACoinScreen {
 		lblWhatIs_3_2_1.setBounds(12, 0, 287, 38);
 		panelItem.add(lblWhatIs_3_2_1);
 		
-		JLabel lblchallengeFlip = new JLabel("<html><div>Challenge #1 Flip A Coin</div></html>");
+		JLabel lblchallengeFlip = new JLabel(String.format("<html><div>Challenge #%d Flip A Coin</div></html>",  battle.getChallengeCount() + 1));
 		lblchallengeFlip.setFont(new Font("Century Schoolbook L", Font.BOLD, 18));
 		lblchallengeFlip.setBounds(25, 12, 621, 45);
 		frame.getContentPane().add(lblchallengeFlip);

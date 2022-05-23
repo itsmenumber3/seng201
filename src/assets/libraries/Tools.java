@@ -470,10 +470,13 @@ public class Tools {
     }
 
 
-		public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
+	public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
     	ArrayList<Monster> monsters = new ArrayList<>();
     	for (int index = 0; index < inputSize; index++) {
-    		monsters.add(this.generateRandomMonster(inputPlayer));
+    		Monster theMonster = this.generateRandomMonster(inputPlayer);
+    		theMonster.setEntityPurchaseValue(random.nextInt(50, 70));
+    		theMonster.setEntitySellbackValue(random.nextInt(30, 50));
+    		monsters.add(theMonster);
     	}
     	return monsters;
     }
@@ -540,7 +543,8 @@ public class Tools {
 			e.printStackTrace();
 		}
 		
-		monster.setEntitySellbackValue(random.nextInt(70, 100));
+		monster.setEntityPurchaseValue(random.nextInt(50, 80));
+		monster.setEntitySellbackValue(random.nextInt(50, 100));
 		
 		return monster;
 	}
@@ -683,14 +687,4 @@ public class Tools {
 		return "";
 	}
 
-	public String[] getMonsterNames(Player inputPlayer) {
-		ArrayList<Monster> monsters = inputPlayer.getPlayerInventory().getMonsters();
-		ArrayList<String> monsterNameArrayList= new ArrayList<>();
-
-		for (Monster monster : monsters) {
-			monsterNameArrayList.add(monster.getEntityName());
-		}
-		String[] strings = (String[]) monsterNameArrayList.toArray();
-		return new String[]{"Me", "Myself"};
-	}
 }

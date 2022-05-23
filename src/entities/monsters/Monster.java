@@ -1,5 +1,6 @@
 package entities.monsters;
 
+import assets.enums.EntityType;
 import assets.enums.MonsterType;
 import assets.enums.RoleType;
 import entities.Entity;
@@ -77,7 +78,10 @@ public class Monster extends Entity implements Role {
 //
 //    // INSTANTIATION --------------------------------------------------------
 
-
+    public Monster() {
+    	setEntityType(EntityType.MONSTER);
+    	
+    }
 
     // HEALTH LEVEL ---------------------------------------------------
 
@@ -120,6 +124,9 @@ public class Monster extends Entity implements Role {
 
     public void increaseMonsterHealthLevel(double inputIncreaseAmount) {
         this.monsterHealthLevel += inputIncreaseAmount;
+        if (this.monsterHealthLevel > 100) {
+        	this.monsterHealthLevel = 100;
+        }
     }
 
     public void monsterGetsAttacked(double inputOpponentAttackDamage) {

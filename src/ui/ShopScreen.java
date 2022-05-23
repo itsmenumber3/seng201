@@ -1,6 +1,8 @@
 package ui;
 
 import entities.Entity;
+import entities.items.Fuel;
+import entities.items.LottoTicket;
 import entities.items.consumables.Drink;
 import entities.items.consumables.Food;
 import main.GameEnvironment;
@@ -23,6 +25,9 @@ import java.awt.Color;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
+import assets.enums.DrinkType;
+import assets.enums.FoodType;
+import assets.libraries.Tools;
 import battles.Battle;
 import entities.monsters.Monster;
 
@@ -39,6 +44,8 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.JSpinner;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class ShopScreen {
 
@@ -50,7 +57,7 @@ public class ShopScreen {
 	private Shop shop;
 	private String displayInfo;
 	private Monster selectedMonster;
-
+	private int fuelPrice;
 	private JButton btnSelectedMonster;
 
 	private Food selectedFood;
@@ -64,6 +71,9 @@ public class ShopScreen {
 	private String[] drinkNames = {"Coffee", "Energy drink"};
 	
 	private boolean nextWindowIsInventory;
+	private JTextField textField;
+	
+	private Tools tools = new Tools();
 	
 	public boolean getNextWindowIsInventory() {
 		return nextWindowIsInventory;
@@ -93,7 +103,8 @@ public class ShopScreen {
 		this.inventory = player.getPlayerInventory();
 		this.battle = player.getPlayerSelectedBattle();
 		this.shop = battle.getBattleShop();
-
+		this.selectedFood = new Food(FoodType.APPLE);
+		this.selectedDrink = new Drink(DrinkType.COFFEE);
 		initialize();
 		window.setVisible(true);
 	}
@@ -119,7 +130,7 @@ public class ShopScreen {
 		double tempResistanceVal = monster.getMonsterResistanceAbility();
 		int tempPurchasePrice = monster.getEntityPurchaseValue();
 
-		return String.format("<html><div>Selected monster details:<br>Name: %s<br>Attack Damage: %.2f<br>Resistance Ability: %.2f<br>Price: $%.2f</div></html>",
+		return String.format("<html><div>Selected monster details:<br>Monster Type: %s<br>Attack Damage: %.2f<br>Resistance Ability: %.2f<br>Price: %d gold coins.</div></html>",
 				tempName, tempAttackVal, tempResistanceVal, tempPurchasePrice);
 	}
 
@@ -135,11 +146,17 @@ public class ShopScreen {
 		
 		JLabel lblShopName = new JLabel(battle.getBattleShop().getShopName());
 		lblShopName.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
-		lblShopName.setBounds(23, 20, 261, 34);
+		lblShopName.setBounds(23, 20, 346, 34);
 		window.getContentPane().add(lblShopName);
 		
+		JLabel lblYourBalance_1_1_2 = new JLabel(String.format("%d gold coins", player.getPlayerGold()));
+		lblYourBalance_1_1_2.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblYourBalance_1_1_2.setBounds(368, 28, 101, 25);
+		window.getContentPane().add(lblYourBalance_1_1_2);
+		lblYourBalance_1_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 69, 724, 388);
+		tabbedPane.setBounds(0, 69, 748, 400);
 		window.getContentPane().add(tabbedPane);
 
 		// FIRST TAB (BUY MONSTERS) ------------------------------------------------
@@ -162,8 +179,10 @@ public class ShopScreen {
 				if (successStatusAddMonster) {
 					boolean successStatusPurchaseEntity = player.playerPurchaseEntity(selectedMonster);
 					if (successStatusPurchaseEntity){
-						inventory.addMonster(selectedMonster);
+						JOptionPane.showMessageDialog(window, "Purchased successfully.");
+						selectedMonster.setEntityName(textField.getText());
 						btnSelectedMonster.setEnabled(false);
+						lblYourBalance_1_1_2.setText(String.format("%d gold coins", player.getPlayerGold()));
 					} else {
 						inventory.getMonsters().remove(selectedMonster);
 						JOptionPane.showMessageDialog(window, "Insufficient funds.");
@@ -185,6 +204,7 @@ public class ShopScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				btnSelectedMonster = btnMonster1;
 				selectedMonster = shop.getShopMonsterRange().get(0);
+				
 				displayInfo = getMonsterDisplayInfo(selectedMonster);
 				lblYourCurrentSelection.setText(displayInfo);
 				btnPurchaseThisMonster.setEnabled(true);
@@ -257,7 +277,7 @@ public class ShopScreen {
 		
 		JLabel lblTip = new JLabel("Tip: click to view properties, then press Purchase this monster.");
 		lblTip.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
-		lblTip.setBounds(12, 350, 361, 15);
+		lblTip.setBounds(12, 358, 361, 15);
 		panelPurchaseMonster.add(lblTip);
 		
 		JLabel lblMonster1Img = new JLabel("");
@@ -289,6 +309,19 @@ public class ShopScreen {
 		lblMonster5Img.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMonster5Img.setBounds(596, 12, 111, 200);
 		panelPurchaseMonster.add(lblMonster5Img);
+		
+		textField = new JTextField(tools.generateRandomMonsterName());
+		textField.setForeground(Color.BLACK);
+		textField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textField.setColumns(10);
+		textField.setBackground(new Color(230, 230, 250));
+		textField.setBounds(575, 277, 132, 33);
+		panelPurchaseMonster.add(textField);
+		
+		JLabel lblNameThisMonster = new JLabel("Name this monster");
+		lblNameThisMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
+		lblNameThisMonster.setBounds(447, 288, 120, 15);
+		panelPurchaseMonster.add(lblNameThisMonster);
 
 		// FIRST TAB (BUY MONSTERS) ------------------------------------------------
 
@@ -311,7 +344,7 @@ public class ShopScreen {
 		JLabel lblYourCurrentFoodSelection;
 		lblYourCurrentFoodSelection = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>",
 				foodNames[0],
-				selectedFood.getHealthIncrease(),
+				selectedFood.getConsumableHealValue(),
 				selectedFood.getEntityPurchaseValue()
 		)
 		);
@@ -323,15 +356,16 @@ public class ShopScreen {
 		btnPurchaseAndStoreFood = new JButton("<html><div>Purchase</div></html>");
 		btnPurchaseAndStoreFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean successStatusPurchaseEntity = player.playerPurchaseEntity(selectedMonster);
+				boolean successStatusPurchaseEntity = player.playerPurchaseEntity(selectedFood);
 				if (successStatusPurchaseEntity){
+					JOptionPane.showMessageDialog(window, "Purchased successfully.");
 					inventory.addFood(selectedFood);
+					lblYourBalance_1_1_2.setText(String.format("%d gold coins", player.getPlayerGold()));
 				} else {
 					JOptionPane.showMessageDialog(window, "Insufficient funds.");
 				}
 			}
 		});
-		btnPurchaseAndStoreFood.setEnabled(false);
 		btnPurchaseAndStoreFood.setForeground(Color.WHITE);
 		btnPurchaseAndStoreFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnPurchaseAndStoreFood.setBackground(Color.RED);
@@ -344,21 +378,17 @@ public class ShopScreen {
 				selectedFood = player.getFoodRange()[comboBoxFood.getSelectedIndex()];
 				lblYourCurrentFoodSelection.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>", 
 						foodNames[comboBoxFood.getSelectedIndex()],
-						selectedFood.getHealthIncrease(),
+						selectedFood.getConsumableHealValue(),
 						selectedFood.getEntityPurchaseValue()
 						)
 				);
 				
-				btnPurchaseAndStoreFood.setEnabled(true);
 				
 			}
 		});
 		comboBoxFood.setModel(new DefaultComboBoxModel(foodNames));
 		comboBoxFood.setBounds(318, 147, 210, 24);
-		panelBuyFood.add(comboBoxFood);
-		
-
-		
+		panelBuyFood.add(comboBoxFood);	
 
 		
 		JPanel panelBuyCafe = new JPanel();
@@ -379,7 +409,7 @@ public class ShopScreen {
 		JLabel lblYourCurrentDrinkSelection;
 		lblYourCurrentDrinkSelection = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>",
 				drinkNames[0],
-				selectedDrink.getHealthIncrease(),
+				selectedDrink.getConsumableHealValue(),
 				selectedDrink.getEntityPurchaseValue()
 		)
 		);
@@ -395,7 +425,7 @@ public class ShopScreen {
 				selectedDrink = player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()];
 				lblYourCurrentDrinkSelection.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. The price is %d gold coins.</div></html>", 
 						drinkNames[comboBoxDrinks.getSelectedIndex()],
-						selectedDrink.getHealthIncrease(),
+						selectedDrink.getConsumableHealValue(),
 						selectedDrink.getEntityPurchaseValue()
 						));
 			}
@@ -410,7 +440,9 @@ public class ShopScreen {
 		btnPurchaseAndStoreDrink.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (player.playerPurchaseEntity(selectedDrink)){
-					inventory.addFood(selectedFood);
+					JOptionPane.showMessageDialog(window, "Purchased successfully.");
+					inventory.addDrink(selectedDrink);
+					lblYourBalance_1_1_2.setText(String.format("%d gold coins", player.getPlayerGold()));
 				} else {
 					JOptionPane.showMessageDialog(window, "Insufficient funds.");
 				}
@@ -418,7 +450,6 @@ public class ShopScreen {
 		});
 		btnPurchaseAndStoreDrink.setForeground(Color.WHITE);
 		btnPurchaseAndStoreDrink.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
-		btnPurchaseAndStoreDrink.setEnabled(false);
 		btnPurchaseAndStoreDrink.setBackground(Color.RED);
 		btnPurchaseAndStoreDrink.setBounds(171, 254, 353, 31);
 		panelBuyCafe.add(btnPurchaseAndStoreDrink);
@@ -426,6 +457,21 @@ public class ShopScreen {
 		JPanel panelLottoCounter = new JPanel();
 		tabbedPane.addTab("Lotto Counter", null, panelLottoCounter, null);
 		panelLottoCounter.setLayout(null);
+		
+		JSlider sliderLotto = new JSlider();
+		sliderLotto.setValue(1);
+		sliderLotto.setSnapToTicks(true);
+		sliderLotto.setPaintTicks(true);
+		sliderLotto.setPaintLabels(true);
+		sliderLotto.setOpaque(false);
+		sliderLotto.setMinorTickSpacing(1);
+		sliderLotto.setMinimum(1);
+		sliderLotto.setMaximum(10);
+		sliderLotto.setMajorTickSpacing(1);
+		sliderLotto.setForeground(Color.BLACK);
+		sliderLotto.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		sliderLotto.setBounds(198, 222, 279, 50);
+		panelLottoCounter.add(sliderLotto);
 		
 		JLabel lblLottoLogo = new JLabel("");
 		lblLottoLogo.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/LottoLogo.png")));
@@ -440,6 +486,22 @@ public class ShopScreen {
 		JButton btnPurchaseTicket = new JButton("Purchase ticket");
 		btnPurchaseTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (inventory.getLottoTicket() != null) {
+					JOptionPane.showMessageDialog(window, "You've already bought a lotto ticket for today. Too much gambling is bad.");
+				} else {
+					LottoTicket lotto = new LottoTicket();
+					lotto.setEntityPurchaseValue(30);
+					lotto.setLottoTicketNumber(sliderLotto.getValue());
+					boolean successStatusPurchaseEntity = player.playerPurchaseEntity(lotto);
+					if (successStatusPurchaseEntity){
+						JOptionPane.showMessageDialog(window, "Purchased successfully.");
+						inventory.setLottoTicket(lotto);
+						lblYourBalance_1_1_2.setText(String.format("%d gold coins", player.getPlayerGold()));
+					} else {
+						JOptionPane.showMessageDialog(window, "Insufficient funds.");
+					}
+				}
+				
 			}
 		});
 		btnPurchaseTicket.setForeground(Color.WHITE);
@@ -453,31 +515,28 @@ public class ShopScreen {
 		lblPrompt.setBounds(198, 164, 243, 64);
 		panelLottoCounter.add(lblPrompt);
 		
-		JSlider sliderNumberofDays_1 = new JSlider();
-		sliderNumberofDays_1.setValue(1);
-		sliderNumberofDays_1.setSnapToTicks(true);
-		sliderNumberofDays_1.setPaintTicks(true);
-		sliderNumberofDays_1.setPaintLabels(true);
-		sliderNumberofDays_1.setOpaque(false);
-		sliderNumberofDays_1.setMinorTickSpacing(1);
-		sliderNumberofDays_1.setMinimum(1);
-		sliderNumberofDays_1.setMaximum(10);
-		sliderNumberofDays_1.setMajorTickSpacing(1);
-		sliderNumberofDays_1.setForeground(Color.BLACK);
-		sliderNumberofDays_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		sliderNumberofDays_1.setBounds(198, 222, 279, 50);
-		panelLottoCounter.add(sliderNumberofDays_1);
-		
 		JPanel panelServo = new JPanel();
 		tabbedPane.addTab("Service Station", null, panelServo, null);
 		panelServo.setLayout(null);
 		
-		JLabel lblIntroduction = new JLabel("<html><div>Welcome to the Service Station. Please indicate how much fuel you need to top up, and we'll quote the amount in gold coins.<br><br>You currently have 100/100 in your fuel tank.</div></html>");
+		JLabel lblIntroduction_1 = new JLabel("");
+		lblIntroduction_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
+		lblIntroduction_1.setBounds(199, 145, 352, 50);
+		panelServo.add(lblIntroduction_1);
+		
+		JLabel lblIntroduction = new JLabel(String.format("<html><div>Welcome to the Service Station. Please indicate how much fuel you need to top up, and we'll quote the amount in gold coins."
+				+ "<br><br>You currently have %.2f/100 in your fuel tank.</div></html>", inventory.getFuelAmount()));
 		lblIntroduction.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblIntroduction.setBounds(194, 57, 352, 111);
+		lblIntroduction.setBounds(199, 35, 352, 111);
 		panelServo.add(lblIntroduction);
 		
 		JSlider sliderNumberofDays = new JSlider();
+		sliderNumberofDays.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				fuelPrice = sliderNumberofDays.getValue();
+				lblIntroduction_1.setText(String.format("<html><div>Your selected amount costs %d gold coins.</div></html>", fuelPrice));
+			}
+		});
 		sliderNumberofDays.setValue(10);
 		sliderNumberofDays.setSnapToTicks(true);
 		sliderNumberofDays.setPaintTicks(true);
@@ -488,21 +547,33 @@ public class ShopScreen {
 		sliderNumberofDays.setMajorTickSpacing(10);
 		sliderNumberofDays.setForeground(Color.BLACK);
 		sliderNumberofDays.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		sliderNumberofDays.setBounds(194, 180, 347, 50);
+		sliderNumberofDays.setBounds(194, 200, 347, 50);
 		panelServo.add(sliderNumberofDays);
 		
-		JButton btnPurchaseFuel = new JButton("Purchase fuel (50 coins)");
+		JButton btnPurchaseFuel = new JButton("Purchase fuel");
+		btnPurchaseFuel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (inventory.getFuelAmount() >= 100) {
+					JOptionPane.showMessageDialog(window, "You've already got 100% fuel.");
+				} else {
+					Fuel fuel = new Fuel();
+					fuel.setEntityPurchaseValue(sliderNumberofDays.getValue());
+					boolean successStatusPurchaseEntity = player.playerPurchaseEntity(fuel);
+					if (successStatusPurchaseEntity){
+						JOptionPane.showMessageDialog(window, "Purchased successfully.");
+						inventory.refillFuel(sliderNumberofDays.getValue());
+						lblYourBalance_1_1_2.setText(String.format("%d gold coins", player.getPlayerGold()));
+					} else {
+						JOptionPane.showMessageDialog(window, "Insufficient funds.");
+					}
+				}
+			}
+		});
 		btnPurchaseFuel.setForeground(Color.WHITE);
 		btnPurchaseFuel.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
 		btnPurchaseFuel.setBackground(Color.RED);
-		btnPurchaseFuel.setBounds(194, 242, 226, 33);
+		btnPurchaseFuel.setBounds(194, 262, 226, 33);
 		panelServo.add(btnPurchaseFuel);
-		
-		JLabel lblYourBalance_1_1_2 = new JLabel(String.format("%d gold coins", player.getPlayerGold()));
-		lblYourBalance_1_1_2.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblYourBalance_1_1_2.setBounds(368, 28, 101, 25);
-		window.getContentPane().add(lblYourBalance_1_1_2);
-		lblYourBalance_1_1_2.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
 		JButton btnReturnToDashboard = new JButton("Return to Map");
 		btnReturnToDashboard.addActionListener(new ActionListener() {

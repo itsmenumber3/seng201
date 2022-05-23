@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -28,6 +29,11 @@ public class BattleScreen {
 	private final JLabel lblPhoto = new JLabel("");
 	private Player player;
 	private Battle battle;
+	private String randomEventMessage;
+	
+	public String getRandomEventMessage() {
+		return randomEventMessage;
+	}
 
 	/**
 	 * Launch the application.
@@ -99,8 +105,16 @@ public class BattleScreen {
 		JButton btnTravelTo = new JButton(String.format("<html><div>Travel to %s</div></html>", battle.getBattleName()));
 		btnTravelTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				player.setNextDayNextBattle();
-				finishedWindow(true);
+				if (player.travelToPreviewBattle() == true) {
+					randomEventMessage = tools.runRandomOvernightEvent(player);
+					player.getPlayerInventory().sleepTime();
+					finishedWindow(true);
+					
+				} else {
+					JOptionPane.showMessageDialog(window, "You don't have enough fuel. Please go to shop to top up.");
+				}
+				
+				
 			}
 		});
 		btnTravelTo.setBounds(34, 347, 364, 43);

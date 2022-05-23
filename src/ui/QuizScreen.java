@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import main.GameEnvironment;
 import main.Player;
@@ -21,6 +22,8 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class QuizScreen {
 
@@ -85,6 +88,15 @@ public class QuizScreen {
 	 */
 	private void initialize() {
 		window = new JFrame();
+		window.getContentPane().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (gameEnvironment.getRandomEventMessage() != "") {
+					JOptionPane.showMessageDialog(window, gameEnvironment.getRandomEventMessage());
+					gameEnvironment.resetRandomEventMessage();
+				}
+			}
+		});
 		window.setTitle("Monster Quiz");
 		window.setBounds(100, 100, 708, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

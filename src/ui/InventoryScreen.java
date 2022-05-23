@@ -29,13 +29,16 @@ import java.awt.SystemColor;
 import javax.swing.JMenu;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.util.HashMap;
+import java.util.List;
 
 public class InventoryScreen {
 
@@ -45,12 +48,12 @@ public class InventoryScreen {
 	private Battle battle;
 	private Inventory inventory;
 	private ArrayList<Monster> monsters;
-	private HashMap<Food, Integer> inventoryFoods;
-	private HashMap<Drink, Integer> inventoryDrinks;
+	private ArrayList<Integer> inventoryFoods;
+	private ArrayList<Integer> inventoryDrinks;
 	private double fuelAmount;
 	private Monster currentClickMonster;
-	private String monsterDescriptionString = "<html><div>Attack Damage: %2.f<br>Resistance Ability: %.2f<br>Current health: %.2f<br>Sellback Price: %d</div></html>";
-	private String[] monsterNames;       
+	private String monsterDescriptionString = "<html><div>Attack Damage: %.2f<br>Resistance Ability: %.2f<br>Current health: %.2f<br>Sellback Price: %d</div></html>";
+	private List<String> monsterNames;       
 	private String[] foodNames = {"Apple", "Pasta"};
 	private String[] drinkNames = {"Coffee", "Energy drink"};
 	
@@ -69,6 +72,7 @@ public class InventoryScreen {
 	private Tools tools = new Tools();
 
 	private int comboBoxIndex;
+	
 	
 	public boolean getNextWindowIsMap() {
 		return this.nextWindowIsMap;
@@ -96,7 +100,11 @@ public class InventoryScreen {
 		this.inventory = player.getPlayerInventory();
 		battle = player.getPlayerSelectedBattle();
 		monsters = inventory.getMonsters();
-		monsterNames = tools.getMonsterNames(player);
+		monsterNames = new ArrayList<String>();
+		for (Monster monster : monsters) {
+			monsterNames.add(monster.getEntityName());
+		}
+		
 		inventoryFoods = inventory.getFoods();
 		inventoryDrinks = inventory.getDrinks();
 		fuelAmount = inventory.getFuelAmount();
@@ -118,62 +126,6 @@ public class InventoryScreen {
 		initialize();
 	}
 	
-	public void updateMonsters() {
-		switch(monsters.size()) {
-		case 4:
-			btnMonster4.setEnabled(true);
-			btnMonster4.setText(monsters.get(3).getEntityName());
-			lblMonster4Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(3).getEntityImagePath())));
-			btnMonster4.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					currentClickMonster = monsters.get(3);
-					lblMonsterInfo.setText(String.format(monsterDescriptionString, currentClickMonster.getMonsterAttackDamage(), currentClickMonster.getMonsterResistanceAbility(),
-							currentClickMonster.getEntitySellValue()));
-					btnInFrontOfTeam.setEnabled(true);
-				}
-			});
-			lblMonster4Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(3).getEntityImagePath())));
-		case 3:
-			btnMonster3.setEnabled(true);
-			btnMonster3.setText(monsters.get(2).getEntityName());
-			lblMonster3Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(2).getEntityImagePath())));
-			btnMonster3.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					currentClickMonster = monsters.get(2);
-					lblMonsterInfo.setText(String.format(monsterDescriptionString, currentClickMonster.getMonsterAttackDamage(), currentClickMonster.getMonsterResistanceAbility(),
-							currentClickMonster.getEntitySellValue()));
-					btnInFrontOfTeam.setEnabled(true);
-				}
-			});
-			lblMonster3Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(2).getEntityImagePath())));
-		case 2:
-			btnMonster2.setEnabled(true);
-			btnMonster2.setText(monsters.get(1).getEntityName());
-			lblMonster2Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(1).getEntityImagePath())));
-			btnMonster2.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					currentClickMonster = monsters.get(1);
-					lblMonsterInfo.setText(String.format(monsterDescriptionString, currentClickMonster.getMonsterAttackDamage(), currentClickMonster.getMonsterResistanceAbility(),
-							currentClickMonster.getEntitySellValue()));
-					btnInFrontOfTeam.setEnabled(true);
-				}
-			});
-			lblMonster2Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(1).getEntityImagePath())));
-		default:
-			btnMonster1.setEnabled(true);
-			btnMonster1.setText(monsters.get(0).getEntityName());
-			lblMonster1Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(0).getEntityImagePath())));
-			btnMonster1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					currentClickMonster = monsters.get(0);
-					lblMonsterInfo.setText(String.format(monsterDescriptionString, currentClickMonster.getMonsterAttackDamage(), currentClickMonster.getMonsterResistanceAbility(),
-							currentClickMonster.getEntitySellValue()));
-					btnInFrontOfTeam.setEnabled(true);
-				}
-			});
-			break;
-		}
-	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -200,7 +152,9 @@ public class InventoryScreen {
 		tabbedPane.setBackgroundAt(0, SystemColor.menu);
 		panelMonsters.setLayout(null);
 		
-		JLabel lblMonsterInfo = new JLabel();
+		
+		
+		JLabel lblMonsterInfo = new JLabel("");
 		lblMonsterInfo.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblMonsterInfo.setBounds(12, 261, 377, 88);
 		panelMonsters.add(lblMonsterInfo);
@@ -253,14 +207,79 @@ public class InventoryScreen {
 		lblMonster4Img.setBounds(446, 12, 111, 200);
 		panelMonsters.add(lblMonster4Img);
 		
-		updateMonsters();
+	
 		
 		btnInFrontOfTeam = new JButton("<html><div>Set selected monster to front of team</div></html>");
 		btnInFrontOfTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				monsters.remove(currentClickMonster);
 				monsters.add(0, currentClickMonster);
-				updateMonsters();
+				switch(monsters.size()) {
+				case 4:
+					btnMonster4.setEnabled(true);
+					btnMonster4.setText(monsters.get(3).getEntityName());
+					lblMonster4Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(3).getEntityImagePath())));
+					btnMonster4.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							currentClickMonster = monsters.get(3);
+							lblMonsterInfo.setText(String.format(monsterDescriptionString,
+									currentClickMonster.getMonsterAttackDamage(),
+									currentClickMonster.getMonsterResistanceAbility(),
+									currentClickMonster.getMonsterHealthLevel(),
+									currentClickMonster.getEntitySellValue()));
+							btnInFrontOfTeam.setEnabled(true);
+						}
+					});
+					lblMonster4Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(3).getEntityImagePath())));
+				case 3:
+					btnMonster3.setEnabled(true);
+					btnMonster3.setText(monsters.get(2).getEntityName());
+					lblMonster3Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(2).getEntityImagePath())));
+					btnMonster3.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							currentClickMonster = monsters.get(2);
+							lblMonsterInfo.setText(String.format(monsterDescriptionString,
+									currentClickMonster.getMonsterAttackDamage(),
+									currentClickMonster.getMonsterResistanceAbility(),
+									currentClickMonster.getMonsterHealthLevel(),
+									currentClickMonster.getEntitySellValue()));
+							btnInFrontOfTeam.setEnabled(true);
+						}
+					});
+					lblMonster3Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(2).getEntityImagePath())));
+				case 2:
+					btnMonster2.setEnabled(true);
+					btnMonster2.setText(monsters.get(1).getEntityName());
+					lblMonster2Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(1).getEntityImagePath())));
+					btnMonster2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							currentClickMonster = monsters.get(1);
+							lblMonsterInfo.setText(String.format(monsterDescriptionString,
+									currentClickMonster.getMonsterAttackDamage(),
+									currentClickMonster.getMonsterResistanceAbility(),
+									currentClickMonster.getMonsterHealthLevel(),
+									currentClickMonster.getEntitySellValue()));
+							btnInFrontOfTeam.setEnabled(true);
+						}
+					});
+					lblMonster2Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(1).getEntityImagePath())));
+				default:
+					btnMonster1.setEnabled(true);
+					btnMonster1.setText(monsters.get(0).getEntityName());
+					lblMonster1Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(0).getEntityImagePath())));
+					btnMonster1.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							currentClickMonster = monsters.get(0);
+							lblMonsterInfo.setText(String.format(monsterDescriptionString,
+									currentClickMonster.getMonsterAttackDamage(),
+									currentClickMonster.getMonsterResistanceAbility(),
+									currentClickMonster.getMonsterHealthLevel(),
+									currentClickMonster.getEntitySellValue()));
+							btnInFrontOfTeam.setEnabled(true);
+						}
+					});
+					break;
+				}
 			}
 		});
 		btnInFrontOfTeam.setEnabled(false);
@@ -269,6 +288,74 @@ public class InventoryScreen {
 		btnInFrontOfTeam.setBackground(Color.RED);
 		btnInFrontOfTeam.setBounds(407, 309, 300, 40);
 		panelMonsters.add(btnInFrontOfTeam);
+		
+		
+		switch(monsters.size()) {
+		case 4:
+			btnMonster4.setEnabled(true);
+			btnMonster4.setText(monsters.get(3).getEntityName());
+			lblMonster4Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(3).getEntityImagePath())));
+			btnMonster4.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					currentClickMonster = monsters.get(3);
+					lblMonsterInfo.setText(String.format(monsterDescriptionString,
+							currentClickMonster.getMonsterAttackDamage(),
+							currentClickMonster.getMonsterResistanceAbility(),
+							currentClickMonster.getMonsterHealthLevel(),
+							currentClickMonster.getEntitySellValue()));
+					btnInFrontOfTeam.setEnabled(true);
+				}
+			});
+			lblMonster4Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(3).getEntityImagePath())));
+		case 3:
+			btnMonster3.setEnabled(true);
+			btnMonster3.setText(monsters.get(2).getEntityName());
+			lblMonster3Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(2).getEntityImagePath())));
+			btnMonster3.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					currentClickMonster = monsters.get(2);
+					lblMonsterInfo.setText(String.format(monsterDescriptionString,
+							currentClickMonster.getMonsterAttackDamage(),
+							currentClickMonster.getMonsterResistanceAbility(),
+							currentClickMonster.getMonsterHealthLevel(),
+							currentClickMonster.getEntitySellValue()));
+					btnInFrontOfTeam.setEnabled(true);
+				}
+			});
+			lblMonster3Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(2).getEntityImagePath())));
+		case 2:
+			btnMonster2.setEnabled(true);
+			btnMonster2.setText(monsters.get(1).getEntityName());
+			lblMonster2Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(1).getEntityImagePath())));
+			btnMonster2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					currentClickMonster = monsters.get(1);
+					lblMonsterInfo.setText(String.format(monsterDescriptionString,
+							currentClickMonster.getMonsterAttackDamage(),
+							currentClickMonster.getMonsterResistanceAbility(),
+							currentClickMonster.getMonsterHealthLevel(),
+							currentClickMonster.getEntitySellValue()));
+					btnInFrontOfTeam.setEnabled(true);
+				}
+			});
+			lblMonster2Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(1).getEntityImagePath())));
+		default:
+			btnMonster1.setEnabled(true);
+			btnMonster1.setText(monsters.get(0).getEntityName());
+			lblMonster1Img.setIcon(new ImageIcon(InventoryScreen.class.getResource(monsters.get(0).getEntityImagePath())));
+			btnMonster1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					currentClickMonster = monsters.get(0);
+					lblMonsterInfo.setText(String.format(monsterDescriptionString,
+							currentClickMonster.getMonsterAttackDamage(),
+							currentClickMonster.getMonsterResistanceAbility(),
+							currentClickMonster.getMonsterHealthLevel(),
+							currentClickMonster.getEntitySellValue()));
+					btnInFrontOfTeam.setEnabled(true);
+				}
+			});
+			break;
+		}
 		
 		JPanel panelFood = new JPanel();
 		tabbedPane.addTab("Food Chest", null, panelFood, null);
@@ -283,7 +370,8 @@ public class InventoryScreen {
 		lblSelectedMonster.setBounds(12, 109, 420, 47);
 		panelFood.add(lblSelectedMonster);
 		
-		JComboBox comboBoxMonster = new JComboBox(monsterNames);
+		
+		JComboBox comboBoxMonster = new JComboBox();
 		comboBoxMonster.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				lblSelectedMonster.setText(String.format("<html><div>The health level of %s is %.2f/100.</div></html>", 
@@ -293,65 +381,72 @@ public class InventoryScreen {
 				);
 			}
 		});
+		for (int i = 0; i < monsterNames.size(); i++) {
+			    comboBoxMonster.addItem(monsterNames.get(i));
+		}
 		comboBoxMonster.setBounds(157, 26, 210, 24);
-		comboBoxMonster.setModel(new DefaultComboBoxModel(monsterNames));
 		panelFood.add(comboBoxMonster);
-		
-
-		
-		
 		
 		JLabel lblSelectedFood;
 		lblSelectedFood = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>",
 				foodNames[0],
-				player.getFoodRange()[0].getHealthIncrease(),
-				inventoryFoods.get(player.getFoodRange()[0])
+				player.getFoodRange()[0].getConsumableHealValue(),
+				inventoryFoods.get(0)
 		));
 		lblSelectedFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblSelectedFood.setBounds(12, 171, 420, 47);
 		panelFood.add(lblSelectedFood);
-
-		JButton btnFeedNow = new JButton("<html><div>Feed</div></html>");
-		btnFeedNow = new JButton("<html><div>Feed</div></html>");
-		btnFeedNow.setEnabled(false);
-		JButton finalBtnFeedNow = btnFeedNow;
-		btnFeedNow.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Food theFoodToFeed = player.getFoodRange()[comboBoxIndex];
-				Monster theMonsterToFeed = monsters.get(comboBoxIndex);
-				inventory.removeFood(theFoodToFeed);
-				theMonsterToFeed.increaseMonsterHealthLevel(theFoodToFeed.getHealthIncrease());
-				finalBtnFeedNow.setEnabled(false);
-			}
-		});
 		
-		JComboBox comboBoxFood = new JComboBox(foodNames);
-		JButton finalBtnFeedNow1 = btnFeedNow;
+		JComboBox comboBoxFood;
+		comboBoxFood = new JComboBox(foodNames);
 		comboBoxFood.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				comboBoxIndex = comboBoxFood.getSelectedIndex();
-				lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %d/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
+				lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>",
 						foodNames[comboBoxFood.getSelectedIndex()],
-						player.getFoodRange()[comboBoxFood.getSelectedIndex()].getHealthIncrease(),
-						inventoryFoods.get(player.getFoodRange()[comboBoxFood.getSelectedIndex()])
+						player.getFoodRange()[comboBoxFood.getSelectedIndex()].getConsumableHealValue(),
+						inventoryFoods.get(comboBoxFood.getSelectedIndex())
 						)
 				);
-				if (inventoryFoods.get(player.getFoodRange()[comboBoxFood.getSelectedIndex()]) > 0) {
-					finalBtnFeedNow1.setEnabled(true);
-				}lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %d/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
-						foodNames[comboBoxFood.getSelectedIndex()],
-						player.getFoodRange()[comboBoxFood.getSelectedIndex()].getHealthIncrease(),
-						inventoryFoods.get(player.getFoodRange()[comboBoxFood.getSelectedIndex()])
-						)
-				);
-				if (inventoryFoods.get(player.getFoodRange()[comboBoxFood.getSelectedIndex()]) > 0) {
-					finalBtnFeedNow1.setEnabled(true);
-				}
 			}
 		});
 		comboBoxFood.setModel(new DefaultComboBoxModel(foodNames));
 		comboBoxFood.setBounds(157, 61, 210, 24);
 		panelFood.add(comboBoxFood);
+		
+		
+
+		
+
+
+		JButton btnFeedNow = new JButton("<html><div>Feed</div></html>");
+		btnFeedNow = new JButton("<html><div>Feed</div></html>");
+		JButton finalBtnFeedNow = btnFeedNow;
+		btnFeedNow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Food theFoodToFeed = player.getFoodRange()[comboBoxIndex];
+				Monster theMonsterToFeed = monsters.get(comboBoxIndex);
+				boolean successStatus = inventory.removeFood(theFoodToFeed);
+				if (successStatus) {
+					if (theMonsterToFeed.getMonsterHealthLevel() < 100) {
+						JOptionPane.showMessageDialog(window, "Yummy!!");
+						theMonsterToFeed.increaseMonsterHealthLevel(theFoodToFeed.getConsumableHealValue());
+					}  else {
+						JOptionPane.showMessageDialog(window, "I'm already full - my health is 100%.");
+					}
+				} else {
+					JOptionPane.showMessageDialog(window, "You don't have enough of this food.");
+				}
+				lblSelectedFood.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>",
+						foodNames[comboBoxFood.getSelectedIndex()],
+						player.getFoodRange()[comboBoxFood.getSelectedIndex()].getConsumableHealValue(),
+						inventoryFoods.get(comboBoxFood.getSelectedIndex())
+						)
+				);
+			}
+		});
+		
+		
 		
 
 		
@@ -379,33 +474,35 @@ public class InventoryScreen {
 		panelDrinks.setLayout(null);
 		
 		JLabel lblSelectedMonster_Drinks;
-		lblSelectedMonster_Drinks = new JLabel(String.format("<html><div>The health level of %s is %.0f/100.</div></html>",
+		lblSelectedMonster_Drinks = new JLabel(String.format("<html><div>The health level of %s is %.2f/100.</div></html>",
 				monsters.get(0).getEntityName(),
 				monsters.get(0).getMonsterHealthLevel()));
 		lblSelectedMonster_Drinks.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblSelectedMonster_Drinks.setBounds(12, 109, 420, 47);
 		panelDrinks.add(lblSelectedMonster_Drinks);
 		
-		JComboBox comboBoxMonster_Drinks = new JComboBox(monsterNames);
+		JComboBox comboBoxMonster_Drinks = new JComboBox();
 		comboBoxMonster_Drinks.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				lblSelectedMonster_Drinks.setText(String.format("<html><div>The health level of %s is %.0f/100.</div></html>", 
+				lblSelectedMonster_Drinks.setText(String.format("<html><div>The health level of %s is %.2f/100.</div></html>",
 						monsters.get(comboBoxMonster.getSelectedIndex()).getEntityName(), 
 						monsters.get(comboBoxMonster.getSelectedIndex()).getMonsterHealthLevel()
 						));
 			}
 		});
-		comboBoxMonster_Drinks.setModel(new DefaultComboBoxModel(monsterNames));
+		for (int i = 0; i < monsterNames.size(); i++) {
+		    comboBoxMonster_Drinks.addItem(monsterNames.get(i));
+	}
 		comboBoxMonster_Drinks.setBounds(157, 26, 210, 24);
 		panelDrinks.add(comboBoxMonster_Drinks);
 		
 
 		
 		JLabel lblSelectedDrink;
-		lblSelectedDrink = new JLabel(String.format("<html><div>You're selecting %s which adds %d/100 to a monster's health. You have %d of these in your inventory.</div></html>",
+		lblSelectedDrink = new JLabel(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>",
 				drinkNames[0],
-				player.getDrinkRange()[0].getHealthIncrease(),
-				inventoryFoods.get(player.getDrinkRange()[0])
+				player.getDrinkRange()[0].getConsumableHealValue(),
+				inventoryDrinks.get(0)
 		)
 		);
 		lblSelectedDrink.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
@@ -417,15 +514,12 @@ public class InventoryScreen {
 		JComboBox comboBoxDrinks = new JComboBox(drinkNames);
 		comboBoxDrinks.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
-				lblSelectedDrink.setText(String.format("<html><div>You're selecting %s which adds %d/100 to a monster's health. You have %d of these in your inventory.</div></html>", 
+				lblSelectedDrink.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>",
 						drinkNames[comboBoxDrinks.getSelectedIndex()],
-						player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()].getHealthIncrease(),
-						inventoryFoods.get(player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()])
+						player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()].getConsumableHealValue(),
+						inventoryDrinks.get(comboBoxDrinks.getSelectedIndex())
 						)
 				);
-				if (inventoryFoods.get(player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()]) > 0) {
-					btnDrink.setEnabled(true);
-				}
 			}
 		});
 		comboBoxDrinks.setModel(new DefaultComboBoxModel(drinkNames));
@@ -449,14 +543,23 @@ public class InventoryScreen {
 			public void actionPerformed(ActionEvent arg0) {
 				Drink theDrinkToDrink = player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()];
 				Monster theMonsterToDrink = monsters.get(comboBoxMonster_Drinks.getSelectedIndex());
-				inventory.removeDrink(theDrinkToDrink);
-				theMonsterToDrink.increaseMonsterHealthLevel(theDrinkToDrink.getHealthIncrease());
-				btnDrink.setEnabled(false);
+				Boolean successStatus = inventory.removeDrink(theDrinkToDrink);
+				if (successStatus) {
+					JOptionPane.showMessageDialog(window, "Yummy!!");
+					theMonsterToDrink.increaseMonsterHealthLevel(theDrinkToDrink.getConsumableHealValue());
+				} else {
+					JOptionPane.showMessageDialog(window, "You don't have enough of this drink.");
+				}
+				lblSelectedDrink.setText(String.format("<html><div>You're selecting %s which adds %.2f/100 to a monster's health. You have %d of these in your inventory.</div></html>",
+						drinkNames[comboBoxDrinks.getSelectedIndex()],
+						player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()].getConsumableHealValue(),
+						inventoryDrinks.get(comboBoxDrinks.getSelectedIndex())
+						));
+			
 			}
 		});
 		btnDrink.setForeground(Color.WHITE);
 		btnDrink.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
-		btnDrink.setEnabled(false);
 		btnDrink.setBackground(Color.RED);
 		btnDrink.setBounds(12, 235, 353, 31);
 		panelDrinks.add(btnDrink);
@@ -468,7 +571,7 @@ public class InventoryScreen {
 		JLabel lblFuelInformation = new JLabel(String.format("<html><div>You have %.2f/100.00 of fuel left. To travel between the North Island and the South Island, it takes 20 units of your fuel. To travel within an island, it takes 10 units of your fuel.</div></html>", 
 				inventory.getFuelAmount()));
 		lblFuelInformation.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblFuelInformation.setBounds(27, 22, 420, 47);
+		lblFuelInformation.setBounds(27, 22, 420, 148);
 		panelFuel.add(lblFuelInformation);
 		
 		JLabel lblBalance = new JLabel(String.format("%d gold coins", player.getPlayerGold()));
@@ -490,8 +593,10 @@ public class InventoryScreen {
 		btnReturnToMap.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
 		JButton btnShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
-		if (battle.getBattleName() == null) {
+		btnShop.setEnabled(true);
+		if (battle.getBattleName() == "Wellington") {
 			btnShop.setText("Shop Unavailable");
+			btnShop.setEnabled(false);
 		}
 		btnShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

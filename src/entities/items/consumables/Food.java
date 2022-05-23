@@ -5,7 +5,6 @@ import java.security.SecureRandom;
 
 public class Food extends Consumable {
 	SecureRandom random = new SecureRandom();
-	private double healthIncrease;
 	private FoodType foodType;
 	
 	
@@ -19,23 +18,15 @@ public class Food extends Consumable {
     		setFoodType(inputFoodType);
     		this.setEntityName("Pasta");
     		this.setEntityPurchaseValue(magicNumbers.PASTA_SELL_VALUE);
-    		setHealthIncrease(random.nextInt(magicNumbers.PASTA_SELL_VALUE, magicNumbers.PASTA_SELL_VALUE + magicNumbers.FOOD_VAR));	
+    		setConsumableHealValue(random.nextInt(magicNumbers.PASTA_SELL_VALUE, magicNumbers.PASTA_SELL_VALUE + magicNumbers.FOOD_VAR));
     	}
     	else {
     		setFoodType(inputFoodType);
     		this.setEntityName("Apple");
     		this.setEntityPurchaseValue(magicNumbers.APPLE_SELL_VALUE);
-    		setHealthIncrease(random.nextInt(magicNumbers.APPLE_SELL_VALUE, magicNumbers.APPLE_SELL_VALUE + magicNumbers.FOOD_VAR));
+    		setConsumableHealValue(random.nextInt(magicNumbers.APPLE_SELL_VALUE, magicNumbers.APPLE_SELL_VALUE + magicNumbers.FOOD_VAR));
     	}
     }
-
-	public double getHealthIncrease() {
-		return healthIncrease;
-	}
-
-	public void setHealthIncrease(int healthIncrease) {
-		this.healthIncrease = healthIncrease;
-	}
 
 
 

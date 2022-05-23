@@ -51,7 +51,7 @@ public class Consumable extends Item {
     // HEAL VALUE -----------------------------------------------------------------
     
     
-    public void setConsumableHealValue(int inputConsumableHealValue) {
+    public void setConsumableHealValue(double inputConsumableHealValue) {
     	this.consumableHealValue = inputConsumableHealValue;
     }
     

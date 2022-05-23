@@ -1,5 +1,6 @@
 package main;
 
+import assets.enums.DrinkType;
 import assets.enums.FoodType;
 import assets.libraries.Tools;
 import entities.items.LottoTicket;
@@ -23,8 +24,8 @@ public class Inventory {
     
     private Player player; // Used to set the player of the game
     private ArrayList<Monster> monsters = new ArrayList<>(); // An ArrayList for holding objects of Monster type.
-    private HashMap<Food, Integer> foods = new HashMap<>(); // A HashMap for holding the quantity of each Food type.
-    private HashMap<Drink, Integer> drinks = new HashMap<>(); // A HashMap for holding the quantity of each Drink type.
+    private ArrayList<Integer> foods = new ArrayList<>(); // A HashMap for holding the quantity of each Food type.
+    private ArrayList<Integer> drinks = new ArrayList<>(); // A HashMap for holding the quantity of each Drink type.
     private double fuelAmount; // A double for holding the quantity of fuel owned
     private LottoTicket lottoTicket = null; // A lotto ticket is required to increase the chances of a random event happpening during travel
     
@@ -93,9 +94,9 @@ public class Inventory {
      * This method resets the food HashMap
      */
     public void resetFoods() {
-        foods = new HashMap<>();
-        foods.put(player.getFoodRange()[0], 0);
-        foods.put(player.getFoodRange()[1], 0);
+        foods = new ArrayList<>();
+        foods.add(0);
+        foods.add(0);
     }
 
     /**
@@ -103,7 +104,7 @@ public class Inventory {
      * Setting a custom list of food is not permitted
      * @throws UnallowedMethodException
      */
-    public void setFoods(HashMap<Drink, Integer> inputFoods) {
+    public void setFoods(ArrayList<Integer> inputFoods) {
         try {
             throw new UnallowedMethodException("Unallowed method");
         } catch (UnallowedMethodException e) {
@@ -117,7 +118,12 @@ public class Inventory {
      * @param inputFood Food
      */
     public void addFood(Food inputFood) {
-        foods.put(inputFood, foods.get(inputFood) + 1);
+    	if (inputFood.getFoodType() == FoodType.APPLE) {
+    		foods.set(0, foods.get(0)+1);
+    	} else {
+            foods.set(1, foods.get(1)+1);
+    	}
+        
     }
 
     /**
@@ -125,15 +131,30 @@ public class Inventory {
      * the player now has 1 less quantity of the specified food
      * @param inputFood Food
      */
-    public void removeFood(Food inputFood) {
-        foods.put(inputFood, foods.get(inputFood) - 1);
+    public boolean removeFood(Food inputFood) {
+    	if (inputFood.getFoodType() == FoodType.APPLE) {
+    		if (foods.get(0) <=0) {
+    			return false;
+    		} else {
+    			foods.set(0, foods.get(0)-1);
+    			return true;
+    		}
+            
+    	} else {
+            if (foods.get(1) <= 0) {
+            	return false;
+            } else {
+            	foods.set(1, foods.get(1)-1);
+            	return true;
+            }
+    	}
     }
 
     /**
      * This method returns the HashMap of food options
      * @return foods HashMap
      */
-    public HashMap<Food, Integer> getFoods() {
+    public ArrayList<Integer> getFoods() {
         return foods;
     }
     // FOOD -------------------------------------------------------
@@ -143,9 +164,9 @@ public class Inventory {
      * This method resets the drink HashMap
      */
     public void resetDrinks() {
-        drinks = new HashMap<>();
-        drinks.put(player.getDrinkRange()[0], 0);
-        drinks.put(player.getDrinkRange()[1], 0);
+        drinks = new ArrayList<>();
+        drinks.add(0);
+        drinks.add(0);
     }
 
     /**
@@ -153,7 +174,7 @@ public class Inventory {
      * Setting a custom list of food is not permitted
      * @throws UnallowedMethodException
      */
-    public void setDrinks(HashMap<Drink, Integer> inputDrinks) {
+    public void setDrinks(Object inputDrinks) {
         try {
             throw new UnallowedMethodException("Unallowed method");
         } catch (UnallowedMethodException e) {
@@ -167,22 +188,41 @@ public class Inventory {
      * @param inputDrink Drink
      */
     public void addDrink(Drink inputDrink) {
-        drinks.put(inputDrink, foods.get(inputDrink) + 1);
+        if (inputDrink.getDrinkType() == DrinkType.COFFEE) {
+            drinks.set(0, drinks.get(0)+1);
+        } else {
+            drinks.set(1, drinks.get(1)+1);
+        }
     }
     /**
      * Remove an item of drink from the HashMap mapping
      * the player now has 1 less quantity of the specified drink
      * @param inputDrink Drink
      */
-    public void removeDrink(Drink inputDrink) {
-        drinks.put(inputDrink, foods.get(inputDrink) - 1);
+    public boolean removeDrink(Drink inputDrink) {
+        if (inputDrink.getDrinkType() == DrinkType.COFFEE) {
+            if (drinks.get(0) <=0) {
+            	return false;
+            } else {
+            	drinks.set(0, drinks.get(0)-1);
+            	return true;
+            }
+        } else {
+        	if (drinks.get(1) <=0) {
+        		return false;
+        	} else {
+        		drinks.set(1, drinks.get(1)-1);
+        		return true;
+        	}
+            
+        }
     }
     
     /**
      * This method returns the HashMap of drink options
      * @return drinks HashMap
      */
-    public HashMap<Drink, Integer> getDrinks() {
+    public ArrayList<Integer> getDrinks() {
         return drinks;
     }
     // DRINKS -----------------------------------------------------
@@ -209,6 +249,9 @@ public class Inventory {
      */
     public void refillFuel(double inputRefillAmount) {
         fuelAmount += inputRefillAmount;
+        if (fuelAmount > 100) {
+        	fuelAmount = 100;
+        }
     }
     
     /**
@@ -232,7 +275,7 @@ public class Inventory {
      * 	false boolean, If there is not enough fuel the team cannot travel
      */
     public boolean hasEnoughFuelIfTrueUseFuel(double inputFuelAmount) {
-    	if (inputFuelAmount >= fuelAmount) {
+    	if (inputFuelAmount <= fuelAmount) {
     		fuelAmount -= inputFuelAmount;
     		return true;
     	} else {
@@ -264,6 +307,12 @@ public class Inventory {
      */
     public void resetLottoTicket() {
         lottoTicket = null;
+    }
+    
+    public void sleepTime() {
+    	for (Monster monster : getMonsters()) {
+    		monster.increaseMonsterHealthLevel(20);
+    	}
     }
     // LOTTO TICKET -----------------------------------------------
 

@@ -139,7 +139,7 @@ public class MapScreen {
 		panelItem.add(lblGoldsAndPoints);
 		lblGoldsAndPoints.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		
-		JLabel lblCurrentLocationInfo = new JLabel("<html><div>" + "Your monsters are currently at " + "Wellington" + ". Please select your next battle location to travel to." + "</div></html>");
+		JLabel lblCurrentLocationInfo = new JLabel(String.format("<html><div>Your monsters are currently at %s. Please select your next battle location to travel to.</div></html>", battle.getBattleName()));
 		lblCurrentLocationInfo.setForeground(Color.WHITE);
 		lblCurrentLocationInfo.setBounds(12, 49, 207, 106);
 		panelItem.add(lblCurrentLocationInfo);
@@ -149,7 +149,7 @@ public class MapScreen {
 		btnVisitShop = new JButton(String.format("Visit %s", battle.getBattleShop().getShopName()));
 		btnVisitShop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				nextScreen = 1;
+				nextScreen = 2;
 				finishedWindow();
 			}
 		});

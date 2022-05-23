@@ -45,10 +45,7 @@ public class Player implements Role {
     	this is a constant and will never change. */
     private Battle playerSelectedBattle; // Current battle location the player is in
     private Battle playerPreviewBattle; // Battle location that player is going to travel to next
-    private Food[] foodRange = {new Food(FoodType.APPLE), new Food(FoodType.PASTA)}; /* The food range sets the default values 
-    	for the 2 food options for whole game */
-    private Drink[] drinkRange = {new Drink(DrinkType.COFFEE), new Drink(DrinkType.ENERGY_DRINK)}; /* The drink range sets the default values
-    	for the 2 drink options for the whole game */
+
 
     // CONSTRUCTOR ------------------------------------------------
     /**
@@ -201,8 +198,7 @@ public class Player implements Role {
      */
     public void setNextDayNextBattle() {
     	playerCurrentDay += 1;
-    	playerSelectedBattle = playerPreviewBattle;
-    	boolean hasEnoughFuel = getPlayerInventory().hasEnoughFuelIfTrueUseFuel(10);
+    	playerSelectedBattle = playerPreviewBattle; 
     }
 
     /**
@@ -442,7 +438,7 @@ public class Player implements Role {
     		fuelAmountNeeded = 20;
     	}
     	if (getPlayerInventory().hasEnoughFuelIfTrueUseFuel(fuelAmountNeeded)) {
-    		setPlayerSelectedBattle(playerPreviewBattle);
+    		setNextDayNextBattle();
     		return true;
     	} else {
     		return false;
@@ -450,53 +446,11 @@ public class Player implements Role {
     }
     // PREVIEW BATTLE ---------------------------------------------
 
-    // FOOD RANGE -------------------------------------------------
-    /**
-     * This method is not allowed.
-     * The food range is never to be set in a fixed location
-     * @return boolean
-     */
-    public boolean setFoodRange() {
-        boolean allowed = true;
-        try {
-            throw new UnallowedMethodException("unallowed method");
-        } catch (UnallowedMethodException e) {
-            allowed = false;
-        }
-        return allowed;
-    }
-
-    /**
-     * This method returns the a new shopRange.
-     * @return FoodRange Food[]
-     */
     public Food[] getFoodRange() {
-        return new Food[]{new Food(FoodType.APPLE), new Food(FoodType.PASTA)};
-    }
-    // FOOD RANGE -------------------------------------------------
-
-    // DRINK RANGE ------------------------------------------------
-    /**
-     * This method is not allowed.
-     * The drink range is never to be set in a fixed location
-     * @return boolean
-     */
-    public boolean setDrinkRange() {
-        boolean allowed = true;
-        try {
-        	throw new UnallowedMethodException("unallowed method");
-        } catch (UnallowedMethodException e) {
-        	allowed = false;
-        }
-        return allowed;
+        return new Food[] {new Food(FoodType.APPLE), new Food(FoodType.PASTA)};
     }
 
-    /**
-     * This method returns the current shopRange.
-     * @return DrinkRange Drink[]
-     */
     public Drink[] getDrinkRange() {
-        return new Drink[]{new Drink(DrinkType.COFFEE), new Drink(DrinkType.ENERGY_DRINK)};
+        return new Drink[] {new Drink(DrinkType.COFFEE), new Drink(DrinkType.ENERGY_DRINK)};
     }
-    // DRINK RANGE ------------------------------------------------
 }

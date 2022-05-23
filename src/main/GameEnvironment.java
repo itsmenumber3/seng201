@@ -44,6 +44,16 @@ public class GameEnvironment {
     public FightOutcomeType getFightOutcome() {
     	return fightOutcome;
     }
+    
+    private String randomEventMessage;
+    public String getRandomEventMessage() {
+    	return randomEventMessage;
+    }
+    
+    public void resetRandomEventMessage() {
+    	randomEventMessage = "";
+    }
+    
     // FIGHT OUTCOME ----------------------------------------------
 
     // PLAYER -----------------------------------------------------
@@ -201,6 +211,7 @@ public class GameEnvironment {
     public void closeBattleScreen(BattleScreen inputBattleWindow, boolean isPlayerBattling) {
         inputBattleWindow.closeWindow();
         if (isPlayerBattling) {
+        	randomEventMessage = inputBattleWindow.getRandomEventMessage();
             launchTravellingScreen();
         } else {
             launchMapScreen();
@@ -224,7 +235,11 @@ public class GameEnvironment {
      */
     public void closeShopScreen(ShopScreen inputShopWindow) {
         inputShopWindow.closeWindow();
-        launchMapScreen();
+        if (inputShopWindow.getNextWindowIsInventory()) {
+        	launchInventoryScreen();
+        } else {
+        	launchMapScreen();
+        }
     }
     // SHOP SCREEN ------------------------------------------------
 
