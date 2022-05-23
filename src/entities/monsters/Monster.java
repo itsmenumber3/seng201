@@ -16,9 +16,9 @@ public class Monster extends Entity implements Role {
     private double monsterAttackDamage; // This is the damage caused by the monster on its opponent
     private double monsterResistanceAbility; // This is the resistance to an attack that the monster has
 
-    /** Setter of the roleType
-    *This is an unallowed method and will throw the UnallowedMethodException exception
-    *It will return "unallowed method" to the stack
+    // ROLE TYPE --------------------------------------------------
+    /** This method is not allowed.
+     *  will throw the UnallowedMethodException exception
     */
 	public void setRoleType(RoleType inputRoleType) {
 		try {
@@ -26,58 +26,16 @@ public class Monster extends Entity implements Role {
 		} catch (UnallowedMethodException e) {
 			e.printStackTrace();
 		}
-	}
-	
-    /** Getter the roleType of the Monster
-    * This method returns the role type of the monster
-    * @return roleType: RoleType
-    */
-    public RoleType getRoleType() {
-        return this.roleType;
-    }
-    
-    /** Setter for the monsterType of Monster
-    * This method sets the monsters type
-    * @param inputMonsterType
-    * @return monsterType: MonsterType
-    */
-    public void setMonsterType(MonsterType inputMonsterType) {
-    	this.monsterType = inputMonsterType;
-    }
+    };
     
     /** Getter for the monsterType of the Monster'
     * This method returns the monsters type
     * @return monsterType: MonsterType
     */
     public MonsterType getMonsterType() {
-    	return this.monsterType;
+    	return monsterType;
     }
-
-
-//    // INSTANTIATION --------------------------------------------------------
-//
-//    /**
-//     * This method will create an instance of the class Monster.
-//     * @param inputEntityName String, the name of the monster
-//     * @param inputEntityRarity Rarity, the rarity of the monster
-//     * @param inputEntityPurchaseValue
-//     * @param inputEntitySellValue
-//     * @param inputAttackDamage
-//     * @param inputResistanceAbility
-//     * @param inputHealAmount
-//     * @see Rarity
-//     */
-//    public Monster(String inputEntityName, int inputEntityRarity, int inputEntityPurchaseValue, int inputEntitySellValue,
-//                   int inputAttackDamage, int inputResistanceAbility) {
-//        super(inputEntityName, inputEntityRarity, inputEntityPurchaseValue, inputEntitySellValue);
-//        this.resetMonsterHealthLevel();
-//        this.setMonsterAttackDamage(inputAttackDamage);
-//        this.setMonsterResistanceAbility(inputResistanceAbility);
-//    }
-//
-//    // INSTANTIATION --------------------------------------------------------
-
-
+    // MONSTER TYPE -----------------------------------------------
 
     // HEALTH LEVEL ---------------------------------------------------
 
@@ -101,7 +59,7 @@ public class Monster extends Entity implements Role {
     public void resetMonsterHealthLevel() {
         try {
             if (magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE  && magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
-                this.monsterHealthLevel = magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL;
+                monsterHealthLevel = magicNumbers.DEFAULT_MONSTER_HEALTH_LEVEL;
             } else {
                 throw new InvalidMonsterNumericPropertyException("Health over 100");
             }
@@ -115,15 +73,15 @@ public class Monster extends Entity implements Role {
      * @return monsterHealthLevel: integer
      */
     public double getMonsterHealthLevel() {
-        return this.monsterHealthLevel;
+        return monsterHealthLevel;
     }
 
     public void increaseMonsterHealthLevel(double inputIncreaseAmount) {
-        this.monsterHealthLevel += inputIncreaseAmount;
+        monsterHealthLevel += inputIncreaseAmount;
     }
 
     public void monsterGetsAttacked(double inputOpponentAttackDamage) {
-        this.monsterHealthLevel = this.monsterHealthLevel - (inputOpponentAttackDamage * ((100 - this.monsterResistanceAbility) / 100));
+        monsterHealthLevel = monsterHealthLevel - (inputOpponentAttackDamage * ((100 - monsterResistanceAbility) / 100));
     }
 
 
@@ -141,7 +99,7 @@ public class Monster extends Entity implements Role {
     public void setMonsterAttackDamage(double inputMonsterAttackDamage) {
         try {
             if (inputMonsterAttackDamage <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE  && inputMonsterAttackDamage >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
-                this.monsterAttackDamage = inputMonsterAttackDamage;
+                monsterAttackDamage = inputMonsterAttackDamage;
             } else {
                 throw new InvalidMonsterNumericPropertyException("Over 100!");
             }
@@ -156,7 +114,7 @@ public class Monster extends Entity implements Role {
      * @return monsterAttackDamage: integer
      */
     public double getMonsterAttackDamage() {
-        return this.monsterAttackDamage;
+        return monsterAttackDamage;
     }
     // ATTACK DAMAGE --------------------------------------------------
 
@@ -171,14 +129,14 @@ public class Monster extends Entity implements Role {
     public void setMonsterResistanceAbility(double inputResistanceAbility) {
         try {
             if (inputResistanceAbility <= magicNumbers.MAXIMUM_MONSTER_NUMERIC_PROPERTY_VALUE && inputResistanceAbility >= magicNumbers.MINIMUM_MONSTER_NUMERIC_PROPERTY_VALUE) {
-                this.monsterResistanceAbility = inputResistanceAbility;
+                monsterResistanceAbility = inputResistanceAbility;
             } else {
                 throw new InvalidMonsterNumericPropertyException("Invalid numeric value");
             }
         } catch (InvalidMonsterNumericPropertyException e) {
             e.printStackTrace();
         }
-        this.monsterResistanceAbility = inputResistanceAbility;
+        monsterResistanceAbility = inputResistanceAbility;
     }
 
     /** Getter for the monsterResistanceAbility
@@ -186,7 +144,7 @@ public class Monster extends Entity implements Role {
      * @return monsterResistanceAbility: integer
      */
     public double getMonsterResistanceAbility() {
-        return this.monsterResistanceAbility;
+        return monsterResistanceAbility;
     }
 
     // RESISTANCE ABILITY ---------------------------------------------------
