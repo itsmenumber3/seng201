@@ -69,7 +69,7 @@ public class QuizScreen {
 	public void finishedWindow() {
 		battle.incrementChallengeCount();
 		quiz.runQuizResults();
-		gameEnvironment.setFightOutcome(tools.runFight(player));
+		battle.setFightOutcome(tools.runFight(player));
 		gameEnvironment.closeQuizScreen(this);
 	}
 

@@ -556,7 +556,7 @@ public class Tools {
 
 	public Challenge makeRandomChallenge() {
 		Challenge challenge;
-		int randomNumber = 0; //random.nextInt(0, 2);
+		int randomNumber = random.nextInt(0, 3);
 		switch (randomNumber) {
 			case 0:
 				challenge = new PaperScissorsRock();
@@ -594,14 +594,14 @@ public class Tools {
 			if (inputPlayer.getPlayerSelectedBattle().getBattleMonster().getMonsterHealthLevel() <= 0) {
 				return FightOutcomeType.PLAYER_WINS_BATTLE;
 			} else {
-				inputPlayer.getPlayerSelectedBattle().setCurrentChallenge(this.makeRandomChallenge());
+				//inputPlayer.getPlayerSelectedBattle().setCurrentChallenge(this.makeRandomChallenge());
 				return FightOutcomeType.BOTH_MONSTERS_STILL_HAVE_HEALTH;
 			}
 		} else {
 			inputPlayer.getPlayerInventory().getMonsters().remove(0);
 
 			if (inputPlayer.getPlayerInventory().getMonsters().size() > 0) {
-				inputPlayer.getPlayerSelectedBattle().setCurrentChallenge(this.makeRandomChallenge());
+				//inputPlayer.getPlayerSelectedBattle().setCurrentChallenge(this.makeRandomChallenge());
 				return FightOutcomeType.PLAYER_LOSES_MONSTER_BUT_BATTLE_CONTINUES;
 			} else {
 				return FightOutcomeType.PLAYER_OUT_OF_MONSTERS_AND_LOSES_BATTLE_GAME_OVER;
@@ -689,6 +689,6 @@ public class Tools {
 			monsterNameArrayList.add(monster.getEntityName());
 		}
 		String[] strings = (String[]) monsterNameArrayList.toArray();
-		return ;
+		return new String[]{"Me", "Myself"};
 	}
 }

@@ -3,6 +3,7 @@ package battles;
 import java.util.ArrayList;
 
 import assets.enums.BattleType;
+import assets.enums.FightOutcomeType;
 import battles.challenge.Challenge;
 import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
@@ -113,4 +114,14 @@ public class Battle{
     public String getBattleImagePath() {
         return battleImagePath;
     }
+    
+    public FightOutcomeType fightOutcome;
+    
+	public void setFightOutcome(FightOutcomeType inputFightOutcome) {
+		fightOutcome = inputFightOutcome;
+	}
+	
+	public FightOutcomeType getFightOutcome() {
+		return fightOutcome;
+	}
 }

@@ -1,5 +1,6 @@
 package main;
 
+import assets.enums.ChallengeOutcomeType;
 import assets.enums.ChallengeType;
 import assets.enums.FightOutcomeType;
 import assets.libraries.Tools;
@@ -16,6 +17,8 @@ import javax.swing.*;
  * The class Game is the master class in this game.
  */
 public class GameEnvironment {
+	
+	
 
     // LIBRARIES --------------------------------------------------
     private final Player player = new Player(); // Player of the game
@@ -247,105 +250,7 @@ public class GameEnvironment {
     	makeNewChallengeAndLaunchScreen();
     }
     // TRAVELLING SCREEN ------------------------------------------
-
-    // QUIZ SCREEN ------------------------------------------------
-    /**
-     * Launches the quiz screen where the player
-     * answers a question to decide whether the player gets to attack in the battle
-     */
-    public void launchQuizScreen() {
-    	QuizScreen quizWindow = new QuizScreen(this);
-    }
-
-    /**
-     * Closes the quiz screen and calls the launch challenge result screen
-     * @param inputQuizScreen QuizScreen
-     */
-    public void closeQuizScreen(QuizScreen inputQuizScreen) {
-        inputQuizScreen.closeWindow();
-        launchChallengeResultScreen();
-    }
-    // QUIZ SCREEN ------------------------------------------------
-
-    // PAPER SCISSOR ROCK SCREEN ----------------------------------
-    /**
-     * Launches the paper, scissors, rock screen where the player
-     * plays paper, scissors, rock to decide whether the player gets to attack in the battle
-     */
-    public void launchPaperScissorsRockScreen() {
-    	PaperScissorsRockScreen paperScissorsRockWindow = new PaperScissorsRockScreen(this);
-    }
-
-    /**
-     * Closes the paper, scissors, rock screen and calls the launch challenge result screen
-     * @param inputPapersScissorsRockWindow PaperScissorsRockScreen
-     */
-    public void closePaperScissorsRockScreen(PaperScissorsRockScreen inputPapersScissorsRockWindow) {
-        inputPapersScissorsRockWindow.closeWindow();
-        System.out.println(getPlayer().getPlayerSelectedBattle().getCurrentChallenge().getChallengeOutcome().toString());
-        launchChallengeResultScreen();
-
-    }
-    // PAPER SCISSOR ROCK SCREEN ----------------------------------
-
-    // FLIP A COIN SCREEN -----------------------------------------
-    /**
-     * Launches the flip a coin screen where the player
-     * plays flip a coin to decide whether the player gets to attack in the battle
-     */
-    public void launchFlipACoinScreen() {
-        FlipACoinScreen flipACoinWindow = new FlipACoinScreen(this);
-    }
-
-    /**
-     * Closes the flip a coin screen and calls the launch challenge result screen
-     * @param flipACoinWindow FlipACoinScreen
-     */
-    public void closeFlipACoinScreen(FlipACoinScreen flipACoinWindow) {
-        flipACoinWindow.closeWindow();
-        launchChallengeResultScreen();
-    }
-    // FLIP A COIN SCREEN -----------------------------------------
-
-    // CHALLENGE RESULT SCREEN ------------------------------------
-    /**
-     * Launches the challenge result screen which displays
-     * the players monsters and stats and the opponent monsters stats
-     */
-    public void launchChallengeResultScreen() {
-        ChallengeResultScreen challengeResultWindow = new ChallengeResultScreen(this);
-    }
-
-    /**
-     * Closes the challenge result window and has 4 options to call:
-     * If the player wins the battle the launch battle screen is called
-     * If both monsters still have health > 0 the battle continues and a new challenge is called
-     * If the players current monster's health < 0 and has more monsters in their team
-     * and the battle monster has health > 0 the battle continues and a new challenge is called
-     * If the players current monster's health < 0 and there are no more monsters in the team
-     * the battle and subsequently game is over and the finish game screen is called
-     * @param inputChallengeResultWindow ChallengeResultScreen
-     */
-    public void closeChallengeResultScreen(ChallengeResultScreen inputChallengeResultWindow) {
-        inputChallengeResultWindow.closeWindow();
-        
-        switch (getFightOutcome()) {
-        case PLAYER_WINS_BATTLE:
-        	launchBattleResultScreen();
-        	break;
-        case BOTH_MONSTERS_STILL_HAVE_HEALTH:
-        	makeNewChallengeAndLaunchScreen();
-        	break;
-        case PLAYER_LOSES_MONSTER_BUT_BATTLE_CONTINUES:
-        	makeNewChallengeAndLaunchScreen();
-        	break;
-        default: // Game is over
-        	launchFinishGameScreen();
-        	break;
-        }
-    }
-    // CHALLENGE RESULT SCREEN ------------------------------------
-
+    
     // NEW CHALLENGE SCREEN ---------------------------------------
     /**
      * Chooses the next challenge and launches the relevant screen:
@@ -367,6 +272,113 @@ public class GameEnvironment {
         }
     }
     // NEW CHALLENGE SCREEN ---------------------------------------
+
+
+    
+    // CHALLENGE RESULT SCREEN ------------------------------------
+    /**
+     * Launches the challenge result screen which displays
+     * the players monsters and stats and the opponent monsters stats
+     */
+    public void launchChallengeResultScreen() {
+        ChallengeResultScreen challengeResultWindow = new ChallengeResultScreen(this);
+    }
+
+    /**
+     * Closes the challenge result window and has 4 options to call:
+     * If the player wins the battle the launch battle screen is called
+     * If both monsters still have health > 0 the battle continues and a new challenge is called
+     * If the players current monster's health < 0 and has more monsters in their team
+     * and the battle monster has health > 0 the battle continues and a new challenge is called
+     * If the players current monster's health < 0 and there are no more monsters in the team
+     * the battle and subsequently game is over and the finish game screen is called
+     * @param inputChallengeResultWindow ChallengeResultScreen
+     */
+    public void closeChallengeResultScreen(ChallengeResultScreen inputChallengeResultWindow) {
+        inputChallengeResultWindow.closeWindow();
+        makeNewChallengeAndLaunchScreen();
+    	
+    }
+
+
+    // QUIZ SCREEN ------------------------------------------------
+    /**
+     * Launches the quiz screen where the player
+     * answers a question to decide whether the player gets to attack in the battle
+     */
+    public void launchQuizScreen() {
+    	QuizScreen quizWindow = new QuizScreen(this);
+    }
+
+    /**
+     * Closes the quiz screen and calls the launch challenge result screen
+     * @param inputQuizScreen QuizScreen
+     */
+    public void closeQuizScreen(QuizScreen inputQuizScreen) {
+        inputQuizScreen.closeWindow();
+        decideNextChallengeScreenBasedOnRunFight();
+
+    }
+    // QUIZ SCREEN ------------------------------------------------
+
+    // PAPER SCISSOR ROCK SCREEN ----------------------------------
+    /**
+     * Launches the paper, scissors, rock screen where the player
+     * plays paper, scissors, rock to decide whether the player gets to attack in the battle
+     */
+    public void launchPaperScissorsRockScreen() {
+    	PaperScissorsRockScreen paperScissorsRockWindow = new PaperScissorsRockScreen(this);
+    }
+
+    /**
+     * Closes the paper, scissors, rock screen and calls the launch challenge result screen
+     * @param inputPapersScissorsRockWindow PaperScissorsRockScreen
+     */
+    public void closePaperScissorsRockScreen(PaperScissorsRockScreen inputPapersScissorsRockWindow) {
+        inputPapersScissorsRockWindow.closeWindow();
+        decideNextChallengeScreenBasedOnRunFight();
+    }
+    // PAPER SCISSOR ROCK SCREEN ----------------------------------
+    
+    public void decideNextChallengeScreenBasedOnRunFight() {
+    	FightOutcomeType fightOutcome = getPlayer().getPlayerSelectedBattle().getFightOutcome();
+    	
+    	
+    	switch (fightOutcome) {
+    	case PLAYER_WINS_BATTLE:
+    		launchBattleResultScreen();
+    		break;
+    	case PLAYER_OUT_OF_MONSTERS_AND_LOSES_BATTLE_GAME_OVER:
+    		launchFinishGameScreen();
+    		break;
+    	default:
+    		launchChallengeResultScreen();
+    	}
+  
+        
+    }
+
+    // FLIP A COIN SCREEN -----------------------------------------
+    /**
+     * Launches the flip a coin screen where the player
+     * plays flip a coin to decide whether the player gets to attack in the battle
+     */
+    public void launchFlipACoinScreen() {
+        FlipACoinScreen flipACoinWindow = new FlipACoinScreen(this);
+    }
+
+    /**
+     * Closes the flip a coin screen and calls the launch challenge result screen
+     * @param flipACoinWindow FlipACoinScreen
+     */
+    public void closeFlipACoinScreen(FlipACoinScreen flipACoinWindow) {
+        flipACoinWindow.closeWindow();
+        decideNextChallengeScreenBasedOnRunFight();
+
+    }
+    // FLIP A COIN SCREEN -----------------------------------------
+
+
 
     // BATTLE RESULT SCREEN ---------------------------------------
     /**
