@@ -81,7 +81,7 @@ public class MagicNumbers {
      * This is the day that should be set when the game starts or restarts.
      * @see main.Player
      */
-    public final int RESET_CURRENT_DAY_VALUE = 1; // Do not change
+    public final int RESET_CURRENT_DAY_VALUE = 0; // Do not change
 
     /**
      * This is

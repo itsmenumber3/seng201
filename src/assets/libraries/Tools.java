@@ -580,6 +580,7 @@ public class Tools {
 	}
 
 	public FightOutcomeType runFight(Player inputPlayer) {
+		inputPlayer.incrementPlayerPointsBy(3);
 		if (inputPlayer.getPlayerSelectedBattle().getCurrentChallenge().getChallengeOutcome() == ChallengeOutcomeType.WIN) {
 			// Player monster attacks battle monster
 			inputPlayer.getPlayerSelectedBattle().getBattleMonster().monsterGetsAttacked(
@@ -592,6 +593,7 @@ public class Tools {
 
 		if (inputPlayer.getPlayerInventory().getMonsters().get(0).getMonsterHealthLevel() > 0) {
 			if (inputPlayer.getPlayerSelectedBattle().getBattleMonster().getMonsterHealthLevel() <= 0) {
+				inputPlayer.incrementPlayerGoldBy(inputPlayer.getPlayerSelectedBattle().getBattleMonster().getEntitySellValue());
 				return FightOutcomeType.PLAYER_WINS_BATTLE;
 			} else {
 				//inputPlayer.getPlayerSelectedBattle().setCurrentChallenge(this.makeRandomChallenge());
