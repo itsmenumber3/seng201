@@ -32,39 +32,14 @@ public class Tools {
 	QuizData quizData = new QuizData();
 
 
-    public boolean TrueFalseRandom(float inputProbability) {
-        return true;
-    }
 
-    /**
-     * This method validates the user input where naming is required, such as the name of the Player,
-     * and the names given by the Player to the Monsters. There is a number of criteria to a valid name:
-     * 1. The name must be between 3-18 characters (inclusive) in length.
-     * 2. The name must only contain alphanumeric characters, or points, dashes, and underscores.
-     * If the name is found to be VALID, return that name as String for assignment into a variable.
-     * Else, if the name is found to be INVALID, throw an InvalidInputException error.
-     * InvalidInputException is a custom exception class found in seng201.classes.exceptions.
-     * @param inputName String, which is the argument passed on by setPlayerName() in class Player().
-     * @return inputName String, only return if the name is valid against criteria
-     * @throws InvalidInputException if the name is found to be invalid
-     */
-    public String nameValidation(String inputName) throws InvalidInputException {
-        String regex = magicNumbers.NAME_VALIDATION_REGEX;
-        Pattern pattern = Pattern.compile(regex);
-
-        if (inputName == null) {
-            throw new InvalidInputException("name cannot be blank");
-        } else {
-            Matcher nameMatcher = pattern.matcher(inputName);
-            if (!nameMatcher.matches()) {
-                throw new InvalidInputException("name is invalid");
-            } else {
-                return inputName;
-            }
-        }
-    }
-    
-
+	/**
+	 * Set the team size based on the input of difficulty
+	 * @param inputDifficulty integer
+	 * @return 2 integer, If hard difficulty
+	 * 	3 integer, If medium difficulty
+	 * 	4 integer, If easy difficulty
+	 */
     public int howManyMonstersBasedOnDifficulty(int inputDifficulty) {
     	if (inputDifficulty == 1) {
     		return 4;
@@ -75,6 +50,12 @@ public class Tools {
     	}
     }
     
+    /**
+     * Generate a random monster.
+     * Gets a random type and subsequently sets the attack and heal values randomly
+     * @param inputPlayer Player
+     * @return monster Monster
+     */
     public Monster generateRandomMonster(Player inputPlayer) {
     	Monster monster;
     	
@@ -460,17 +441,18 @@ public class Tools {
 			}
     	} 
 		
-		 // to complete implementation 
-    	
-    	
+		 // to complete implementation
     	monster.resetMonsterHealthLevel();
-
-    	
     	return monster;
     }
 
-
-	public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
+    /**
+     * Generates multiple monsters for the first selected monster screen and shop options
+     * @param inputPlayer Player
+     * @param inputSize integer
+     * @return monster ArrayList<Monster>
+     */
+    public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
     	ArrayList<Monster> monsters = new ArrayList<>();
     	for (int index = 0; index < inputSize; index++) {
     		Monster theMonster = this.generateRandomMonster(inputPlayer);
@@ -481,6 +463,11 @@ public class Tools {
     	return monsters;
     }
     
+    /**
+     * Sets a default description for screen display based off the required variables
+     * @param inputMonster Monster
+     * @return A formatted string with monster details
+     */
     public String makeStringDescriptionFromMonsterInformation(Monster inputMonster) {
     	return String.format("This monster is a %s.<br> It has an attack damage of %.2f.<br> Its resistance ability is %.2f. <br>It is of rarity level %d. <br>Currently, its health is %.2f out of 100.",
 				inputMonster.getMonsterType().toString(),
@@ -490,10 +477,21 @@ public class Tools {
 				inputMonster.getMonsterHealthLevel());
     }
     
+    /**
+     * Chooses a random name for each monster from a list in magic numbers
+     * @return a string that is the name of the monster
+     */
     public String generateRandomMonsterName() {
     	return magicNumbers.RANDOM_MONSTER_NAMES[random.nextInt(magicNumbers.RANDOM_MONSTER_NAMES.length)];
     }
 
+    /**
+     * Creates a battle monster with random stats for the location that the team is traveling to
+     * A location has a predefined monster type so it just needs to generate some random attack and resistance values
+     * @param inputMonsterType MonsterType
+     * @param inputPlayer Player
+     * @return monster Monster
+     */
 	public Monster generateRandomBattleMonster(MonsterType inputMonsterType, Player inputPlayer) {
 		Monster monster = new Monster();
 		
@@ -543,8 +541,7 @@ public class Tools {
 			e.printStackTrace();
 		}
 		
-		monster.setEntityPurchaseValue(random.nextInt(50, 80));
-		monster.setEntitySellbackValue(random.nextInt(50, 100));
+		monster.setEntitySellbackValue(random.nextInt(70, 100));
 		
 		return monster;
 	}
@@ -687,4 +684,14 @@ public class Tools {
 		return "";
 	}
 
+	public String[] getMonsterNames(Player inputPlayer) {
+		ArrayList<Monster> monsters = inputPlayer.getPlayerInventory().getMonsters();
+		ArrayList<String> monsterNameArrayList= new ArrayList<>();
+
+		for (Monster monster : monsters) {
+			monsterNameArrayList.add(monster.getEntityName());
+		}
+		String[] strings = (String[]) monsterNameArrayList.toArray();
+		return new String[]{"Me", "Myself"};
+	}
 }
