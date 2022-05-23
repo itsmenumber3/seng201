@@ -28,6 +28,25 @@ public class Monster extends Entity implements Role {
 		}
     };
     
+    /** Getter the roleType of the Monster
+    * This method returns the role type of the monster
+    * @return roleType: RoleType
+    */
+    public RoleType getRoleType() {
+        return this.roleType;
+    }
+
+    /** Setter for the monsterType of Monster
+    * This method sets the monsters type
+    * @param inputMonsterType
+    * @return monsterType: MonsterType
+    */
+    public void setMonsterType(MonsterType inputMonsterType) {
+    	this.monsterType = inputMonsterType;
+    }
+
+
+    
     /** Getter for the monsterType of the Monster'
     * This method returns the monsters type
     * @return monsterType: MonsterType
