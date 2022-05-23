@@ -70,7 +70,7 @@ public class FlipACoinScreen {
 	public void finishedWindow() {
 		battle.incrementChallengeCount();
 		flipACoin.runFlipACoinResults();
-		gameEnvironment.setFightOutcome(tools.runFight(player));
+		battle.setFightOutcome(tools.runFight(player));
 		gameEnvironment.closeFlipACoinScreen(this);
 	}
 

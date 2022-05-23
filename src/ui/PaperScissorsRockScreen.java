@@ -2,10 +2,9 @@ package ui;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
+import assets.enums.ChallengeOutcomeType;
 import assets.enums.PapersScissorsRockType;
 import assets.libraries.Tools;
 import battles.Battle;
@@ -17,14 +16,9 @@ import main.GameEnvironment;
 import main.Player;
 
 import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JToggleButton;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JPanel;
 import java.awt.Color;
 
 public class PaperScissorsRockScreen {
@@ -71,11 +65,9 @@ public class PaperScissorsRockScreen {
 	}
 
 	public void finishedWindow() {
-		battle.incrementChallengeCount();
-		battle.getCurrentChallenge().setChallengeOutcomeType(paperScissorsRock.runPaperScissorsRockResults());
-		System.out.println(battle.getCurrentChallenge());
-		System.out.println(battle.getCurrentChallenge().getChallengeOutcomeType());
-		gameEnvironment.setFightOutcome(tools.runFight(player));
+		player.getPlayerSelectedBattle().incrementChallengeCount();
+		paperScissorsRock.runPaperScissorsRockResults();
+		battle.setFightOutcome(tools.runFight(player));
 		gameEnvironment.closePaperScissorsRockScreen(this);
 	}
 
@@ -155,7 +147,7 @@ public class PaperScissorsRockScreen {
 		lblRockSymbol.setBounds(552, 220, 96, 96);
 		window.getContentPane().add(lblRockSymbol);
 		
-		JToggleButton tglbtnPaper = new JToggleButton("Paper");
+		JButton tglbtnPaper = new JButton("Paper");
 		tglbtnPaper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				paperScissorsRock.setPlayerChoice(PapersScissorsRockType.PAPER);
@@ -166,7 +158,7 @@ public class PaperScissorsRockScreen {
 		tglbtnPaper.setBounds(102, 330, 96, 34);
 		window.getContentPane().add(tglbtnPaper);
 		
-		JToggleButton tglbtnScissors = new JToggleButton("Scissors");
+		JButton tglbtnScissors = new JButton("Scissors");
 		tglbtnScissors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				paperScissorsRock.setPlayerChoice(PapersScissorsRockType.SCISSORS);
@@ -177,7 +169,7 @@ public class PaperScissorsRockScreen {
 		tglbtnScissors.setBounds(305, 330, 118, 34);
 		window.getContentPane().add(tglbtnScissors);
 		
-		JToggleButton tglbtnRock = new JToggleButton("Rock");
+		JButton tglbtnRock = new JButton("Rock");
 		tglbtnRock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				paperScissorsRock.setPlayerChoice(PapersScissorsRockType.ROCK);
