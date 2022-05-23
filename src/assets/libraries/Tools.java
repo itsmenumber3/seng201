@@ -31,40 +31,15 @@ public class Tools {
     SecureRandom random = new SecureRandom();
 	QuizData quizData = new QuizData();
 
-
-    public boolean TrueFalseRandom(float inputProbability) {
-        return true;
-    }
-
-    /**
-     * This method validates the user input where naming is required, such as the name of the Player,
-     * and the names given by the Player to the Monsters. There is a number of criteria to a valid name:
-     * 1. The name must be between 3-18 characters (inclusive) in length.
-     * 2. The name must only contain alphanumeric characters, or points, dashes, and underscores.
-     * If the name is found to be VALID, return that name as String for assignment into a variable.
-     * Else, if the name is found to be INVALID, throw an InvalidInputException error.
-     * InvalidInputException is a custom exception class found in seng201.classes.exceptions.
-     * @param inputName String, which is the argument passed on by setPlayerName() in class Player().
-     * @return inputName String, only return if the name is valid against criteria
-     * @throws InvalidInputException if the name is found to be invalid
-     */
-    public String nameValidation(String inputName) throws InvalidInputException {
-        String regex = magicNumbers.NAME_VALIDATION_REGEX;
-        Pattern pattern = Pattern.compile(regex);
-
-        if (inputName == null) {
-            throw new InvalidInputException("name cannot be blank");
-        } else {
-            Matcher nameMatcher = pattern.matcher(inputName);
-            if (!nameMatcher.matches()) {
-                throw new InvalidInputException("name is invalid");
-            } else {
-                return inputName;
-            }
-        }
-    }
     
 
+	/**
+	 * Set the team size based on the input of difficulty
+	 * @param inputDifficulty integer
+	 * @return 2 integer, If hard difficulty
+	 * 	3 integer, If medium difficulty
+	 * 	4 integer, If easy difficulty
+	 */
     public int howManyMonstersBasedOnDifficulty(int inputDifficulty) {
     	if (inputDifficulty == 1) {
     		return 4;
@@ -75,6 +50,12 @@ public class Tools {
     	}
     }
     
+    /**
+     * Generate a random monster.
+     * Gets a random type and subsequently sets the attack and heal values randomly
+     * @param inputPlayer Player
+     * @return monster Monster
+     */
     public Monster generateRandomMonster(Player inputPlayer) {
     	Monster monster;
     	
@@ -461,16 +442,17 @@ public class Tools {
     	} 
 		
 		 // to complete implementation 
-    	
-    	
     	monster.resetMonsterHealthLevel();
-
-    	
     	return monster;
     }
 
-
-		public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
+    /**
+     * Generates multiple monsters for the first selected monster screen and shop options
+     * @param inputPlayer Player
+     * @param inputSize integer
+     * @return monster ArrayList<Monster>
+     */
+    public ArrayList<Monster> generateManyRandomMonsters(Player inputPlayer, int inputSize) {
     	ArrayList<Monster> monsters = new ArrayList<>();
     	for (int index = 0; index < inputSize; index++) {
     		monsters.add(this.generateRandomMonster(inputPlayer));
@@ -478,6 +460,11 @@ public class Tools {
     	return monsters;
     }
     
+    /**
+     * Sets a default description for screen display based off the required variables
+     * @param inputMonster Monster
+     * @return A formatted string with monster details
+     */
     public String makeStringDescriptionFromMonsterInformation(Monster inputMonster) {
     	return String.format("This monster is a %s.<br> It has an attack damage of %.2f.<br> Its resistance ability is %.2f. <br>It is of rarity level %d. <br>Currently, its health is %.2f out of 100.",
 				inputMonster.getMonsterType().toString(),
@@ -487,10 +474,21 @@ public class Tools {
 				inputMonster.getMonsterHealthLevel());
     }
     
+    /**
+     * Chooses a random name for each monster from a list in magic numbers
+     * @return a string that is the name of the monster
+     */
     public String generateRandomMonsterName() {
     	return magicNumbers.RANDOM_MONSTER_NAMES[random.nextInt(magicNumbers.RANDOM_MONSTER_NAMES.length)];
     }
 
+    /**
+     * Creates a battle monster with random stats for the location that the team is traveling to
+     * A location has a predefined monster type so it just needs to generate some random attack and resistance values
+     * @param inputMonsterType MonsterType
+     * @param inputPlayer Player
+     * @return monster Monster
+     */
 	public Monster generateRandomBattleMonster(MonsterType inputMonsterType, Player inputPlayer) {
 		Monster monster = new Monster();
 		
@@ -545,6 +543,11 @@ public class Tools {
 		return monster;
 	}
 	
+	/**
+	 * Create the description for the battle screen
+	 * @param inputBattle Battle
+	 * @return A formatted string to be displayed in the battle screen
+	 */
 	public String makeBattleDescription(Battle inputBattle) {
 		String[] creativeMonstersDescriptionStrings = {"It is a dangerous monster that has taken the lives of many people.", 
 												"Many village residents have disappeared, and they suspect nothing else but this monster.", 
@@ -554,6 +557,10 @@ public class Tools {
 				inputBattle.getBattleMonster().getEntitySellValue());
 	}
 
+	/**
+	 * Choose a random challenge for the battle
+	 * @return challeng Challenge
+	 */
 	public Challenge makeRandomChallenge() {
 		Challenge challenge;
 		int randomNumber = random.nextInt(0, 3);
@@ -570,6 +577,10 @@ public class Tools {
 		return challenge;
 	}
 
+	/**
+	 * Sets up the quiz question, passing through the answer so that it can be checked
+	 * @return quiz Quiz
+	 */
 	public Quiz makeRandomQuiz() {
 		Quiz quiz = new Quiz();
 		String[] questionData = this.quizData.getQuestion(random.nextInt(1, 10));
@@ -579,6 +590,11 @@ public class Tools {
 		return quiz;
 	}
 
+	/**
+	 * Runs the fight process of attack and resistance and passes whether the battle is complete or continuing
+	 * @param inputPlayer Player
+	 * @return FlightOutcomeType
+	 */
 	public FightOutcomeType runFight(Player inputPlayer) {
 		inputPlayer.incrementPlayerPointsBy(3);
 		if (inputPlayer.getPlayerSelectedBattle().getCurrentChallenge().getChallengeOutcome() == ChallengeOutcomeType.WIN) {
@@ -610,7 +626,11 @@ public class Tools {
 			}
 		}
 	}
-	
+	/**
+	 * Set the message to be displayed on the challenge result screen
+	 * @param inputChallengeOutcomeType ChallengeOutcomeType
+	 * @return returnString String
+	 */
 	public String generateChallengeResultMessage(ChallengeOutcomeType inputChallengeOutcomeType) {
 		String returnString;
 		System.out.println(inputChallengeOutcomeType);
