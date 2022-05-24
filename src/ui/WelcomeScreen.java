@@ -91,11 +91,11 @@ public class WelcomeScreen {
 		lblTheNewZealand.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTheNewZealand.setForeground(Color.WHITE);
 		lblTheNewZealand.setFont(new Font("Century Schoolbook L", Font.PLAIN, 30));
-		lblTheNewZealand.setBounds(0, 117, 748, 67);
+		lblTheNewZealand.setBounds(0, 331, 748, 67);
 		window.getContentPane().add(lblTheNewZealand);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(WelcomeScreen.class.getResource("/assets/ui/img/WelcomeScreenNewResized.jpg")));
+		label.setIcon(new ImageIcon(WelcomeScreen.class.getResource("/assets/ui/img/CanterburyWetlands.jpg")));
 		label.setBounds(0, 0, 748, 469);
 		window.getContentPane().add(label);
 	}

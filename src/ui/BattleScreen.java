@@ -108,6 +108,7 @@ public class BattleScreen {
 				if (player.travelToPreviewBattle() == true) {
 					randomEventMessage = tools.runRandomOvernightEvent(player);
 					player.getPlayerInventory().sleepTime();
+					JOptionPane.showMessageDialog(window, "You will now be transported to this location overnight. Your monsters are now sleeping.");
 					finishedWindow(true);
 					
 				} else {
@@ -134,7 +135,7 @@ public class BattleScreen {
 		btnGoBackToMap.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		btnGoBackToMap.setBackground(SystemColor.info);
 		lblPhoto.setIcon(new ImageIcon(BattleScreen.class.getResource(battle.getBattleImagePath())));
-		lblPhoto.setBounds(239, 0, 499, 469);
+		lblPhoto.setBounds(249, 0, 499, 469);
 		window.getContentPane().add(lblPhoto);
 	}
 }

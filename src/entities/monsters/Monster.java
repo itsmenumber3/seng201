@@ -124,6 +124,9 @@ public class Monster extends Entity implements Role {
 
     public void increaseMonsterHealthLevel(double inputIncreaseAmount) {
         monsterHealthLevel += inputIncreaseAmount;
+        if (monsterHealthLevel >= 100) {
+        	monsterHealthLevel = 100;
+        }
     }
 
     public void monsterGetsAttacked(double inputOpponentAttackDamage) {

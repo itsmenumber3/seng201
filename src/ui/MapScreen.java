@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.text.html.HTML;
 
 import assets.enums.MonsterType;
@@ -168,7 +169,7 @@ public class MapScreen {
 			btnVisitShop.setEnabled(false);
 		}
 		
-		btnInventory = new JButton("My inventory");
+		btnInventory = new JButton(String.format("%s inventory", player.getPlayerName()));
 		btnInventory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				nextScreen = 4;
@@ -208,6 +209,7 @@ public class MapScreen {
 				Monster previewMonster = tools.generateRandomBattleMonster(MonsterType.MUD_MONSTER, gameEnvironment.getPlayer());
 				previewBattle.setBattleMonster(previewMonster);
 				player.setPlayerPreviewBattle(previewBattle);
+				
 				nextScreen = 1;
 				finishedWindow();
 			}

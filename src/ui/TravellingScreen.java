@@ -61,7 +61,7 @@ public class TravellingScreen {
 	private void initialize() {
 		window = new JFrame();
 
-		window.setTitle("Travelling...");
+		window.setTitle("Travelling... Your monsters are now put on sleep.");
 		window.setBounds(100, 100, 750, 520);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
@@ -73,7 +73,7 @@ public class TravellingScreen {
 		progressBar.setBounds(12, 12, 724, 35);
 		window.getContentPane().add(progressBar);
 		
-		JLabel lblIntroduction_1 = new JLabel("<html><div>Your monsters are being transported...</div></html>");
+		JLabel lblIntroduction_1 = new JLabel("<html><div>Your monsters are being transported overnight to your next battle... They are now put on sleep, which increases health by 20%.</div></html>");
 		lblIntroduction_1.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		lblIntroduction_1.setBounds(12, 59, 515, 42);
 		window.getContentPane().add(lblIntroduction_1);

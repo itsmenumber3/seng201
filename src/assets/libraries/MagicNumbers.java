@@ -124,13 +124,13 @@ public class MagicNumbers {
 
     public final int[] RESISTANCE_AND_ATTACK_RANGE = {10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
     
-    public final int BATTLE_ATTACK_EASY = 10;
+    public final int BATTLE_ATTACK_EASY = 30;
     public final int BATTLE_RESISTANCE_EASY = 5;
     
-    public final int BATTLE_ATTACK_MED = 15;
+    public final int BATTLE_ATTACK_MED = 40;
     public final int BATTLE_RESISTANCE_MED = 10;
     
-    public final int BATTLE_ATTACK_HARD = 20;
+    public final int BATTLE_ATTACK_HARD = 60;
     public final int BATTLE_RESISTANCE_HARD = 15;
     
     public final int PASTA_SELL_VALUE = 16;

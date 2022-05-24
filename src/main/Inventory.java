@@ -10,7 +10,7 @@ import entities.monsters.Monster;
 import exceptions.UnallowedMethodException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 public class Inventory {
 	
@@ -27,7 +27,7 @@ public class Inventory {
     private ArrayList<Integer> foods = new ArrayList<>(); // A HashMap for holding the quantity of each Food type.
     private ArrayList<Integer> drinks = new ArrayList<>(); // A HashMap for holding the quantity of each Drink type.
     private double fuelAmount; // A double for holding the quantity of fuel owned
-    private LottoTicket lottoTicket = null; // A lotto ticket is required to increase the chances of a random event happpening during travel
+    private LottoTicket lottoTicket = null; // A lotto ticket is required to increase the chances of a random event happening during travel
     
     // CONSTRUCTOR ------------------------------------------------
     /**
@@ -258,7 +258,7 @@ public class Inventory {
      * This method is not allowed.
      * Setting a custom amount of fuel is not permitted
      * @param inputFuel double
-     * @throws UnallowedMethodException
+     * @throws UnallowedMethodException unallowed method
      */
     public void setFuelAmount(double inputFuel) {
         try {
@@ -288,7 +288,7 @@ public class Inventory {
     /**
      * Adds a lotto ticket to the players inventory 
      * A lotto ticket increases the chance of a random activity happening during travel
-     * @param inputLottoTicket
+     * @param inputLottoTicket the lotto ticket
      */
     public void setLottoTicket(LottoTicket inputLottoTicket) {
         lottoTicket = inputLottoTicket;

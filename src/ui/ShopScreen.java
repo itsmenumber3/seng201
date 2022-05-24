@@ -139,17 +139,20 @@ public class ShopScreen {
 	 */
 	private void initialize() {
 		window = new JFrame();
+		window.getContentPane().setBackground(Color.RED);
 		window.setTitle(battle.getBattleShop().getShopName());
 		window.setBounds(100, 100, 750, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.getContentPane().setLayout(null);
 		
 		JLabel lblShopName = new JLabel(battle.getBattleShop().getShopName());
+		lblShopName.setForeground(Color.WHITE);
 		lblShopName.setFont(new Font("Century Schoolbook L", Font.BOLD, 24));
 		lblShopName.setBounds(23, 20, 346, 34);
 		window.getContentPane().add(lblShopName);
 		
 		JLabel lblYourBalance_1_1_2 = new JLabel(String.format("%d gold coins", player.getPlayerGold()));
+		lblYourBalance_1_1_2.setForeground(Color.WHITE);
 		lblYourBalance_1_1_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblYourBalance_1_1_2.setBounds(368, 28, 101, 25);
 		window.getContentPane().add(lblYourBalance_1_1_2);
@@ -161,6 +164,7 @@ public class ShopScreen {
 
 		// FIRST TAB (BUY MONSTERS) ------------------------------------------------
 		JPanel panelPurchaseMonster = new JPanel();
+		panelPurchaseMonster.setBackground(Color.WHITE);
 		tabbedPane.addTab("Buy Monsters", null, panelPurchaseMonster, "");
 		tabbedPane.setEnabledAt(0, true);
 		tabbedPane.setBackgroundAt(0, Color.WHITE);
@@ -195,7 +199,7 @@ public class ShopScreen {
 		});
 		btnPurchaseThisMonster.setForeground(Color.WHITE);
 		btnPurchaseThisMonster.setFont(new Font("Century Schoolbook L", Font.PLAIN, 16));
-		btnPurchaseThisMonster.setBackground(Color.RED);
+		btnPurchaseThisMonster.setBackground(Color.DARK_GRAY);
 		btnPurchaseThisMonster.setBounds(508, 320, 199, 29);
 		panelPurchaseMonster.add(btnPurchaseThisMonster);
 		
@@ -312,9 +316,9 @@ public class ShopScreen {
 		
 		textField = new JTextField(tools.generateRandomMonsterName());
 		textField.setForeground(Color.BLACK);
-		textField.setFont(new Font("Dialog", Font.PLAIN, 18));
+		textField.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		textField.setColumns(10);
-		textField.setBackground(new Color(230, 230, 250));
+		textField.setBackground(Color.WHITE);
 		textField.setBounds(575, 277, 132, 33);
 		panelPurchaseMonster.add(textField);
 		
@@ -328,7 +332,9 @@ public class ShopScreen {
 		// SECOND TAB (DELI) -------------------------------------------------------
 		
 		JPanel panelBuyFood = new JPanel();
+		panelBuyFood.setBackground(Color.WHITE);
 		tabbedPane.addTab("Delicatessen", null, panelBuyFood, null);
+		tabbedPane.setBackgroundAt(1, Color.WHITE);
 		panelBuyFood.setLayout(null);
 		
 		JLabel lblIntroductionDeli = new JLabel(String.format("<html><div>Welcome to %s's Service Deli. Please select the food you would like to buy.</div></html>", shop.getShopName()));
@@ -373,6 +379,7 @@ public class ShopScreen {
 		panelBuyFood.add(btnPurchaseAndStoreFood);
 		
 		JComboBox comboBoxFood = new JComboBox(foodNames);
+		comboBoxFood.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
 		comboBoxFood.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				selectedFood = player.getFoodRange()[comboBoxFood.getSelectedIndex()];
@@ -392,7 +399,9 @@ public class ShopScreen {
 
 		
 		JPanel panelBuyCafe = new JPanel();
+		panelBuyCafe.setBackground(Color.WHITE);
 		tabbedPane.addTab("Cafe", null, panelBuyCafe, null);
+		tabbedPane.setBackgroundAt(2, Color.WHITE);
 		panelBuyCafe.setLayout(null);
 
 		
@@ -420,6 +429,7 @@ public class ShopScreen {
 		JButton btnPurchaseAndStoreDrink;
 		
 		JComboBox comboBoxDrinks = new JComboBox(drinkNames);
+		comboBoxDrinks.setFont(new Font("Century Schoolbook L", Font.PLAIN, 12));
 		comboBoxDrinks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				selectedDrink = player.getDrinkRange()[comboBoxDrinks.getSelectedIndex()];
@@ -455,7 +465,9 @@ public class ShopScreen {
 		panelBuyCafe.add(btnPurchaseAndStoreDrink);
 		
 		JPanel panelLottoCounter = new JPanel();
+		panelLottoCounter.setBackground(Color.WHITE);
 		tabbedPane.addTab("Lotto Counter", null, panelLottoCounter, null);
+		tabbedPane.setBackgroundAt(3, Color.WHITE);
 		panelLottoCounter.setLayout(null);
 		
 		JSlider sliderLotto = new JSlider();
@@ -473,14 +485,9 @@ public class ShopScreen {
 		sliderLotto.setBounds(198, 222, 279, 50);
 		panelLottoCounter.add(sliderLotto);
 		
-		JLabel lblLottoLogo = new JLabel("");
-		lblLottoLogo.setIcon(new ImageIcon(ShopScreen.class.getResource("/assets/ui/img/LottoLogo.png")));
-		lblLottoLogo.setBounds(12, 12, 376, 168);
-		panelLottoCounter.add(lblLottoLogo);
-		
 		JLabel lblIntroductionLotto = new JLabel("<html><div>Welcome to Lotto NZ. Please play responsibly. Each ticket costs 30 coins, and you can select your own number from 0 to 10. A lotto ticket increases your chance of having positive events occuring overnight.</div></html>");
 		lblIntroductionLotto.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		lblIntroductionLotto.setBounds(413, 12, 294, 168);
+		lblIntroductionLotto.setBounds(198, 23, 294, 168);
 		panelLottoCounter.add(lblIntroductionLotto);
 		
 		JButton btnPurchaseTicket = new JButton("Purchase ticket");
@@ -516,7 +523,9 @@ public class ShopScreen {
 		panelLottoCounter.add(lblPrompt);
 		
 		JPanel panelServo = new JPanel();
+		panelServo.setBackground(Color.WHITE);
 		tabbedPane.addTab("Service Station", null, panelServo, null);
+		tabbedPane.setBackgroundAt(4, Color.WHITE);
 		panelServo.setLayout(null);
 		
 		JLabel lblIntroduction_1 = new JLabel("");

@@ -522,17 +522,17 @@ public class Tools {
 			}
 			
 			if (inputPlayer.getPlayerDifficulty() == 1) {
-				monster.setMonsterAttackDamage(magicNumbers.BATTLE_ATTACK_EASY);
-				monster.setMonsterResistanceAbility(magicNumbers.BATTLE_RESISTANCE_EASY);
+				monster.setMonsterAttackDamage(random.nextInt(5, 20));
+				monster.setMonsterResistanceAbility(random.nextInt(5, 20));
 			}
 			else if (inputPlayer.getPlayerDifficulty() == 2) {
-				monster.setMonsterAttackDamage(magicNumbers.BATTLE_ATTACK_MED);
-				monster.setMonsterResistanceAbility(magicNumbers.BATTLE_RESISTANCE_MED);
+				monster.setMonsterAttackDamage(random.nextInt(25, 35));
+				monster.setMonsterResistanceAbility(random.nextInt(25, 35));
 				
 			}
 			else {
-				monster.setMonsterAttackDamage(magicNumbers.BATTLE_ATTACK_HARD);
-				monster.setMonsterResistanceAbility(magicNumbers.BATTLE_RESISTANCE_HARD);
+				monster.setMonsterAttackDamage(random.nextInt(35, 45));
+				monster.setMonsterResistanceAbility(random.nextInt(35, 45));
 				
 			}
 			monster.resetMonsterHealthLevel();

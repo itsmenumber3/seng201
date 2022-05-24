@@ -439,12 +439,7 @@ public class GameEnvironment {
     public void closeFinishGameScreen(FinishGameScreen inputFinishGameWindow) {
         inputFinishGameWindow.closeWindow();
         if (inputFinishGameWindow.getQuitGame() == false) {
-        	GameEnvironment game = new GameEnvironment();
-            Battle battle = new Battle();
-            battle.setBattleName("Wellington");
-            getPlayer().setPlayerPreviewBattle(battle);
-            game.getPlayer().setNextDayNextBattle();
-            game.launchWelcomeScreen();
+        	main(null);
         }
     }
     // FINISH GAME SCREEN -----------------------------------------
@@ -457,6 +452,7 @@ public class GameEnvironment {
         GameEnvironment game = new GameEnvironment();
         Battle battle = new Battle();
         battle.setBattleName("Wellington");
+        battle.setBattleIsland("North Island");
         game.getPlayer().setPlayerPreviewBattle(battle);
         game.getPlayer().setNextDayNextBattle();
         game.launchWelcomeScreen();
