@@ -1,6 +1,6 @@
 # Monster Fighter
 
-##To build the source code and load it into Eclipse:
+## To build the source code and load it into Eclipse:
 
 
  - Firstly the source code needs to extracted from the zip file(called `hph44_jni68_MonsterFighter.zip`) 
@@ -14,7 +14,7 @@
  
  - Find the GameEnvironment.java file within the src/main package and run it to play the Monster Fighter game.
  
- ##To build and run MonsterFighet from the Jar file:
+ ## To build and run MonsterFighet from the Jar file:
 
  - Follow the first steps above to unzip the file.
  
