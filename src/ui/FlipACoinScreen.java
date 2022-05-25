@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 import assets.libraries.Tools;
 import battles.Battle;
 import battles.challenge.FlipACoin;
-import battles.challenge.Quiz;
+
 import entities.monsters.Monster;
 import main.GameEnvironment;
 import main.Player;

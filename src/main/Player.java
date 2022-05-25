@@ -4,7 +4,7 @@ import assets.enums.DrinkType;
 import assets.enums.FoodType;
 import assets.enums.RoleType;
 import assets.libraries.MagicNumbers;
-import assets.libraries.Tools;
+
 import battles.Battle;
 import entities.Entity;
 import entities.items.consumables.Drink;
@@ -12,8 +12,6 @@ import entities.items.consumables.Food;
 import exceptions.InvalidInputException;
 import exceptions.UnallowedMethodException;
 import exceptions.UnexpectedNegativeNumberException;
-
-import java.util.ArrayList;
 
 /**
  * The class player is where all player dependent variables are accessed from
@@ -32,7 +30,7 @@ public class Player implements Role {
      * Tools is a class that provides some basic functionalities, such as playerName validation
      * and random number generator!
      */
-    private final Tools tools = new Tools();
+
     // LIBRARIES --------------------------------------------------
 
     private String playerName; // Player name that is entered in setup screen
@@ -117,7 +115,6 @@ public class Player implements Role {
                 throw new InvalidInputException("Invalid input");
             }
         } catch (InvalidInputException e) {
-            System.out.println("Please provide a valid difficulty level");
             e.printStackTrace();
         }
     }
@@ -208,20 +205,7 @@ public class Player implements Role {
         playerCurrentDay = magicNumbers.RESET_CURRENT_DAY_VALUE;
     }
 
-    /**
-     * This method checks if the player has won the game. This is done by comparing the current day to what is the last day.
-     * If the player has won the game, return true to Game(). Else, we increment the playerCurrentDay and return false.
-     * @return true  boolean if player has won the game (the current day is the last day)
-     * 	false boolean if player hasn't won the game
-     */
-    public boolean hasPlayerWonGameElseSetPlayerNextDay() {
-        if (getPlayerCurrentDay() == getPlayerDays()) {
-            return true;
-        } else {
-            playerCurrentDay++;
-            return false;
-        }
-    }
+
 
     /**
      * This method gets the current day and returns it
@@ -427,7 +411,7 @@ public class Player implements Role {
      * Makes the changes required when traveling to the next battle location
      * The required fuel amount is checked that it is available and if so then it is removed from the players inventory
      * @return true boolean, If the player has enough fuel they can proceed to travel to the next battle location
-     *	false boolean, If the player does not have enough fuel they will be reverted back to the map
+     *	false boolean, If the player does not have enough fuel they will be reverted.
      *	where they can go to the shop and buy more fuel
      */
     public boolean travelToPreviewBattle() {

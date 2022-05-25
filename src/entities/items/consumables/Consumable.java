@@ -1,7 +1,6 @@
 package entities.items.consumables;
 
 import assets.enums.ConsumableType;
-import assets.enums.ItemType;
 import entities.items.Item;
 
 /**

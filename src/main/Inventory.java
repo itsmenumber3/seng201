@@ -22,7 +22,7 @@ public class Inventory {
     // LIBRARIES --------------------------------------------------
     
     
-    private Player player; // Used to set the player of the game
+    private final Player player; // Used to set the player of the game
     private ArrayList<Monster> monsters = new ArrayList<>(); // An ArrayList for holding objects of Monster type.
     private ArrayList<Integer> foods = new ArrayList<>(); // A HashMap for holding the quantity of each Food type.
     private ArrayList<Integer> drinks = new ArrayList<>(); // A HashMap for holding the quantity of each Drink type.

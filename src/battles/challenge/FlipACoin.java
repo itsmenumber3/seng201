@@ -3,7 +3,7 @@ package battles.challenge;
 import assets.enums.ChallengeOutcomeType;
 import assets.enums.ChallengeType;
 
-import java.security.SecureRandom;
+
 
 public class FlipACoin extends Challenge {
 	public FlipACoin() {

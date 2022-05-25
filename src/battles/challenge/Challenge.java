@@ -2,7 +2,7 @@ package battles.challenge;
 
 import assets.enums.ChallengeOutcomeType;
 import assets.enums.ChallengeType;
-import assets.enums.FightOutcomeType;
+
 
 import java.security.SecureRandom;
 

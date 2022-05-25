@@ -1,6 +1,6 @@
 package main;
 
-import assets.enums.ChallengeOutcomeType;
+
 import assets.enums.ChallengeType;
 import assets.enums.FightOutcomeType;
 import assets.libraries.Tools;
@@ -8,10 +8,10 @@ import battles.Battle;
 import battles.challenge.Challenge;
 import battles.challenge.FlipACoin;
 import battles.challenge.PaperScissorsRock;
-import battles.challenge.Quiz;
+
 import exceptions.UnallowedMethodException;
 import ui.*;
-import javax.swing.*;
+
 
 /**
  * The class Game is the master class in this game.
@@ -24,26 +24,6 @@ public class GameEnvironment {
     private final Player player = new Player(); // Player of the game
     private final Tools tools = new Tools(); // Access to the tools class
     // LIBRARIES --------------------------------------------------
-
-    private FightOutcomeType fightOutcome; // Fight outcome for each fight
-
-    // FIGHT OUTCOME ----------------------------------------------
-    /**
-     * Sets the fight outcome of a challenge
-     * e.g Flip a coin or a quiz question
-     * @param inputFightOutcomeType FightOutcomeType
-     */
-    public void setFightOutcome(FightOutcomeType inputFightOutcomeType) {
-    	fightOutcome = inputFightOutcomeType;
-    }
-    
-    /**
-     * Gets the fight outcome for setting the following screen after a challenge
-     * @return fightOutcome: FightOutcomeType
-     */
-    public FightOutcomeType getFightOutcome() {
-    	return fightOutcome;
-    }
     
     private String randomEventMessage;
     public String getRandomEventMessage() {
@@ -72,7 +52,7 @@ public class GameEnvironment {
 
     /**
      * Gets the current player within the current game environment
-     * @return player Player
+     * @return player of type Player
      */
     public Player getPlayer() {
     	return player;
@@ -152,26 +132,18 @@ public class GameEnvironment {
      */
     public void closeMapScreen(MapScreen inputMapWindow) {
     	inputMapWindow.closeWindow();
-    	switch (inputMapWindow.getNextScreen()) {
-    	case 1:
-    		launchBattleScreen();
-    		break;
-    	case 2:
-    		launchShopScreen();
-    		break;
-    	case 3:
-    		launchFinishGameScreen();
-    		break;
-    	default:
-    		launchInventoryScreen();
-    	}
+        switch (inputMapWindow.getNextScreen()) {
+            case 1 -> launchBattleScreen();
+            case 2 -> launchShopScreen();
+            case 3 -> launchFinishGameScreen();
+            default -> launchInventoryScreen();
+        }
     }
     // MAP SCREEN -------------------------------------------------
 
     // INVENTORY SCREEN -------------------------------------------
     /**
      * Launches the inventory screen to see the currently owned monsters, food, drinks or fuel
-     * @param isPreviousWindowMapWindow boolean
      */
     public void launchInventoryScreen() {
         InventoryScreen inventoryWindow = new InventoryScreen(this);
@@ -359,18 +331,13 @@ public class GameEnvironment {
     
     public void decideNextChallengeScreenBasedOnRunFight() {
     	FightOutcomeType fightOutcome = getPlayer().getPlayerSelectedBattle().getFightOutcome();
-    	
-    	
-    	switch (fightOutcome) {
-    	case PLAYER_WINS_BATTLE:
-    		launchBattleResultScreen();
-    		break;
-    	case PLAYER_OUT_OF_MONSTERS_AND_LOSES_BATTLE_GAME_OVER:
-    		launchFinishGameScreen();
-    		break;
-    	default:
-    		launchChallengeResultScreen();
-    	}
+
+
+        switch (fightOutcome) {
+            case PLAYER_WINS_BATTLE -> launchBattleResultScreen();
+            case PLAYER_OUT_OF_MONSTERS_AND_LOSES_BATTLE_GAME_OVER -> launchFinishGameScreen();
+            default -> launchChallengeResultScreen();
+        }
   
         
     }
@@ -438,7 +405,7 @@ public class GameEnvironment {
      */
     public void closeFinishGameScreen(FinishGameScreen inputFinishGameWindow) {
         inputFinishGameWindow.closeWindow();
-        if (inputFinishGameWindow.getQuitGame() == false) {
+        if (!inputFinishGameWindow.getQuitGame()) {
         	main(null);
         }
     }

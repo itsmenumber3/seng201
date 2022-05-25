@@ -62,22 +62,6 @@ public class Shop implements Role {
     public ArrayList<Monster> getShopMonsterRange() {
         return shopMonsterRange;
     }
-    
-    /**
-     * This method removes a monster from the shop range.
-     * @param inputMonster Monster
-     */
-    private void removeMonsterFromShopMonsterRange(Monster removeMonster) {
-        getShopMonsterRange().remove(removeMonster);
-    }
 
-    /**
-     * This method triggers relevant methods when a monster is purchased from the shop by the player.
-     * @param inputMonster Monster, the entity in question
-     */
-    public void uponMonsterBeingPurchasedByPlayer(Monster inputMonster) {
-        removeMonsterFromShopMonsterRange(inputMonster);
-        
-    }
     // MONSTER RANGE ----------------------------------------------  
 }

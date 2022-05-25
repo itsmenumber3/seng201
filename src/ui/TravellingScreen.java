@@ -84,7 +84,7 @@ public class TravellingScreen {
 				if (stateOfProgressBar) {
 					for (int index = 0; index <= 100; index++) {
 						try {
-							Thread.sleep(10);
+							Thread.sleep(40);
 						} catch (InterruptedException ex) {
 							ex.printStackTrace();
 						}
